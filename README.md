@@ -1,14 +1,10 @@
-# MAGIC Implementation
-This is the codebase for "[Multi-Agent Graph-Attention Communication and Teaming](http://www.ifaamas.org/Proceedings/aamas2021/pdfs/p964.pdf)," which is published in [AAMAS 2021](https://aamas2021.soton.ac.uk/) (oral) and presented at [ICCV 2021 Mair2 Workshop](https://www.mair2.com/home) (best paper award). The presentation video of this work can be found [here](https://www.youtube.com/watch?v=g9sQyOjjoFY). A short video demo can be found [here](https://youtu.be/32zZdjC4-6A). The implementation is in three domains including Predator-Prey, Traffic-Junction, and Google Researh Football.
-
-Authors: [Yaru Niu*](https://www.yaruniu.com/), [Rohan Paleja*](https://rohanpaleja.com/), [Matthew Gombolay](https://core-robotics.gatech.edu/people/matthew-gombolay/)
+# CAVE Implementation
+This is the codebase for Communication-Augmented Value Estimation. The implementation is in two domains: Predator-Prey and Traffic-Junction.
 
 ## Requirements
 * OpenAI Gym
 * PyTorch 1.5 (CPU)
-* [visdom](https://github.com/facebookresearch/visdom)
 * Predator-Prey and Traffic Junction [Environments](https://github.com/apsdehal/ic3net-envs)
-* Fork from authors' version of [Google Research Football](https://github.com/chrisyrniu/football) 
 
 
 ## Testing Environment Setup
@@ -17,84 +13,40 @@ Authors: [Yaru Niu*](https://www.yaruniu.com/), [Rohan Paleja*](https://rohanpal
   cd envs/ic3net-envs
   python setup.py develop
   ```
-* Google Research Football  
-  Install required apt packages with:  
-  ```
-  sudo apt-get install git cmake build-essential libgl1-mesa-dev libsdl2-dev \
-  libsdl2-image-dev libsdl2-ttf-dev libsdl2-gfx-dev libboost-all-dev \
-  libdirectfb-dev libst-dev mesa-utils xvfb x11vnc libsdl-sge-dev python3-pip
-  ```
-  Install the game of author's version (added multi-agent observations and fixed some bugs):  
-  ```
-  git clone https://github.com/chrisyrniu/football.git
-  cd football
-  pip install .
-  ```
-  Install the multi-agent environment wrapper for GRF (each agent will receive a local observation in multi-agent settings)  
-  ```
-  cd envs/grf-envs
-  python setup.py develop
-  ```
+  
+## Training CAVE and Baselines (except MAGIC)
+- `cd baselines`
+- Run `python run_baselines.py --help` to check all the options.
+- Use `--commnet` to enable CommNet, `--ic3net` to enable IC3Net, `--tarcomm` and `--ic3net` to enable TarMAC-IC3Net, and `--gacomm` to enable GA-Comm.
+- Use `--cave` to enable CAVE with TarMAC or GA-Comm.
+- Each combination of method and environment has its own bash script, in `/scripts/`.
+- Most of these scripts were designed to be used in [SLURM](https://slurm.schedmd.com/) for HPC. For example, run TarMAC+CAVE in the Predator-Prey 10-agent scenario with `sbatch train_pp_hard_tarmac_cave.sh [seed=1]`.
+- Most scripts should still work as standard bash scripts. For example, run TarMAC+CAVE in the Predator-Prey 10-agent scenario with `sh train_pp_hard_tarmac_cave.sh [seed=1]`.
+  - If using `sh`, we recommend piping the output to a LOG file. This can be done by adding  `| tee <log_filename>.log` to the Python call.
+- A seed can be provided as an optional argument when calling a bash script. By default, the seed is 1.
+- Multiple runs with different seeds can be set up using `sbatch train_multiple_experiments <experiment_script>.sh [num_runs]`.
+
 
 ## Training MAGIC
--Run `python main.py --help` to check all the options.  
--Use `--first_graph_complete` and `--second_graph_complete` to set the corresponding communication graph of the first round and second round to be complete (disable the sub-scheduler), respectively.  
--Use `--comm_mask_zero` to block the communication.
-* Predator-Prey 5-agent scenario:
-  `sh train_pp_medium.sh`
-* Predator-Prey 10-agent scenario:
-  `sh train_pp_hard.sh`
-* Traffic-Junction 5-agent scenario:
-  `sh train_tj_easy.sh`
-* Traffic-Junction 10-agent scenario:
-  `sh train_tj_medium.sh`
-* Traffic-Junction 20-agent scenario:
-  `sh train_tj_hard.sh`
-* Google Research Football 3 vs. 2 (3-agent) scenario:
-  `sh train_grf.sh`
-  
-## Training Baselines
--`cd baselines`  
--Run `python run_baselines.py --help` to check all the options.  
--Use `--comm_action_one` to force all agents to always communicate all (other) agents.  
--Use `--comm_mask_zero` to block the communication.  
--Use `--commnet` to enable CommNet, `--ic3net` to enable IC3Net, `--tarcomm` and `--ic3net` to enable TarMAC-IC3Net, and `--gacomm` to enable GA-Comm.  
--The learning rate for IC3Net in Google Research Football was adjusted as 0.0007, otherwise it was kept as 0.001.  
-* Predator-Prey 5-agent scenario:
-  `sh train_pp_medium.sh`
-* Predator-Prey 10-agent scenario:
-  `sh train_pp_hard.sh`
-* Traffic-Junction 5-agent scenario:
-  `sh train_tj_easy.sh`
-* Traffic-Junction 10-agent scenario:
-  `sh train_tj_medium.sh`
-* Traffic-Junction 20-agent scenario:
-  `sh train_tj_hard.sh`
-* Google Research Football 3 vs. 2 (3-agent) scenario:
-  `sh train_grf.sh`
+- Run `python main.py --help` to check all the options.  
+- Use `--first_graph_complete` and `--second_graph_complete` to set the corresponding communication graph of the first round and second round to be complete (disable the sub-scheduler), respectively.  
+- Use `--comm_mask_zero` to block the communication.
+  - Predator-Prey 5-agent scenario: `sh train_pp_medium.sh`
+  - Predator-Prey 10-agent scenario: `sh train_pp_hard.sh`
+  - Traffic-Junction 5-agent scenario: `sh train_tj_easy.sh`
+  - Traffic-Junction 10-agent scenario: `sh train_tj_medium.sh`
+  - Traffic-Junction 20-agent scenario: `sh train_tj_hard.sh`
 
 ## Visualization
-* Check training progress  
-  Use visdom with `--plot`. `--plot_env` should be followed by the name of this plotting environment. `--plot_port` should be followed by the port number you want to use.
 * Plot with multiple log files  
   Use plot_script.py (log files in saved/):
   ```
-  python plot.py saved/ title Reward
-  python plot.py saved/ title Success
-  python plot.py saved/ title Steps-Taken
+  python plot.py <path/to/file with all data for an environment> <figure filename> Reward
+  python plot.py <path/to/file with all data for an environment> <figure filename> Success
+  python plot.py <path/to/file with all data for an environment> <figure filename> Steps-Taken
   ```
 
-## Citation
-If you find our paper and repo helpful to your research, please consider citing the paper:
-```
-@inproceedings{niu2021multi,
-  title={Multi-Agent Graph-Attention Communication and Teaming},
-  author={Niu, Yaru and Paleja, Rohan and Gombolay, Matthew},
-  booktitle={Proceedings of the 20th International Conference on Autonomous Agents and MultiAgent Systems},
-  pages={964--973},
-  year={2021}
-}
-```
+## References
+The training framework is adapted from [MAGIC](https://github.com/CORE-Robotics-Lab/MAGIC)
 
-## Reference
-The training framework is adapted from [IC3Net](https://github.com/IC3Net/IC3Net)
+MAGIC's repository was, in turn, adapted from [IC3Net](https://github.com/IC3Net/IC3Net)
