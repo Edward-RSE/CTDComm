@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage (for iridis/slurm):
-# sbatch train_pp_hard_commnet.sh [seed=0]
+# sbatch train_pp_hard_tarmac.sh [seed=1]
 #
 # Optional config arguments:
 #     Communication: --comm_action_one --comm_mask_zero
@@ -22,9 +22,6 @@ else
   seed=1
 fi
 
-printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
-
-# Note that --joint_ag_critic is deprecated and replacedwith --cave
 python -u run_baselines.py \
   --env_name predator_prey \
   --nagents 10 \
@@ -40,7 +37,7 @@ python -u run_baselines.py \
   --lrate 0.001 \
   --tarcomm \
   --ic3net \
-  --joint_ag_critic \
+  --cave \
   --recurrent \
   --save \
   --save_adjacency \
