@@ -31,11 +31,11 @@ This is the codebase for Communication-Augmented Value Estimation. The implement
 - Run `python main.py --help` to check all the options.  
 - Use `--first_graph_complete` and `--second_graph_complete` to set the corresponding communication graph of the first round and second round to be complete (disable the sub-scheduler), respectively.  
 - Use `--comm_mask_zero` to block the communication.
+- Example calls
   - Predator-Prey 5-agent scenario: `sh train_pp_medium.sh`
-  - Predator-Prey 10-agent scenario: `sh train_pp_hard.sh`
-  - Traffic-Junction 5-agent scenario: `sh train_tj_easy.sh`
-  - Traffic-Junction 10-agent scenario: `sh train_tj_medium.sh`
-  - Traffic-Junction 20-agent scenario: `sh train_tj_hard.sh`
+  - Predator-Prey 5-agent scenario: `sbatch train_pp_medium_slurm.sh`
+  - Predator-Prey 5-agent scenario: `sbatch train_pp_medium_slurm_cave.sh`
+  - Predator-Prey 10-agent scenario: `sbatch train_pp_hard_slurm.sh`
 
 ## Visualization
 * Plot with multiple log files  
