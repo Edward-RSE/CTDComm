@@ -4,7 +4,7 @@ import signal
 import argparse
 import os
 from pathlib import Path
-import json
+# import json
 
 import numpy as np
 import torch
@@ -80,6 +80,8 @@ parser.add_argument('--nactions', default='1', type=str,
                     help='the number of agent actions (0 for continuous). Use N:M:K for multiple actions')
 parser.add_argument('--action_scale', default=1.0, type=float,
                     help='scale action output from model')
+parser.add_argument('--env_seed', type=int, default=-1,
+                    help='random seed for the environment. Pass -1 for random seed')
 # other
 parser.add_argument('--plot', action='store_true', default=False,
                     help='plot training progress')
@@ -219,7 +221,8 @@ if args.env_name == 'grf':
     args.render = False
 env = data.init(args.env_name, args, False)
 
-num_inputs = env.observation_dim
+#TODO: Wher tf does observation_dim come from?
+num_inputs = env.observation_dim 
 args.num_actions = env.num_actions
 
 # Multi-action
@@ -245,6 +248,8 @@ parse_action_args(args)
 if args.seed == -1:
     args.seed = np.random.randint(0,10000)
 torch.manual_seed(args.seed)
+if args.env_seed == -1:
+    args.env_seed = np.random.randint(0,10000)
 
 print(args)
 
@@ -280,10 +285,11 @@ if args.nprocesses > 1:
 else:
     trainer = Trainer(args, policy_net, data.init(args.env_name, args))
 
-disp_trainer = Trainer(args, policy_net, data.init(args.env_name, args, False))
-disp_trainer.display = True
-def disp():
-    x = disp_trainer.get_episode()    
+# # This doesn't get used but I'll leave it since it succinctly displays an episode
+# disp_trainer = Trainer(args, policy_net, data.init(args.env_name, args, False))
+# disp_trainer.display = True
+# def disp():
+#     x = disp_trainer.get_episode()    
     
 log = dict()
 log['epoch'] = LogField(list(), False, None, None)
@@ -310,7 +316,20 @@ if args.env_name == 'traffic_junction':
             env_name_str = env_name_str + '_add_01'
         elif args.add_rate_max == 0.2:
             env_name_str = env_name_str + '_add_02'
-elif args.env_name == 'predator_prey':
+elif 'predator_prey 'in args.env_name:
+    if 'dec' in args.env_name:
+        if args.comm_range != 0:
+            env_name_str = args.env_name + '_cr=' + str(args.comm_range)
+        else:
+            env_name_str = args.env_name
+        
+        if args.learning_prey:
+            env_name_str = env_name_str + f'_{args.nenemies}_learning_prey'
+        elif args.moving_prey:
+            env_name_str = env_name_str + f'_{args.nenemies}_random_prey'
+        elif args.nenemies != 1:
+            env_name_str = env_name_str + f'_{args.nenemies}_prey'
+
     if args.nagents == 5:
         env_name_str = args.env_name + '_medium'
     elif args.nagents == 10:
@@ -388,6 +407,7 @@ def run(num_epochs):
         epoch_begin_time = time.time()
         stat = dict()
         for n in range(args.epoch_size):
+            #TODO: Allow for pz trainer if necessary
             if n == args.epoch_size - 1 and args.display:
                 trainer.display = True
             if args.save_adjacency:
@@ -495,8 +515,11 @@ def load(path):
 
 def signal_handler(signal, frame):
         print('You pressed Ctrl+C! Exiting gracefully.')
-        if args.display:
-            env.end_display()
+        if 'dec' in args.env_name:
+            env.close()
+        else:
+            if args.display:
+                env.exit_render()
         sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
@@ -506,7 +529,8 @@ if args.load != '':
 
 run(args.num_epochs)
 if args.display:
-    env.end_display()
+    # The MAGIC code called a fucntion called 'env.end_display()' which didn't exist in any of the environments...
+    env.exit_render()
 
 if args.save:
     save(final=True)

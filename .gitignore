@@ -2,9 +2,3 @@
 /saved_magic/*
 /baselines/saved/predator_prey*
 /baselines/saved/traffic_junction*
-
-# Ignore future work
-/baselines/dec_agent.py
-/baselines/dec_tarmac.py
-/baselines/scripts/*dec*.sh
-/baselines/__pycache__/*dec*.pyc

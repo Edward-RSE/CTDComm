@@ -26,16 +26,20 @@ class Trainer(object):
     def get_episode(self, epoch):
         episode = []
         reset_args = getargspec(self.env.reset).args
-        if 'epoch' in reset_args:
-            state = self.env.reset(epoch)
+        if self.args.env_name == 'dec_predator_prey':
+            state, info = self.env.reset(self.args.env_seed)
         else:
-            state = self.env.reset()
+            if 'epoch' in reset_args:
+                state = self.env.reset(epoch)
+            else:
+                state = self.env.reset()
+            info = dict()
         should_display = self.display and self.last_step
 
         if should_display:
-            self.env.display()
+            # None of the envs have a 'display', so I presume they mean render - JenniBN
+            self.env.render()
         stat = dict()
-        info = dict()
         switch_t = -1
 
         prev_hid = torch.zeros(1, self.args.nagents, self.args.hid_size)
@@ -89,7 +93,20 @@ class Trainer(object):
             
             action = select_action(self.args, action_out)
             action, actual = translate_action(self.args, self.env, action)
-            next_state, reward, done, info = self.env.step(actual)
+            if 'dec' in self.args.env_name:
+                # Building in backwards compatibility with the PettingZoo/AEC API
+                next_state, rewards, terminations, truncations, infos = self.env.step(actual)
+                reward = np.array([r for _, r in rewards.items()])
+                terminated = np.all([termination for _, termination in terminations.items()])
+                truncated = np.all([truncation for _, truncation in truncations.items()])
+                done = terminated or truncated
+                info = {'agent_locs': self.locs, 'alive_mask': np.ones_like(reward)}
+                for agent, info_val in infos:
+                    # The environment uses a string to explain that the agent is dead/inactive
+                    if isinstance(info_val, str):
+                        info['alive_mask'][agent[1]] = 0
+            else:
+                next_state, reward, done, info = self.env.step(actual)
 
             # store comm_action in info for next step
             if self.args.hard_attn and self.args.commnet:
@@ -124,7 +141,7 @@ class Trainer(object):
                     episode_mini_mask = 1 - info['is_completed'].reshape(-1)
 
             if should_display:
-                self.env.display()
+                self.env.render()
 
             trans = Transition(state, action, action_out, value, episode_mask, episode_mini_mask, next_state, reward, misc)
             episode.append(trans)
@@ -256,7 +273,7 @@ class Trainer(object):
         batch = []
         self.stats = dict()
         self.stats['num_episodes'] = 0
-        # Leaving this here in case I decide I want batch adjacency again, but it's a lot of data tbh
+        # Leaving this here in case I decide I want batch adjacency again, but it's a lot of unwieldy data tbh
         # For now, just save the adjacency for the last episode of the batch (arbitrary but easiest)
         # if self.args.save_adjacency:
         #     batch_adjacency = []

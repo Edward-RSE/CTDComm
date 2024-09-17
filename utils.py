@@ -109,6 +109,7 @@ def init_args_for_env(parser):
         'levers': 'Levers-v0',
         'number_pairs': 'NumberPairs-v0',
         'predator_prey': 'PredatorPrey-v0',
+        'dec_predator_prey': 'PredatorPrey_v1'
         'traffic_junction': 'TrafficJunction-v0',
         'grf': 'GRFWrapper-v0'
     }
@@ -122,12 +123,18 @@ def init_args_for_env(parser):
     if not env_name or env_name not in env_dict:
         return
 
-    import gym
-    import ic3net_envs
-    # import grf_envs #Altered by JenniBN because I haven't installed GRF yet
-
-    env = gym.make(env_dict[env_name], disable_env_checker=True) #JenniBN, edited to work with latest gym
+    if env_name == 'PredatorPrey_v1':
+        import gymnasium
+        import pettingzoo
+        import decentralised_envs
+        env = decentralised_envs.dec_predator_prey.env()
+    else:
+        import gym
+        import ic3net_envs
+        # import grf_envs #Altered by JenniBN because I haven't installed GRF yet
+        env = gym.make(env_dict[env_name], disable_env_checker=True) #JenniBN, edited to work with latest gym
     env.init_args(parser)
+    return
 
 def display_models(list_models):
     print('='*100)
