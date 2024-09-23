@@ -9,7 +9,7 @@
 #SBATCH --ntasks=1      # Number of tasks
 #SBATCH --nodes=1       # Number of nodes
 #SBATCH --cpus-per-task=1
-#SBATCH --time=1:00:00 # Walltime (maximum is 60 hours for batch) Hopefully we can reduce this!
+#SBATCH --time=1:00:00 # Walltime (maximum is 60 hours for batch)
 
 if [ $# -eq 1 ]; then
     num_runs=5

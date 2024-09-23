@@ -111,9 +111,9 @@ class TarCommNetMLP(nn.Module):
         # [TarMAC changeset] Attentional communication modules
         ######################################################
 
-        self.state2query = nn.Linear(args.hid_size, 16)
-        self.state2key = nn.Linear(args.hid_size, 16)
-        self.state2value = nn.Linear(args.hid_size, args.hid_size)
+        self.state2query = nn.Linear(args.hid_size, args.qk_hid_size)
+        self.state2key = nn.Linear(args.hid_size, args.qk_hid_size)
+        self.state2value = nn.Linear(args.hid_size, args.value_hid_size)
 
 
     def get_agent_mask(self, batch_size, info):

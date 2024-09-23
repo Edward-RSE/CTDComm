@@ -221,21 +221,25 @@ if args.env_name == 'grf':
     args.render = False
 env = data.init(args.env_name, args, False)
 
-#TODO: Wher tf does observation_dim come from?
+#TODO: Check that observation dim works with the new api
 num_inputs = env.observation_dim 
-args.num_actions = env.num_actions
+if args.env_name == 'dec_predator_prey':
+    args.num_actions = [env.naction]
+    args.dim_actions = 1
+else:
+    args.num_actions = env.num_actions
+    args.dim_actions = env.dim_actions
 
 # Multi-action
 if not isinstance(args.num_actions, (list, tuple)): # single action case
     args.num_actions = [args.num_actions]
-args.dim_actions = env.dim_actions
 args.num_inputs = num_inputs
 
 # Hard attention
 if args.hard_attn and args.commnet:
     # add comm_action as last dim in actions
     args.num_actions = [*args.num_actions, 2]
-    args.dim_actions = env.dim_actions + 1
+    args.dim_actions = args.dim_actions + 1
 
 # Recurrence
 if (args.commnet or args.magic) and (args.recurrent or args.rnn_type == 'LSTM'):
@@ -249,7 +253,10 @@ if args.seed == -1:
     args.seed = np.random.randint(0,10000)
 torch.manual_seed(args.seed)
 if args.env_seed == -1:
-    args.env_seed = np.random.randint(0,10000)
+    if args.env_name == 'dec_predator_prey':
+        args.env_seed = None #the environment has a nie way of dealing with seeds
+    else:  
+        args.env_seed = np.random.randint(0,10000)
 
 print(args)
 
@@ -329,16 +336,18 @@ elif 'predator_prey 'in args.env_name:
             env_name_str = env_name_str + f'_{args.nenemies}_random_prey'
         elif args.nenemies != 1:
             env_name_str = env_name_str + f'_{args.nenemies}_prey'
+    else:
+        env_name_str = args.env_name
 
     if args.nagents == 5:
-        env_name_str = args.env_name + '_medium'
+        env_name_str = env_name_str + '_5v1' #'_medium'
     elif args.nagents == 10:
         if args.nenemies == 1:
-            env_name_str = args.env_name + '_hard'
+            env_name_str = env_name_str + '_10v1' #'_hard'
         if args.nenemies == 2:
-            env_name_str = args.env_name + '_10v2'
+            env_name_str = env_name_str + '_10v2'
     elif args.nagents == 20:
-        env_name_str = args.env_name + '_20v1'
+        env_name_str = env_name_str + '_20v1'
 else:
     env_name_str = args.env_name
 
@@ -514,13 +523,13 @@ def load(path):
     trainer.load_state_dict(d['trainer'])
 
 def signal_handler(signal, frame):
-        print('You pressed Ctrl+C! Exiting gracefully.')
-        if 'dec' in args.env_name:
-            env.close()
-        else:
-            if args.display:
-                env.exit_render()
-        sys.exit(0)
+    print('You pressed Ctrl+C! Exiting gracefully.')
+    if 'dec' in args.env_name:
+        env.close()
+    else:
+        if args.display:
+            env.exit_render()
+    sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -530,7 +539,11 @@ if args.load != '':
 run(args.num_epochs)
 if args.display:
     # The MAGIC code called a fucntion called 'env.end_display()' which didn't exist in any of the environments...
-    env.exit_render()
+    if 'dec' in args.env_name:
+        env.close()
+    else:
+        if args.display:
+            env.exit_render()
 
 if args.save:
     save(final=True)

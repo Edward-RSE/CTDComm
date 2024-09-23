@@ -53,9 +53,9 @@ class DecAgent(TarCommNetMLP):
         #     self.hidd_encoder = nn.Linear(args.hid_size, args.hid_size)
 
         # Attentional communication modules
-        self.state2query = nn.Linear(args.hid_size, 16)
-        self.state2key = nn.Linear(args.hid_size, 16)
-        self.state2value = nn.Linear(args.hid_size, args.hid_size)
+        self.state2query = nn.Linear(args.hid_size, args.qk_hid_size)
+        self.state2key = nn.Linear(args.hid_size, args.qk_hid_size)
+        self.state2value = nn.Linear(args.hid_size, args.value_hid_size)
 
         # Function for processing communication
         if args.share_weights:
