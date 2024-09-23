@@ -2,3 +2,7 @@
 /saved_magic/*
 /baselines/saved/predator_prey*
 /baselines/saved/traffic_junction*
+
+
+# Ignore directories used for informal testing
+/envs/base-verysimplemodule/*

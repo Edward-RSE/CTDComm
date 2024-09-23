@@ -109,7 +109,7 @@ def init_args_for_env(parser):
         'levers': 'Levers-v0',
         'number_pairs': 'NumberPairs-v0',
         'predator_prey': 'PredatorPrey-v0',
-        'dec_predator_prey': 'PredatorPrey_v1'
+        'dec_predator_prey': 'PredatorPrey-v1',
         'traffic_junction': 'TrafficJunction-v0',
         'grf': 'GRFWrapper-v0'
     }
@@ -123,11 +123,11 @@ def init_args_for_env(parser):
     if not env_name or env_name not in env_dict:
         return
 
-    if env_name == 'PredatorPrey_v1':
+    if env_dict[env_name] == 'PredatorPrey-v1':
         import gymnasium
         import pettingzoo
-        import decentralised_envs
-        env = decentralised_envs.dec_predator_prey.env()
+        import predator_prey
+        env = predator_prey.env.PredatorPreyEnv()
     else:
         import gym
         import ic3net_envs
