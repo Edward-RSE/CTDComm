@@ -1,0 +1,8625 @@
+Running SLURM prolog script on gold54.cluster.local
+===============================================================================
+Job started on Tue Oct 29 10:30:06 GMT 2024
+Job ID          : 6706966
+Job name        : train_dpp_5v1_dec_tarmac.sh
+WorkDir         : /mainfs/home/jabn1n20/CTDComm/baselines
+Command         : /mainfs/home/jabn1n20/CTDComm/baselines/dec_scripts/train_dpp_5v1_dec_tarmac.sh
+Partition       : serial
+Num hosts       : 1
+Num cores       : 8
+Num of tasks    : 8
+Hosts allocated : gold54
+Job Output Follows ...
+===============================================================================
+Namespace(action_scale=1.0, advantages_per_action=False, alpha=0.97, batch_size=500, cave=False, comm_action_one=False, comm_init='uniform', comm_mask_zero=False, comm_mode='avg', comm_passes=2, comm_range=0, commnet=1, continuous=False, dec_tarmac=True, detach_gap=10, dim=10, dim_actions=2, directed=False, display=False, entr=0, env_name='dec_predator_prey', env_seed=1, epoch_size=10, eps=1e-06, first_gat_normalize=False, first_graph_complete=False, gacomm=False, gamma=1.0, gat_encoder_normalize=False, gat_encoder_out_size=64, gat_hid_size=64, gat_num_heads=1, gat_num_heads_out=1, ge_num_heads=4, hard_attn=1, hid_size=128, ic3net=True, learn_second_graph=False, learning_prey=False, load='', lrate=0.001, magic=False, max_steps=40, mean_ratio=0, message_decoder=False, message_encoder=False, mode='mixed', moving_prey=False, naction_heads=[5, 2], nactions='1', nagents=5, nenemies=1, nfriendly=5, normalize_rewards=False, nprocesses=16, num_actions=[5, 2], num_epochs=500, num_inputs=936, plot=False, plot_env='main', plot_port='8097', qk_hid_size=16, random=False, recurrent=True, rnn_type='LSTM', save=True, save_adjacency=False, save_every=25, second_gat_normalize=False, second_graph_complete=False, seed=1, self_loop_type1=2, self_loop_type2=2, share_agent_weights=False, share_weights=False, stay=True, tarcomm=False, tau=1.0, use_gat_encoder=False, value_coeff=0.01, value_hid_size=128, vision=1)
+====================================================================================================
+Model log:
+
+DecTarMAC(
+  (agents): ModuleList(
+    (0): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (1): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (2): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (3): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (4): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+  )
+  (value_head): Linear(in_features=128, out_features=1, bias=True)
+)
+====================================================================================================
+
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 1
+Episode: 2080
+Reward: [-1.85 -1.85 -1.88 -1.89 -1.86]
+Time: 520.38s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.44 0.55 0.7  0.36 0.44]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 2
+Episode: 4160
+Reward: [-1.85 -1.86 -1.88 -1.88 -1.84]
+Time: 533.42s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.37 0.64 0.99 0.14 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 3
+Episode: 6240
+Reward: [-1.87 -1.84 -1.91 -1.86 -1.84]
+Time: 538.00s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.07 0.66 0.99 0.09 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 4
+Episode: 8320
+Reward: [-1.85 -1.84 -1.91 -1.85 -1.84]
+Time: 488.23s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.02 0.58 0.98 0.07 0.4 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 5
+Episode: 10400
+Reward: [-1.83 -1.82 -1.87 -1.84 -1.83]
+Time: 488.76s
+Success: 0.0005
+Steps-Taken: 40.00
+Comm-Action: [0.03 0.62 0.99 0.07 0.37]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 6
+Episode: 12480
+Reward: [-1.82 -1.82 -1.86 -1.84 -1.81]
+Time: 523.81s
+Success: 0.0005
+Steps-Taken: 40.00
+Comm-Action: [0.05 0.52 0.99 0.04 0.33]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 7
+Episode: 14560
+Reward: [-1.81 -1.8  -1.88 -1.81 -1.81]
+Time: 534.21s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.03 0.48 0.99 0.02 0.25]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 8
+Episode: 16640
+Reward: [-1.79 -1.8  -1.88 -1.78 -1.77]
+Time: 512.92s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.05 0.53 0.99 0.03 0.26]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 9
+Episode: 18720
+Reward: [-1.79 -1.77 -1.89 -1.8  -1.74]
+Time: 550.56s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.05 0.56 0.99 0.05 0.36]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 10
+Episode: 20800
+Reward: [-1.77 -1.76 -1.87 -1.78 -1.7 ]
+Time: 519.62s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.06 0.54 1.   0.05 0.26]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 11
+Episode: 22880
+Reward: [-1.76 -1.72 -1.89 -1.73 -1.67]
+Time: 504.60s
+Success: 0.0010
+Steps-Taken: 39.99
+Comm-Action: [0.08 0.6  1.   0.08 0.22]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 12
+Episode: 24961
+Reward: [-1.72 -1.68 -1.87 -1.74 -1.56]
+Time: 496.40s
+Success: 0.0010
+Steps-Taken: 39.98
+Comm-Action: [0.09 0.59 1.   0.11 0.26]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 13
+Episode: 27041
+Reward: [-1.77 -1.73 -1.84 -1.69 -1.57]
+Time: 525.60s
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.07 0.44 1.   0.29 0.26]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 14
+Episode: 29121
+Reward: [-1.72 -1.8  -1.87 -1.63 -1.49]
+Time: 562.83s
+Success: 0.0005
+Steps-Taken: 40.00
+Comm-Action: [0.3  0.72 1.   0.27 0.25]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 15
+Episode: 31203
+Reward: [-1.66 -1.79 -1.85 -1.56 -1.63]
+Time: 534.56s
+Success: 0.0024
+Steps-Taken: 39.95
+Comm-Action: [0.35 0.83 0.99 0.13 0.3 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 16
+Episode: 33285
+Reward: [-1.64 -1.67 -1.83 -1.58 -1.44]
+Time: 556.79s
+Success: 0.0072
+Steps-Taken: 39.93
+Comm-Action: [0.29 0.7  0.99 0.24 0.26]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 17
+Episode: 35368
+Reward: [-1.58 -1.63 -1.81 -1.47 -1.44]
+Time: 543.14s
+Success: 0.0101
+Steps-Taken: 39.89
+Comm-Action: [0.37 0.63 0.96 0.22 0.22]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 18
+Episode: 37454
+Reward: [-1.47 -1.55 -1.77 -1.49 -1.41]
+Time: 523.32s
+Success: 0.0259
+Steps-Taken: 39.77
+Comm-Action: [0.32 0.53 0.87 0.23 0.19]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 19
+Episode: 39541
+Reward: [-1.49 -1.52 -1.75 -1.44 -1.37]
+Time: 529.75s
+Success: 0.0211
+Steps-Taken: 39.78
+Comm-Action: [0.24 0.62 0.93 0.19 0.17]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 20
+Episode: 41638
+Reward: [-1.36 -1.47 -1.69 -1.33 -1.35]
+Time: 532.31s
+Success: 0.0577
+Steps-Taken: 39.41
+Comm-Action: [0.29 0.6  0.9  0.18 0.14]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 21
+Episode: 43753
+Reward: [-1.32 -1.43 -1.68 -1.25 -1.3 ]
+Time: 562.62s
+Success: 0.0686
+Steps-Taken: 39.16
+Comm-Action: [0.24 0.61 0.9  0.21 0.17]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 22
+Episode: 45886
+Reward: [-1.28 -1.32 -1.62 -1.23 -1.25]
+Time: 583.85s
+Success: 0.1078
+Steps-Taken: 38.75
+Comm-Action: [0.22 0.62 0.93 0.21 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 23
+Episode: 48038
+Reward: [-1.26 -1.29 -1.54 -1.17 -1.25]
+Time: 552.70s
+Success: 0.1255
+Steps-Taken: 38.49
+Comm-Action: [0.23 0.6  0.9  0.15 0.16]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 24
+Episode: 50166
+Reward: [-1.23 -1.25 -1.64 -1.14 -1.17]
+Time: 542.05s
+Success: 0.0954
+Steps-Taken: 38.90
+Comm-Action: [0.2  0.56 0.9  0.16 0.16]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 25
+Episode: 52301
+Reward: [-1.2  -1.22 -1.57 -1.08 -1.11]
+Time: 580.70s
+Success: 0.0979
+Steps-Taken: 38.83
+Comm-Action: [0.22 0.51 0.85 0.27 0.14]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 26
+Episode: 54451
+Reward: [-1.1  -1.17 -1.53 -1.06 -1.08]
+Time: 615.91s
+Success: 0.1344
+Steps-Taken: 38.54
+Comm-Action: [0.21 0.56 0.78 0.28 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 27
+Episode: 56666
+Reward: [-1.11 -1.17 -1.46 -1.03 -1.11]
+Time: 547.91s
+Success: 0.2248
+Steps-Taken: 37.60
+Comm-Action: [0.2  0.57 0.62 0.29 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 28
+Episode: 58925
+Reward: [-1.07 -1.1  -1.36 -0.99 -1.04]
+Time: 525.11s
+Success: 0.2953
+Steps-Taken: 36.69
+Comm-Action: [0.23 0.55 0.63 0.31 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 29
+Episode: 61197
+Reward: [-1.   -1.07 -1.33 -0.99 -1.06]
+Time: 556.62s
+Success: 0.3059
+Steps-Taken: 36.51
+Comm-Action: [0.19 0.55 0.69 0.29 0.12]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 30
+Episode: 63493
+Reward: [-1.04 -1.04 -1.29 -0.95 -1.03]
+Time: 526.50s
+Success: 0.3550
+Steps-Taken: 36.18
+Comm-Action: [0.2  0.6  0.62 0.3  0.09]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 31
+Episode: 65862
+Reward: [-0.97 -1.01 -1.25 -0.93 -1.03]
+Time: 510.57s
+Success: 0.4031
+Steps-Taken: 34.92
+Comm-Action: [0.24 0.63 0.72 0.28 0.06]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 32
+Episode: 68233
+Reward: [-0.99 -0.97 -1.25 -0.93 -0.99]
+Time: 495.24s
+Success: 0.4049
+Steps-Taken: 34.97
+Comm-Action: [0.23 0.65 0.75 0.28 0.06]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 33
+Episode: 70576
+Reward: [-0.93 -1.02 -1.24 -0.94 -1.01]
+Time: 521.24s
+Success: 0.3871
+Steps-Taken: 35.30
+Comm-Action: [0.22 0.59 0.77 0.25 0.07]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 34
+Episode: 72998
+Reward: [-0.94 -0.96 -1.17 -0.93 -0.97]
+Time: 522.86s
+Success: 0.4265
+Steps-Taken: 34.22
+Comm-Action: [0.21 0.55 0.78 0.23 0.06]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 35
+Episode: 75464
+Reward: [-0.94 -0.95 -1.15 -0.93 -0.97]
+Time: 500.47s
+Success: 0.4765
+Steps-Taken: 33.52
+Comm-Action: [0.26 0.51 0.75 0.23 0.05]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 36
+Episode: 77924
+Reward: [-0.93 -0.92 -1.15 -0.89 -0.96]
+Time: 498.35s
+Success: 0.4569
+Steps-Taken: 33.62
+Comm-Action: [0.22 0.54 0.81 0.23 0.03]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 37
+Episode: 80377
+Reward: [-0.92 -0.92 -1.17 -0.89 -0.99]
+Time: 501.96s
+Success: 0.4643
+Steps-Taken: 33.71
+Comm-Action: [0.19 0.5  0.79 0.2  0.03]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 38
+Episode: 82851
+Reward: [-0.91 -0.92 -1.11 -0.91 -0.94]
+Time: 476.81s
+Success: 0.4996
+Steps-Taken: 33.37
+Comm-Action: [0.16 0.51 0.81 0.19 0.02]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 39
+Episode: 85335
+Reward: [-0.88 -0.89 -1.14 -0.91 -0.94]
+Time: 482.65s
+Success: 0.4980
+Steps-Taken: 33.25
+Comm-Action: [0.12 0.49 0.84 0.25 0.02]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 40
+Episode: 87797
+Reward: [-0.88 -0.88 -1.16 -0.9  -0.93]
+Time: 489.11s
+Success: 0.4744
+Steps-Taken: 33.58
+Comm-Action: [0.15 0.49 0.83 0.26 0.04]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 41
+Episode: 90259
+Reward: [-0.89 -0.89 -1.16 -0.88 -0.91]
+Time: 451.99s
+Success: 0.4842
+Steps-Taken: 33.62
+Comm-Action: [0.2  0.46 0.81 0.29 0.05]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 42
+Episode: 92751
+Reward: [-0.89 -0.89 -1.11 -0.87 -0.92]
+Time: 461.38s
+Success: 0.5237
+Steps-Taken: 33.22
+Comm-Action: [0.24 0.46 0.76 0.28 0.05]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 43
+Episode: 95339
+Reward: [-0.86 -0.85 -1.05 -0.88 -0.91]
+Time: 447.13s
+Success: 0.5699
+Steps-Taken: 32.08
+Comm-Action: [0.25 0.48 0.78 0.26 0.04]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 44
+Episode: 97901
+Reward: [-0.89 -0.84 -1.   -0.87 -0.92]
+Time: 441.20s
+Success: 0.5843
+Steps-Taken: 32.17
+Comm-Action: [0.22 0.47 0.83 0.25 0.06]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 45
+Episode: 100535
+Reward: [-0.88 -0.87 -0.95 -0.86 -0.89]
+Time: 433.01s
+Success: 0.6173
+Steps-Taken: 31.39
+Comm-Action: [0.25 0.45 0.83 0.25 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 46
+Episode: 103211
+Reward: [-0.87 -0.85 -0.94 -0.86 -0.88]
+Time: 424.14s
+Success: 0.6513
+Steps-Taken: 30.87
+Comm-Action: [0.29 0.46 0.76 0.27 0.09]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 47
+Episode: 105900
+Reward: [-0.85 -0.86 -0.93 -0.87 -0.9 ]
+Time: 413.33s
+Success: 0.6690
+Steps-Taken: 30.64
+Comm-Action: [0.28 0.44 0.74 0.25 0.11]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 48
+Episode: 108548
+Reward: [-0.9  -0.86 -0.92 -0.86 -0.88]
+Time: 410.29s
+Success: 0.6333
+Steps-Taken: 31.31
+Comm-Action: [0.27 0.42 0.77 0.25 0.12]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 49
+Episode: 111220
+Reward: [-0.89 -0.83 -0.92 -0.84 -0.87]
+Time: 404.14s
+Success: 0.6643
+Steps-Taken: 30.85
+Comm-Action: [0.25 0.42 0.79 0.2  0.11]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 50
+Episode: 113929
+Reward: [-0.84 -0.83 -0.9  -0.85 -0.88]
+Time: 395.13s
+Success: 0.6925
+Steps-Taken: 30.45
+Comm-Action: [0.23 0.41 0.78 0.24 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 51
+Episode: 116683
+Reward: [-0.83 -0.85 -0.86 -0.8  -0.89]
+Time: 389.46s
+Success: 0.7179
+Steps-Taken: 29.98
+Comm-Action: [0.25 0.43 0.76 0.26 0.19]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 52
+Episode: 119481
+Reward: [-0.84 -0.83 -0.86 -0.81 -0.86]
+Time: 391.92s
+Success: 0.7355
+Steps-Taken: 29.54
+Comm-Action: [0.26 0.44 0.75 0.28 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 53
+Episode: 122209
+Reward: [-0.85 -0.83 -0.88 -0.82 -0.88]
+Time: 406.09s
+Success: 0.6990
+Steps-Taken: 30.25
+Comm-Action: [0.31 0.44 0.67 0.3  0.14]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 54
+Episode: 124919
+Reward: [-0.84 -0.82 -0.87 -0.89 -0.88]
+Time: 395.13s
+Success: 0.7081
+Steps-Taken: 30.37
+Comm-Action: [0.31 0.47 0.64 0.34 0.19]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 55
+Episode: 127614
+Reward: [-0.87 -0.83 -0.85 -0.97 -0.87]
+Time: 414.06s
+Success: 0.6738
+Steps-Taken: 30.61
+Comm-Action: [0.23 0.48 0.64 0.37 0.19]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 56
+Episode: 130361
+Reward: [-0.84 -0.82 -0.84 -0.88 -0.9 ]
+Time: 413.01s
+Success: 0.6931
+Steps-Taken: 30.02
+Comm-Action: [0.22 0.48 0.69 0.36 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 57
+Episode: 133106
+Reward: [-0.81 -0.82 -0.85 -0.89 -0.89]
+Time: 394.89s
+Success: 0.7005
+Steps-Taken: 30.05
+Comm-Action: [0.22 0.5  0.72 0.41 0.13]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 58
+Episode: 135858
+Reward: [-0.81 -0.82 -0.84 -0.84 -0.89]
+Time: 409.41s
+Success: 0.7180
+Steps-Taken: 29.89
+Comm-Action: [0.24 0.51 0.72 0.35 0.15]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 59
+Episode: 138615
+Reward: [-0.82 -0.82 -0.83 -0.84 -0.9 ]
+Time: 407.09s
+Success: 0.7305
+Steps-Taken: 29.82
+Comm-Action: [0.28 0.52 0.81 0.4  0.14]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 60
+Episode: 141432
+Reward: [-0.82 -0.82 -0.83 -0.8  -0.87]
+Time: 405.72s
+Success: 0.7373
+Steps-Taken: 29.31
+Comm-Action: [0.25 0.52 0.86 0.37 0.13]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 61
+Episode: 144218
+Reward: [-0.82 -0.84 -0.87 -0.81 -0.87]
+Time: 405.67s
+Success: 0.7247
+Steps-Taken: 29.64
+Comm-Action: [0.23 0.51 0.82 0.43 0.1 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 62
+Episode: 146994
+Reward: [-0.83 -0.85 -0.89 -0.82 -0.88]
+Time: 406.81s
+Success: 0.7251
+Steps-Taken: 29.72
+Comm-Action: [0.21 0.49 0.85 0.44 0.12]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 63
+Episode: 149759
+Reward: [-0.82 -0.84 -0.86 -0.8  -0.89]
+Time: 427.42s
+Success: 0.7306
+Steps-Taken: 29.83
+Comm-Action: [0.18 0.48 0.87 0.48 0.12]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 64
+Episode: 152509
+Reward: [-0.83 -0.83 -0.85 -0.8  -0.9 ]
+Time: 425.10s
+Success: 0.7127
+Steps-Taken: 30.03
+Comm-Action: [0.16 0.42 0.86 0.47 0.11]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 65
+Episode: 155308
+Reward: [-0.83 -0.82 -0.84 -0.79 -0.89]
+Time: 438.67s
+Success: 0.7460
+Steps-Taken: 29.43
+Comm-Action: [0.18 0.42 0.85 0.47 0.12]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 66
+Episode: 158057
+Reward: [-0.81 -0.82 -0.9  -0.79 -0.89]
+Time: 424.06s
+Success: 0.7261
+Steps-Taken: 30.02
+Comm-Action: [0.19 0.42 0.84 0.47 0.13]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 67
+Episode: 160827
+Reward: [-0.83 -0.82 -0.88 -0.78 -0.86]
+Time: 429.83s
+Success: 0.7296
+Steps-Taken: 29.76
+Comm-Action: [0.2  0.41 0.83 0.43 0.1 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 68
+Episode: 163549
+Reward: [-0.84 -0.81 -0.95 -0.78 -0.86]
+Time: 423.99s
+Success: 0.6877
+Steps-Taken: 30.28
+Comm-Action: [0.24 0.44 0.8  0.46 0.1 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 69
+Episode: 166199
+Reward: [-0.84 -0.83 -0.97 -0.8  -0.88]
+Time: 398.54s
+Success: 0.6453
+Steps-Taken: 31.15
+Comm-Action: [0.24 0.48 0.83 0.44 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 70
+Episode: 168758
+Reward: [-0.81 -0.82 -1.09 -0.79 -0.86]
+Time: 401.82s
+Success: 0.5623
+Steps-Taken: 32.28
+Comm-Action: [0.26 0.55 0.77 0.42 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 71
+Episode: 171453
+Reward: [-0.83 -0.81 -0.9  -0.8  -0.89]
+Time: 399.74s
+Success: 0.6712
+Steps-Taken: 30.59
+Comm-Action: [0.26 0.57 0.69 0.43 0.07]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 72
+Episode: 174182
+Reward: [-0.81 -0.81 -0.91 -0.79 -0.87]
+Time: 394.57s
+Success: 0.7182
+Steps-Taken: 30.24
+Comm-Action: [0.28 0.55 0.66 0.43 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 73
+Episode: 176936
+Reward: [-0.82 -0.82 -0.88 -0.78 -0.87]
+Time: 392.59s
+Success: 0.7328
+Steps-Taken: 29.97
+Comm-Action: [0.27 0.51 0.64 0.44 0.07]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 74
+Episode: 179743
+Reward: [-0.81 -0.81 -0.87 -0.79 -0.88]
+Time: 395.41s
+Success: 0.7488
+Steps-Taken: 29.40
+Comm-Action: [0.22 0.46 0.66 0.42 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 75
+Episode: 182533
+Reward: [-0.79 -0.81 -0.87 -0.77 -0.86]
+Time: 395.35s
+Success: 0.7466
+Steps-Taken: 29.58
+Comm-Action: [0.25 0.44 0.67 0.42 0.09]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 76
+Episode: 185313
+Reward: [-0.82 -0.81 -0.86 -0.77 -0.86]
+Time: 401.13s
+Success: 0.7342
+Steps-Taken: 29.69
+Comm-Action: [0.23 0.46 0.65 0.42 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 77
+Episode: 188088
+Reward: [-0.83 -0.83 -0.85 -0.78 -0.9 ]
+Time: 393.97s
+Success: 0.7528
+Steps-Taken: 29.68
+Comm-Action: [0.26 0.48 0.64 0.43 0.07]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 78
+Episode: 190921
+Reward: [-0.78 -0.8  -0.82 -0.79 -0.87]
+Time: 402.99s
+Success: 0.7610
+Steps-Taken: 29.10
+Comm-Action: [0.28 0.48 0.66 0.43 0.06]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 79
+Episode: 193775
+Reward: [-0.8  -0.79 -0.82 -0.77 -0.86]
+Time: 390.22s
+Success: 0.7789
+Steps-Taken: 28.84
+Comm-Action: [0.31 0.49 0.68 0.44 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 80
+Episode: 196578
+Reward: [-0.79 -0.81 -0.84 -0.78 -0.88]
+Time: 406.87s
+Success: 0.7428
+Steps-Taken: 29.45
+Comm-Action: [0.3  0.52 0.7  0.44 0.08]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 81
+Episode: 199413
+Reward: [-0.79 -0.8  -0.81 -0.8  -0.88]
+Time: 390.46s
+Success: 0.7623
+Steps-Taken: 29.05
+Comm-Action: [0.33 0.52 0.7  0.46 0.1 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 82
+Episode: 202220
+Reward: [-0.8  -0.82 -0.81 -0.78 -0.89]
+Time: 395.78s
+Success: 0.7520
+Steps-Taken: 29.35
+Comm-Action: [0.35 0.5  0.73 0.47 0.11]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 83
+Episode: 205060
+Reward: [-0.79 -0.8  -0.81 -0.79 -0.9 ]
+Time: 396.42s
+Success: 0.7518
+Steps-Taken: 28.99
+Comm-Action: [0.38 0.5  0.69 0.49 0.12]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 84
+Episode: 207889
+Reward: [-0.8  -0.81 -0.8  -0.79 -0.88]
+Time: 396.08s
+Success: 0.7632
+Steps-Taken: 29.10
+Comm-Action: [0.36 0.51 0.71 0.48 0.13]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 85
+Episode: 210768
+Reward: [-0.8  -0.79 -0.8  -0.75 -0.87]
+Time: 395.92s
+Success: 0.7930
+Steps-Taken: 28.57
+Comm-Action: [0.32 0.49 0.69 0.48 0.13]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 86
+Episode: 213593
+Reward: [-0.8  -0.81 -0.83 -0.77 -0.86]
+Time: 399.31s
+Success: 0.7749
+Steps-Taken: 29.14
+Comm-Action: [0.27 0.45 0.71 0.5  0.11]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 87
+Episode: 216229
+Reward: [-0.81 -0.81 -1.08 -0.78 -0.87]
+Time: 395.03s
+Success: 0.6225
+Steps-Taken: 31.40
+Comm-Action: [0.25 0.42 0.7  0.49 0.13]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 88
+Episode: 218714
+Reward: [-0.8  -0.79 -1.26 -0.79 -0.86]
+Time: 398.05s
+Success: 0.5119
+Steps-Taken: 33.21
+Comm-Action: [0.24 0.39 0.7  0.49 0.2 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 89
+Episode: 221447
+Reward: [-0.8  -0.82 -1.   -0.74 -0.85]
+Time: 396.38s
+Success: 0.7095
+Steps-Taken: 30.32
+Comm-Action: [0.25 0.41 0.73 0.51 0.27]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 90
+Episode: 224124
+Reward: [-0.81 -0.8  -1.06 -0.77 -0.84]
+Time: 391.38s
+Success: 0.6963
+Steps-Taken: 30.86
+Comm-Action: [0.29 0.4  0.71 0.52 0.23]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 91
+Episode: 226805
+Reward: [-0.79 -0.8  -1.06 -0.75 -0.86]
+Time: 398.36s
+Success: 0.7001
+Steps-Taken: 30.83
+Comm-Action: [0.3  0.36 0.68 0.53 0.24]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 92
+Episode: 229287
+Reward: [-0.82 -0.82 -1.28 -0.79 -0.85]
+Time: 397.95s
+Success: 0.5359
+Steps-Taken: 33.36
+Comm-Action: [0.3  0.33 0.65 0.54 0.3 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 93
+Episode: 231669
+Reward: [-0.79 -0.8  -1.4  -0.81 -0.84]
+Time: 394.51s
+Success: 0.4194
+Steps-Taken: 34.85
+Comm-Action: [0.32 0.32 0.6  0.5  0.34]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 94
+Episode: 234208
+Reward: [-0.8  -0.81 -1.25 -0.78 -0.82]
+Time: 397.79s
+Success: 0.5849
+Steps-Taken: 32.60
+Comm-Action: [0.33 0.36 0.55 0.51 0.35]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 95
+Episode: 236596
+Reward: [-0.8  -0.82 -1.39 -0.78 -0.82]
+Time: 395.08s
+Success: 0.4083
+Steps-Taken: 34.66
+Comm-Action: [0.36 0.36 0.32 0.53 0.34]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 96
+Episode: 238900
+Reward: [-0.82 -0.83 -1.51 -0.8  -0.82]
+Time: 413.51s
+Success: 0.2904
+Steps-Taken: 35.91
+Comm-Action: [0.36 0.34 0.29 0.53 0.33]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 97
+Episode: 241184
+Reward: [-0.78 -0.82 -1.53 -0.78 -0.85]
+Time: 425.69s
+Success: 0.2574
+Steps-Taken: 36.25
+Comm-Action: [0.36 0.33 0.27 0.54 0.31]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 98
+Episode: 243496
+Reward: [-0.81 -0.8  -1.5  -0.77 -0.83]
+Time: 427.31s
+Success: 0.3045
+Steps-Taken: 35.84
+Comm-Action: [0.34 0.33 0.35 0.56 0.32]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 99
+Episode: 245894
+Reward: [-0.8  -0.8  -1.39 -0.77 -0.85]
+Time: 419.66s
+Success: 0.3837
+Steps-Taken: 34.59
+Comm-Action: [0.3  0.34 0.4  0.57 0.34]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 100
+Episode: 248290
+Reward: [-0.81 -0.8  -1.39 -0.75 -0.8 ]
+Time: 409.48s
+Success: 0.3639
+Steps-Taken: 34.61
+Comm-Action: [0.33 0.34 0.38 0.57 0.38]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 101
+Episode: 250715
+Reward: [-0.81 -0.8  -1.33 -0.78 -0.83]
+Time: 409.05s
+Success: 0.4367
+Steps-Taken: 34.20
+Comm-Action: [0.29 0.37 0.43 0.57 0.34]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 102
+Episode: 253259
+Reward: [-0.8  -0.8  -1.19 -0.77 -0.84]
+Time: 403.76s
+Success: 0.5711
+Steps-Taken: 32.52
+Comm-Action: [0.3  0.38 0.5  0.53 0.36]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 103
+Episode: 255821
+Reward: [-0.82 -0.81 -1.18 -0.78 -0.81]
+Time: 401.46s
+Success: 0.6015
+Steps-Taken: 32.29
+Comm-Action: [0.33 0.39 0.52 0.54 0.42]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 104
+Episode: 258414
+Reward: [-0.79 -0.81 -1.14 -0.75 -0.82]
+Time: 400.72s
+Success: 0.6622
+Steps-Taken: 31.77
+Comm-Action: [0.33 0.38 0.58 0.52 0.43]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 105
+Episode: 260947
+Reward: [-0.79 -0.82 -1.21 -0.76 -0.83]
+Time: 397.63s
+Success: 0.5910
+Steps-Taken: 32.71
+Comm-Action: [0.35 0.41 0.58 0.52 0.42]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 106
+Episode: 263613
+Reward: [-0.78 -0.81 -1.06 -0.77 -0.81]
+Time: 400.36s
+Success: 0.6995
+Steps-Taken: 31.04
+Comm-Action: [0.35 0.41 0.63 0.51 0.41]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 107
+Episode: 266336
+Reward: [-0.79 -0.81 -0.98 -0.78 -0.82]
+Time: 401.24s
+Success: 0.7102
+Steps-Taken: 30.34
+Comm-Action: [0.34 0.4  0.65 0.5  0.43]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 108
+Episode: 269120
+Reward: [-0.76 -0.8  -0.96 -0.75 -0.82]
+Time: 400.11s
+Success: 0.7687
+Steps-Taken: 29.69
+Comm-Action: [0.32 0.37 0.67 0.5  0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 109
+Episode: 271885
+Reward: [-0.78 -0.8  -0.99 -0.76 -0.8 ]
+Time: 393.94s
+Success: 0.7678
+Steps-Taken: 29.78
+Comm-Action: [0.32 0.39 0.67 0.45 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 110
+Episode: 274546
+Reward: [-0.77 -0.81 -1.11 -0.78 -0.8 ]
+Time: 397.34s
+Success: 0.7009
+Steps-Taken: 31.05
+Comm-Action: [0.32 0.37 0.66 0.46 0.42]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 111
+Episode: 277228
+Reward: [-0.79 -0.8  -1.08 -0.76 -0.81]
+Time: 390.46s
+Success: 0.7360
+Steps-Taken: 30.77
+Comm-Action: [0.29 0.39 0.61 0.47 0.39]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 112
+Episode: 279919
+Reward: [-0.79 -0.78 -1.05 -0.77 -0.82]
+Time: 394.45s
+Success: 0.7157
+Steps-Taken: 30.66
+Comm-Action: [0.26 0.42 0.61 0.51 0.38]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 113
+Episode: 282616
+Reward: [-0.8  -0.79 -1.06 -0.76 -0.82]
+Time: 398.38s
+Success: 0.7275
+Steps-Taken: 30.64
+Comm-Action: [0.32 0.4  0.62 0.5  0.36]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 114
+Episode: 285364
+Reward: [-0.79 -0.85 -0.95 -0.76 -0.81]
+Time: 400.66s
+Success: 0.7697
+Steps-Taken: 30.03
+Comm-Action: [0.31 0.42 0.66 0.48 0.35]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 115
+Episode: 288090
+Reward: [-0.79 -0.8  -1.02 -0.76 -0.81]
+Time: 400.91s
+Success: 0.7572
+Steps-Taken: 30.22
+Comm-Action: [0.33 0.43 0.68 0.47 0.33]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 116
+Episode: 290853
+Reward: [-0.78 -0.79 -1.   -0.75 -0.79]
+Time: 399.38s
+Success: 0.7546
+Steps-Taken: 29.92
+Comm-Action: [0.33 0.43 0.68 0.46 0.34]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 117
+Episode: 293612
+Reward: [-0.79 -0.81 -0.97 -0.77 -0.82]
+Time: 396.25s
+Success: 0.7543
+Steps-Taken: 29.95
+Comm-Action: [0.35 0.41 0.69 0.45 0.33]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 118
+Episode: 296376
+Reward: [-0.81 -0.79 -1.   -0.76 -0.8 ]
+Time: 396.87s
+Success: 0.7771
+Steps-Taken: 29.83
+Comm-Action: [0.34 0.42 0.71 0.42 0.33]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 119
+Episode: 299170
+Reward: [-0.79 -0.78 -0.96 -0.77 -0.8 ]
+Time: 405.05s
+Success: 0.7799
+Steps-Taken: 29.53
+Comm-Action: [0.32 0.41 0.74 0.42 0.36]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 120
+Episode: 301999
+Reward: [-0.79 -0.78 -0.92 -0.75 -0.79]
+Time: 396.20s
+Success: 0.7890
+Steps-Taken: 29.07
+Comm-Action: [0.31 0.41 0.76 0.44 0.4 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 121
+Episode: 304835
+Reward: [-0.77 -0.79 -0.93 -0.76 -0.8 ]
+Time: 393.05s
+Success: 0.7909
+Steps-Taken: 29.02
+Comm-Action: [0.31 0.42 0.78 0.48 0.44]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 122
+Episode: 307715
+Reward: [-0.79 -0.78 -0.89 -0.76 -0.79]
+Time: 397.89s
+Success: 0.8187
+Steps-Taken: 28.60
+Comm-Action: [0.34 0.42 0.77 0.5  0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 123
+Episode: 310654
+Reward: [-0.79 -0.79 -0.84 -0.77 -0.79]
+Time: 397.67s
+Success: 0.8319
+Steps-Taken: 28.05
+Comm-Action: [0.34 0.43 0.76 0.5  0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 124
+Episode: 313549
+Reward: [-0.79 -0.77 -0.91 -0.74 -0.79]
+Time: 394.31s
+Success: 0.7800
+Steps-Taken: 28.51
+Comm-Action: [0.37 0.44 0.79 0.51 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 125
+Episode: 316442
+Reward: [-0.79 -0.78 -0.9  -0.76 -0.8 ]
+Time: 392.83s
+Success: 0.7974
+Steps-Taken: 28.44
+Comm-Action: [0.38 0.45 0.78 0.51 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 126
+Episode: 319304
+Reward: [-0.79 -0.77 -0.95 -0.77 -0.79]
+Time: 395.40s
+Success: 0.7778
+Steps-Taken: 28.73
+Comm-Action: [0.35 0.46 0.78 0.52 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 127
+Episode: 322275
+Reward: [-0.78 -0.79 -0.87 -0.76 -0.79]
+Time: 396.26s
+Success: 0.8287
+Steps-Taken: 27.70
+Comm-Action: [0.36 0.47 0.75 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 128
+Episode: 325223
+Reward: [-0.79 -0.79 -0.88 -0.76 -0.78]
+Time: 394.54s
+Success: 0.8121
+Steps-Taken: 27.87
+Comm-Action: [0.36 0.47 0.77 0.51 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 129
+Episode: 328195
+Reward: [-0.81 -0.78 -0.85 -0.76 -0.78]
+Time: 406.34s
+Success: 0.8459
+Steps-Taken: 27.72
+Comm-Action: [0.34 0.45 0.76 0.49 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 130
+Episode: 331172
+Reward: [-0.79 -0.78 -0.85 -0.77 -0.78]
+Time: 397.06s
+Success: 0.8391
+Steps-Taken: 27.70
+Comm-Action: [0.34 0.46 0.76 0.5  0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 131
+Episode: 334176
+Reward: [-0.79 -0.77 -0.81 -0.75 -0.77]
+Time: 395.73s
+Success: 0.8522
+Steps-Taken: 27.41
+Comm-Action: [0.35 0.45 0.76 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 132
+Episode: 337102
+Reward: [-0.79 -0.76 -0.86 -0.78 -0.77]
+Time: 392.62s
+Success: 0.8076
+Steps-Taken: 28.12
+Comm-Action: [0.34 0.46 0.76 0.49 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 133
+Episode: 340070
+Reward: [-0.78 -0.77 -0.85 -0.78 -0.76]
+Time: 393.51s
+Success: 0.8396
+Steps-Taken: 27.68
+Comm-Action: [0.34 0.45 0.73 0.51 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 134
+Episode: 343105
+Reward: [-0.78 -0.76 -0.81 -0.76 -0.78]
+Time: 413.10s
+Success: 0.8524
+Steps-Taken: 27.18
+Comm-Action: [0.36 0.46 0.73 0.51 0.41]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 135
+Episode: 346180
+Reward: [-0.78 -0.74 -0.8  -0.74 -0.8 ]
+Time: 401.93s
+Success: 0.8728
+Steps-Taken: 26.73
+Comm-Action: [0.34 0.44 0.75 0.54 0.37]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 136
+Episode: 349279
+Reward: [-0.76 -0.76 -0.77 -0.74 -0.79]
+Time: 396.74s
+Success: 0.8835
+Steps-Taken: 26.58
+Comm-Action: [0.34 0.45 0.78 0.55 0.38]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 137
+Episode: 352357
+Reward: [-0.77 -0.76 -0.76 -0.73 -0.77]
+Time: 397.36s
+Success: 0.8821
+Steps-Taken: 26.74
+Comm-Action: [0.34 0.45 0.79 0.56 0.41]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 138
+Episode: 355425
+Reward: [-0.78 -0.76 -0.75 -0.75 -0.76]
+Time: 396.86s
+Success: 0.8758
+Steps-Taken: 26.75
+Comm-Action: [0.35 0.45 0.8  0.56 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 139
+Episode: 358462
+Reward: [-0.78 -0.77 -0.76 -0.74 -0.77]
+Time: 394.48s
+Success: 0.8594
+Steps-Taken: 27.10
+Comm-Action: [0.36 0.44 0.81 0.55 0.41]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 140
+Episode: 361545
+Reward: [-0.77 -0.76 -0.76 -0.75 -0.75]
+Time: 406.12s
+Success: 0.8751
+Steps-Taken: 26.65
+Comm-Action: [0.34 0.43 0.8  0.56 0.42]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 141
+Episode: 364622
+Reward: [-0.75 -0.78 -0.74 -0.75 -0.75]
+Time: 396.61s
+Success: 0.8612
+Steps-Taken: 26.74
+Comm-Action: [0.34 0.44 0.82 0.56 0.42]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 142
+Episode: 367772
+Reward: [-0.75 -0.75 -0.7  -0.72 -0.76]
+Time: 396.83s
+Success: 0.8965
+Steps-Taken: 26.13
+Comm-Action: [0.35 0.45 0.82 0.55 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 143
+Episode: 370910
+Reward: [-0.77 -0.76 -0.69 -0.74 -0.77]
+Time: 396.55s
+Success: 0.8945
+Steps-Taken: 26.20
+Comm-Action: [0.37 0.45 0.83 0.57 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 144
+Episode: 374086
+Reward: [-0.76 -0.74 -0.7  -0.72 -0.77]
+Time: 399.68s
+Success: 0.9071
+Steps-Taken: 25.86
+Comm-Action: [0.37 0.43 0.86 0.55 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 145
+Episode: 377305
+Reward: [-0.75 -0.75 -0.66 -0.72 -0.75]
+Time: 396.70s
+Success: 0.9189
+Steps-Taken: 25.46
+Comm-Action: [0.38 0.43 0.86 0.56 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 146
+Episode: 380513
+Reward: [-0.77 -0.75 -0.68 -0.73 -0.77]
+Time: 385.61s
+Success: 0.9059
+Steps-Taken: 25.68
+Comm-Action: [0.37 0.45 0.86 0.57 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 147
+Episode: 383746
+Reward: [-0.75 -0.73 -0.64 -0.73 -0.76]
+Time: 395.10s
+Success: 0.9199
+Steps-Taken: 25.38
+Comm-Action: [0.38 0.43 0.85 0.58 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 148
+Episode: 386981
+Reward: [-0.75 -0.74 -0.64 -0.73 -0.76]
+Time: 397.50s
+Success: 0.9243
+Steps-Taken: 25.36
+Comm-Action: [0.41 0.43 0.85 0.6  0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 149
+Episode: 390246
+Reward: [-0.74 -0.74 -0.65 -0.71 -0.75]
+Time: 394.20s
+Success: 0.9354
+Steps-Taken: 25.06
+Comm-Action: [0.43 0.43 0.85 0.62 0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 150
+Episode: 393523
+Reward: [-0.75 -0.75 -0.64 -0.71 -0.75]
+Time: 400.10s
+Success: 0.9432
+Steps-Taken: 25.10
+Comm-Action: [0.43 0.43 0.84 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 151
+Episode: 396795
+Reward: [-0.75 -0.74 -0.62 -0.72 -0.74]
+Time: 398.83s
+Success: 0.9377
+Steps-Taken: 25.07
+Comm-Action: [0.43 0.42 0.85 0.59 0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 152
+Episode: 400075
+Reward: [-0.75 -0.73 -0.61 -0.7  -0.76]
+Time: 400.99s
+Success: 0.9390
+Steps-Taken: 25.04
+Comm-Action: [0.43 0.44 0.85 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 153
+Episode: 403305
+Reward: [-0.77 -0.75 -0.62 -0.72 -0.76]
+Time: 398.48s
+Success: 0.9291
+Steps-Taken: 25.39
+Comm-Action: [0.43 0.45 0.84 0.61 0.57]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 154
+Episode: 406553
+Reward: [-0.76 -0.75 -0.6  -0.72 -0.75]
+Time: 393.84s
+Success: 0.9350
+Steps-Taken: 25.32
+Comm-Action: [0.46 0.44 0.85 0.63 0.55]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 155
+Episode: 409831
+Reward: [-0.73 -0.73 -0.6  -0.72 -0.74]
+Time: 396.23s
+Success: 0.9356
+Steps-Taken: 24.99
+Comm-Action: [0.46 0.47 0.83 0.62 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 156
+Episode: 413066
+Reward: [-0.75 -0.75 -0.65 -0.74 -0.77]
+Time: 390.82s
+Success: 0.9243
+Steps-Taken: 25.35
+Comm-Action: [0.44 0.48 0.82 0.64 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 157
+Episode: 416378
+Reward: [-0.71 -0.74 -0.61 -0.7  -0.75]
+Time: 391.91s
+Success: 0.9466
+Steps-Taken: 24.73
+Comm-Action: [0.45 0.46 0.83 0.62 0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 158
+Episode: 419666
+Reward: [-0.74 -0.73 -0.61 -0.71 -0.76]
+Time: 391.63s
+Success: 0.9404
+Steps-Taken: 24.93
+Comm-Action: [0.45 0.46 0.86 0.62 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 159
+Episode: 422983
+Reward: [-0.74 -0.73 -0.59 -0.71 -0.73]
+Time: 398.46s
+Success: 0.9460
+Steps-Taken: 24.74
+Comm-Action: [0.48 0.46 0.85 0.6  0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 160
+Episode: 426274
+Reward: [-0.74 -0.74 -0.6  -0.72 -0.74]
+Time: 398.25s
+Success: 0.9411
+Steps-Taken: 24.93
+Comm-Action: [0.51 0.45 0.86 0.61 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 161
+Episode: 429639
+Reward: [-0.73 -0.73 -0.59 -0.7  -0.74]
+Time: 399.63s
+Success: 0.9545
+Steps-Taken: 24.38
+Comm-Action: [0.49 0.46 0.86 0.64 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 162
+Episode: 432975
+Reward: [-0.72 -0.74 -0.59 -0.72 -0.74]
+Time: 390.92s
+Success: 0.9502
+Steps-Taken: 24.60
+Comm-Action: [0.5  0.45 0.86 0.65 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 163
+Episode: 436398
+Reward: [-0.72 -0.73 -0.58 -0.68 -0.73]
+Time: 393.78s
+Success: 0.9591
+Steps-Taken: 23.94
+Comm-Action: [0.49 0.44 0.87 0.65 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 164
+Episode: 439816
+Reward: [-0.73 -0.7  -0.58 -0.67 -0.75]
+Time: 391.83s
+Success: 0.9561
+Steps-Taken: 23.97
+Comm-Action: [0.49 0.43 0.85 0.63 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 165
+Episode: 443258
+Reward: [-0.73 -0.71 -0.57 -0.67 -0.73]
+Time: 397.27s
+Success: 0.9628
+Steps-Taken: 23.82
+Comm-Action: [0.49 0.44 0.83 0.65 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 166
+Episode: 446682
+Reward: [-0.71 -0.74 -0.57 -0.67 -0.72]
+Time: 391.26s
+Success: 0.9606
+Steps-Taken: 23.96
+Comm-Action: [0.52 0.44 0.83 0.65 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 167
+Episode: 450130
+Reward: [-0.72 -0.71 -0.56 -0.67 -0.71]
+Time: 390.95s
+Success: 0.9649
+Steps-Taken: 23.78
+Comm-Action: [0.52 0.45 0.84 0.64 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 168
+Episode: 453601
+Reward: [-0.71 -0.71 -0.55 -0.67 -0.72]
+Time: 392.68s
+Success: 0.9643
+Steps-Taken: 23.66
+Comm-Action: [0.51 0.45 0.83 0.63 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 169
+Episode: 457091
+Reward: [-0.72 -0.72 -0.55 -0.64 -0.72]
+Time: 400.15s
+Success: 0.9582
+Steps-Taken: 23.46
+Comm-Action: [0.52 0.46 0.84 0.61 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 170
+Episode: 460547
+Reward: [-0.72 -0.71 -0.57 -0.66 -0.73]
+Time: 403.03s
+Success: 0.9578
+Steps-Taken: 23.77
+Comm-Action: [0.51 0.46 0.85 0.59 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 171
+Episode: 463884
+Reward: [-0.7  -0.73 -0.58 -0.75 -0.72]
+Time: 397.56s
+Success: 0.9230
+Steps-Taken: 24.59
+Comm-Action: [0.52 0.44 0.84 0.59 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 172
+Episode: 467182
+Reward: [-0.75 -0.73 -0.6  -0.78 -0.72]
+Time: 397.92s
+Success: 0.9157
+Steps-Taken: 24.92
+Comm-Action: [0.5  0.44 0.86 0.59 0.72]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 173
+Episode: 470602
+Reward: [-0.71 -0.71 -0.56 -0.69 -0.72]
+Time: 389.68s
+Success: 0.9518
+Steps-Taken: 23.98
+Comm-Action: [0.51 0.45 0.86 0.62 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 174
+Episode: 473997
+Reward: [-0.72 -0.72 -0.56 -0.68 -0.74]
+Time: 399.17s
+Success: 0.9529
+Steps-Taken: 24.14
+Comm-Action: [0.5  0.44 0.86 0.62 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 175
+Episode: 477429
+Reward: [-0.71 -0.72 -0.56 -0.66 -0.72]
+Time: 393.90s
+Success: 0.9621
+Steps-Taken: 23.84
+Comm-Action: [0.52 0.44 0.86 0.61 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 176
+Episode: 480893
+Reward: [-0.7  -0.72 -0.55 -0.66 -0.72]
+Time: 394.77s
+Success: 0.9697
+Steps-Taken: 23.59
+Comm-Action: [0.55 0.44 0.87 0.6  0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 177
+Episode: 484417
+Reward: [-0.7  -0.71 -0.54 -0.66 -0.71]
+Time: 402.18s
+Success: 0.9614
+Steps-Taken: 23.31
+Comm-Action: [0.57 0.45 0.85 0.6  0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 178
+Episode: 487930
+Reward: [-0.69 -0.72 -0.53 -0.65 -0.72]
+Time: 395.90s
+Success: 0.9621
+Steps-Taken: 23.30
+Comm-Action: [0.56 0.43 0.84 0.62 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 179
+Episode: 491416
+Reward: [-0.7  -0.71 -0.55 -0.65 -0.71]
+Time: 394.52s
+Success: 0.9466
+Steps-Taken: 23.50
+Comm-Action: [0.56 0.43 0.85 0.61 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 180
+Episode: 494870
+Reward: [-0.7  -0.72 -0.57 -0.64 -0.72]
+Time: 391.32s
+Success: 0.9592
+Steps-Taken: 23.69
+Comm-Action: [0.55 0.44 0.83 0.59 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 181
+Episode: 498361
+Reward: [-0.69 -0.73 -0.55 -0.64 -0.73]
+Time: 397.93s
+Success: 0.9582
+Steps-Taken: 23.50
+Comm-Action: [0.54 0.44 0.82 0.59 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 182
+Episode: 501904
+Reward: [-0.7  -0.7  -0.53 -0.64 -0.72]
+Time: 395.60s
+Success: 0.9656
+Steps-Taken: 23.13
+Comm-Action: [0.56 0.44 0.82 0.61 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 183
+Episode: 505484
+Reward: [-0.7  -0.69 -0.54 -0.64 -0.71]
+Time: 399.05s
+Success: 0.9693
+Steps-Taken: 22.94
+Comm-Action: [0.55 0.44 0.81 0.6  0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 184
+Episode: 509014
+Reward: [-0.71 -0.69 -0.53 -0.64 -0.71]
+Time: 392.65s
+Success: 0.9592
+Steps-Taken: 23.15
+Comm-Action: [0.55 0.46 0.81 0.6  0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 185
+Episode: 512582
+Reward: [-0.69 -0.71 -0.52 -0.64 -0.71]
+Time: 404.46s
+Success: 0.9720
+Steps-Taken: 23.00
+Comm-Action: [0.56 0.46 0.81 0.59 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 186
+Episode: 516156
+Reward: [-0.68 -0.7  -0.52 -0.64 -0.71]
+Time: 410.18s
+Success: 0.9628
+Steps-Taken: 22.94
+Comm-Action: [0.59 0.47 0.81 0.59 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 187
+Episode: 519690
+Reward: [-0.7  -0.71 -0.52 -0.66 -0.71]
+Time: 409.65s
+Success: 0.9694
+Steps-Taken: 23.17
+Comm-Action: [0.57 0.46 0.81 0.61 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 188
+Episode: 523201
+Reward: [-0.69 -0.7  -0.53 -0.66 -0.71]
+Time: 399.24s
+Success: 0.9598
+Steps-Taken: 23.31
+Comm-Action: [0.6  0.45 0.8  0.61 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 189
+Episode: 526729
+Reward: [-0.69 -0.7  -0.53 -0.65 -0.71]
+Time: 400.04s
+Success: 0.9649
+Steps-Taken: 23.16
+Comm-Action: [0.61 0.45 0.82 0.6  0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 190
+Episode: 530329
+Reward: [-0.66 -0.71 -0.52 -0.65 -0.72]
+Time: 392.07s
+Success: 0.9728
+Steps-Taken: 22.81
+Comm-Action: [0.65 0.45 0.83 0.6  0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 191
+Episode: 533977
+Reward: [-0.63 -0.71 -0.53 -0.64 -0.71]
+Time: 397.25s
+Success: 0.9731
+Steps-Taken: 22.41
+Comm-Action: [0.68 0.44 0.82 0.58 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 192
+Episode: 537610
+Reward: [-0.64 -0.71 -0.52 -0.67 -0.71]
+Time: 398.55s
+Success: 0.9590
+Steps-Taken: 22.52
+Comm-Action: [0.71 0.45 0.82 0.61 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 193
+Episode: 541286
+Reward: [-0.63 -0.71 -0.52 -0.64 -0.72]
+Time: 401.77s
+Success: 0.9573
+Steps-Taken: 22.25
+Comm-Action: [0.7  0.45 0.82 0.62 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 194
+Episode: 544990
+Reward: [-0.63 -0.7  -0.54 -0.61 -0.72]
+Time: 392.11s
+Success: 0.9760
+Steps-Taken: 22.13
+Comm-Action: [0.69 0.46 0.84 0.62 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 195
+Episode: 548680
+Reward: [-0.62 -0.7  -0.53 -0.6  -0.71]
+Time: 395.29s
+Success: 0.9696
+Steps-Taken: 22.13
+Comm-Action: [0.75 0.46 0.84 0.62 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 196
+Episode: 552460
+Reward: [-0.61 -0.7  -0.51 -0.61 -0.7 ]
+Time: 393.65s
+Success: 0.9831
+Steps-Taken: 21.67
+Comm-Action: [0.75 0.46 0.85 0.62 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 197
+Episode: 556277
+Reward: [-0.6  -0.7  -0.51 -0.61 -0.7 ]
+Time: 400.15s
+Success: 0.9845
+Steps-Taken: 21.47
+Comm-Action: [0.73 0.45 0.86 0.63 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 198
+Episode: 560088
+Reward: [-0.6  -0.7  -0.51 -0.6  -0.7 ]
+Time: 411.51s
+Success: 0.9780
+Steps-Taken: 21.49
+Comm-Action: [0.75 0.45 0.88 0.63 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 199
+Episode: 563895
+Reward: [-0.58 -0.7  -0.51 -0.6  -0.71]
+Time: 413.72s
+Success: 0.9766
+Steps-Taken: 21.51
+Comm-Action: [0.76 0.45 0.87 0.64 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 200
+Episode: 567707
+Reward: [-0.6  -0.7  -0.53 -0.6  -0.7 ]
+Time: 412.64s
+Success: 0.9719
+Steps-Taken: 21.51
+Comm-Action: [0.77 0.45 0.82 0.65 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 201
+Episode: 571582
+Reward: [-0.58 -0.69 -0.52 -0.6  -0.69]
+Time: 420.42s
+Success: 0.9809
+Steps-Taken: 21.11
+Comm-Action: [0.79 0.44 0.83 0.63 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 202
+Episode: 575495
+Reward: [-0.56 -0.67 -0.51 -0.59 -0.71]
+Time: 407.71s
+Success: 0.9816
+Steps-Taken: 20.90
+Comm-Action: [0.77 0.45 0.83 0.62 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 203
+Episode: 579323
+Reward: [-0.57 -0.7  -0.52 -0.61 -0.71]
+Time: 410.19s
+Success: 0.9760
+Steps-Taken: 21.37
+Comm-Action: [0.78 0.44 0.83 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 204
+Episode: 583186
+Reward: [-0.55 -0.68 -0.51 -0.61 -0.71]
+Time: 432.62s
+Success: 0.9772
+Steps-Taken: 21.17
+Comm-Action: [0.78 0.44 0.83 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 205
+Episode: 587054
+Reward: [-0.56 -0.69 -0.5  -0.59 -0.71]
+Time: 418.19s
+Success: 0.9842
+Steps-Taken: 21.17
+Comm-Action: [0.76 0.45 0.83 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 206
+Episode: 590930
+Reward: [-0.56 -0.69 -0.51 -0.59 -0.7 ]
+Time: 429.42s
+Success: 0.9791
+Steps-Taken: 21.10
+Comm-Action: [0.77 0.45 0.83 0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 207
+Episode: 594818
+Reward: [-0.57 -0.69 -0.53 -0.6  -0.71]
+Time: 429.48s
+Success: 0.9697
+Steps-Taken: 21.05
+Comm-Action: [0.8  0.45 0.82 0.62 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 208
+Episode: 598728
+Reward: [-0.57 -0.69 -0.53 -0.58 -0.69]
+Time: 426.76s
+Success: 0.9760
+Steps-Taken: 20.89
+Comm-Action: [0.78 0.45 0.8  0.65 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 209
+Episode: 602693
+Reward: [-0.55 -0.69 -0.5  -0.58 -0.68]
+Time: 423.48s
+Success: 0.9811
+Steps-Taken: 20.65
+Comm-Action: [0.78 0.45 0.82 0.66 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 210
+Episode: 606644
+Reward: [-0.55 -0.68 -0.51 -0.58 -0.69]
+Time: 429.07s
+Success: 0.9825
+Steps-Taken: 20.69
+Comm-Action: [0.81 0.46 0.82 0.65 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 211
+Episode: 610620
+Reward: [-0.56 -0.7  -0.52 -0.57 -0.68]
+Time: 422.77s
+Success: 0.9834
+Steps-Taken: 20.58
+Comm-Action: [0.81 0.47 0.82 0.65 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 212
+Episode: 614661
+Reward: [-0.53 -0.69 -0.5  -0.56 -0.67]
+Time: 415.23s
+Success: 0.9849
+Steps-Taken: 20.26
+Comm-Action: [0.81 0.48 0.8  0.68 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 213
+Episode: 618648
+Reward: [-0.53 -0.68 -0.51 -0.58 -0.68]
+Time: 415.70s
+Success: 0.9784
+Steps-Taken: 20.48
+Comm-Action: [0.84 0.48 0.81 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 214
+Episode: 622672
+Reward: [-0.52 -0.68 -0.49 -0.56 -0.68]
+Time: 418.17s
+Success: 0.9871
+Steps-Taken: 20.30
+Comm-Action: [0.85 0.47 0.82 0.68 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 215
+Episode: 626734
+Reward: [-0.53 -0.68 -0.49 -0.55 -0.67]
+Time: 419.14s
+Success: 0.9862
+Steps-Taken: 20.13
+Comm-Action: [0.84 0.46 0.84 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 216
+Episode: 630800
+Reward: [-0.52 -0.67 -0.5  -0.56 -0.67]
+Time: 416.92s
+Success: 0.9857
+Steps-Taken: 20.12
+Comm-Action: [0.83 0.45 0.86 0.7  0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 217
+Episode: 634890
+Reward: [-0.52 -0.68 -0.49 -0.55 -0.65]
+Time: 428.59s
+Success: 0.9897
+Steps-Taken: 19.96
+Comm-Action: [0.86 0.45 0.86 0.68 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 218
+Episode: 638946
+Reward: [-0.54 -0.69 -0.5  -0.55 -0.67]
+Time: 417.36s
+Success: 0.9842
+Steps-Taken: 20.17
+Comm-Action: [0.87 0.44 0.86 0.68 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 219
+Episode: 642974
+Reward: [-0.52 -0.69 -0.51 -0.53 -0.68]
+Time: 415.92s
+Success: 0.9769
+Steps-Taken: 20.30
+Comm-Action: [0.87 0.44 0.86 0.67 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 220
+Episode: 647113
+Reward: [-0.52 -0.68 -0.5  -0.53 -0.66]
+Time: 431.62s
+Success: 0.9865
+Steps-Taken: 19.74
+Comm-Action: [0.88 0.45 0.83 0.68 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 221
+Episode: 651331
+Reward: [-0.5  -0.67 -0.48 -0.52 -0.65]
+Time: 430.43s
+Success: 0.9948
+Steps-Taken: 19.38
+Comm-Action: [0.89 0.44 0.82 0.68 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 222
+Episode: 655466
+Reward: [-0.53 -0.68 -0.52 -0.53 -0.68]
+Time: 426.37s
+Success: 0.9865
+Steps-Taken: 19.74
+Comm-Action: [0.9  0.44 0.84 0.7  0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 223
+Episode: 659599
+Reward: [-0.53 -0.69 -0.52 -0.55 -0.66]
+Time: 415.49s
+Success: 0.9898
+Steps-Taken: 19.74
+Comm-Action: [0.9  0.44 0.84 0.71 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 224
+Episode: 663738
+Reward: [-0.53 -0.69 -0.52 -0.55 -0.66]
+Time: 406.20s
+Success: 0.9862
+Steps-Taken: 19.79
+Comm-Action: [0.91 0.45 0.85 0.71 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 225
+Episode: 667885
+Reward: [-0.52 -0.69 -0.52 -0.54 -0.65]
+Time: 406.90s
+Success: 0.9877
+Steps-Taken: 19.66
+Comm-Action: [0.9  0.45 0.86 0.72 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 226
+Episode: 672091
+Reward: [-0.52 -0.68 -0.51 -0.54 -0.65]
+Time: 408.60s
+Success: 0.9917
+Steps-Taken: 19.43
+Comm-Action: [0.88 0.45 0.88 0.73 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 227
+Episode: 676309
+Reward: [-0.52 -0.67 -0.51 -0.53 -0.65]
+Time: 418.29s
+Success: 0.9903
+Steps-Taken: 19.37
+Comm-Action: [0.88 0.44 0.86 0.72 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 228
+Episode: 680478
+Reward: [-0.53 -0.67 -0.52 -0.55 -0.66]
+Time: 422.22s
+Success: 0.9832
+Steps-Taken: 19.60
+Comm-Action: [0.88 0.44 0.84 0.74 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 229
+Episode: 684658
+Reward: [-0.53 -0.68 -0.51 -0.53 -0.66]
+Time: 428.80s
+Success: 0.9892
+Steps-Taken: 19.56
+Comm-Action: [0.88 0.43 0.84 0.73 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 230
+Episode: 688866
+Reward: [-0.52 -0.69 -0.5  -0.53 -0.65]
+Time: 407.82s
+Success: 0.9898
+Steps-Taken: 19.38
+Comm-Action: [0.88 0.45 0.81 0.74 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 231
+Episode: 693042
+Reward: [-0.52 -0.68 -0.5  -0.53 -0.66]
+Time: 425.55s
+Success: 0.9768
+Steps-Taken: 19.58
+Comm-Action: [0.89 0.45 0.81 0.74 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 232
+Episode: 697291
+Reward: [-0.52 -0.67 -0.5  -0.53 -0.65]
+Time: 433.56s
+Success: 0.9896
+Steps-Taken: 19.23
+Comm-Action: [0.9  0.45 0.82 0.74 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 233
+Episode: 701504
+Reward: [-0.53 -0.68 -0.51 -0.53 -0.66]
+Time: 456.50s
+Success: 0.9869
+Steps-Taken: 19.40
+Comm-Action: [0.91 0.45 0.82 0.7  0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 234
+Episode: 705731
+Reward: [-0.53 -0.67 -0.53 -0.54 -0.66]
+Time: 453.14s
+Success: 0.9877
+Steps-Taken: 19.32
+Comm-Action: [0.91 0.46 0.84 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 235
+Episode: 710007
+Reward: [-0.52 -0.67 -0.52 -0.54 -0.65]
+Time: 459.14s
+Success: 0.9878
+Steps-Taken: 19.13
+Comm-Action: [0.91 0.46 0.81 0.7  0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 236
+Episode: 714330
+Reward: [-0.51 -0.66 -0.5  -0.52 -0.65]
+Time: 449.00s
+Success: 0.9882
+Steps-Taken: 18.88
+Comm-Action: [0.91 0.46 0.8  0.69 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 237
+Episode: 718647
+Reward: [-0.51 -0.66 -0.5  -0.52 -0.66]
+Time: 443.21s
+Success: 0.9924
+Steps-Taken: 18.88
+Comm-Action: [0.9  0.46 0.81 0.71 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 238
+Episode: 723016
+Reward: [-0.49 -0.65 -0.48 -0.5  -0.64]
+Time: 423.19s
+Success: 0.9904
+Steps-Taken: 18.66
+Comm-Action: [0.9  0.46 0.81 0.69 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 239
+Episode: 727357
+Reward: [-0.5  -0.66 -0.5  -0.51 -0.64]
+Time: 443.15s
+Success: 0.9903
+Steps-Taken: 18.86
+Comm-Action: [0.91 0.46 0.81 0.69 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 240
+Episode: 731672
+Reward: [-0.5  -0.65 -0.5  -0.51 -0.65]
+Time: 430.46s
+Success: 0.9884
+Steps-Taken: 18.91
+Comm-Action: [0.92 0.46 0.8  0.68 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 241
+Episode: 735978
+Reward: [-0.51 -0.66 -0.51 -0.51 -0.65]
+Time: 419.32s
+Success: 0.9858
+Steps-Taken: 18.98
+Comm-Action: [0.92 0.48 0.82 0.67 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 242
+Episode: 740264
+Reward: [-0.51 -0.66 -0.51 -0.52 -0.65]
+Time: 426.49s
+Success: 0.9837
+Steps-Taken: 19.09
+Comm-Action: [0.91 0.49 0.81 0.65 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 243
+Episode: 744603
+Reward: [-0.51 -0.65 -0.49 -0.52 -0.65]
+Time: 429.69s
+Success: 0.9885
+Steps-Taken: 18.84
+Comm-Action: [0.92 0.49 0.8  0.67 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 244
+Episode: 748812
+Reward: [-0.56 -0.68 -0.54 -0.56 -0.67]
+Time: 408.22s
+Success: 0.9656
+Steps-Taken: 19.40
+Comm-Action: [0.91 0.5  0.81 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 245
+Episode: 752931
+Reward: [-0.58 -0.69 -0.57 -0.57 -0.67]
+Time: 424.78s
+Success: 0.9658
+Steps-Taken: 19.84
+Comm-Action: [0.9  0.49 0.81 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 246
+Episode: 757243
+Reward: [-0.53 -0.66 -0.52 -0.53 -0.64]
+Time: 432.33s
+Success: 0.9782
+Steps-Taken: 18.94
+Comm-Action: [0.9  0.48 0.81 0.69 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 247
+Episode: 761637
+Reward: [-0.51 -0.65 -0.51 -0.51 -0.64]
+Time: 462.38s
+Success: 0.9873
+Steps-Taken: 18.59
+Comm-Action: [0.91 0.49 0.82 0.67 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 248
+Episode: 765972
+Reward: [-0.52 -0.67 -0.51 -0.52 -0.65]
+Time: 451.31s
+Success: 0.9901
+Steps-Taken: 18.82
+Comm-Action: [0.9  0.48 0.82 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 249
+Episode: 770423
+Reward: [-0.49 -0.63 -0.5  -0.5  -0.63]
+Time: 417.86s
+Success: 0.9937
+Steps-Taken: 18.34
+Comm-Action: [0.9  0.49 0.83 0.7  0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 250
+Episode: 774916
+Reward: [-0.5  -0.62 -0.49 -0.5  -0.63]
+Time: 411.05s
+Success: 0.9944
+Steps-Taken: 18.15
+Comm-Action: [0.9  0.49 0.83 0.69 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 251
+Episode: 779392
+Reward: [-0.49 -0.63 -0.49 -0.5  -0.64]
+Time: 394.01s
+Success: 0.9933
+Steps-Taken: 18.25
+Comm-Action: [0.9  0.49 0.82 0.67 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 252
+Episode: 783890
+Reward: [-0.5  -0.62 -0.5  -0.5  -0.63]
+Time: 397.46s
+Success: 0.9909
+Steps-Taken: 18.12
+Comm-Action: [0.9  0.48 0.81 0.68 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 253
+Episode: 788244
+Reward: [-0.54 -0.64 -0.52 -0.54 -0.66]
+Time: 401.85s
+Success: 0.9821
+Steps-Taken: 18.78
+Comm-Action: [0.89 0.48 0.8  0.69 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 254
+Episode: 792607
+Reward: [-0.55 -0.64 -0.54 -0.55 -0.67]
+Time: 394.76s
+Success: 0.9691
+Steps-Taken: 18.69
+Comm-Action: [0.91 0.52 0.83 0.69 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 255
+Episode: 796755
+Reward: [-0.6  -0.67 -0.59 -0.6  -0.72]
+Time: 424.50s
+Success: 0.9564
+Steps-Taken: 19.69
+Comm-Action: [0.91 0.51 0.84 0.69 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 256
+Episode: 800227
+Reward: [-0.79 -0.84 -0.81 -0.81 -0.91]
+Time: 429.18s
+Success: 0.8004
+Steps-Taken: 23.67
+Comm-Action: [0.89 0.59 0.87 0.75 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 257
+Episode: 803727
+Reward: [-0.72 -0.79 -0.71 -0.74 -0.85]
+Time: 416.58s
+Success: 0.8400
+Steps-Taken: 23.50
+Comm-Action: [0.86 0.52 0.81 0.64 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 258
+Episode: 807598
+Reward: [-0.64 -0.72 -0.64 -0.66 -0.74]
+Time: 390.73s
+Success: 0.9380
+Steps-Taken: 21.15
+Comm-Action: [0.86 0.5  0.79 0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 259
+Episode: 811704
+Reward: [-0.59 -0.68 -0.59 -0.61 -0.69]
+Time: 407.66s
+Success: 0.9649
+Steps-Taken: 19.92
+Comm-Action: [0.86 0.49 0.77 0.66 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 260
+Episode: 815876
+Reward: [-0.57 -0.68 -0.57 -0.6  -0.68]
+Time: 398.61s
+Success: 0.9734
+Steps-Taken: 19.63
+Comm-Action: [0.87 0.51 0.76 0.67 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 261
+Episode: 820089
+Reward: [-0.56 -0.67 -0.56 -0.59 -0.67]
+Time: 389.95s
+Success: 0.9824
+Steps-Taken: 19.38
+Comm-Action: [0.88 0.51 0.77 0.68 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 262
+Episode: 824419
+Reward: [-0.54 -0.66 -0.55 -0.56 -0.65]
+Time: 400.07s
+Success: 0.9838
+Steps-Taken: 18.83
+Comm-Action: [0.88 0.5  0.77 0.67 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 263
+Episode: 828747
+Reward: [-0.55 -0.66 -0.55 -0.57 -0.66]
+Time: 407.77s
+Success: 0.9836
+Steps-Taken: 18.89
+Comm-Action: [0.89 0.51 0.77 0.67 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 264
+Episode: 833062
+Reward: [-0.56 -0.66 -0.54 -0.57 -0.67]
+Time: 400.28s
+Success: 0.9824
+Steps-Taken: 18.92
+Comm-Action: [0.89 0.52 0.78 0.68 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 265
+Episode: 837502
+Reward: [-0.53 -0.63 -0.53 -0.55 -0.65]
+Time: 399.13s
+Success: 0.9851
+Steps-Taken: 18.36
+Comm-Action: [0.89 0.53 0.76 0.69 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 266
+Episode: 841932
+Reward: [-0.53 -0.63 -0.52 -0.54 -0.66]
+Time: 427.76s
+Success: 0.9867
+Steps-Taken: 18.42
+Comm-Action: [0.89 0.52 0.75 0.7  0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 267
+Episode: 846454
+Reward: [-0.52 -0.62 -0.52 -0.54 -0.65]
+Time: 453.27s
+Success: 0.9931
+Steps-Taken: 18.06
+Comm-Action: [0.9  0.53 0.76 0.7  0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 268
+Episode: 850980
+Reward: [-0.52 -0.62 -0.52 -0.54 -0.64]
+Time: 436.29s
+Success: 0.9920
+Steps-Taken: 18.04
+Comm-Action: [0.9  0.52 0.76 0.7  0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 269
+Episode: 855381
+Reward: [-0.53 -0.64 -0.53 -0.54 -0.66]
+Time: 416.33s
+Success: 0.9814
+Steps-Taken: 18.55
+Comm-Action: [0.9  0.54 0.75 0.69 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 270
+Episode: 859834
+Reward: [-0.54 -0.63 -0.54 -0.55 -0.66]
+Time: 395.23s
+Success: 0.9746
+Steps-Taken: 18.32
+Comm-Action: [0.9  0.55 0.75 0.71 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 271
+Episode: 864412
+Reward: [-0.51 -0.61 -0.52 -0.52 -0.63]
+Time: 399.29s
+Success: 0.9902
+Steps-Taken: 17.84
+Comm-Action: [0.9  0.53 0.76 0.69 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 272
+Episode: 868985
+Reward: [-0.52 -0.61 -0.52 -0.53 -0.64]
+Time: 402.48s
+Success: 0.9875
+Steps-Taken: 17.80
+Comm-Action: [0.9  0.55 0.77 0.69 0.72]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 273
+Episode: 873660
+Reward: [-0.53 -0.6  -0.53 -0.53 -0.64]
+Time: 399.13s
+Success: 0.9882
+Steps-Taken: 17.43
+Comm-Action: [0.9  0.59 0.79 0.71 0.72]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 274
+Episode: 878385
+Reward: [-0.51 -0.59 -0.52 -0.52 -0.63]
+Time: 391.02s
+Success: 0.9907
+Steps-Taken: 17.24
+Comm-Action: [0.91 0.57 0.79 0.73 0.72]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 275
+Episode: 883147
+Reward: [-0.52 -0.58 -0.51 -0.52 -0.63]
+Time: 403.03s
+Success: 0.9924
+Steps-Taken: 17.12
+Comm-Action: [0.9  0.57 0.78 0.73 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 276
+Episode: 887959
+Reward: [-0.51 -0.58 -0.51 -0.53 -0.62]
+Time: 394.35s
+Success: 0.9919
+Steps-Taken: 16.92
+Comm-Action: [0.89 0.58 0.78 0.75 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 277
+Episode: 892684
+Reward: [-0.54 -0.59 -0.53 -0.53 -0.64]
+Time: 396.84s
+Success: 0.9835
+Steps-Taken: 17.24
+Comm-Action: [0.89 0.59 0.79 0.74 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 278
+Episode: 897434
+Reward: [-0.52 -0.58 -0.51 -0.51 -0.63]
+Time: 399.93s
+Success: 0.9884
+Steps-Taken: 17.19
+Comm-Action: [0.89 0.61 0.78 0.71 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 279
+Episode: 902263
+Reward: [-0.51 -0.57 -0.51 -0.51 -0.63]
+Time: 395.30s
+Success: 0.9915
+Steps-Taken: 16.86
+Comm-Action: [0.9  0.63 0.78 0.72 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 280
+Episode: 907058
+Reward: [-0.51 -0.57 -0.51 -0.52 -0.63]
+Time: 404.27s
+Success: 0.9887
+Steps-Taken: 17.02
+Comm-Action: [0.9  0.65 0.78 0.72 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 281
+Episode: 911926
+Reward: [-0.51 -0.56 -0.51 -0.51 -0.62]
+Time: 383.02s
+Success: 0.9916
+Steps-Taken: 16.77
+Comm-Action: [0.9  0.67 0.79 0.72 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 282
+Episode: 916830
+Reward: [-0.5  -0.54 -0.51 -0.5  -0.62]
+Time: 385.85s
+Success: 0.9941
+Steps-Taken: 16.62
+Comm-Action: [0.9  0.68 0.79 0.73 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 283
+Episode: 921707
+Reward: [-0.51 -0.54 -0.5  -0.5  -0.64]
+Time: 389.56s
+Success: 0.9887
+Steps-Taken: 16.68
+Comm-Action: [0.92 0.7  0.79 0.74 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 284
+Episode: 926596
+Reward: [-0.51 -0.55 -0.5  -0.5  -0.63]
+Time: 387.02s
+Success: 0.9898
+Steps-Taken: 16.65
+Comm-Action: [0.92 0.69 0.8  0.75 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 285
+Episode: 931515
+Reward: [-0.5  -0.53 -0.49 -0.49 -0.63]
+Time: 389.91s
+Success: 0.9955
+Steps-Taken: 16.55
+Comm-Action: [0.92 0.67 0.79 0.74 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 286
+Episode: 936361
+Reward: [-0.51 -0.54 -0.51 -0.5  -0.65]
+Time: 380.37s
+Success: 0.9823
+Steps-Taken: 16.82
+Comm-Action: [0.91 0.67 0.79 0.73 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 287
+Episode: 941265
+Reward: [-0.51 -0.53 -0.5  -0.51 -0.63]
+Time: 388.64s
+Success: 0.9869
+Steps-Taken: 16.60
+Comm-Action: [0.91 0.68 0.77 0.74 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 288
+Episode: 946211
+Reward: [-0.51 -0.53 -0.5  -0.51 -0.62]
+Time: 402.78s
+Success: 0.9933
+Steps-Taken: 16.51
+Comm-Action: [0.91 0.7  0.76 0.77 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 289
+Episode: 951197
+Reward: [-0.5  -0.52 -0.49 -0.49 -0.62]
+Time: 400.51s
+Success: 0.9938
+Steps-Taken: 16.34
+Comm-Action: [0.9  0.71 0.76 0.76 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 290
+Episode: 956178
+Reward: [-0.5  -0.52 -0.49 -0.5  -0.62]
+Time: 393.64s
+Success: 0.9928
+Steps-Taken: 16.36
+Comm-Action: [0.9  0.68 0.76 0.76 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 291
+Episode: 961139
+Reward: [-0.5  -0.53 -0.49 -0.49 -0.62]
+Time: 404.70s
+Success: 0.9931
+Steps-Taken: 16.43
+Comm-Action: [0.91 0.69 0.75 0.76 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 292
+Episode: 966123
+Reward: [-0.5  -0.53 -0.49 -0.48 -0.62]
+Time: 396.99s
+Success: 0.9938
+Steps-Taken: 16.35
+Comm-Action: [0.9  0.71 0.75 0.73 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 293
+Episode: 971095
+Reward: [-0.51 -0.54 -0.49 -0.48 -0.62]
+Time: 402.60s
+Success: 0.9918
+Steps-Taken: 16.39
+Comm-Action: [0.9  0.71 0.76 0.73 0.7 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 294
+Episode: 976180
+Reward: [-0.49 -0.5  -0.48 -0.47 -0.61]
+Time: 395.66s
+Success: 0.9945
+Steps-Taken: 15.99
+Comm-Action: [0.91 0.7  0.76 0.74 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 295
+Episode: 981281
+Reward: [-0.48 -0.5  -0.48 -0.47 -0.61]
+Time: 398.50s
+Success: 0.9965
+Steps-Taken: 15.96
+Comm-Action: [0.9  0.69 0.77 0.76 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 296
+Episode: 986321
+Reward: [-0.51 -0.52 -0.5  -0.5  -0.63]
+Time: 399.99s
+Success: 0.9889
+Steps-Taken: 16.17
+Comm-Action: [0.91 0.69 0.78 0.77 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 297
+Episode: 991274
+Reward: [-0.52 -0.54 -0.52 -0.52 -0.63]
+Time: 402.44s
+Success: 0.9879
+Steps-Taken: 16.47
+Comm-Action: [0.93 0.68 0.78 0.78 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 298
+Episode: 996342
+Reward: [-0.49 -0.51 -0.49 -0.49 -0.62]
+Time: 392.31s
+Success: 0.9968
+Steps-Taken: 16.07
+Comm-Action: [0.93 0.66 0.76 0.76 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 299
+Episode: 1001484
+Reward: [-0.49 -0.5  -0.49 -0.48 -0.61]
+Time: 398.25s
+Success: 0.9981
+Steps-Taken: 15.83
+Comm-Action: [0.92 0.66 0.77 0.75 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 300
+Episode: 1006535
+Reward: [-0.5  -0.52 -0.5  -0.49 -0.62]
+Time: 398.78s
+Success: 0.9931
+Steps-Taken: 16.12
+Comm-Action: [0.92 0.67 0.77 0.75 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 301
+Episode: 1011517
+Reward: [-0.51 -0.54 -0.51 -0.51 -0.62]
+Time: 399.93s
+Success: 0.9930
+Steps-Taken: 16.35
+Comm-Action: [0.93 0.69 0.79 0.77 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 302
+Episode: 1016663
+Reward: [-0.49 -0.5  -0.48 -0.48 -0.61]
+Time: 389.82s
+Success: 0.9949
+Steps-Taken: 15.83
+Comm-Action: [0.92 0.68 0.76 0.77 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 303
+Episode: 1021810
+Reward: [-0.49 -0.5  -0.48 -0.48 -0.61]
+Time: 390.53s
+Success: 0.9971
+Steps-Taken: 15.83
+Comm-Action: [0.93 0.67 0.77 0.79 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 304
+Episode: 1026956
+Reward: [-0.49 -0.51 -0.48 -0.49 -0.61]
+Time: 384.88s
+Success: 0.9969
+Steps-Taken: 15.83
+Comm-Action: [0.93 0.69 0.76 0.78 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 305
+Episode: 1032078
+Reward: [-0.49 -0.51 -0.48 -0.49 -0.61]
+Time: 390.10s
+Success: 0.9957
+Steps-Taken: 15.87
+Comm-Action: [0.93 0.69 0.76 0.78 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 306
+Episode: 1037182
+Reward: [-0.49 -0.5  -0.48 -0.49 -0.61]
+Time: 386.57s
+Success: 0.9961
+Steps-Taken: 15.96
+Comm-Action: [0.93 0.68 0.76 0.76 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 307
+Episode: 1042288
+Reward: [-0.49 -0.5  -0.48 -0.49 -0.62]
+Time: 393.18s
+Success: 0.9920
+Steps-Taken: 15.94
+Comm-Action: [0.93 0.71 0.75 0.77 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 308
+Episode: 1047430
+Reward: [-0.48 -0.5  -0.48 -0.48 -0.6 ]
+Time: 380.57s
+Success: 0.9946
+Steps-Taken: 15.84
+Comm-Action: [0.92 0.71 0.75 0.78 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 309
+Episode: 1052557
+Reward: [-0.48 -0.49 -0.47 -0.47 -0.61]
+Time: 387.67s
+Success: 0.9943
+Steps-Taken: 15.87
+Comm-Action: [0.92 0.69 0.74 0.78 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 310
+Episode: 1057636
+Reward: [-0.48 -0.5  -0.48 -0.49 -0.62]
+Time: 393.46s
+Success: 0.9967
+Steps-Taken: 16.04
+Comm-Action: [0.93 0.71 0.75 0.79 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 311
+Episode: 1062667
+Reward: [-0.5  -0.52 -0.49 -0.5  -0.62]
+Time: 396.86s
+Success: 0.9944
+Steps-Taken: 16.20
+Comm-Action: [0.94 0.68 0.75 0.81 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 312
+Episode: 1067766
+Reward: [-0.48 -0.5  -0.48 -0.48 -0.62]
+Time: 400.97s
+Success: 0.9963
+Steps-Taken: 15.96
+Comm-Action: [0.94 0.69 0.73 0.81 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 313
+Episode: 1072883
+Reward: [-0.48 -0.49 -0.47 -0.48 -0.61]
+Time: 408.09s
+Success: 0.9939
+Steps-Taken: 15.88
+Comm-Action: [0.93 0.7  0.73 0.82 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 314
+Episode: 1077978
+Reward: [-0.48 -0.49 -0.47 -0.47 -0.61]
+Time: 393.29s
+Success: 0.9884
+Steps-Taken: 15.98
+Comm-Action: [0.94 0.71 0.74 0.81 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 315
+Episode: 1083146
+Reward: [-0.47 -0.48 -0.47 -0.47 -0.61]
+Time: 401.54s
+Success: 0.9954
+Steps-Taken: 15.74
+Comm-Action: [0.92 0.71 0.74 0.79 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 316
+Episode: 1088217
+Reward: [-0.49 -0.5  -0.48 -0.5  -0.61]
+Time: 395.30s
+Success: 0.9905
+Steps-Taken: 16.04
+Comm-Action: [0.92 0.71 0.73 0.81 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 317
+Episode: 1093336
+Reward: [-0.48 -0.49 -0.47 -0.48 -0.61]
+Time: 403.03s
+Success: 0.9928
+Steps-Taken: 15.88
+Comm-Action: [0.93 0.71 0.73 0.81 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 318
+Episode: 1098395
+Reward: [-0.49 -0.5  -0.48 -0.49 -0.61]
+Time: 399.31s
+Success: 0.9909
+Steps-Taken: 16.09
+Comm-Action: [0.93 0.7  0.75 0.81 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 319
+Episode: 1103527
+Reward: [-0.47 -0.48 -0.47 -0.48 -0.61]
+Time: 398.96s
+Success: 0.9947
+Steps-Taken: 15.84
+Comm-Action: [0.93 0.7  0.74 0.81 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 320
+Episode: 1108686
+Reward: [-0.47 -0.48 -0.47 -0.48 -0.61]
+Time: 399.95s
+Success: 0.9963
+Steps-Taken: 15.77
+Comm-Action: [0.93 0.72 0.75 0.8  0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 321
+Episode: 1113894
+Reward: [-0.47 -0.47 -0.47 -0.47 -0.6 ]
+Time: 398.63s
+Success: 0.9939
+Steps-Taken: 15.67
+Comm-Action: [0.93 0.72 0.74 0.81 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 322
+Episode: 1119044
+Reward: [-0.49 -0.49 -0.47 -0.49 -0.6 ]
+Time: 395.82s
+Success: 0.9926
+Steps-Taken: 15.82
+Comm-Action: [0.93 0.73 0.74 0.81 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 323
+Episode: 1124042
+Reward: [-0.51 -0.51 -0.5  -0.51 -0.61]
+Time: 381.80s
+Success: 0.9912
+Steps-Taken: 16.27
+Comm-Action: [0.92 0.72 0.74 0.83 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 324
+Episode: 1129157
+Reward: [-0.48 -0.48 -0.47 -0.48 -0.61]
+Time: 368.35s
+Success: 0.9949
+Steps-Taken: 15.92
+Comm-Action: [0.91 0.7  0.72 0.81 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 325
+Episode: 1134315
+Reward: [-0.48 -0.48 -0.47 -0.48 -0.6 ]
+Time: 361.64s
+Success: 0.9944
+Steps-Taken: 15.80
+Comm-Action: [0.92 0.7  0.72 0.82 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 326
+Episode: 1139343
+Reward: [-0.5 -0.5 -0.5 -0.5 -0.6]
+Time: 367.35s
+Success: 0.9956
+Steps-Taken: 16.19
+Comm-Action: [0.92 0.7  0.73 0.84 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 327
+Episode: 1144470
+Reward: [-0.48 -0.49 -0.49 -0.48 -0.61]
+Time: 366.51s
+Success: 0.9945
+Steps-Taken: 15.91
+Comm-Action: [0.92 0.71 0.73 0.84 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 328
+Episode: 1149584
+Reward: [-0.49 -0.49 -0.49 -0.48 -0.61]
+Time: 367.78s
+Success: 0.9961
+Steps-Taken: 15.90
+Comm-Action: [0.93 0.72 0.76 0.84 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 329
+Episode: 1154785
+Reward: [-0.47 -0.47 -0.47 -0.47 -0.6 ]
+Time: 366.80s
+Success: 0.9965
+Steps-Taken: 15.65
+Comm-Action: [0.93 0.68 0.75 0.85 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 330
+Episode: 1159996
+Reward: [-0.48 -0.48 -0.47 -0.47 -0.6 ]
+Time: 373.69s
+Success: 0.9967
+Steps-Taken: 15.61
+Comm-Action: [0.93 0.68 0.74 0.86 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 331
+Episode: 1165156
+Reward: [-0.48 -0.49 -0.48 -0.49 -0.6 ]
+Time: 375.16s
+Success: 0.9953
+Steps-Taken: 15.77
+Comm-Action: [0.93 0.69 0.74 0.87 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 332
+Episode: 1170315
+Reward: [-0.48 -0.48 -0.47 -0.49 -0.61]
+Time: 373.73s
+Success: 0.9965
+Steps-Taken: 15.77
+Comm-Action: [0.92 0.69 0.73 0.87 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 333
+Episode: 1175574
+Reward: [-0.48 -0.47 -0.47 -0.48 -0.59]
+Time: 387.12s
+Success: 0.9975
+Steps-Taken: 15.50
+Comm-Action: [0.93 0.69 0.73 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 334
+Episode: 1180843
+Reward: [-0.47 -0.46 -0.47 -0.47 -0.6 ]
+Time: 385.28s
+Success: 0.9981
+Steps-Taken: 15.47
+Comm-Action: [0.93 0.7  0.73 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 335
+Episode: 1186121
+Reward: [-0.47 -0.47 -0.47 -0.46 -0.6 ]
+Time: 382.45s
+Success: 0.9968
+Steps-Taken: 15.42
+Comm-Action: [0.93 0.68 0.73 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 336
+Episode: 1191303
+Reward: [-0.5  -0.5  -0.49 -0.49 -0.6 ]
+Time: 388.59s
+Success: 0.9971
+Steps-Taken: 15.74
+Comm-Action: [0.93 0.69 0.73 0.88 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 337
+Episode: 1196451
+Reward: [-0.5  -0.49 -0.49 -0.49 -0.62]
+Time: 388.27s
+Success: 0.9959
+Steps-Taken: 15.80
+Comm-Action: [0.94 0.69 0.73 0.87 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 338
+Episode: 1201642
+Reward: [-0.48 -0.48 -0.47 -0.48 -0.6 ]
+Time: 379.85s
+Success: 0.9948
+Steps-Taken: 15.69
+Comm-Action: [0.94 0.68 0.71 0.87 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 339
+Episode: 1206847
+Reward: [-0.49 -0.49 -0.48 -0.49 -0.6 ]
+Time: 386.09s
+Success: 0.9952
+Steps-Taken: 15.62
+Comm-Action: [0.94 0.68 0.73 0.88 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 340
+Episode: 1212070
+Reward: [-0.49 -0.49 -0.49 -0.49 -0.6 ]
+Time: 398.75s
+Success: 0.9962
+Steps-Taken: 15.58
+Comm-Action: [0.94 0.69 0.75 0.89 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 341
+Episode: 1217283
+Reward: [-0.49 -0.5  -0.49 -0.49 -0.61]
+Time: 397.82s
+Success: 0.9956
+Steps-Taken: 15.61
+Comm-Action: [0.94 0.72 0.75 0.88 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 342
+Episode: 1222528
+Reward: [-0.48 -0.48 -0.48 -0.48 -0.6 ]
+Time: 405.03s
+Success: 0.9962
+Steps-Taken: 15.51
+Comm-Action: [0.93 0.72 0.74 0.87 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 343
+Episode: 1227779
+Reward: [-0.47 -0.47 -0.47 -0.46 -0.61]
+Time: 390.77s
+Success: 0.9979
+Steps-Taken: 15.49
+Comm-Action: [0.92 0.71 0.73 0.88 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 344
+Episode: 1233004
+Reward: [-0.47 -0.47 -0.46 -0.47 -0.6 ]
+Time: 372.81s
+Success: 0.9966
+Steps-Taken: 15.56
+Comm-Action: [0.93 0.68 0.72 0.89 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 345
+Episode: 1238191
+Reward: [-0.48 -0.49 -0.48 -0.48 -0.61]
+Time: 376.66s
+Success: 0.9946
+Steps-Taken: 15.70
+Comm-Action: [0.94 0.67 0.74 0.88 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 346
+Episode: 1243420
+Reward: [-0.48 -0.48 -0.47 -0.48 -0.6 ]
+Time: 369.15s
+Success: 0.9954
+Steps-Taken: 15.56
+Comm-Action: [0.94 0.66 0.72 0.87 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 347
+Episode: 1248694
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.6 ]
+Time: 373.63s
+Success: 0.9943
+Steps-Taken: 15.43
+Comm-Action: [0.93 0.69 0.72 0.88 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 348
+Episode: 1253924
+Reward: [-0.48 -0.49 -0.48 -0.48 -0.6 ]
+Time: 372.47s
+Success: 0.9937
+Steps-Taken: 15.53
+Comm-Action: [0.93 0.69 0.73 0.88 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 349
+Episode: 1259107
+Reward: [-0.49 -0.5  -0.5  -0.5  -0.6 ]
+Time: 374.29s
+Success: 0.9909
+Steps-Taken: 15.73
+Comm-Action: [0.94 0.72 0.76 0.88 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 350
+Episode: 1264347
+Reward: [-0.48 -0.47 -0.47 -0.48 -0.6 ]
+Time: 371.19s
+Success: 0.9950
+Steps-Taken: 15.53
+Comm-Action: [0.94 0.72 0.75 0.87 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 351
+Episode: 1269644
+Reward: [-0.47 -0.47 -0.46 -0.46 -0.59]
+Time: 373.01s
+Success: 0.9943
+Steps-Taken: 15.34
+Comm-Action: [0.94 0.72 0.74 0.84 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 352
+Episode: 1274889
+Reward: [-0.48 -0.47 -0.47 -0.48 -0.6 ]
+Time: 378.38s
+Success: 0.9962
+Steps-Taken: 15.55
+Comm-Action: [0.94 0.72 0.74 0.85 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 353
+Episode: 1280188
+Reward: [-0.47 -0.47 -0.46 -0.46 -0.59]
+Time: 373.16s
+Success: 0.9936
+Steps-Taken: 15.35
+Comm-Action: [0.95 0.73 0.74 0.87 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 354
+Episode: 1285446
+Reward: [-0.48 -0.47 -0.47 -0.46 -0.6 ]
+Time: 379.16s
+Success: 0.9932
+Steps-Taken: 15.50
+Comm-Action: [0.95 0.7  0.75 0.86 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 355
+Episode: 1290729
+Reward: [-0.47 -0.46 -0.45 -0.46 -0.59]
+Time: 376.59s
+Success: 0.9977
+Steps-Taken: 15.40
+Comm-Action: [0.95 0.7  0.74 0.86 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 356
+Episode: 1295967
+Reward: [-0.47 -0.47 -0.47 -0.47 -0.6 ]
+Time: 380.43s
+Success: 0.9969
+Steps-Taken: 15.53
+Comm-Action: [0.95 0.72 0.75 0.85 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 357
+Episode: 1301169
+Reward: [-0.47 -0.47 -0.47 -0.47 -0.61]
+Time: 382.69s
+Success: 0.9967
+Steps-Taken: 15.65
+Comm-Action: [0.96 0.74 0.74 0.84 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 358
+Episode: 1306356
+Reward: [-0.48 -0.48 -0.47 -0.47 -0.59]
+Time: 376.35s
+Success: 0.9940
+Steps-Taken: 15.68
+Comm-Action: [0.95 0.73 0.74 0.84 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 359
+Episode: 1311605
+Reward: [-0.48 -0.47 -0.47 -0.46 -0.59]
+Time: 377.47s
+Success: 0.9960
+Steps-Taken: 15.48
+Comm-Action: [0.95 0.71 0.74 0.87 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 360
+Episode: 1316846
+Reward: [-0.48 -0.47 -0.47 -0.46 -0.6 ]
+Time: 382.45s
+Success: 0.9941
+Steps-Taken: 15.55
+Comm-Action: [0.95 0.69 0.75 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 361
+Episode: 1322026
+Reward: [-0.47 -0.47 -0.47 -0.46 -0.62]
+Time: 376.48s
+Success: 0.9961
+Steps-Taken: 15.71
+Comm-Action: [0.95 0.68 0.74 0.86 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 362
+Episode: 1327210
+Reward: [-0.48 -0.47 -0.47 -0.46 -0.61]
+Time: 386.84s
+Success: 0.9975
+Steps-Taken: 15.69
+Comm-Action: [0.95 0.69 0.74 0.84 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 363
+Episode: 1332509
+Reward: [-0.46 -0.45 -0.45 -0.45 -0.59]
+Time: 383.46s
+Success: 0.9992
+Steps-Taken: 15.33
+Comm-Action: [0.95 0.68 0.74 0.85 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 364
+Episode: 1337812
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.58]
+Time: 379.69s
+Success: 0.9989
+Steps-Taken: 15.34
+Comm-Action: [0.95 0.68 0.74 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 365
+Episode: 1343090
+Reward: [-0.47 -0.47 -0.46 -0.46 -0.59]
+Time: 387.35s
+Success: 0.9975
+Steps-Taken: 15.45
+Comm-Action: [0.95 0.69 0.74 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 366
+Episode: 1348358
+Reward: [-0.47 -0.48 -0.47 -0.47 -0.59]
+Time: 377.33s
+Success: 0.9977
+Steps-Taken: 15.48
+Comm-Action: [0.95 0.7  0.76 0.87 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 367
+Episode: 1353574
+Reward: [-0.47 -0.47 -0.46 -0.46 -0.6 ]
+Time: 369.64s
+Success: 0.9981
+Steps-Taken: 15.60
+Comm-Action: [0.96 0.67 0.74 0.85 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 368
+Episode: 1358787
+Reward: [-0.47 -0.47 -0.46 -0.46 -0.6 ]
+Time: 364.07s
+Success: 0.9964
+Steps-Taken: 15.64
+Comm-Action: [0.96 0.71 0.72 0.84 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 369
+Episode: 1363989
+Reward: [-0.47 -0.47 -0.47 -0.46 -0.6 ]
+Time: 379.86s
+Success: 0.9981
+Steps-Taken: 15.64
+Comm-Action: [0.96 0.74 0.73 0.87 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 370
+Episode: 1369177
+Reward: [-0.47 -0.47 -0.46 -0.46 -0.6 ]
+Time: 374.61s
+Success: 0.9983
+Steps-Taken: 15.68
+Comm-Action: [0.96 0.73 0.72 0.86 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 371
+Episode: 1374443
+Reward: [-0.47 -0.47 -0.47 -0.46 -0.58]
+Time: 367.46s
+Success: 0.9970
+Steps-Taken: 15.48
+Comm-Action: [0.96 0.72 0.73 0.85 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 372
+Episode: 1379743
+Reward: [-0.46 -0.46 -0.45 -0.46 -0.58]
+Time: 362.24s
+Success: 0.9981
+Steps-Taken: 15.34
+Comm-Action: [0.95 0.73 0.72 0.87 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 373
+Episode: 1384973
+Reward: [-0.48 -0.47 -0.46 -0.48 -0.59]
+Time: 371.28s
+Success: 0.9987
+Steps-Taken: 15.53
+Comm-Action: [0.95 0.76 0.73 0.86 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 374
+Episode: 1390276
+Reward: [-0.46 -0.46 -0.45 -0.46 -0.59]
+Time: 379.48s
+Success: 0.9979
+Steps-Taken: 15.32
+Comm-Action: [0.95 0.75 0.72 0.84 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 375
+Episode: 1395514
+Reward: [-0.47 -0.47 -0.46 -0.47 -0.59]
+Time: 378.75s
+Success: 0.9981
+Steps-Taken: 15.54
+Comm-Action: [0.95 0.76 0.72 0.86 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 376
+Episode: 1400783
+Reward: [-0.47 -0.47 -0.46 -0.47 -0.59]
+Time: 379.26s
+Success: 0.9977
+Steps-Taken: 15.43
+Comm-Action: [0.95 0.79 0.73 0.87 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 377
+Episode: 1406162
+Reward: [-0.47 -0.47 -0.46 -0.47 -0.57]
+Time: 382.52s
+Success: 0.9965
+Steps-Taken: 15.12
+Comm-Action: [0.95 0.79 0.73 0.88 0.69]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 378
+Episode: 1411540
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.57]
+Time: 377.47s
+Success: 0.9980
+Steps-Taken: 15.13
+Comm-Action: [0.95 0.77 0.74 0.88 0.71]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 379
+Episode: 1416917
+Reward: [-0.46 -0.47 -0.46 -0.46 -0.57]
+Time: 389.19s
+Success: 0.9976
+Steps-Taken: 15.12
+Comm-Action: [0.96 0.77 0.74 0.89 0.72]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 380
+Episode: 1422228
+Reward: [-0.48 -0.49 -0.48 -0.49 -0.57]
+Time: 384.50s
+Success: 0.9919
+Steps-Taken: 15.30
+Comm-Action: [0.96 0.77 0.76 0.89 0.75]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 381
+Episode: 1427638
+Reward: [-0.47 -0.48 -0.48 -0.47 -0.56]
+Time: 381.94s
+Success: 0.9978
+Steps-Taken: 15.03
+Comm-Action: [0.96 0.8  0.76 0.89 0.74]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 382
+Episode: 1433030
+Reward: [-0.48 -0.49 -0.48 -0.47 -0.56]
+Time: 387.04s
+Success: 0.9994
+Steps-Taken: 15.07
+Comm-Action: [0.97 0.81 0.77 0.9  0.74]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 383
+Episode: 1438522
+Reward: [-0.47 -0.48 -0.47 -0.46 -0.55]
+Time: 384.98s
+Success: 0.9993
+Steps-Taken: 14.79
+Comm-Action: [0.97 0.82 0.78 0.91 0.75]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 384
+Episode: 1444017
+Reward: [-0.46 -0.47 -0.46 -0.46 -0.56]
+Time: 384.25s
+Success: 0.9993
+Steps-Taken: 14.80
+Comm-Action: [0.97 0.82 0.77 0.91 0.76]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 385
+Episode: 1449471
+Reward: [-0.48 -0.48 -0.48 -0.47 -0.56]
+Time: 388.32s
+Success: 0.9952
+Steps-Taken: 14.92
+Comm-Action: [0.97 0.82 0.79 0.91 0.77]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 386
+Episode: 1454956
+Reward: [-0.48 -0.48 -0.47 -0.47 -0.56]
+Time: 384.91s
+Success: 0.9973
+Steps-Taken: 14.83
+Comm-Action: [0.98 0.82 0.79 0.91 0.78]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 387
+Episode: 1460292
+Reward: [-0.49 -0.5  -0.5  -0.5  -0.58]
+Time: 384.37s
+Success: 0.9850
+Steps-Taken: 15.24
+Comm-Action: [0.97 0.82 0.79 0.91 0.78]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 388
+Episode: 1465571
+Reward: [-0.5  -0.52 -0.51 -0.5  -0.58]
+Time: 376.43s
+Success: 0.9866
+Steps-Taken: 15.42
+Comm-Action: [0.97 0.85 0.78 0.92 0.79]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 389
+Episode: 1470777
+Reward: [-0.52 -0.54 -0.54 -0.52 -0.58]
+Time: 371.60s
+Success: 0.9819
+Steps-Taken: 15.64
+Comm-Action: [0.98 0.87 0.8  0.91 0.81]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 390
+Episode: 1476186
+Reward: [-0.49 -0.49 -0.49 -0.49 -0.56]
+Time: 374.10s
+Success: 0.9959
+Steps-Taken: 15.04
+Comm-Action: [0.98 0.84 0.78 0.93 0.79]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 391
+Episode: 1481673
+Reward: [-0.47 -0.47 -0.47 -0.47 -0.56]
+Time: 369.43s
+Success: 0.9958
+Steps-Taken: 14.81
+Comm-Action: [0.98 0.83 0.77 0.92 0.8 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 392
+Episode: 1487103
+Reward: [-0.49 -0.48 -0.48 -0.48 -0.57]
+Time: 374.28s
+Success: 0.9947
+Steps-Taken: 15.00
+Comm-Action: [0.98 0.84 0.77 0.92 0.8 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 393
+Episode: 1492506
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.57]
+Time: 365.87s
+Success: 0.9981
+Steps-Taken: 15.01
+Comm-Action: [0.98 0.85 0.75 0.92 0.79]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 394
+Episode: 1498032
+Reward: [-0.47 -0.46 -0.47 -0.47 -0.55]
+Time: 365.76s
+Success: 0.9964
+Steps-Taken: 14.71
+Comm-Action: [0.98 0.83 0.76 0.91 0.8 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 395
+Episode: 1503602
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.54]
+Time: 377.84s
+Success: 0.9984
+Steps-Taken: 14.60
+Comm-Action: [0.98 0.81 0.76 0.9  0.8 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 396
+Episode: 1509161
+Reward: [-0.47 -0.46 -0.47 -0.46 -0.54]
+Time: 378.34s
+Success: 0.9960
+Steps-Taken: 14.63
+Comm-Action: [0.97 0.82 0.76 0.91 0.81]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 397
+Episode: 1514686
+Reward: [-0.47 -0.47 -0.49 -0.47 -0.55]
+Time: 378.32s
+Success: 0.9975
+Steps-Taken: 14.74
+Comm-Action: [0.97 0.82 0.78 0.91 0.82]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 398
+Episode: 1520317
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.54]
+Time: 381.05s
+Success: 0.9984
+Steps-Taken: 14.43
+Comm-Action: [0.98 0.84 0.77 0.91 0.83]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 399
+Episode: 1525983
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.53]
+Time: 375.45s
+Success: 0.9956
+Steps-Taken: 14.33
+Comm-Action: [0.98 0.83 0.76 0.92 0.84]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 400
+Episode: 1531598
+Reward: [-0.47 -0.47 -0.46 -0.47 -0.54]
+Time: 383.34s
+Success: 0.9922
+Steps-Taken: 14.47
+Comm-Action: [0.98 0.85 0.75 0.92 0.83]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 401
+Episode: 1537203
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.55]
+Time: 396.39s
+Success: 0.9941
+Steps-Taken: 14.49
+Comm-Action: [0.98 0.87 0.76 0.92 0.83]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 402
+Episode: 1542760
+Reward: [-0.49 -0.48 -0.49 -0.49 -0.55]
+Time: 399.95s
+Success: 0.9865
+Steps-Taken: 14.64
+Comm-Action: [0.98 0.86 0.77 0.94 0.85]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 403
+Episode: 1548423
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.54]
+Time: 377.06s
+Success: 0.9968
+Steps-Taken: 14.33
+Comm-Action: [0.97 0.82 0.76 0.91 0.85]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 404
+Episode: 1554041
+Reward: [-0.48 -0.47 -0.48 -0.49 -0.54]
+Time: 392.47s
+Success: 0.9893
+Steps-Taken: 14.46
+Comm-Action: [0.98 0.79 0.78 0.92 0.87]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 405
+Episode: 1559692
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.53]
+Time: 381.84s
+Success: 0.9963
+Steps-Taken: 14.38
+Comm-Action: [0.97 0.77 0.75 0.91 0.86]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 406
+Episode: 1565450
+Reward: [-0.46 -0.45 -0.45 -0.47 -0.52]
+Time: 396.06s
+Success: 0.9957
+Steps-Taken: 14.12
+Comm-Action: [0.97 0.79 0.76 0.92 0.87]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 407
+Episode: 1571232
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.52]
+Time: 375.04s
+Success: 0.9978
+Steps-Taken: 14.04
+Comm-Action: [0.97 0.79 0.76 0.92 0.87]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 408
+Episode: 1576943
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.51]
+Time: 380.64s
+Success: 0.9953
+Steps-Taken: 14.23
+Comm-Action: [0.97 0.79 0.77 0.94 0.89]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 409
+Episode: 1582676
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.52]
+Time: 375.74s
+Success: 0.9960
+Steps-Taken: 14.19
+Comm-Action: [0.97 0.79 0.77 0.93 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 410
+Episode: 1588459
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.51]
+Time: 379.30s
+Success: 0.9965
+Steps-Taken: 14.04
+Comm-Action: [0.97 0.8  0.77 0.93 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 411
+Episode: 1594148
+Reward: [-0.47 -0.48 -0.48 -0.48 -0.53]
+Time: 376.47s
+Success: 0.9923
+Steps-Taken: 14.28
+Comm-Action: [0.97 0.82 0.78 0.92 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 412
+Episode: 1599915
+Reward: [-0.47 -0.46 -0.46 -0.47 -0.52]
+Time: 375.64s
+Success: 0.9976
+Steps-Taken: 14.10
+Comm-Action: [0.97 0.81 0.78 0.93 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 413
+Episode: 1605786
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.5 ]
+Time: 368.52s
+Success: 0.9986
+Steps-Taken: 13.80
+Comm-Action: [0.97 0.81 0.78 0.93 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 414
+Episode: 1611650
+Reward: [-0.46 -0.46 -0.45 -0.47 -0.51]
+Time: 373.73s
+Success: 0.9978
+Steps-Taken: 13.87
+Comm-Action: [0.97 0.83 0.79 0.93 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 415
+Episode: 1617377
+Reward: [-0.49 -0.48 -0.47 -0.48 -0.53]
+Time: 367.73s
+Success: 0.9904
+Steps-Taken: 14.20
+Comm-Action: [0.97 0.84 0.8  0.93 0.96]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 416
+Episode: 1623132
+Reward: [-0.49 -0.49 -0.48 -0.49 -0.52]
+Time: 368.01s
+Success: 0.9953
+Steps-Taken: 14.14
+Comm-Action: [0.97 0.83 0.81 0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 417
+Episode: 1628993
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.52]
+Time: 383.89s
+Success: 0.9962
+Steps-Taken: 13.89
+Comm-Action: [0.98 0.8  0.8  0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 418
+Episode: 1634702
+Reward: [-0.5  -0.5  -0.48 -0.49 -0.53]
+Time: 365.23s
+Success: 0.9923
+Steps-Taken: 14.24
+Comm-Action: [0.98 0.81 0.8  0.94 0.96]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 419
+Episode: 1640448
+Reward: [-0.49 -0.49 -0.48 -0.49 -0.52]
+Time: 369.55s
+Success: 0.9970
+Steps-Taken: 14.12
+Comm-Action: [0.98 0.81 0.79 0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 420
+Episode: 1646251
+Reward: [-0.48 -0.48 -0.47 -0.48 -0.51]
+Time: 362.71s
+Success: 0.9976
+Steps-Taken: 14.00
+Comm-Action: [0.98 0.81 0.78 0.95 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 421
+Episode: 1651993
+Reward: [-0.49 -0.49 -0.48 -0.49 -0.51]
+Time: 374.00s
+Success: 0.9925
+Steps-Taken: 14.14
+Comm-Action: [0.98 0.83 0.79 0.95 0.98]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 422
+Episode: 1657813
+Reward: [-0.48 -0.47 -0.47 -0.48 -0.51]
+Time: 373.18s
+Success: 0.9962
+Steps-Taken: 13.95
+Comm-Action: [0.98 0.84 0.77 0.94 0.98]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 423
+Episode: 1663632
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.51]
+Time: 360.71s
+Success: 0.9964
+Steps-Taken: 13.96
+Comm-Action: [0.97 0.85 0.78 0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 424
+Episode: 1669485
+Reward: [-0.47 -0.46 -0.46 -0.47 -0.51]
+Time: 370.05s
+Success: 0.9973
+Steps-Taken: 13.88
+Comm-Action: [0.97 0.86 0.77 0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 425
+Episode: 1675364
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.49]
+Time: 381.83s
+Success: 0.9976
+Steps-Taken: 13.82
+Comm-Action: [0.97 0.87 0.78 0.94 0.96]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 426
+Episode: 1681186
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.5 ]
+Time: 392.04s
+Success: 0.9969
+Steps-Taken: 13.95
+Comm-Action: [0.96 0.87 0.78 0.93 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 427
+Episode: 1687064
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.5 ]
+Time: 399.00s
+Success: 0.9993
+Steps-Taken: 13.81
+Comm-Action: [0.96 0.84 0.79 0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 428
+Episode: 1692823
+Reward: [-0.48 -0.48 -0.48 -0.49 -0.51]
+Time: 389.46s
+Success: 0.9970
+Steps-Taken: 14.10
+Comm-Action: [0.96 0.81 0.8  0.95 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 429
+Episode: 1698657
+Reward: [-0.48 -0.47 -0.47 -0.48 -0.5 ]
+Time: 393.24s
+Success: 0.9993
+Steps-Taken: 13.94
+Comm-Action: [0.95 0.81 0.79 0.94 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 430
+Episode: 1704494
+Reward: [-0.46 -0.46 -0.46 -0.48 -0.5 ]
+Time: 387.18s
+Success: 0.9959
+Steps-Taken: 13.91
+Comm-Action: [0.96 0.82 0.79 0.93 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 431
+Episode: 1710297
+Reward: [-0.46 -0.46 -0.47 -0.48 -0.51]
+Time: 379.13s
+Success: 0.9953
+Steps-Taken: 13.98
+Comm-Action: [0.96 0.81 0.8  0.92 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 432
+Episode: 1716145
+Reward: [-0.47 -0.46 -0.46 -0.48 -0.5 ]
+Time: 391.94s
+Success: 0.9981
+Steps-Taken: 13.88
+Comm-Action: [0.96 0.81 0.8  0.92 0.97]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 433
+Episode: 1722030
+Reward: [-0.46 -0.46 -0.45 -0.47 -0.5 ]
+Time: 374.83s
+Success: 0.9976
+Steps-Taken: 13.81
+Comm-Action: [0.96 0.82 0.79 0.91 0.96]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 434
+Episode: 1727895
+Reward: [-0.46 -0.46 -0.46 -0.48 -0.5 ]
+Time: 383.06s
+Success: 0.9990
+Steps-Taken: 13.85
+Comm-Action: [0.96 0.81 0.8  0.92 0.96]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 435
+Episode: 1733732
+Reward: [-0.47 -0.46 -0.47 -0.48 -0.5 ]
+Time: 378.29s
+Success: 0.9962
+Steps-Taken: 13.89
+Comm-Action: [0.96 0.8  0.8  0.93 0.96]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 436
+Episode: 1739525
+Reward: [-0.46 -0.46 -0.47 -0.49 -0.51]
+Time: 374.03s
+Success: 0.9953
+Steps-Taken: 14.04
+Comm-Action: [0.96 0.81 0.79 0.93 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 437
+Episode: 1745230
+Reward: [-0.48 -0.48 -0.48 -0.49 -0.52]
+Time: 372.20s
+Success: 0.9932
+Steps-Taken: 14.24
+Comm-Action: [0.96 0.82 0.8  0.92 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 438
+Episode: 1751091
+Reward: [-0.46 -0.45 -0.46 -0.47 -0.5 ]
+Time: 362.44s
+Success: 0.9973
+Steps-Taken: 13.87
+Comm-Action: [0.95 0.78 0.8  0.9  0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 439
+Episode: 1756953
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.5 ]
+Time: 362.06s
+Success: 0.9966
+Steps-Taken: 13.85
+Comm-Action: [0.95 0.78 0.79 0.89 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 440
+Episode: 1762827
+Reward: [-0.46 -0.45 -0.47 -0.47 -0.49]
+Time: 361.76s
+Success: 0.9973
+Steps-Taken: 13.82
+Comm-Action: [0.96 0.78 0.8  0.9  0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 441
+Episode: 1768705
+Reward: [-0.45 -0.45 -0.46 -0.47 -0.5 ]
+Time: 363.07s
+Success: 0.9980
+Steps-Taken: 13.79
+Comm-Action: [0.95 0.79 0.81 0.91 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 442
+Episode: 1774498
+Reward: [-0.47 -0.47 -0.48 -0.48 -0.51]
+Time: 361.82s
+Success: 0.9974
+Steps-Taken: 14.05
+Comm-Action: [0.96 0.78 0.81 0.92 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 443
+Episode: 1780357
+Reward: [-0.46 -0.46 -0.47 -0.47 -0.5 ]
+Time: 370.65s
+Success: 0.9980
+Steps-Taken: 13.90
+Comm-Action: [0.96 0.78 0.81 0.92 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 444
+Episode: 1786178
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.5 ]
+Time: 371.65s
+Success: 0.9950
+Steps-Taken: 13.96
+Comm-Action: [0.97 0.79 0.82 0.93 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 445
+Episode: 1792107
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.49]
+Time: 369.01s
+Success: 0.9985
+Steps-Taken: 13.70
+Comm-Action: [0.97 0.79 0.81 0.92 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 446
+Episode: 1798041
+Reward: [-0.46 -0.47 -0.46 -0.47 -0.49]
+Time: 380.59s
+Success: 0.9985
+Steps-Taken: 13.68
+Comm-Action: [0.97 0.79 0.81 0.92 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 447
+Episode: 1803941
+Reward: [-0.46 -0.47 -0.46 -0.46 -0.5 ]
+Time: 375.52s
+Success: 0.9983
+Steps-Taken: 13.75
+Comm-Action: [0.97 0.82 0.81 0.91 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 448
+Episode: 1809818
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.5 ]
+Time: 377.66s
+Success: 0.9997
+Steps-Taken: 13.82
+Comm-Action: [0.97 0.81 0.79 0.92 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 449
+Episode: 1815616
+Reward: [-0.46 -0.46 -0.46 -0.48 -0.51]
+Time: 382.56s
+Success: 0.9988
+Steps-Taken: 14.01
+Comm-Action: [0.97 0.8  0.79 0.92 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 450
+Episode: 1821424
+Reward: [-0.45 -0.46 -0.46 -0.47 -0.51]
+Time: 386.64s
+Success: 0.9974
+Steps-Taken: 13.97
+Comm-Action: [0.97 0.81 0.78 0.93 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 451
+Episode: 1827342
+Reward: [-0.44 -0.45 -0.45 -0.46 -0.49]
+Time: 387.38s
+Success: 0.9992
+Steps-Taken: 13.73
+Comm-Action: [0.97 0.81 0.78 0.93 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 452
+Episode: 1833208
+Reward: [-0.44 -0.46 -0.45 -0.47 -0.5 ]
+Time: 398.96s
+Success: 0.9983
+Steps-Taken: 13.84
+Comm-Action: [0.98 0.85 0.78 0.94 0.91]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 453
+Episode: 1839035
+Reward: [-0.46 -0.47 -0.46 -0.47 -0.5 ]
+Time: 417.78s
+Success: 0.9973
+Steps-Taken: 13.95
+Comm-Action: [0.98 0.87 0.78 0.94 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 454
+Episode: 1844777
+Reward: [-0.46 -0.47 -0.47 -0.48 -0.51]
+Time: 391.50s
+Success: 0.9955
+Steps-Taken: 14.14
+Comm-Action: [0.98 0.85 0.77 0.92 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 455
+Episode: 1850606
+Reward: [-0.45 -0.46 -0.45 -0.47 -0.51]
+Time: 381.09s
+Success: 0.9991
+Steps-Taken: 13.94
+Comm-Action: [0.98 0.85 0.76 0.92 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 456
+Episode: 1856545
+Reward: [-0.44 -0.45 -0.45 -0.46 -0.5 ]
+Time: 369.24s
+Success: 0.9997
+Steps-Taken: 13.68
+Comm-Action: [0.98 0.84 0.76 0.92 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 457
+Episode: 1862363
+Reward: [-0.46 -0.46 -0.46 -0.48 -0.51]
+Time: 373.45s
+Success: 0.9988
+Steps-Taken: 13.97
+Comm-Action: [0.98 0.84 0.77 0.92 0.95]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 458
+Episode: 1868172
+Reward: [-0.46 -0.46 -0.47 -0.48 -0.5 ]
+Time: 367.38s
+Success: 0.9976
+Steps-Taken: 14.01
+Comm-Action: [0.98 0.82 0.77 0.92 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 459
+Episode: 1874103
+Reward: [-0.44 -0.44 -0.45 -0.46 -0.49]
+Time: 361.80s
+Success: 0.9993
+Steps-Taken: 13.69
+Comm-Action: [0.98 0.82 0.77 0.93 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 460
+Episode: 1880020
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.48]
+Time: 367.40s
+Success: 0.9988
+Steps-Taken: 13.70
+Comm-Action: [0.98 0.84 0.78 0.93 0.94]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 461
+Episode: 1885892
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.49]
+Time: 390.48s
+Success: 0.9991
+Steps-Taken: 13.84
+Comm-Action: [0.98 0.83 0.79 0.94 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 462
+Episode: 1891815
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.48]
+Time: 391.96s
+Success: 0.9995
+Steps-Taken: 13.71
+Comm-Action: [0.98 0.8  0.78 0.94 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 463
+Episode: 1897683
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.49]
+Time: 405.40s
+Success: 0.9986
+Steps-Taken: 13.86
+Comm-Action: [0.98 0.8  0.78 0.94 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 464
+Episode: 1903557
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.49]
+Time: 375.39s
+Success: 0.9981
+Steps-Taken: 13.82
+Comm-Action: [0.98 0.8  0.77 0.92 0.93]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 465
+Episode: 1909431
+Reward: [-0.45 -0.46 -0.46 -0.47 -0.48]
+Time: 367.36s
+Success: 0.9980
+Steps-Taken: 13.84
+Comm-Action: [0.98 0.8  0.78 0.92 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 466
+Episode: 1915229
+Reward: [-0.47 -0.46 -0.47 -0.47 -0.49]
+Time: 359.64s
+Success: 0.9971
+Steps-Taken: 13.99
+Comm-Action: [0.98 0.8  0.78 0.93 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 467
+Episode: 1921096
+Reward: [-0.46 -0.45 -0.46 -0.47 -0.49]
+Time: 392.19s
+Success: 0.9983
+Steps-Taken: 13.84
+Comm-Action: [0.98 0.8  0.76 0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 468
+Episode: 1926966
+Reward: [-0.46 -0.46 -0.45 -0.47 -0.49]
+Time: 370.31s
+Success: 0.9969
+Steps-Taken: 13.85
+Comm-Action: [0.98 0.79 0.76 0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 469
+Episode: 1932830
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.49]
+Time: 376.99s
+Success: 0.9981
+Steps-Taken: 13.83
+Comm-Action: [0.98 0.8  0.78 0.89 0.91]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 470
+Episode: 1938768
+Reward: [-0.45 -0.44 -0.45 -0.47 -0.49]
+Time: 359.73s
+Success: 0.9993
+Steps-Taken: 13.69
+Comm-Action: [0.98 0.78 0.77 0.9  0.91]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 471
+Episode: 1944629
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.49]
+Time: 361.92s
+Success: 0.9966
+Steps-Taken: 13.85
+Comm-Action: [0.98 0.77 0.78 0.91 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 472
+Episode: 1950218
+Reward: [-0.5  -0.51 -0.5  -0.49 -0.52]
+Time: 358.44s
+Success: 0.9893
+Steps-Taken: 14.58
+Comm-Action: [0.98 0.8  0.79 0.91 0.91]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 473
+Episode: 1955997
+Reward: [-0.46 -0.48 -0.47 -0.48 -0.5 ]
+Time: 350.22s
+Success: 0.9962
+Steps-Taken: 14.06
+Comm-Action: [0.98 0.8  0.77 0.91 0.91]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 474
+Episode: 1961840
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.5 ]
+Time: 355.90s
+Success: 0.9956
+Steps-Taken: 13.91
+Comm-Action: [0.98 0.79 0.77 0.92 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 475
+Episode: 1967766
+Reward: [-0.45 -0.46 -0.45 -0.46 -0.48]
+Time: 351.72s
+Success: 0.9990
+Steps-Taken: 13.68
+Comm-Action: [0.98 0.78 0.76 0.92 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 476
+Episode: 1973598
+Reward: [-0.47 -0.47 -0.47 -0.47 -0.5 ]
+Time: 350.59s
+Success: 0.9973
+Steps-Taken: 13.94
+Comm-Action: [0.98 0.8  0.77 0.92 0.91]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 477
+Episode: 1979517
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.49]
+Time: 352.04s
+Success: 0.9973
+Steps-Taken: 13.74
+Comm-Action: [0.98 0.8  0.78 0.91 0.92]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 478
+Episode: 1985526
+Reward: [-0.44 -0.45 -0.45 -0.46 -0.48]
+Time: 348.18s
+Success: 0.9990
+Steps-Taken: 13.52
+Comm-Action: [0.98 0.8  0.78 0.92 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 479
+Episode: 1991526
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.48]
+Time: 343.36s
+Success: 0.9988
+Steps-Taken: 13.52
+Comm-Action: [0.98 0.79 0.77 0.91 0.89]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 480
+Episode: 1997480
+Reward: [-0.45 -0.45 -0.46 -0.46 -0.47]
+Time: 351.58s
+Success: 0.9997
+Steps-Taken: 13.65
+Comm-Action: [0.98 0.82 0.78 0.91 0.89]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 481
+Episode: 2003394
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.48]
+Time: 352.67s
+Success: 0.9988
+Steps-Taken: 13.73
+Comm-Action: [0.98 0.81 0.77 0.91 0.89]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 482
+Episode: 2009315
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.47]
+Time: 350.11s
+Success: 0.9993
+Steps-Taken: 13.72
+Comm-Action: [0.98 0.82 0.78 0.92 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 483
+Episode: 2015248
+Reward: [-0.45 -0.45 -0.45 -0.45 -0.48]
+Time: 354.24s
+Success: 0.9990
+Steps-Taken: 13.69
+Comm-Action: [0.98 0.82 0.78 0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 484
+Episode: 2021157
+Reward: [-0.46 -0.46 -0.46 -0.46 -0.49]
+Time: 346.17s
+Success: 0.9973
+Steps-Taken: 13.75
+Comm-Action: [0.98 0.83 0.78 0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 485
+Episode: 2027055
+Reward: [-0.45 -0.46 -0.45 -0.46 -0.5 ]
+Time: 346.88s
+Success: 0.9990
+Steps-Taken: 13.77
+Comm-Action: [0.98 0.84 0.78 0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 486
+Episode: 2032973
+Reward: [-0.45 -0.46 -0.45 -0.46 -0.49]
+Time: 345.25s
+Success: 0.9978
+Steps-Taken: 13.72
+Comm-Action: [0.98 0.87 0.78 0.91 0.89]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 487
+Episode: 2038893
+Reward: [-0.45 -0.46 -0.45 -0.46 -0.49]
+Time: 345.54s
+Success: 0.9998
+Steps-Taken: 13.72
+Comm-Action: [0.98 0.88 0.78 0.92 0.89]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 488
+Episode: 2044792
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.49]
+Time: 336.92s
+Success: 1.0000
+Steps-Taken: 13.76
+Comm-Action: [0.98 0.87 0.77 0.93 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 489
+Episode: 2050811
+Reward: [-0.44 -0.44 -0.44 -0.45 -0.47]
+Time: 346.64s
+Success: 0.9998
+Steps-Taken: 13.48
+Comm-Action: [0.98 0.88 0.78 0.93 0.88]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 490
+Episode: 2056762
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.49]
+Time: 341.36s
+Success: 0.9992
+Steps-Taken: 13.67
+Comm-Action: [0.98 0.9  0.78 0.91 0.88]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 491
+Episode: 2062783
+Reward: [-0.44 -0.44 -0.44 -0.46 -0.48]
+Time: 343.18s
+Success: 0.9997
+Steps-Taken: 13.48
+Comm-Action: [0.98 0.91 0.77 0.9  0.88]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 492
+Episode: 2068626
+Reward: [-0.47 -0.47 -0.47 -0.48 -0.51]
+Time: 344.33s
+Success: 0.9974
+Steps-Taken: 13.90
+Comm-Action: [0.97 0.92 0.77 0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 493
+Episode: 2074071
+Reward: [-0.53 -0.54 -0.53 -0.53 -0.55]
+Time: 340.97s
+Success: 0.9840
+Steps-Taken: 14.95
+Comm-Action: [0.97 0.91 0.8  0.91 0.9 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 494
+Episode: 2079891
+Reward: [-0.47 -0.48 -0.48 -0.48 -0.5 ]
+Time: 342.97s
+Success: 0.9978
+Steps-Taken: 13.97
+Comm-Action: [0.97 0.88 0.78 0.9  0.87]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 495
+Episode: 2085863
+Reward: [-0.45 -0.45 -0.46 -0.46 -0.48]
+Time: 345.85s
+Success: 0.9992
+Steps-Taken: 13.59
+Comm-Action: [0.97 0.88 0.77 0.9  0.87]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 496
+Episode: 2091816
+Reward: [-0.45 -0.46 -0.45 -0.46 -0.48]
+Time: 341.05s
+Success: 0.9993
+Steps-Taken: 13.62
+Comm-Action: [0.97 0.89 0.77 0.89 0.87]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 497
+Episode: 2097734
+Reward: [-0.45 -0.46 -0.46 -0.47 -0.49]
+Time: 339.54s
+Success: 0.9988
+Steps-Taken: 13.70
+Comm-Action: [0.97 0.88 0.77 0.91 0.88]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 498
+Episode: 2103688
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.48]
+Time: 346.65s
+Success: 0.9987
+Steps-Taken: 13.66
+Comm-Action: [0.97 0.89 0.76 0.91 0.88]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 499
+Episode: 2109644
+Reward: [-0.45 -0.45 -0.45 -0.46 -0.48]
+Time: 338.64s
+Success: 0.9987
+Steps-Taken: 13.62
+Comm-Action: [0.97 0.89 0.76 0.92 0.88]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 500
+Episode: 2115517
+Reward: [-0.46 -0.45 -0.46 -0.47 -0.49]
+Time: 336.61s
+Success: 0.9986
+Steps-Taken: 13.81
+Comm-Action: [0.97 0.89 0.77 0.92 0.88]
+==============================================================================
+Running epilogue script on gold54.
+
+Submit time  : 2024-10-29T10:30:05
+Start time   : 2024-10-29T10:30:06
+End time     : 2024-10-31T18:34:15
+Elapsed time : 2-08:04:09 (Timelimit=2-12:00:00)
+
+Job ID: 6706966
+Cluster: i5
+User/Group: jabn1n20/fp
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 23:57:17
+CPU Efficiency: 5.34% of 18-16:33:12 core-walltime
+Job Wall-clock time: 2-08:04:09
+Memory Utilized: 11.71 GB
+Memory Efficiency: 6.35% of 184.57 GB
+

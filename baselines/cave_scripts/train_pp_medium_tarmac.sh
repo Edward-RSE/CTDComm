@@ -12,7 +12,11 @@
 #SBATCH --time=60:00:00 # Walltime (maximum is 60 hours for batch)
 
 # Specific setup for my cluster and virtual environment
-source activate marl37
+module load conda
+source activate commpy
+# conda init
+# conda activate commpy
+#marl37
 
 export OMP_NUM_THREADS=1
 

@@ -27,7 +27,12 @@ class Trainer(object):
         episode = []
         reset_args = getargspec(self.env.reset).args
         if self.args.env_name == 'dec_predator_prey':
-            state, info = self.env.reset(self.args.env_seed)
+            observations, info = self.env.reset(self.args.env_seed)
+
+            # Convert observation dict into a 'state' array for backwards compatibility (batch size=1)
+            state = np.stack([obs.flatten() for _, obs in observations.items()])
+            state = np.expand_dims(state, 0)
+            state = torch.from_numpy(state).double()
         else:
             if 'epoch' in reset_args:
                 state = self.env.reset(epoch)
@@ -94,17 +99,25 @@ class Trainer(object):
             action = select_action(self.args, action_out)
             action, actual = translate_action(self.args, self.env, action)
             if 'dec' in self.args.env_name:
-                # Building in backwards compatibility with the PettingZoo/AEC API
+                # Building in forwards compatibility with the PettingZoo/AEC API
+                #TODO: does the dict setup still work when learning agents die?
+                actual = {self.env.possible_agents[i]: actual[0][i] for i in range(len(self.env.possible_agents))}
                 next_state, rewards, terminations, truncations, infos = self.env.step(actual)
                 reward = np.array([r for _, r in rewards.items()])
                 terminated = np.all([termination for _, termination in terminations.items()])
                 truncated = np.all([truncation for _, truncation in truncations.items()])
                 done = terminated or truncated
-                info = {'agent_locs': self.locs, 'alive_mask': np.ones_like(reward)}
-                for agent, info_val in infos:
+
+                info = {'agent_locs': self.env.locs, 'alive_mask': np.ones_like(reward)}
+                for agent, info_val in infos.items():
                     # The environment uses a string to explain that the agent is dead/inactive
                     if isinstance(info_val, str):
                         info['alive_mask'][agent[1]] = 0
+                
+                # Convert next_state dict into a 'state' array for backwards compatibility (batch size=1)
+                next_state = np.stack([obs.flatten() for _, obs in next_state.items()])
+                next_state = np.expand_dims(next_state, 0)
+                next_state = torch.from_numpy(next_state).double()
             else:
                 next_state, reward, done, info = self.env.step(actual)
 
@@ -126,7 +139,8 @@ class Trainer(object):
             # reward = reward * misc['alive_mask']
 
             stat['reward'] = stat.get('reward', 0) + reward[:self.args.nfriendly]
-            if hasattr(self.args, 'enemy_comm') and self.args.enemy_comm:
+            if hasattr(self.args, 'enemy_comm') and self.args.enemy_comm \
+                        or (hasattr(self.args, 'learning_prey') and self.args.learning_prey):
                 stat['enemy_reward'] = stat.get('enemy_reward', 0) + reward[self.args.nfriendly:]
 
             done = done or t == self.args.max_steps - 1
@@ -152,14 +166,18 @@ class Trainer(object):
         stat['steps_taken'] = stat['num_steps']
 
         if hasattr(self.env, 'reward_terminal'):
-            reward = self.env.reward_terminal()
+            rewards = self.env.reward_terminal()
+            if 'dec' in self.args.env_name:
+                reward = np.array([r for _, r in rewards.items()])
+
             # We are not multiplying in case of reward terminal with alive agent
             # If terminal reward is masked environment should do
             # reward = reward * misc['alive_mask']
 
             episode[-1] = episode[-1]._replace(reward = episode[-1].reward + reward)
             stat['reward'] = stat.get('reward', 0) + reward[:self.args.nfriendly]
-            if hasattr(self.args, 'enemy_comm') and self.args.enemy_comm:
+            if (hasattr(self.args, 'enemy_comm') and self.args.enemy_comm) \
+                or (hasattr(self.args, 'learning_prey') and self.args.learning_prey):
                 stat['enemy_reward'] = stat.get('enemy_reward', 0) + reward[self.args.nfriendly:]
 
 

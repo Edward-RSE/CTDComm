@@ -48,7 +48,7 @@ parser.add_argument('--hid_size', default=64, type=int,
 parser.add_argument('--qk_hid_size', default=16, type=int,
                     help='key and query size for soft attention')
 parser.add_argument('--value_hid_size', default=32, type=int,
-                    help='value size for soft attention')
+                    help='value size for soft attention. Note: current code (at least Dec-/TarMAC) break unless this is the same as hid_size')
 parser.add_argument('--recurrent', action='store_true', default=False,
                     help='make the model recurrent in time')
 
@@ -115,8 +115,12 @@ parser.add_argument('--magic', action='store_true', default=False,
                     help="enable magic model")
 parser.add_argument('--cave', action='store_true', default=False,
                     help="enable the CAVE value head")
+parser.add_argument('--message_augment', action='store_true', default=False,
+                    help="enable the critic to be augmented with the aggregated messages received by each agent")
+parser.add_argument('--v_augment', action='store_true', default=False,
+                    help="enable the critic to be augmented with the attention value message sent by each agent")
 parser.add_argument('--dec_tarmac', action='store_true', default=False,
-                    help="enable dec-tarmac model")
+                    help="enable dec-tarmac model. Use this with cave and message_augment for CTDComm")
 parser.add_argument('--nagents', type=int, default=1,
                     help="Number of agents (used in multiagent)")
 parser.add_argument('--comm_mode', type=str, default='avg',
@@ -141,7 +145,7 @@ parser.add_argument('--comm_action_one', default=False, action='store_true',
 parser.add_argument('--advantages_per_action', default=False, action='store_true',
                     help='Whether to multipy log prob for each chosen action with advantages')
 parser.add_argument('--share_weights', default=False, action='store_true',
-                    help='Share weights for hops')
+                    help='Share weights between communication modules between rounds')
 
 # CommNet specific args
 parser.add_argument('--directed', action='store_true', default=False,
@@ -210,7 +214,8 @@ if args.magic:
 
 # Enemy comm
 args.nfriendly = args.nagents
-if hasattr(args, 'enemy_comm') and args.enemy_comm:
+if (hasattr(args, 'enemy_comm') and args.enemy_comm) or \
+    (hasattr(args, 'learning_prey') and args.learning_prey):
     if hasattr(args, 'nenemies'):
         args.nagents += args.nenemies
     else:
@@ -224,7 +229,7 @@ env = data.init(args.env_name, args, False)
 #TODO: Check that observation dim works with the new api
 num_inputs = env.observation_dim 
 if args.env_name == 'dec_predator_prey':
-    args.num_actions = [env.naction]
+    args.num_actions = env.naction #[env.naction]
     args.dim_actions = 1
 else:
     args.num_actions = env.num_actions
@@ -238,7 +243,7 @@ args.num_inputs = num_inputs
 # Hard attention
 if args.hard_attn and args.commnet:
     # add comm_action as last dim in actions
-    args.num_actions = [*args.num_actions, 2]
+    args.num_actions = list(args.num_actions) + [2]
     args.dim_actions = args.dim_actions + 1
 
 # Recurrence
@@ -323,42 +328,50 @@ if args.env_name == 'traffic_junction':
             env_name_str = env_name_str + '_add_01'
         elif args.add_rate_max == 0.2:
             env_name_str = env_name_str + '_add_02'
-elif 'predator_prey 'in args.env_name:
+elif 'predator_prey' in args.env_name:
     if 'dec' in args.env_name:
+        env_name_str = args.env_name + f'_{args.nagents}v{args.nenemies}'
+        
         if args.comm_range != 0:
             env_name_str = args.env_name + '_cr=' + str(args.comm_range)
-        else:
-            env_name_str = args.env_name
         
         if args.learning_prey:
-            env_name_str = env_name_str + f'_{args.nenemies}_learning_prey'
+            env_name_str = env_name_str + '_learning_prey'
         elif args.moving_prey:
-            env_name_str = env_name_str + f'_{args.nenemies}_random_prey'
-        elif args.nenemies != 1:
-            env_name_str = env_name_str + f'_{args.nenemies}_prey'
+            env_name_str = env_name_str + '_random_prey'
     else:
         env_name_str = args.env_name
-
-    if args.nagents == 5:
-        env_name_str = env_name_str + '_5v1' #'_medium'
-    elif args.nagents == 10:
-        if args.nenemies == 1:
-            env_name_str = env_name_str + '_10v1' #'_hard'
-        if args.nenemies == 2:
-            env_name_str = env_name_str + '_10v2'
-    elif args.nagents == 20:
-        env_name_str = env_name_str + '_20v1'
+        if args.nagents == 5:
+            env_name_str = env_name_str + '_5v1' #'_medium'
+        elif args.nagents == 10:
+            if args.nenemies == 1:
+                env_name_str = env_name_str + '_10v1' #'_hard'
+            if args.nenemies == 2:
+                env_name_str = env_name_str + '_10v2'
+        elif args.nagents == 20:
+            env_name_str = env_name_str + '_20v1'
 else:
     env_name_str = args.env_name
 
-model_dir = Path('./saved') / env_name_str
+model_dir = Path('./ctdcomm_saved') / env_name_str
 if args.magic:
     model_dir = model_dir / 'magic'
 elif args.gacomm:
     model_dir = model_dir / 'gacomm'
 elif args.dec_tarmac:
     if args.ic3net:
-        model_dir = model_dir / 'dec_tarmac'
+        if args.cave:
+            if args.message_augment:
+                model_dir = model_dir / 'ctdcomm'
+            elif args.v_augment:
+                model_dir = model_dir / 'ctdcomm_v_aug'
+        else:
+            if args.message_augment:
+                model_dir = model_dir / 'dec_tarmac_message_aug'
+            elif args.v_augment:
+                model_dir = model_dir / 'dec_tarmac_v_aug'
+            else:
+                model_dir = model_dir / 'dec_tarmac'
     elif args.commnet:
         model_dir = model_dir / 'dec_tarcomm'
 elif args.tarcomm:
@@ -378,7 +391,7 @@ elif args.commnet:
 else:
     model_dir = model_dir / 'other'
 
-if args.cave:
+if args.cave and not (args.message_augment or args.v_augment):
     # Alter the dir name to differentiate from a standard value head
     dir_head, dir_tail = os.path.split(model_dir)
     model_dir = Path(dir_head + "/" + dir_tail + "_cave")
@@ -416,7 +429,6 @@ def run(num_epochs):
         epoch_begin_time = time.time()
         stat = dict()
         for n in range(args.epoch_size):
-            #TODO: Allow for pz trainer if necessary
             if n == args.epoch_size - 1 and args.display:
                 trainer.display = True
             if args.save_adjacency:

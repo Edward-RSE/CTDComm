@@ -31,7 +31,7 @@ class DecAgent(TarCommNetMLP):
         Arguments:
             args {Namespace} -- Parse args namespace
             num_inputs {number} -- Environment observation dimension for agents
-            agent_id {number} -- Unique id for this decentralised agent
+            agent_id {number} -- Unique id for this decentralised agent, use None if the agents share weights
         """
         
         super(TarCommNetMLP, self).__init__()
@@ -211,7 +211,10 @@ class DecAgent(TarCommNetMLP):
             self.hidden_state = sum([self.x, self.f_modules[comm_pass](self.hidden_state), c])
             self.hidden_state = self.tanh(self.hidden_state)
 
-        return attn, self.hidden_state, self.cell_state
+        if self.args.message_augment:
+            return attn, self.hidden_state, self.cell_state, comm
+        else:
+            return attn, self.hidden_state, self.cell_state, None
     
     def get_action(self):
         """

@@ -1,0 +1,2030 @@
+Running SLURM prolog script on gold51.cluster.local
+===============================================================================
+Job started on Sat Nov  9 20:39:22 GMT 2024
+Job ID          : 6761531
+Job name        : train_dpp_10v1_ctdcomm.sh
+WorkDir         : /mainfs/home/jabn1n20/CTDComm/baselines
+Command         : /mainfs/home/jabn1n20/CTDComm/baselines/dec_scripts/train_dpp_10v1_ctdcomm.sh
+Partition       : serial
+Num hosts       : 1
+Num cores       : 8
+Num of tasks    : 8
+Hosts allocated : gold51
+Job Output Follows ...
+===============================================================================
+Namespace(action_scale=1.0, advantages_per_action=False, alpha=0.99, batch_size=500, cave=False, comm_action_one=False, comm_init='uniform', comm_mask_zero=False, comm_mode='avg', comm_passes=2, comm_range=0, commnet=1, continuous=False, dec_tarmac=True, detach_gap=10, dim=20, dim_actions=2, directed=False, display=False, entr=0.01, env_name='dec_predator_prey', env_seed=1, epoch_size=10, eps=1e-06, first_gat_normalize=False, first_graph_complete=False, gacomm=False, gamma=0.99, gat_encoder_normalize=False, gat_encoder_out_size=64, gat_hid_size=64, gat_num_heads=1, gat_num_heads_out=1, ge_num_heads=4, hard_attn=1, hid_size=128, ic3net=True, learn_second_graph=False, learning_prey=False, load='', lrate=0.0007, magic=False, max_steps=80, mean_ratio=0, message_augment=False, message_decoder=False, message_encoder=False, mode='mixed', moving_prey=False, naction_heads=[5, 2], nactions='1', nagents=10, nenemies=1, nfriendly=10, normalize_rewards=False, nprocesses=16, num_actions=[5, 2], num_epochs=250, num_inputs=3636, plot=False, plot_env='main', plot_port='8097', qk_hid_size=16, random=False, recurrent=True, rnn_type='LSTM', save=True, save_adjacency=False, save_every=25, second_gat_normalize=False, second_graph_complete=False, seed=1, self_loop_type1=2, self_loop_type2=2, share_weights=False, stay=True, tarcomm=False, tau=1.0, use_gat_encoder=False, v_augment=True, value_coeff=0.01, value_hid_size=128, vision=1)
+====================================================================================================
+Model log:
+
+DecTarMAC(
+  (agents): ModuleList(
+    (0): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (1): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (2): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (3): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (4): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (5): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (6): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (7): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (8): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (9): DecAgent(
+      (encoder): Linear(in_features=3636, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+  )
+  (value_head): Linear(in_features=256, out_features=1, bias=True)
+)
+====================================================================================================
+
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 1
+Episode: 1120
+Reward: [-3.87 -3.89 -3.87 -3.91 -3.91 -3.85 -3.86 -3.9  -3.88 -3.88]
+Time: 1769.83s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.58 0.4  0.48 0.54 0.51 0.52 0.49 0.41 0.5  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 2
+Episode: 2240
+Reward: [-3.84 -3.84 -3.9  -3.86 -3.88 -3.86 -3.88 -3.86 -3.91 -3.86]
+Time: 1831.70s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.59 0.29 0.41 0.39 0.59 0.48 0.45 0.35 0.47 0.57]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 3
+Episode: 3360
+Reward: [-3.86 -3.88 -3.88 -3.88 -3.88 -3.91 -3.87 -3.87 -3.91 -3.87]
+Time: 1842.02s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.46 0.37 0.44 0.22 0.57 0.43 0.37 0.42 0.43 0.57]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 4
+Episode: 4480
+Reward: [-3.88 -3.84 -3.88 -3.87 -3.87 -3.89 -3.86 -3.85 -3.9  -3.86]
+Time: 1845.44s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.49 0.51 0.28 0.54 0.37 0.42 0.46 0.42 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 5
+Episode: 5600
+Reward: [-3.89 -3.85 -3.87 -3.85 -3.9  -3.88 -3.89 -3.88 -3.88 -3.88]
+Time: 1839.42s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.41 0.44 0.41 0.42 0.5  0.42 0.52 0.56 0.42 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 6
+Episode: 6720
+Reward: [-3.87 -3.88 -3.83 -3.86 -3.85 -3.87 -3.88 -3.87 -3.86 -3.9 ]
+Time: 1842.52s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.44 0.47 0.46 0.45 0.48 0.44 0.56 0.53 0.45 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 7
+Episode: 7840
+Reward: [-3.89 -3.87 -3.87 -3.86 -3.89 -3.86 -3.89 -3.87 -3.86 -3.84]
+Time: 1814.96s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.46 0.49 0.47 0.43 0.46 0.48 0.5  0.54 0.44 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 8
+Episode: 8960
+Reward: [-3.89 -3.9  -3.9  -3.86 -3.84 -3.86 -3.9  -3.84 -3.86 -3.87]
+Time: 1830.43s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.47 0.48 0.45 0.47 0.45 0.47 0.49 0.44 0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 9
+Episode: 10080
+Reward: [-3.88 -3.87 -3.86 -3.88 -3.84 -3.88 -3.86 -3.88 -3.85 -3.85]
+Time: 1808.95s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.48 0.44 0.46 0.46 0.5  0.43 0.41 0.46 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 10
+Episode: 11200
+Reward: [-3.85 -3.84 -3.83 -3.86 -3.89 -3.85 -3.85 -3.88 -3.87 -3.85]
+Time: 1632.94s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.5  0.48 0.48 0.41 0.59 0.44 0.43 0.44 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 11
+Episode: 12320
+Reward: [-3.88 -3.86 -3.84 -3.86 -3.86 -3.91 -3.85 -3.83 -3.88 -3.89]
+Time: 1542.78s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.48 0.54 0.45 0.43 0.57 0.48 0.47 0.42 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 12
+Episode: 13440
+Reward: [-3.88 -3.88 -3.82 -3.85 -3.89 -3.84 -3.84 -3.83 -3.86 -3.89]
+Time: 1547.17s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.46 0.62 0.46 0.47 0.53 0.48 0.52 0.43 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 13
+Episode: 14560
+Reward: [-3.87 -3.85 -3.88 -3.84 -3.89 -3.86 -3.86 -3.82 -3.84 -3.81]
+Time: 1528.17s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.47 0.6  0.5  0.49 0.5  0.51 0.51 0.44 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 14
+Episode: 15680
+Reward: [-3.86 -3.83 -3.86 -3.88 -3.83 -3.87 -3.85 -3.86 -3.82 -3.83]
+Time: 1665.59s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.48 0.55 0.55 0.51 0.49 0.52 0.48 0.48 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 15
+Episode: 16800
+Reward: [-3.89 -3.85 -3.87 -3.85 -3.89 -3.87 -3.87 -3.82 -3.86 -3.87]
+Time: 1757.10s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.5  0.51 0.59 0.53 0.49 0.55 0.45 0.53 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 16
+Episode: 17920
+Reward: [-3.88 -3.87 -3.88 -3.84 -3.83 -3.86 -3.87 -3.85 -3.84 -3.86]
+Time: 1727.49s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.52 0.49 0.56 0.51 0.49 0.55 0.45 0.55 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 17
+Episode: 19040
+Reward: [-3.85 -3.85 -3.89 -3.86 -3.9  -3.84 -3.85 -3.83 -3.86 -3.87]
+Time: 1852.24s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.52 0.46 0.51 0.48 0.51 0.52 0.46 0.5  0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 18
+Episode: 20160
+Reward: [-3.84 -3.85 -3.86 -3.89 -3.88 -3.86 -3.87 -3.84 -3.84 -3.9 ]
+Time: 1958.93s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.56 0.48 0.5  0.49 0.5  0.51 0.49 0.51 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 19
+Episode: 21280
+Reward: [-3.85 -3.85 -3.87 -3.89 -3.85 -3.87 -3.87 -3.82 -3.83 -3.79]
+Time: 1780.05s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.51 0.52 0.52 0.47 0.46 0.52 0.46 0.48 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 20
+Episode: 22400
+Reward: [-3.8  -3.84 -3.87 -3.87 -3.87 -3.84 -3.84 -3.86 -3.85 -3.84]
+Time: 1596.77s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.47 0.48 0.52 0.5  0.47 0.51 0.5  0.44 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 21
+Episode: 23520
+Reward: [-3.84 -3.82 -3.85 -3.83 -3.86 -3.84 -3.83 -3.84 -3.87 -3.89]
+Time: 1617.20s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.51 0.47 0.5  0.5  0.48 0.53 0.52 0.43 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 22
+Episode: 24640
+Reward: [-3.84 -3.86 -3.89 -3.85 -3.84 -3.88 -3.84 -3.83 -3.84 -3.87]
+Time: 1640.03s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.5  0.47 0.49 0.48 0.47 0.53 0.5  0.45 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 23
+Episode: 25760
+Reward: [-3.85 -3.82 -3.81 -3.82 -3.81 -3.83 -3.84 -3.83 -3.81 -3.85]
+Time: 1658.31s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.46 0.45 0.46 0.5  0.52 0.53 0.53 0.47 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 24
+Episode: 26880
+Reward: [-3.85 -3.85 -3.87 -3.81 -3.83 -3.84 -3.84 -3.8  -3.83 -3.87]
+Time: 1771.75s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.45 0.45 0.45 0.49 0.52 0.53 0.51 0.55 0.46 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 25
+Episode: 28000
+Reward: [-3.86 -3.81 -3.86 -3.86 -3.84 -3.82 -3.86 -3.8  -3.8  -3.83]
+Time: 1660.83s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.45 0.48 0.46 0.49 0.51 0.56 0.5  0.56 0.47 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 26
+Episode: 29120
+Reward: [-3.84 -3.83 -3.84 -3.81 -3.8  -3.88 -3.84 -3.81 -3.76 -3.81]
+Time: 1706.49s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.43 0.5  0.46 0.48 0.53 0.54 0.5  0.53 0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 27
+Episode: 30240
+Reward: [-3.82 -3.82 -3.86 -3.79 -3.85 -3.87 -3.85 -3.8  -3.82 -3.83]
+Time: 1842.49s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.51 0.48 0.49 0.55 0.5  0.49 0.53 0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 28
+Episode: 31360
+Reward: [-3.81 -3.82 -3.83 -3.83 -3.81 -3.88 -3.85 -3.78 -3.83 -3.83]
+Time: 1845.95s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.5  0.48 0.47 0.54 0.5  0.5  0.53 0.52 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 29
+Episode: 32480
+Reward: [-3.88 -3.83 -3.83 -3.8  -3.81 -3.82 -3.89 -3.79 -3.77 -3.82]
+Time: 1804.23s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.42 0.5  0.51 0.48 0.55 0.47 0.5  0.55 0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 30
+Episode: 33600
+Reward: [-3.83 -3.79 -3.82 -3.83 -3.81 -3.83 -3.84 -3.77 -3.78 -3.86]
+Time: 1865.79s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.43 0.51 0.53 0.47 0.53 0.49 0.49 0.53 0.48 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 31
+Episode: 34720
+Reward: [-3.85 -3.79 -3.83 -3.8  -3.83 -3.84 -3.84 -3.78 -3.76 -3.82]
+Time: 1856.52s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.42 0.54 0.54 0.49 0.57 0.46 0.46 0.52 0.47 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 32
+Episode: 35840
+Reward: [-3.84 -3.79 -3.83 -3.8  -3.82 -3.85 -3.85 -3.8  -3.74 -3.82]
+Time: 1908.30s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.55 0.54 0.52 0.54 0.43 0.47 0.54 0.49 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 33
+Episode: 36960
+Reward: [-3.82 -3.75 -3.86 -3.76 -3.85 -3.83 -3.81 -3.74 -3.79 -3.79]
+Time: 1733.52s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.46 0.51 0.51 0.54 0.51 0.43 0.45 0.54 0.47 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 34
+Episode: 38080
+Reward: [-3.81 -3.86 -3.84 -3.84 -3.77 -3.84 -3.79 -3.77 -3.81 -3.78]
+Time: 1718.99s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.45 0.5  0.51 0.52 0.5  0.48 0.44 0.52 0.45 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 35
+Episode: 39200
+Reward: [-3.81 -3.8  -3.77 -3.81 -3.81 -3.82 -3.82 -3.79 -3.78 -3.81]
+Time: 1639.66s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.51 0.52 0.52 0.49 0.48 0.46 0.51 0.48 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 36
+Episode: 40320
+Reward: [-3.8  -3.78 -3.83 -3.81 -3.81 -3.81 -3.81 -3.72 -3.72 -3.76]
+Time: 1693.00s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.49 0.54 0.5  0.49 0.5  0.46 0.52 0.49 0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 37
+Episode: 41440
+Reward: [-3.79 -3.75 -3.8  -3.75 -3.84 -3.82 -3.81 -3.76 -3.77 -3.76]
+Time: 1764.94s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.45 0.52 0.48 0.5  0.55 0.47 0.55 0.53 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 38
+Episode: 42560
+Reward: [-3.84 -3.76 -3.85 -3.77 -3.72 -3.79 -3.8  -3.73 -3.71 -3.78]
+Time: 1947.29s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.45 0.51 0.47 0.51 0.55 0.47 0.55 0.54 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 39
+Episode: 43680
+Reward: [-3.79 -3.78 -3.84 -3.74 -3.81 -3.82 -3.79 -3.74 -3.75 -3.79]
+Time: 2254.19s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.45 0.46 0.51 0.48 0.52 0.52 0.46 0.54 0.54 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 40
+Episode: 44800
+Reward: [-3.78 -3.76 -3.83 -3.73 -3.75 -3.8  -3.79 -3.79 -3.8  -3.73]
+Time: 2355.74s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.44 0.5  0.51 0.5  0.52 0.52 0.46 0.53 0.53 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 41
+Episode: 45920
+Reward: [-3.83 -3.76 -3.82 -3.76 -3.75 -3.78 -3.76 -3.73 -3.8  -3.78]
+Time: 2391.89s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.53 0.52 0.5  0.51 0.5  0.46 0.51 0.5  0.43]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 42
+Episode: 47040
+Reward: [-3.76 -3.72 -3.79 -3.79 -3.75 -3.81 -3.78 -3.76 -3.74 -3.79]
+Time: 2278.73s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.52 0.52 0.51 0.48 0.48 0.44 0.52 0.49 0.43]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 43
+Episode: 48160
+Reward: [-3.79 -3.77 -3.77 -3.72 -3.78 -3.78 -3.71 -3.74 -3.74 -3.74]
+Time: 2253.98s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.56 0.53 0.5  0.46 0.5  0.44 0.56 0.46 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 44
+Episode: 49280
+Reward: [-3.8  -3.74 -3.78 -3.72 -3.72 -3.78 -3.81 -3.73 -3.75 -3.78]
+Time: 2310.59s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.46 0.54 0.53 0.47 0.48 0.5  0.44 0.57 0.49 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 45
+Episode: 50400
+Reward: [-3.74 -3.71 -3.77 -3.7  -3.75 -3.72 -3.76 -3.72 -3.72 -3.74]
+Time: 2382.75s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.45 0.54 0.52 0.46 0.47 0.5  0.45 0.59 0.5  0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 46
+Episode: 51520
+Reward: [-3.79 -3.74 -3.79 -3.67 -3.71 -3.74 -3.77 -3.75 -3.69 -3.77]
+Time: 2267.34s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.46 0.54 0.55 0.45 0.49 0.5  0.49 0.59 0.51 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 47
+Episode: 52640
+Reward: [-3.78 -3.8  -3.75 -3.75 -3.74 -3.76 -3.77 -3.74 -3.69 -3.75]
+Time: 2144.75s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.51 0.54 0.49 0.5  0.47 0.51 0.54 0.48 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 48
+Episode: 53760
+Reward: [-3.78 -3.72 -3.77 -3.66 -3.71 -3.72 -3.73 -3.77 -3.7  -3.77]
+Time: 2146.50s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.49 0.53 0.51 0.5  0.47 0.5  0.52 0.47 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 49
+Episode: 54880
+Reward: [-3.76 -3.67 -3.76 -3.68 -3.71 -3.73 -3.75 -3.74 -3.74 -3.76]
+Time: 2214.62s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.48 0.53 0.51 0.5  0.46 0.47 0.53 0.48 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 50
+Episode: 56000
+Reward: [-3.76 -3.69 -3.79 -3.66 -3.76 -3.76 -3.77 -3.73 -3.69 -3.67]
+Time: 2212.96s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.53 0.52 0.48 0.51 0.44 0.46 0.51 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 51
+Episode: 57120
+Reward: [-3.73 -3.76 -3.72 -3.69 -3.63 -3.66 -3.7  -3.74 -3.66 -3.7 ]
+Time: 2233.17s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.5  0.51 0.49 0.51 0.46 0.46 0.52 0.48 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 52
+Episode: 58240
+Reward: [-3.7  -3.67 -3.76 -3.66 -3.71 -3.71 -3.72 -3.66 -3.68 -3.71]
+Time: 2273.86s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.49 0.53 0.48 0.51 0.48 0.49 0.52 0.51 0.43]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 53
+Episode: 59360
+Reward: [-3.7  -3.68 -3.76 -3.65 -3.73 -3.69 -3.7  -3.73 -3.66 -3.74]
+Time: 2327.89s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.5  0.55 0.47 0.52 0.5  0.48 0.52 0.5  0.44]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 54
+Episode: 60480
+Reward: [-3.72 -3.64 -3.69 -3.63 -3.67 -3.68 -3.73 -3.7  -3.66 -3.66]
+Time: 2241.68s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.47 0.55 0.47 0.53 0.5  0.48 0.51 0.51 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 55
+Episode: 61600
+Reward: [-3.69 -3.66 -3.72 -3.58 -3.68 -3.68 -3.71 -3.66 -3.62 -3.65]
+Time: 2100.14s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.48 0.53 0.46 0.56 0.47 0.49 0.51 0.53 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 56
+Episode: 62720
+Reward: [-3.65 -3.68 -3.7  -3.61 -3.68 -3.62 -3.69 -3.66 -3.62 -3.67]
+Time: 2292.60s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.49 0.52 0.44 0.56 0.47 0.5  0.51 0.51 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 57
+Episode: 63840
+Reward: [-3.69 -3.68 -3.67 -3.65 -3.66 -3.71 -3.69 -3.61 -3.66 -3.7 ]
+Time: 2356.86s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.49 0.51 0.42 0.54 0.51 0.51 0.54 0.51 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 58
+Episode: 64960
+Reward: [-3.67 -3.72 -3.67 -3.65 -3.66 -3.68 -3.74 -3.62 -3.63 -3.72]
+Time: 2349.75s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.48 0.53 0.41 0.51 0.5  0.49 0.54 0.52 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 59
+Episode: 66080
+Reward: [-3.65 -3.66 -3.7  -3.73 -3.65 -3.65 -3.68 -3.66 -3.67 -3.66]
+Time: 2376.60s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.51 0.52 0.4  0.52 0.5  0.48 0.52 0.5  0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 60
+Episode: 67200
+Reward: [-3.72 -3.67 -3.68 -3.66 -3.67 -3.65 -3.7  -3.63 -3.64 -3.64]
+Time: 2375.62s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.52 0.5  0.4  0.52 0.5  0.49 0.51 0.51 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 61
+Episode: 68320
+Reward: [-3.57 -3.68 -3.72 -3.7  -3.63 -3.68 -3.71 -3.69 -3.62 -3.65]
+Time: 2301.82s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.54 0.51 0.43 0.52 0.5  0.49 0.52 0.5  0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 62
+Episode: 69440
+Reward: [-3.64 -3.65 -3.65 -3.67 -3.69 -3.62 -3.69 -3.65 -3.63 -3.65]
+Time: 2347.31s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.53 0.5  0.47 0.5  0.49 0.48 0.53 0.48 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 63
+Episode: 70560
+Reward: [-3.62 -3.64 -3.67 -3.66 -3.71 -3.62 -3.71 -3.61 -3.68 -3.65]
+Time: 2203.98s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.55 0.48 0.48 0.49 0.48 0.5  0.53 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 64
+Episode: 71680
+Reward: [-3.69 -3.57 -3.61 -3.66 -3.62 -3.64 -3.7  -3.63 -3.56 -3.64]
+Time: 2238.28s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.53 0.51 0.47 0.5  0.49 0.49 0.51 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 65
+Episode: 72800
+Reward: [-3.6  -3.52 -3.66 -3.65 -3.58 -3.65 -3.64 -3.61 -3.61 -3.59]
+Time: 2299.07s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.51 0.53 0.47 0.51 0.49 0.47 0.49 0.47 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 66
+Episode: 73920
+Reward: [-3.63 -3.64 -3.66 -3.69 -3.56 -3.64 -3.66 -3.63 -3.65 -3.64]
+Time: 2262.71s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.52 0.5  0.48 0.5  0.5  0.46 0.48 0.48 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 67
+Episode: 75040
+Reward: [-3.62 -3.66 -3.59 -3.62 -3.61 -3.63 -3.71 -3.63 -3.63 -3.57]
+Time: 2233.48s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.53 0.52 0.46 0.5  0.5  0.47 0.48 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 68
+Episode: 76160
+Reward: [-3.52 -3.64 -3.61 -3.65 -3.51 -3.66 -3.67 -3.63 -3.58 -3.51]
+Time: 2113.71s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.54 0.51 0.47 0.5  0.49 0.48 0.46 0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 69
+Episode: 77280
+Reward: [-3.52 -3.6  -3.67 -3.61 -3.57 -3.57 -3.64 -3.53 -3.58 -3.51]
+Time: 2086.55s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.55 0.52 0.46 0.5  0.5  0.49 0.47 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 70
+Episode: 78400
+Reward: [-3.61 -3.65 -3.62 -3.69 -3.59 -3.58 -3.63 -3.69 -3.57 -3.57]
+Time: 2134.35s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.56 0.49 0.47 0.49 0.51 0.48 0.47 0.49 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 71
+Episode: 79520
+Reward: [-3.52 -3.62 -3.61 -3.57 -3.57 -3.6  -3.62 -3.62 -3.55 -3.62]
+Time: 2248.71s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.55 0.49 0.49 0.47 0.51 0.47 0.46 0.49 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 72
+Episode: 80640
+Reward: [-3.49 -3.63 -3.6  -3.64 -3.57 -3.52 -3.64 -3.65 -3.57 -3.6 ]
+Time: 1898.59s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.53 0.49 0.5  0.48 0.5  0.47 0.46 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 73
+Episode: 81760
+Reward: [-3.49 -3.68 -3.67 -3.62 -3.61 -3.53 -3.62 -3.61 -3.59 -3.62]
+Time: 1808.56s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.52 0.51 0.49 0.49 0.5  0.5  0.45 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 74
+Episode: 82880
+Reward: [-3.53 -3.65 -3.62 -3.63 -3.6  -3.46 -3.65 -3.55 -3.59 -3.56]
+Time: 1797.71s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.52 0.51 0.51 0.48 0.51 0.49 0.46 0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 75
+Episode: 84000
+Reward: [-3.61 -3.64 -3.68 -3.63 -3.56 -3.55 -3.67 -3.53 -3.56 -3.48]
+Time: 1876.83s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.54 0.5  0.52 0.51 0.51 0.48 0.48 0.5  0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 76
+Episode: 85120
+Reward: [-3.53 -3.62 -3.6  -3.59 -3.56 -3.57 -3.59 -3.48 -3.6  -3.49]
+Time: 1953.94s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.51 0.49 0.53 0.51 0.51 0.47 0.49 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 77
+Episode: 86240
+Reward: [-3.46 -3.6  -3.62 -3.54 -3.57 -3.52 -3.67 -3.53 -3.57 -3.54]
+Time: 1957.72s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.5  0.5  0.55 0.51 0.49 0.47 0.47 0.51 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 78
+Episode: 87360
+Reward: [-3.52 -3.66 -3.62 -3.6  -3.58 -3.61 -3.63 -3.53 -3.55 -3.53]
+Time: 2198.83s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.56 0.48 0.5  0.55 0.51 0.49 0.45 0.46 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 79
+Episode: 88480
+Reward: [-3.42 -3.6  -3.57 -3.61 -3.58 -3.62 -3.62 -3.56 -3.59 -3.63]
+Time: 2384.81s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.47 0.5  0.53 0.51 0.48 0.46 0.47 0.52 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 80
+Episode: 89600
+Reward: [-3.47 -3.61 -3.62 -3.56 -3.52 -3.44 -3.62 -3.56 -3.53 -3.54]
+Time: 2302.46s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.47 0.49 0.53 0.51 0.49 0.46 0.48 0.5  0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 81
+Episode: 90720
+Reward: [-3.51 -3.68 -3.59 -3.49 -3.59 -3.55 -3.63 -3.52 -3.61 -3.57]
+Time: 2002.75s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.47 0.48 0.5  0.52 0.48 0.44 0.46 0.5  0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 82
+Episode: 91840
+Reward: [-3.46 -3.55 -3.59 -3.54 -3.51 -3.52 -3.59 -3.55 -3.48 -3.58]
+Time: 1866.92s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.46 0.49 0.5  0.52 0.5  0.43 0.46 0.52 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 83
+Episode: 92960
+Reward: [-3.54 -3.61 -3.56 -3.48 -3.48 -3.57 -3.56 -3.59 -3.56 -3.52]
+Time: 1918.64s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.49 0.52 0.51 0.53 0.48 0.43 0.47 0.51 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 84
+Episode: 94080
+Reward: [-3.45 -3.59 -3.59 -3.49 -3.5  -3.48 -3.51 -3.53 -3.5  -3.55]
+Time: 2037.98s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.47 0.52 0.54 0.54 0.49 0.44 0.48 0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 85
+Episode: 95200
+Reward: [-3.5  -3.58 -3.57 -3.56 -3.49 -3.53 -3.6  -3.53 -3.56 -3.48]
+Time: 2297.63s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.46 0.49 0.52 0.55 0.5  0.45 0.5  0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 86
+Episode: 96320
+Reward: [-3.42 -3.54 -3.54 -3.52 -3.56 -3.45 -3.54 -3.46 -3.58 -3.5 ]
+Time: 2327.66s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.53 0.45 0.49 0.53 0.55 0.49 0.46 0.5  0.5  0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 87
+Episode: 97440
+Reward: [-3.54 -3.58 -3.52 -3.51 -3.5  -3.5  -3.57 -3.41 -3.5  -3.48]
+Time: 2320.16s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.54 0.46 0.48 0.54 0.54 0.49 0.47 0.49 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 88
+Episode: 98560
+Reward: [-3.52 -3.59 -3.5  -3.52 -3.56 -3.53 -3.62 -3.46 -3.51 -3.52]
+Time: 2290.65s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.55 0.5  0.49 0.53 0.53 0.51 0.5  0.49 0.49 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 89
+Episode: 99680
+Reward: [-3.47 -3.56 -3.57 -3.58 -3.49 -3.46 -3.5  -3.51 -3.53 -3.52]
+Time: 2104.19s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.51 0.49 0.49 0.51 0.53 0.5  0.53 0.49 0.48 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 90
+Episode: 100800
+Reward: [-3.57 -3.58 -3.66 -3.48 -3.57 -3.46 -3.55 -3.47 -3.48 -3.54]
+Time: 2081.14s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.5  0.49 0.51 0.53 0.48 0.5  0.49 0.47 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 91
+Episode: 101920
+Reward: [-3.53 -3.56 -3.6  -3.51 -3.54 -3.4  -3.58 -3.37 -3.49 -3.58]
+Time: 1908.99s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.52 0.5  0.51 0.52 0.52 0.49 0.5  0.48 0.47 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 92
+Episode: 103040
+Reward: [-3.51 -3.52 -3.51 -3.47 -3.55 -3.34 -3.54 -3.39 -3.49 -3.59]
+Time: 1932.66s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.49 0.5  0.51 0.51 0.5  0.49 0.48 0.46 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 93
+Episode: 104160
+Reward: [-3.48 -3.54 -3.51 -3.45 -3.52 -3.37 -3.45 -3.53 -3.43 -3.54]
+Time: 1902.46s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.51 0.5  0.51 0.51 0.5  0.51 0.49 0.47 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 94
+Episode: 105280
+Reward: [-3.43 -3.54 -3.53 -3.49 -3.51 -3.42 -3.47 -3.54 -3.46 -3.51]
+Time: 1914.48s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.52 0.51 0.5  0.51 0.51 0.5  0.5  0.48 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 95
+Episode: 106400
+Reward: [-3.5  -3.57 -3.59 -3.48 -3.55 -3.37 -3.58 -3.52 -3.51 -3.48]
+Time: 1947.11s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.53 0.5  0.5  0.51 0.51 0.48 0.5  0.48 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 96
+Episode: 107520
+Reward: [-3.46 -3.64 -3.59 -3.56 -3.51 -3.48 -3.5  -3.34 -3.5  -3.57]
+Time: 1875.24s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.52 0.49 0.51 0.5  0.52 0.47 0.5  0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 97
+Episode: 108640
+Reward: [-3.44 -3.5  -3.52 -3.5  -3.5  -3.43 -3.53 -3.38 -3.48 -3.59]
+Time: 1882.26s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.53 0.49 0.52 0.52 0.52 0.48 0.49 0.49 0.46]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 98
+Episode: 109760
+Reward: [-3.44 -3.56 -3.54 -3.49 -3.55 -3.43 -3.55 -3.32 -3.47 -3.49]
+Time: 1922.29s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.53 0.48 0.51 0.52 0.51 0.48 0.47 0.48 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 99
+Episode: 110880
+Reward: [-3.48 -3.62 -3.49 -3.49 -3.53 -3.5  -3.6  -3.41 -3.49 -3.52]
+Time: 2074.02s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.56 0.5  0.51 0.5  0.51 0.46 0.47 0.48 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 100
+Episode: 112000
+Reward: [-3.43 -3.52 -3.56 -3.38 -3.51 -3.45 -3.55 -3.34 -3.55 -3.49]
+Time: 2135.02s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.55 0.51 0.51 0.5  0.51 0.45 0.47 0.48 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 101
+Episode: 113120
+Reward: [-3.44 -3.6  -3.55 -3.42 -3.57 -3.41 -3.51 -3.48 -3.49 -3.54]
+Time: 2142.99s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.5  0.54 0.52 0.51 0.48 0.51 0.48 0.47 0.48 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 102
+Episode: 114240
+Reward: [-3.38 -3.52 -3.49 -3.48 -3.52 -3.38 -3.52 -3.4  -3.48 -3.55]
+Time: 2149.29s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.53 0.51 0.49 0.46 0.51 0.48 0.49 0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 103
+Episode: 115360
+Reward: [-3.47 -3.51 -3.52 -3.49 -3.57 -3.33 -3.57 -3.5  -3.52 -3.59]
+Time: 1962.78s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.47 0.5  0.51 0.47 0.46 0.5  0.48 0.51 0.5  0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 104
+Episode: 116480
+Reward: [-3.42 -3.55 -3.5  -3.44 -3.52 -3.45 -3.53 -3.48 -3.51 -3.53]
+Time: 1863.53s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.51 0.49 0.47 0.48 0.49 0.49 0.51 0.49 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 105
+Episode: 117600
+Reward: [-3.38 -3.55 -3.5  -3.4  -3.55 -3.4  -3.46 -3.44 -3.48 -3.54]
+Time: 1999.96s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.53 0.51 0.48 0.5  0.48 0.48 0.5  0.52 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 106
+Episode: 118720
+Reward: [-3.37 -3.53 -3.46 -3.39 -3.53 -3.46 -3.48 -3.36 -3.5  -3.51]
+Time: 1961.88s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.48 0.52 0.51 0.48 0.51 0.49 0.49 0.51 0.51 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 107
+Episode: 119840
+Reward: [-3.4  -3.53 -3.58 -3.44 -3.56 -3.28 -3.55 -3.38 -3.43 -3.56]
+Time: 2328.18s
+Success: 0.0000
+Steps-Taken: 80.00
+Comm-Action: [0.49 0.53 0.52 0.5  0.52 0.48 0.47 0.5  0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+slurmstepd-gold51: error: *** JOB 6761531 ON gold51 CANCELLED AT 2024-11-12T08:39:39 DUE TO TIME LIMIT ***
+==============================================================================
+Running epilogue script on gold51.
+
+Submit time  : 2024-11-09T12:53:02
+Start time   : 2024-11-09T20:39:22
+End time     : 2024-11-12T08:39:38
+Elapsed time : 2-12:00:16 (Timelimit=2-12:00:00)
+
+Job ID: 6761531
+Cluster: i5
+User/Group: jabn1n20/fp
+State: TIMEOUT (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:00:01
+CPU Efficiency: 0.00% of 20-00:02:08 core-walltime
+Job Wall-clock time: 2-12:00:16
+Memory Utilized: 28.21 GB
+Memory Efficiency: 15.28% of 184.57 GB
+

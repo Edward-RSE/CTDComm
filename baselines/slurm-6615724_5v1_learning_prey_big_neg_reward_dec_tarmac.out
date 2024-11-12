@@ -1,0 +1,9137 @@
+Running SLURM prolog script on gold53.cluster.local
+===============================================================================
+Job started on Thu Oct  3 21:50:24 BST 2024
+Job ID          : 6615724
+Job name        : train_dpp_5v1_learning_prey_dec_tarmac.sh
+WorkDir         : /mainfs/home/jabn1n20/CTDComm/baselines
+Command         : /mainfs/home/jabn1n20/CTDComm/baselines/dec_scripts/train_dpp_5v1_learning_prey_dec_tarmac.sh
+Partition       : serial
+Num hosts       : 1
+Num cores       : 8
+Num of tasks    : 8
+Hosts allocated : gold53
+Job Output Follows ...
+===============================================================================
+/mainfs/home/jabn1n20/CTDComm/envs/decentralised-envs/predator_prey/env/predator_prey.py:180: UserWarning: [33mWARN: You set prey to learn policies without allowing them to move. Ignoring this setting and allowing them to move, regardless.[0m
+  "You set prey to learn policies without allowing them to move. Ignoring this setting and allowing them to move, regardless."
+Namespace(action_scale=1.0, advantages_per_action=False, alpha=0.99, batch_size=500, cave=False, comm_action_one=False, comm_init='uniform', comm_mask_zero=False, comm_mode='avg', comm_passes=1, comm_range=0, commnet=1, continuous=False, dec_tarmac=True, detach_gap=10, dim=10, dim_actions=2, directed=False, display=False, entr=0.01, env_name='dec_predator_prey', env_seed=1, epoch_size=10, eps=1e-06, first_gat_normalize=False, first_graph_complete=False, gacomm=False, gamma=0.99, gat_encoder_normalize=False, gat_encoder_out_size=64, gat_hid_size=64, gat_num_heads=1, gat_num_heads_out=1, ge_num_heads=4, hard_attn=1, hid_size=128, ic3net=True, learn_second_graph=False, learning_prey=True, load='', lrate=0.0007, magic=False, max_steps=40, mean_ratio=0, message_decoder=False, message_encoder=False, mode='mixed', moving_prey=False, naction_heads=[5, 2], nactions='1', nagents=6, nenemies=1, nfriendly=5, normalize_rewards=False, nprocesses=16, num_actions=[5, 2], num_epochs=500, num_inputs=936, plot=False, plot_env='main', plot_port='8097', qk_hid_size=16, random=False, recurrent=True, rnn_type='LSTM', save=True, save_adjacency=False, save_every=25, second_gat_normalize=False, second_graph_complete=False, seed=1, self_loop_type1=2, self_loop_type2=2, share_weights=False, stay=True, tarcomm=False, tau=1.0, use_gat_encoder=False, value_coeff=0.01, value_hid_size=128, vision=1)
+====================================================================================================
+Model log:
+
+DecTarMAC(
+  (agents): ModuleList(
+    (0): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (1): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (2): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (3): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (4): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+    (5): DecAgent(
+      (encoder): Linear(in_features=936, out_features=128, bias=True)
+      (tanh): Tanh()
+      (state2query): Linear(in_features=128, out_features=16, bias=True)
+      (state2key): Linear(in_features=128, out_features=16, bias=True)
+      (state2value): Linear(in_features=128, out_features=128, bias=True)
+      (C_modules): ModuleList(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+      )
+      (f_module): LSTMCell(128, 128)
+      (heads): ModuleList(
+        (0): Linear(in_features=128, out_features=5, bias=True)
+        (1): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
+  )
+  (value_head): Linear(in_features=128, out_features=1, bias=True)
+)
+====================================================================================================
+
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 1
+Episode: 2080
+Reward: [-1.79 -1.78 -1.83 -1.76 -1.78]
+Time: 315.19s
+Enemy-Reward: [0.99]
+Success: 0.0005
+Steps-Taken: 40.00
+Comm-Action: [0.51 0.47 0.39 0.47 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 2
+Episode: 4160
+Reward: [-1.78 -1.79 -1.8  -1.75 -1.77]
+Time: 332.67s
+Enemy-Reward: [0.95]
+Success: 0.0010
+Steps-Taken: 39.99
+Comm-Action: [0.55 0.48 0.57 0.59 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 3
+Episode: 6240
+Reward: [-1.79 -1.79 -1.83 -1.78 -1.8 ]
+Time: 348.14s
+Enemy-Reward: [1.06]
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.5  0.52 0.54 0.58 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 4
+Episode: 8320
+Reward: [-1.81 -1.8  -1.81 -1.8  -1.78]
+Time: 362.34s
+Enemy-Reward: [1.07]
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.55 0.49 0.52 0.56 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 5
+Episode: 10400
+Reward: [-1.82 -1.78 -1.78 -1.8  -1.81]
+Time: 361.32s
+Enemy-Reward: [1.07]
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.52 0.46 0.56 0.49 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 6
+Episode: 12480
+Reward: [-1.82 -1.81 -1.79 -1.8  -1.8 ]
+Time: 365.99s
+Enemy-Reward: [1.08]
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.54 0.46 0.55 0.4  0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 7
+Episode: 14560
+Reward: [-1.82 -1.79 -1.82 -1.81 -1.82]
+Time: 363.84s
+Enemy-Reward: [1.13]
+Success: 0.0005
+Steps-Taken: 40.00
+Comm-Action: [0.51 0.46 0.55 0.42 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 8
+Episode: 16640
+Reward: [-1.83 -1.79 -1.81 -1.82 -1.79]
+Time: 364.95s
+Enemy-Reward: [1.11]
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.51 0.47 0.53 0.43 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 9
+Episode: 18720
+Reward: [-1.81 -1.73 -1.7  -1.79 -1.76]
+Time: 367.99s
+Enemy-Reward: [1.02]
+Success: 0.0000
+Steps-Taken: 40.00
+Comm-Action: [0.52 0.5  0.55 0.48 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 10
+Episode: 20811
+Reward: [-1.62 -1.58 -1.46 -1.61 -1.58]
+Time: 356.25s
+Enemy-Reward: [0.64]
+Success: 0.0407
+Steps-Taken: 39.69
+Comm-Action: [0.56 0.54 0.61 0.55 0.56]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 11
+Episode: 23007
+Reward: [-1.36 -1.32 -1.24 -1.36 -1.3 ]
+Time: 358.91s
+Enemy-Reward: [0.05]
+Success: 0.2400
+Steps-Taken: 37.72
+Comm-Action: [0.58 0.62 0.59 0.64 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 12
+Episode: 25446
+Reward: [-1.12 -1.08 -1.06 -1.13 -1.07]
+Time: 367.59s
+Enemy-Reward: [-0.55]
+Success: 0.4977
+Steps-Taken: 34.03
+Comm-Action: [0.59 0.63 0.57 0.66 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 13
+Episode: 28398
+Reward: [-0.86 -0.83 -0.84 -0.88 -0.84]
+Time: 359.24s
+Enemy-Reward: [-1.2]
+Success: 0.7839
+Steps-Taken: 27.90
+Comm-Action: [0.6  0.64 0.57 0.63 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 14
+Episode: 32133
+Reward: [-0.67 -0.64 -0.68 -0.67 -0.67]
+Time: 359.34s
+Enemy-Reward: [-1.59]
+Success: 0.9523
+Steps-Taken: 21.96
+Comm-Action: [0.63 0.64 0.57 0.62 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 15
+Episode: 36640
+Reward: [-0.57 -0.56 -0.57 -0.57 -0.56]
+Time: 356.62s
+Enemy-Reward: [-1.7]
+Success: 0.9931
+Steps-Taken: 18.09
+Comm-Action: [0.65 0.67 0.6  0.64 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 16
+Episode: 41635
+Reward: [-0.52 -0.51 -0.52 -0.53 -0.52]
+Time: 358.20s
+Enemy-Reward: [-1.73]
+Success: 0.9988
+Steps-Taken: 16.31
+Comm-Action: [0.65 0.68 0.63 0.67 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 17
+Episode: 46920
+Reward: [-0.5  -0.48 -0.49 -0.5  -0.49]
+Time: 355.94s
+Enemy-Reward: [-1.74]
+Success: 0.9994
+Steps-Taken: 15.39
+Comm-Action: [0.66 0.69 0.63 0.68 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 18
+Episode: 52410
+Reward: [-0.47 -0.46 -0.48 -0.48 -0.47]
+Time: 358.42s
+Enemy-Reward: [-1.75]
+Success: 0.9996
+Steps-Taken: 14.77
+Comm-Action: [0.65 0.68 0.64 0.67 0.68]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 19
+Episode: 58030
+Reward: [-0.47 -0.46 -0.46 -0.47 -0.46]
+Time: 357.97s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 14.46
+Comm-Action: [0.65 0.66 0.64 0.67 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 20
+Episode: 63898
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.45]
+Time: 353.56s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.82
+Comm-Action: [0.67 0.65 0.64 0.67 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 21
+Episode: 69780
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 351.70s
+Enemy-Reward: [-1.77]
+Success: 0.9997
+Steps-Taken: 13.80
+Comm-Action: [0.66 0.64 0.63 0.66 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 22
+Episode: 75709
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 354.88s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 13.68
+Comm-Action: [0.66 0.65 0.62 0.65 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 23
+Episode: 81669
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 356.38s
+Enemy-Reward: [-1.77]
+Success: 0.9995
+Steps-Taken: 13.58
+Comm-Action: [0.64 0.62 0.62 0.63 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 24
+Episode: 87753
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 371.41s
+Enemy-Reward: [-1.77]
+Success: 1.0000
+Steps-Taken: 13.31
+Comm-Action: [0.62 0.63 0.62 0.64 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 25
+Episode: 93857
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 372.52s
+Enemy-Reward: [-1.77]
+Success: 1.0000
+Steps-Taken: 13.28
+Comm-Action: [0.63 0.62 0.61 0.65 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 26
+Episode: 100028
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 368.77s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 13.14
+Comm-Action: [0.64 0.63 0.61 0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 27
+Episode: 106210
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 364.10s
+Enemy-Reward: [-1.77]
+Success: 1.0000
+Steps-Taken: 13.11
+Comm-Action: [0.65 0.62 0.6  0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 28
+Episode: 112423
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 367.45s
+Enemy-Reward: [-1.78]
+Success: 0.9998
+Steps-Taken: 13.03
+Comm-Action: [0.63 0.61 0.61 0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 29
+Episode: 118645
+Reward: [-0.41 -0.42 -0.42 -0.41 -0.42]
+Time: 367.10s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 13.02
+Comm-Action: [0.62 0.6  0.61 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 30
+Episode: 124931
+Reward: [-0.41 -0.42 -0.41 -0.41 -0.41]
+Time: 375.89s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 12.89
+Comm-Action: [0.61 0.59 0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 31
+Episode: 131190
+Reward: [-0.41 -0.42 -0.41 -0.41 -0.41]
+Time: 363.66s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 12.95
+Comm-Action: [0.6  0.59 0.6  0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 32
+Episode: 137503
+Reward: [-0.41 -0.41 -0.41 -0.41 -0.41]
+Time: 356.24s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 12.84
+Comm-Action: [0.61 0.61 0.6  0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 33
+Episode: 143829
+Reward: [-0.42 -0.41 -0.41 -0.4  -0.41]
+Time: 371.85s
+Enemy-Reward: [-1.78]
+Success: 0.9998
+Steps-Taken: 12.79
+Comm-Action: [0.61 0.61 0.6  0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 34
+Episode: 150132
+Reward: [-0.41 -0.41 -0.41 -0.41 -0.41]
+Time: 364.88s
+Enemy-Reward: [-1.78]
+Success: 0.9997
+Steps-Taken: 12.85
+Comm-Action: [0.6  0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 35
+Episode: 156456
+Reward: [-0.41 -0.41 -0.41 -0.41 -0.41]
+Time: 359.09s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 12.80
+Comm-Action: [0.62 0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 36
+Episode: 162797
+Reward: [-0.41 -0.41 -0.41 -0.4  -0.41]
+Time: 359.86s
+Enemy-Reward: [-1.78]
+Success: 1.0000
+Steps-Taken: 12.77
+Comm-Action: [0.61 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 37
+Episode: 169138
+Reward: [-0.41 -0.41 -0.41 -0.41 -0.41]
+Time: 344.99s
+Enemy-Reward: [-1.78]
+Success: 0.9998
+Steps-Taken: 12.77
+Comm-Action: [0.62 0.61 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 38
+Episode: 175465
+Reward: [-0.41 -0.4  -0.41 -0.41 -0.41]
+Time: 337.22s
+Enemy-Reward: [-1.78]
+Success: 0.9998
+Steps-Taken: 12.81
+Comm-Action: [0.6  0.61 0.6  0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 39
+Episode: 181785
+Reward: [-0.41 -0.41 -0.41 -0.41 -0.41]
+Time: 339.42s
+Enemy-Reward: [-1.78]
+Success: 0.9997
+Steps-Taken: 12.82
+Comm-Action: [0.6  0.59 0.61 0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 40
+Episode: 188114
+Reward: [-0.41 -0.41 -0.41 -0.41 -0.41]
+Time: 331.59s
+Enemy-Reward: [-1.78]
+Success: 0.9994
+Steps-Taken: 12.80
+Comm-Action: [0.61 0.58 0.6  0.58 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 41
+Episode: 194354
+Reward: [-0.41 -0.42 -0.42 -0.42 -0.41]
+Time: 326.99s
+Enemy-Reward: [-1.78]
+Success: 0.9998
+Steps-Taken: 12.98
+Comm-Action: [0.58 0.58 0.58 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 42
+Episode: 200599
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.41]
+Time: 320.13s
+Enemy-Reward: [-1.77]
+Success: 0.9997
+Steps-Taken: 12.97
+Comm-Action: [0.58 0.58 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 43
+Episode: 206840
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 316.76s
+Enemy-Reward: [-1.77]
+Success: 0.9994
+Steps-Taken: 12.99
+Comm-Action: [0.59 0.58 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 44
+Episode: 213060
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 315.90s
+Enemy-Reward: [-1.77]
+Success: 0.9995
+Steps-Taken: 13.02
+Comm-Action: [0.59 0.59 0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 45
+Episode: 219225
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 311.65s
+Enemy-Reward: [-1.77]
+Success: 0.9987
+Steps-Taken: 13.15
+Comm-Action: [0.59 0.57 0.6  0.61 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 46
+Episode: 225167
+Reward: [-0.45 -0.44 -0.44 -0.45 -0.44]
+Time: 306.04s
+Enemy-Reward: [-1.75]
+Success: 0.9953
+Steps-Taken: 13.66
+Comm-Action: [0.57 0.59 0.61 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 47
+Episode: 231042
+Reward: [-0.46 -0.45 -0.45 -0.45 -0.46]
+Time: 293.40s
+Enemy-Reward: [-1.73]
+Success: 0.9922
+Steps-Taken: 13.80
+Comm-Action: [0.56 0.6  0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 48
+Episode: 236836
+Reward: [-0.46 -0.46 -0.47 -0.46 -0.47]
+Time: 293.34s
+Enemy-Reward: [-1.71]
+Success: 0.9884
+Steps-Taken: 14.01
+Comm-Action: [0.59 0.6  0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 49
+Episode: 242526
+Reward: [-0.48 -0.47 -0.47 -0.48 -0.48]
+Time: 288.29s
+Enemy-Reward: [-1.69]
+Success: 0.9815
+Steps-Taken: 14.28
+Comm-Action: [0.59 0.58 0.61 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 50
+Episode: 248234
+Reward: [-0.47 -0.47 -0.48 -0.47 -0.47]
+Time: 289.48s
+Enemy-Reward: [-1.7]
+Success: 0.9828
+Steps-Taken: 14.27
+Comm-Action: [0.59 0.59 0.6  0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 51
+Episode: 253907
+Reward: [-0.47 -0.48 -0.48 -0.49 -0.48]
+Time: 292.20s
+Enemy-Reward: [-1.69]
+Success: 0.9852
+Steps-Taken: 14.33
+Comm-Action: [0.61 0.59 0.6  0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 52
+Episode: 259721
+Reward: [-0.46 -0.45 -0.46 -0.47 -0.46]
+Time: 288.88s
+Enemy-Reward: [-1.72]
+Success: 0.9895
+Steps-Taken: 13.97
+Comm-Action: [0.61 0.62 0.62 0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 53
+Episode: 265572
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.46]
+Time: 289.18s
+Enemy-Reward: [-1.71]
+Success: 0.9884
+Steps-Taken: 13.90
+Comm-Action: [0.62 0.61 0.66 0.64 0.66]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 54
+Episode: 271406
+Reward: [-0.47 -0.46 -0.47 -0.47 -0.45]
+Time: 290.47s
+Enemy-Reward: [-1.71]
+Success: 0.9897
+Steps-Taken: 13.90
+Comm-Action: [0.63 0.6  0.64 0.64 0.67]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 55
+Episode: 277287
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.45]
+Time: 290.62s
+Enemy-Reward: [-1.72]
+Success: 0.9903
+Steps-Taken: 13.81
+Comm-Action: [0.63 0.61 0.6  0.64 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 56
+Episode: 283150
+Reward: [-0.46 -0.46 -0.46 -0.47 -0.46]
+Time: 291.32s
+Enemy-Reward: [-1.72]
+Success: 0.9903
+Steps-Taken: 13.83
+Comm-Action: [0.64 0.65 0.63 0.64 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 57
+Episode: 289069
+Reward: [-0.45 -0.45 -0.46 -0.45 -0.46]
+Time: 288.46s
+Enemy-Reward: [-1.73]
+Success: 0.9932
+Steps-Taken: 13.70
+Comm-Action: [0.62 0.63 0.62 0.64 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 58
+Episode: 295023
+Reward: [-0.46 -0.45 -0.46 -0.45 -0.45]
+Time: 293.45s
+Enemy-Reward: [-1.73]
+Success: 0.9929
+Steps-Taken: 13.66
+Comm-Action: [0.61 0.62 0.62 0.66 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 59
+Episode: 300961
+Reward: [-0.46 -0.45 -0.46 -0.45 -0.45]
+Time: 283.84s
+Enemy-Reward: [-1.73]
+Success: 0.9944
+Steps-Taken: 13.66
+Comm-Action: [0.6  0.61 0.62 0.64 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 60
+Episode: 306961
+Reward: [-0.45 -0.45 -0.46 -0.44 -0.44]
+Time: 288.05s
+Enemy-Reward: [-1.74]
+Success: 0.9958
+Steps-Taken: 13.52
+Comm-Action: [0.6  0.62 0.62 0.65 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 61
+Episode: 312915
+Reward: [-0.45 -0.46 -0.46 -0.45 -0.45]
+Time: 286.37s
+Enemy-Reward: [-1.73]
+Success: 0.9943
+Steps-Taken: 13.63
+Comm-Action: [0.6  0.61 0.62 0.63 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 62
+Episode: 318950
+Reward: [-0.45 -0.44 -0.44 -0.45 -0.44]
+Time: 285.52s
+Enemy-Reward: [-1.74]
+Success: 0.9957
+Steps-Taken: 13.42
+Comm-Action: [0.62 0.63 0.63 0.63 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 63
+Episode: 324969
+Reward: [-0.45 -0.44 -0.45 -0.45 -0.44]
+Time: 287.06s
+Enemy-Reward: [-1.74]
+Success: 0.9960
+Steps-Taken: 13.46
+Comm-Action: [0.62 0.65 0.62 0.63 0.65]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 64
+Episode: 330972
+Reward: [-0.45 -0.45 -0.45 -0.45 -0.44]
+Time: 290.52s
+Enemy-Reward: [-1.74]
+Success: 0.9955
+Steps-Taken: 13.51
+Comm-Action: [0.63 0.63 0.61 0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 65
+Episode: 336982
+Reward: [-0.45 -0.45 -0.45 -0.45 -0.45]
+Time: 285.00s
+Enemy-Reward: [-1.74]
+Success: 0.9973
+Steps-Taken: 13.52
+Comm-Action: [0.63 0.62 0.62 0.64 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 66
+Episode: 343035
+Reward: [-0.44 -0.44 -0.45 -0.44 -0.44]
+Time: 283.23s
+Enemy-Reward: [-1.74]
+Success: 0.9955
+Steps-Taken: 13.40
+Comm-Action: [0.62 0.63 0.63 0.63 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 67
+Episode: 349063
+Reward: [-0.45 -0.45 -0.45 -0.45 -0.44]
+Time: 290.30s
+Enemy-Reward: [-1.74]
+Success: 0.9970
+Steps-Taken: 13.46
+Comm-Action: [0.61 0.61 0.62 0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 68
+Episode: 355131
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 284.49s
+Enemy-Reward: [-1.75]
+Success: 0.9985
+Steps-Taken: 13.36
+Comm-Action: [0.62 0.62 0.62 0.61 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 69
+Episode: 361305
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.43]
+Time: 290.65s
+Enemy-Reward: [-1.75]
+Success: 0.9976
+Steps-Taken: 13.13
+Comm-Action: [0.63 0.62 0.63 0.62 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 70
+Episode: 367459
+Reward: [-0.44 -0.44 -0.43 -0.43 -0.43]
+Time: 289.19s
+Enemy-Reward: [-1.75]
+Success: 0.9963
+Steps-Taken: 13.18
+Comm-Action: [0.63 0.63 0.63 0.64 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 71
+Episode: 373570
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.43]
+Time: 284.29s
+Enemy-Reward: [-1.75]
+Success: 0.9974
+Steps-Taken: 13.25
+Comm-Action: [0.62 0.62 0.63 0.66 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 72
+Episode: 379685
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 294.50s
+Enemy-Reward: [-1.75]
+Success: 0.9971
+Steps-Taken: 13.27
+Comm-Action: [0.62 0.61 0.63 0.64 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 73
+Episode: 385805
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 286.44s
+Enemy-Reward: [-1.75]
+Success: 0.9974
+Steps-Taken: 13.25
+Comm-Action: [0.62 0.61 0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 74
+Episode: 391917
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.44]
+Time: 287.00s
+Enemy-Reward: [-1.75]
+Success: 0.9979
+Steps-Taken: 13.26
+Comm-Action: [0.62 0.62 0.62 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 75
+Episode: 398011
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 288.89s
+Enemy-Reward: [-1.75]
+Success: 0.9970
+Steps-Taken: 13.33
+Comm-Action: [0.63 0.62 0.62 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 76
+Episode: 404144
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 293.41s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.23
+Comm-Action: [0.64 0.61 0.63 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 77
+Episode: 410246
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.44]
+Time: 290.42s
+Enemy-Reward: [-1.75]
+Success: 0.9982
+Steps-Taken: 13.28
+Comm-Action: [0.61 0.62 0.62 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 78
+Episode: 416303
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 287.26s
+Enemy-Reward: [-1.74]
+Success: 0.9977
+Steps-Taken: 13.40
+Comm-Action: [0.61 0.62 0.63 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 79
+Episode: 422428
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.44]
+Time: 285.59s
+Enemy-Reward: [-1.75]
+Success: 0.9974
+Steps-Taken: 13.24
+Comm-Action: [0.61 0.63 0.62 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 80
+Episode: 428564
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.44]
+Time: 289.87s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.21
+Comm-Action: [0.61 0.62 0.62 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 81
+Episode: 434670
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 292.07s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.26
+Comm-Action: [0.63 0.63 0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 82
+Episode: 440770
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 292.98s
+Enemy-Reward: [-1.75]
+Success: 0.9982
+Steps-Taken: 13.27
+Comm-Action: [0.63 0.62 0.62 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 83
+Episode: 446892
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.44]
+Time: 286.73s
+Enemy-Reward: [-1.75]
+Success: 0.9984
+Steps-Taken: 13.24
+Comm-Action: [0.61 0.62 0.63 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 84
+Episode: 453048
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 289.99s
+Enemy-Reward: [-1.76]
+Success: 0.9989
+Steps-Taken: 13.18
+Comm-Action: [0.61 0.63 0.64 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 85
+Episode: 459175
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.44]
+Time: 292.85s
+Enemy-Reward: [-1.75]
+Success: 0.9984
+Steps-Taken: 13.22
+Comm-Action: [0.62 0.63 0.63 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 86
+Episode: 465297
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.44]
+Time: 285.24s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.25
+Comm-Action: [0.6  0.64 0.63 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 87
+Episode: 471441
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 292.21s
+Enemy-Reward: [-1.75]
+Success: 0.9985
+Steps-Taken: 13.19
+Comm-Action: [0.62 0.64 0.64 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 88
+Episode: 477590
+Reward: [-0.44 -0.43 -0.43 -0.44 -0.44]
+Time: 288.90s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.19
+Comm-Action: [0.63 0.65 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 89
+Episode: 483763
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 287.99s
+Enemy-Reward: [-1.76]
+Success: 0.9990
+Steps-Taken: 13.13
+Comm-Action: [0.63 0.64 0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 90
+Episode: 489918
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.43]
+Time: 286.31s
+Enemy-Reward: [-1.75]
+Success: 0.9985
+Steps-Taken: 13.15
+Comm-Action: [0.63 0.62 0.63 0.63 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 91
+Episode: 496089
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 289.56s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.14
+Comm-Action: [0.63 0.61 0.63 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 92
+Episode: 502248
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 288.22s
+Enemy-Reward: [-1.76]
+Success: 0.9987
+Steps-Taken: 13.15
+Comm-Action: [0.63 0.62 0.61 0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 93
+Episode: 508391
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 287.92s
+Enemy-Reward: [-1.75]
+Success: 0.9979
+Steps-Taken: 13.20
+Comm-Action: [0.62 0.62 0.63 0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 94
+Episode: 514488
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 285.20s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.29
+Comm-Action: [0.62 0.61 0.64 0.64 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 95
+Episode: 520655
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 290.23s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.15
+Comm-Action: [0.62 0.61 0.63 0.64 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 96
+Episode: 526800
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 289.24s
+Enemy-Reward: [-1.76]
+Success: 0.9990
+Steps-Taken: 13.19
+Comm-Action: [0.6  0.6  0.63 0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 97
+Episode: 532942
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 284.47s
+Enemy-Reward: [-1.76]
+Success: 0.9984
+Steps-Taken: 13.20
+Comm-Action: [0.6  0.59 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 98
+Episode: 539100
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 284.25s
+Enemy-Reward: [-1.76]
+Success: 0.9994
+Steps-Taken: 13.16
+Comm-Action: [0.61 0.61 0.61 0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 99
+Episode: 545248
+Reward: [-0.44 -0.44 -0.43 -0.43 -0.43]
+Time: 289.10s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.19
+Comm-Action: [0.61 0.62 0.61 0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 100
+Episode: 551377
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.43]
+Time: 289.93s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.23
+Comm-Action: [0.62 0.63 0.6  0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 101
+Episode: 557486
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 277.18s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.25
+Comm-Action: [0.62 0.63 0.61 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 102
+Episode: 563628
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 276.45s
+Enemy-Reward: [-1.76]
+Success: 0.9987
+Steps-Taken: 13.20
+Comm-Action: [0.61 0.63 0.62 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 103
+Episode: 569767
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.43]
+Time: 274.34s
+Enemy-Reward: [-1.76]
+Success: 0.9989
+Steps-Taken: 13.21
+Comm-Action: [0.62 0.63 0.62 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 104
+Episode: 575854
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 270.42s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.31
+Comm-Action: [0.61 0.63 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 105
+Episode: 581994
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.43]
+Time: 270.12s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.21
+Comm-Action: [0.62 0.62 0.62 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 106
+Episode: 588153
+Reward: [-0.43 -0.44 -0.43 -0.44 -0.43]
+Time: 272.62s
+Enemy-Reward: [-1.75]
+Success: 0.9985
+Steps-Taken: 13.17
+Comm-Action: [0.62 0.62 0.62 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 107
+Episode: 594295
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.43]
+Time: 276.09s
+Enemy-Reward: [-1.75]
+Success: 0.9977
+Steps-Taken: 13.20
+Comm-Action: [0.62 0.63 0.62 0.63 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 108
+Episode: 600457
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.43]
+Time: 273.66s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.16
+Comm-Action: [0.62 0.64 0.63 0.63 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 109
+Episode: 606593
+Reward: [-0.44 -0.44 -0.43 -0.43 -0.43]
+Time: 270.32s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.62 0.62 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 110
+Episode: 612738
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 272.16s
+Enemy-Reward: [-1.76]
+Success: 0.9993
+Steps-Taken: 13.19
+Comm-Action: [0.61 0.63 0.61 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 111
+Episode: 618855
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 276.68s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.25
+Comm-Action: [0.61 0.62 0.59 0.63 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 112
+Episode: 624912
+Reward: [-0.45 -0.44 -0.44 -0.44 -0.44]
+Time: 274.27s
+Enemy-Reward: [-1.75]
+Success: 0.9982
+Steps-Taken: 13.39
+Comm-Action: [0.6  0.62 0.58 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 113
+Episode: 631026
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.43]
+Time: 273.95s
+Enemy-Reward: [-1.76]
+Success: 0.9989
+Steps-Taken: 13.26
+Comm-Action: [0.61 0.63 0.59 0.59 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 114
+Episode: 637173
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.43]
+Time: 271.42s
+Enemy-Reward: [-1.76]
+Success: 0.9990
+Steps-Taken: 13.19
+Comm-Action: [0.62 0.63 0.62 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 115
+Episode: 643293
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 273.20s
+Enemy-Reward: [-1.76]
+Success: 0.9989
+Steps-Taken: 13.25
+Comm-Action: [0.61 0.62 0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 116
+Episode: 649428
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.43]
+Time: 263.56s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.63 0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 117
+Episode: 655583
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.43]
+Time: 265.12s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.18
+Comm-Action: [0.6  0.62 0.6  0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 118
+Episode: 661687
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 262.61s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.27
+Comm-Action: [0.61 0.62 0.6  0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 119
+Episode: 667820
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.43]
+Time: 261.79s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.23
+Comm-Action: [0.59 0.61 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 120
+Episode: 673941
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 265.09s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.23
+Comm-Action: [0.6  0.6  0.6  0.62 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 121
+Episode: 680037
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 265.81s
+Enemy-Reward: [-1.75]
+Success: 0.9985
+Steps-Taken: 13.31
+Comm-Action: [0.6  0.61 0.61 0.62 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 122
+Episode: 686162
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.43]
+Time: 261.75s
+Enemy-Reward: [-1.75]
+Success: 0.9982
+Steps-Taken: 13.23
+Comm-Action: [0.61 0.63 0.61 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 123
+Episode: 692299
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.43]
+Time: 262.91s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.20
+Comm-Action: [0.61 0.63 0.6  0.63 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 124
+Episode: 698426
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.44]
+Time: 263.68s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.23
+Comm-Action: [0.62 0.6  0.6  0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 125
+Episode: 704553
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.43]
+Time: 262.42s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.21
+Comm-Action: [0.61 0.61 0.6  0.64 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 126
+Episode: 710708
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.43]
+Time: 258.86s
+Enemy-Reward: [-1.76]
+Success: 0.9990
+Steps-Taken: 13.18
+Comm-Action: [0.58 0.6  0.6  0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 127
+Episode: 716861
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.44]
+Time: 260.86s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.16
+Comm-Action: [0.61 0.62 0.62 0.64 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 128
+Episode: 723007
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.43]
+Time: 262.91s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.61 0.63 0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 129
+Episode: 729154
+Reward: [-0.43 -0.43 -0.44 -0.44 -0.43]
+Time: 260.40s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.18
+Comm-Action: [0.61 0.62 0.62 0.62 0.64]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 130
+Episode: 735221
+Reward: [-0.44 -0.44 -0.45 -0.44 -0.44]
+Time: 265.90s
+Enemy-Reward: [-1.74]
+Success: 0.9984
+Steps-Taken: 13.35
+Comm-Action: [0.6  0.62 0.62 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 131
+Episode: 741383
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 263.16s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.16
+Comm-Action: [0.61 0.62 0.63 0.63 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 132
+Episode: 747508
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.43]
+Time: 259.95s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.24
+Comm-Action: [0.61 0.61 0.62 0.62 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 133
+Episode: 753660
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.43]
+Time: 262.03s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.16
+Comm-Action: [0.6  0.61 0.62 0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 134
+Episode: 759798
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.43]
+Time: 261.17s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.20
+Comm-Action: [0.6  0.61 0.61 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 135
+Episode: 765928
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.44]
+Time: 263.38s
+Enemy-Reward: [-1.75]
+Success: 0.9984
+Steps-Taken: 13.22
+Comm-Action: [0.59 0.62 0.62 0.63 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 136
+Episode: 772100
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.64s
+Enemy-Reward: [-1.76]
+Success: 0.9989
+Steps-Taken: 13.13
+Comm-Action: [0.59 0.63 0.61 0.63 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 137
+Episode: 778235
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 259.55s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.22
+Comm-Action: [0.61 0.61 0.61 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 138
+Episode: 784355
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 264.08s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.25
+Comm-Action: [0.63 0.62 0.61 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 139
+Episode: 790505
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 266.60s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.19
+Comm-Action: [0.62 0.63 0.61 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 140
+Episode: 796639
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 262.23s
+Enemy-Reward: [-1.75]
+Success: 0.9984
+Steps-Taken: 13.21
+Comm-Action: [0.62 0.63 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 141
+Episode: 802732
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 256.70s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.31
+Comm-Action: [0.61 0.62 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 142
+Episode: 808800
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 259.53s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.35
+Comm-Action: [0.59 0.61 0.6  0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 143
+Episode: 814917
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 258.82s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.26
+Comm-Action: [0.59 0.61 0.61 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 144
+Episode: 820988
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 258.97s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.34
+Comm-Action: [0.61 0.61 0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 145
+Episode: 827137
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 256.12s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 13.18
+Comm-Action: [0.6  0.6  0.63 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 146
+Episode: 833228
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 259.22s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.31
+Comm-Action: [0.6  0.62 0.63 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 147
+Episode: 839354
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 257.70s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.23
+Comm-Action: [0.6  0.61 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 148
+Episode: 845475
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.44]
+Time: 261.38s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.25
+Comm-Action: [0.6  0.6  0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 149
+Episode: 851614
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 268.85s
+Enemy-Reward: [-1.76]
+Success: 0.9993
+Steps-Taken: 13.20
+Comm-Action: [0.61 0.58 0.62 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 150
+Episode: 857733
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 272.63s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.24
+Comm-Action: [0.63 0.59 0.62 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 151
+Episode: 863854
+Reward: [-0.44 -0.44 -0.43 -0.43 -0.43]
+Time: 275.14s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.24
+Comm-Action: [0.62 0.61 0.61 0.63 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 152
+Episode: 869993
+Reward: [-0.44 -0.44 -0.43 -0.43 -0.44]
+Time: 272.05s
+Enemy-Reward: [-1.76]
+Success: 0.9992
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.6  0.6  0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 153
+Episode: 876105
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.44]
+Time: 275.72s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.26
+Comm-Action: [0.61 0.6  0.61 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 154
+Episode: 882196
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 268.94s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.29
+Comm-Action: [0.6  0.58 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 155
+Episode: 888302
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 270.07s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.27
+Comm-Action: [0.6  0.59 0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 156
+Episode: 894351
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 271.16s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.41
+Comm-Action: [0.61 0.6  0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 157
+Episode: 900493
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.44]
+Time: 275.95s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.21
+Comm-Action: [0.61 0.6  0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 158
+Episode: 906688
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 266.12s
+Enemy-Reward: [-1.76]
+Success: 0.9994
+Steps-Taken: 13.09
+Comm-Action: [0.61 0.6  0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 159
+Episode: 912811
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 268.49s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.24
+Comm-Action: [0.6  0.63 0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 160
+Episode: 918970
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.43]
+Time: 271.88s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.17
+Comm-Action: [0.61 0.63 0.6  0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 161
+Episode: 925098
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.44]
+Time: 273.22s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.25
+Comm-Action: [0.61 0.61 0.58 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 162
+Episode: 931232
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 273.52s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.23
+Comm-Action: [0.62 0.62 0.59 0.61 0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 163
+Episode: 937334
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 273.45s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.30
+Comm-Action: [0.61 0.61 0.59 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 164
+Episode: 943409
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 271.18s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.33
+Comm-Action: [0.6  0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 165
+Episode: 949537
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.44]
+Time: 275.40s
+Enemy-Reward: [-1.75]
+Success: 0.9987
+Steps-Taken: 13.23
+Comm-Action: [0.6  0.61 0.61 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 166
+Episode: 955653
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.44]
+Time: 271.19s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.25
+Comm-Action: [0.6  0.63 0.63 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 167
+Episode: 961781
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 272.42s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.24
+Comm-Action: [0.61 0.61 0.62 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 168
+Episode: 967879
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 285.95s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.28
+Comm-Action: [0.61 0.61 0.61 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 169
+Episode: 973998
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 276.51s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.25
+Comm-Action: [0.6  0.6  0.61 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 170
+Episode: 980098
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.43]
+Time: 280.43s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.28
+Comm-Action: [0.61 0.6  0.61 0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 171
+Episode: 986256
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 275.60s
+Enemy-Reward: [-1.76]
+Success: 0.9994
+Steps-Taken: 13.16
+Comm-Action: [0.61 0.6  0.62 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 172
+Episode: 992403
+Reward: [-0.44 -0.44 -0.43 -0.43 -0.43]
+Time: 272.38s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.19
+Comm-Action: [0.6  0.6  0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 173
+Episode: 998511
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 274.20s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.27
+Comm-Action: [0.6  0.6  0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 174
+Episode: 1004706
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 269.06s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 13.09
+Comm-Action: [0.61 0.6  0.6  0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 175
+Episode: 1010831
+Reward: [-0.43 -0.43 -0.44 -0.44 -0.44]
+Time: 274.44s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.24
+Comm-Action: [0.6  0.62 0.6  0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 176
+Episode: 1016989
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 271.65s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.16
+Comm-Action: [0.61 0.61 0.61 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 177
+Episode: 1023132
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 274.90s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 13.19
+Comm-Action: [0.6  0.61 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 178
+Episode: 1029282
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 268.01s
+Enemy-Reward: [-1.76]
+Success: 0.9993
+Steps-Taken: 13.18
+Comm-Action: [0.6  0.6  0.59 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 179
+Episode: 1035424
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 270.94s
+Enemy-Reward: [-1.76]
+Success: 0.9987
+Steps-Taken: 13.20
+Comm-Action: [0.61 0.6  0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 180
+Episode: 1041547
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 274.97s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.24
+Comm-Action: [0.62 0.62 0.6  0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 181
+Episode: 1047744
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 268.27s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.07
+Comm-Action: [0.61 0.62 0.59 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 182
+Episode: 1053881
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 270.32s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.19
+Comm-Action: [0.61 0.62 0.6  0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 183
+Episode: 1060000
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 271.29s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.23
+Comm-Action: [0.61 0.61 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 184
+Episode: 1066199
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 267.18s
+Enemy-Reward: [-1.76]
+Success: 0.9994
+Steps-Taken: 13.09
+Comm-Action: [0.6  0.63 0.62 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 185
+Episode: 1072343
+Reward: [-0.43 -0.44 -0.44 -0.44 -0.44]
+Time: 273.09s
+Enemy-Reward: [-1.75]
+Success: 0.9985
+Steps-Taken: 13.20
+Comm-Action: [0.6  0.64 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 186
+Episode: 1078483
+Reward: [-0.43 -0.43 -0.44 -0.44 -0.43]
+Time: 272.82s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.19
+Comm-Action: [0.6  0.63 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 187
+Episode: 1084590
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.43]
+Time: 269.61s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.26
+Comm-Action: [0.59 0.62 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 188
+Episode: 1090726
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.43]
+Time: 266.39s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.62 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 189
+Episode: 1096893
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 267.97s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.15
+Comm-Action: [0.59 0.61 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 190
+Episode: 1103015
+Reward: [-0.44 -0.43 -0.43 -0.44 -0.43]
+Time: 270.27s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.23
+Comm-Action: [0.59 0.61 0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 191
+Episode: 1109130
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 270.70s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.25
+Comm-Action: [0.6  0.62 0.6  0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 192
+Episode: 1115249
+Reward: [-0.44 -0.43 -0.44 -0.43 -0.44]
+Time: 270.86s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.26
+Comm-Action: [0.6  0.62 0.58 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 193
+Episode: 1121379
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.43]
+Time: 272.56s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.22
+Comm-Action: [0.6  0.62 0.59 0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 194
+Episode: 1127529
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.43]
+Time: 273.24s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.18
+Comm-Action: [0.61 0.62 0.6  0.61 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 195
+Episode: 1133706
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.44]
+Time: 269.50s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.14
+Comm-Action: [0.6  0.6  0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 196
+Episode: 1139839
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 271.66s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.6  0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 197
+Episode: 1145980
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 272.39s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.20
+Comm-Action: [0.61 0.61 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 198
+Episode: 1152118
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 275.30s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.21
+Comm-Action: [0.6  0.61 0.6  0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 199
+Episode: 1158246
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 273.48s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.22
+Comm-Action: [0.61 0.6  0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 200
+Episode: 1164391
+Reward: [-0.43 -0.44 -0.44 -0.43 -0.44]
+Time: 268.85s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.19
+Comm-Action: [0.6  0.6  0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 201
+Episode: 1170588
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 273.48s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.09
+Comm-Action: [0.6  0.6  0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 202
+Episode: 1176727
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 267.62s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.20
+Comm-Action: [0.6  0.6  0.6  0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 203
+Episode: 1182883
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 271.90s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.16
+Comm-Action: [0.59 0.6  0.62 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 204
+Episode: 1189001
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 278.79s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.23
+Comm-Action: [0.6  0.6  0.61 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 205
+Episode: 1195172
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.44]
+Time: 274.94s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.13
+Comm-Action: [0.62 0.6  0.6  0.63 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 206
+Episode: 1201319
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.44]
+Time: 269.49s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.19
+Comm-Action: [0.61 0.61 0.62 0.64 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 207
+Episode: 1207474
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.44]
+Time: 272.40s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.16
+Comm-Action: [0.6  0.61 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 208
+Episode: 1213611
+Reward: [-0.44 -0.44 -0.43 -0.44 -0.44]
+Time: 274.10s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.20
+Comm-Action: [0.6  0.6  0.64 0.63 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 209
+Episode: 1219818
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 275.82s
+Enemy-Reward: [-1.76]
+Success: 0.9994
+Steps-Taken: 13.06
+Comm-Action: [0.62 0.59 0.64 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 210
+Episode: 1225988
+Reward: [-0.43 -0.43 -0.44 -0.44 -0.44]
+Time: 270.67s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.14
+Comm-Action: [0.63 0.6  0.63 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 211
+Episode: 1232139
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 268.88s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.18
+Comm-Action: [0.61 0.6  0.61 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 212
+Episode: 1238280
+Reward: [-0.44 -0.44 -0.44 -0.44 -0.44]
+Time: 266.38s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.18
+Comm-Action: [0.6  0.61 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 213
+Episode: 1244442
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.43]
+Time: 269.69s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.14
+Comm-Action: [0.59 0.59 0.61 0.62 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 214
+Episode: 1250644
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 265.78s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.05
+Comm-Action: [0.61 0.59 0.61 0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 215
+Episode: 1256825
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 266.85s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.11
+Comm-Action: [0.62 0.61 0.61 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 216
+Episode: 1262994
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 270.60s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.14
+Comm-Action: [0.62 0.61 0.62 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 217
+Episode: 1269167
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 271.51s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.12
+Comm-Action: [0.61 0.6  0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 218
+Episode: 1275355
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 268.69s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.09
+Comm-Action: [0.6  0.6  0.6  0.61 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 219
+Episode: 1281558
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 280.27s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.07
+Comm-Action: [0.61 0.6  0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 220
+Episode: 1287744
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.44]
+Time: 308.86s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.10
+Comm-Action: [0.61 0.6  0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 221
+Episode: 1293966
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 328.75s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.03
+Comm-Action: [0.61 0.61 0.6  0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 222
+Episode: 1300129
+Reward: [-0.43 -0.44 -0.43 -0.44 -0.43]
+Time: 295.93s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.15
+Comm-Action: [0.6  0.6  0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 223
+Episode: 1306274
+Reward: [-0.44 -0.44 -0.44 -0.43 -0.44]
+Time: 278.34s
+Enemy-Reward: [-1.75]
+Success: 0.9993
+Steps-Taken: 13.20
+Comm-Action: [0.6  0.6  0.59 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 224
+Episode: 1312476
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 272.33s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.07
+Comm-Action: [0.61 0.61 0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 225
+Episode: 1318693
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 271.74s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.05
+Comm-Action: [0.6  0.63 0.6  0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 226
+Episode: 1324892
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 274.39s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.07
+Comm-Action: [0.6  0.61 0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 227
+Episode: 1331044
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.44]
+Time: 269.87s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.17
+Comm-Action: [0.59 0.6  0.6  0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 228
+Episode: 1337249
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 304.06s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.06
+Comm-Action: [0.6  0.59 0.6  0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 229
+Episode: 1343421
+Reward: [-0.44 -0.43 -0.44 -0.44 -0.43]
+Time: 324.06s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.14
+Comm-Action: [0.6  0.6  0.61 0.59 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 230
+Episode: 1349620
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 312.53s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.08
+Comm-Action: [0.6  0.61 0.61 0.59 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 231
+Episode: 1355832
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 319.53s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.05
+Comm-Action: [0.61 0.6  0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 232
+Episode: 1362030
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 318.22s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.08
+Comm-Action: [0.61 0.59 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 233
+Episode: 1368218
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 321.95s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.10
+Comm-Action: [0.6  0.59 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 234
+Episode: 1374380
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 327.64s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.14
+Comm-Action: [0.6  0.59 0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 235
+Episode: 1380567
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 321.05s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.09
+Comm-Action: [0.6 0.6 0.6 0.6 0.6]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 236
+Episode: 1386807
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 316.73s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.99
+Comm-Action: [0.6  0.61 0.62 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 237
+Episode: 1393018
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 315.18s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.03
+Comm-Action: [0.61 0.59 0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 238
+Episode: 1399216
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 319.50s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.08
+Comm-Action: [0.61 0.59 0.61 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 239
+Episode: 1405477
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 294.63s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.92
+Comm-Action: [0.6  0.59 0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 240
+Episode: 1411682
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 282.96s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.06
+Comm-Action: [0.6  0.59 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 241
+Episode: 1417895
+Reward: [-0.43 -0.43 -0.44 -0.43 -0.43]
+Time: 269.44s
+Enemy-Reward: [-1.75]
+Success: 0.9989
+Steps-Taken: 13.05
+Comm-Action: [0.6  0.59 0.62 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 242
+Episode: 1424111
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 259.35s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.02
+Comm-Action: [0.61 0.6  0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 243
+Episode: 1430336
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 263.31s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 13.02
+Comm-Action: [0.59 0.61 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 244
+Episode: 1436511
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.64s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.12
+Comm-Action: [0.6  0.62 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 245
+Episode: 1442683
+Reward: [-0.43 -0.44 -0.43 -0.44 -0.43]
+Time: 264.62s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.12
+Comm-Action: [0.6  0.62 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 246
+Episode: 1448902
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.43]
+Time: 259.45s
+Enemy-Reward: [-1.76]
+Success: 0.9990
+Steps-Taken: 13.02
+Comm-Action: [0.59 0.62 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 247
+Episode: 1455082
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.24s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.11
+Comm-Action: [0.59 0.61 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 248
+Episode: 1461298
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 257.01s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.03
+Comm-Action: [0.6  0.61 0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 249
+Episode: 1467471
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 259.15s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.14
+Comm-Action: [0.59 0.6  0.62 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 250
+Episode: 1473657
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 263.05s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.10
+Comm-Action: [0.58 0.59 0.62 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 251
+Episode: 1479891
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.43]
+Time: 258.15s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.99
+Comm-Action: [0.6  0.59 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 252
+Episode: 1486082
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.44]
+Time: 275.30s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.09
+Comm-Action: [0.6  0.58 0.62 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 253
+Episode: 1492298
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 288.94s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.02
+Comm-Action: [0.6  0.59 0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 254
+Episode: 1498499
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 288.03s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.07
+Comm-Action: [0.61 0.58 0.61 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 255
+Episode: 1504698
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 289.35s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.08
+Comm-Action: [0.61 0.59 0.6  0.62 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 256
+Episode: 1510873
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 290.89s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.13
+Comm-Action: [0.59 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 257
+Episode: 1517081
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.42]
+Time: 290.24s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 13.05
+Comm-Action: [0.6  0.6  0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 258
+Episode: 1523311
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.42]
+Time: 289.43s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 13.01
+Comm-Action: [0.59 0.59 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 259
+Episode: 1529534
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 290.49s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.04
+Comm-Action: [0.59 0.58 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 260
+Episode: 1535770
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 291.19s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.01
+Comm-Action: [0.59 0.61 0.6  0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 261
+Episode: 1542003
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 277.92s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.01
+Comm-Action: [0.58 0.61 0.6  0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 262
+Episode: 1548237
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 264.59s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.00
+Comm-Action: [0.59 0.6  0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 263
+Episode: 1554469
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.25s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.99
+Comm-Action: [0.59 0.6  0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 264
+Episode: 1560686
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 256.99s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.03
+Comm-Action: [0.59 0.6  0.61 0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 265
+Episode: 1566906
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 258.75s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.02
+Comm-Action: [0.6  0.59 0.59 0.63 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 266
+Episode: 1573138
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.81s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.01
+Comm-Action: [0.59 0.59 0.6  0.62 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 267
+Episode: 1579332
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 256.85s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.07
+Comm-Action: [0.59 0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 268
+Episode: 1585546
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 258.73s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.04
+Comm-Action: [0.59 0.6  0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 269
+Episode: 1591773
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 257.94s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.01
+Comm-Action: [0.6  0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 270
+Episode: 1597981
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.60s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.04
+Comm-Action: [0.59 0.6  0.59 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 271
+Episode: 1604203
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.30s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 13.04
+Comm-Action: [0.6  0.61 0.57 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 272
+Episode: 1610430
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 263.13s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.02
+Comm-Action: [0.6  0.59 0.57 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 273
+Episode: 1616634
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.92s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.07
+Comm-Action: [0.61 0.6  0.58 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 274
+Episode: 1622818
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 259.27s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.12
+Comm-Action: [0.61 0.61 0.6  0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 275
+Episode: 1629043
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 257.82s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 13.01
+Comm-Action: [0.61 0.61 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 276
+Episode: 1635265
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.26s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.03
+Comm-Action: [0.6  0.61 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 277
+Episode: 1641451
+Reward: [-0.43 -0.43 -0.43 -0.44 -0.44]
+Time: 257.69s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.11
+Comm-Action: [0.6  0.6  0.6  0.59 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 278
+Episode: 1647695
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.42]
+Time: 259.16s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.61 0.58 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 279
+Episode: 1653904
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.53s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.04
+Comm-Action: [0.6  0.58 0.6  0.58 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 280
+Episode: 1660143
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 260.01s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.99
+Comm-Action: [0.6  0.58 0.59 0.59 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 281
+Episode: 1666346
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.45s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.06
+Comm-Action: [0.6  0.59 0.59 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 282
+Episode: 1672595
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 257.64s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.96
+Comm-Action: [0.6  0.59 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 283
+Episode: 1678821
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 256.28s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.02
+Comm-Action: [0.6  0.59 0.6  0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 284
+Episode: 1685073
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.43]
+Time: 260.05s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.96
+Comm-Action: [0.6  0.59 0.6  0.6  0.63]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 285
+Episode: 1691311
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 259.57s
+Enemy-Reward: [-1.75]
+Success: 0.9990
+Steps-Taken: 12.98
+Comm-Action: [0.6  0.59 0.59 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 286
+Episode: 1697567
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.43]
+Time: 258.82s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.94
+Comm-Action: [0.6  0.59 0.59 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 287
+Episode: 1703830
+Reward: [-0.43 -0.43 -0.42 -0.42 -0.43]
+Time: 260.23s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.6  0.59 0.59 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 288
+Episode: 1710031
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 259.29s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.08
+Comm-Action: [0.61 0.59 0.59 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 289
+Episode: 1716258
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 258.01s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 13.01
+Comm-Action: [0.6  0.6  0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 290
+Episode: 1722482
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 260.58s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.99
+Comm-Action: [0.6  0.6  0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 291
+Episode: 1728666
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.01s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.10
+Comm-Action: [0.61 0.61 0.59 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 292
+Episode: 1734882
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 255.24s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.04
+Comm-Action: [0.62 0.6  0.59 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 293
+Episode: 1741074
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 255.19s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 13.09
+Comm-Action: [0.59 0.59 0.61 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 294
+Episode: 1747330
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 259.95s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.94
+Comm-Action: [0.59 0.59 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 295
+Episode: 1753551
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.89s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.03
+Comm-Action: [0.6  0.58 0.59 0.58 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 296
+Episode: 1759798
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.43]
+Time: 260.82s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.96
+Comm-Action: [0.6  0.58 0.61 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 297
+Episode: 1766000
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 259.08s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.07
+Comm-Action: [0.61 0.59 0.61 0.59 0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 298
+Episode: 1772237
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 262.60s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.99
+Comm-Action: [0.61 0.59 0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 299
+Episode: 1778468
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 259.22s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.00
+Comm-Action: [0.61 0.6  0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 300
+Episode: 1784706
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.43]
+Time: 257.90s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.97
+Comm-Action: [0.62 0.6  0.59 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 301
+Episode: 1790942
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.31s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.02
+Comm-Action: [0.62 0.6  0.59 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 302
+Episode: 1797191
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.43]
+Time: 259.09s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.96
+Comm-Action: [0.61 0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 303
+Episode: 1803488
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 257.82s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.85
+Comm-Action: [0.61 0.6  0.61 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 304
+Episode: 1809753
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.42]
+Time: 260.91s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.94
+Comm-Action: [0.61 0.59 0.62 0.6  0.62]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 305
+Episode: 1815984
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 263.19s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.03
+Comm-Action: [0.61 0.59 0.61 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 306
+Episode: 1822249
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 261.25s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.92
+Comm-Action: [0.61 0.59 0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 307
+Episode: 1828479
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 258.18s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.00
+Comm-Action: [0.6  0.6  0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 308
+Episode: 1834744
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.07s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.61 0.61 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 309
+Episode: 1840995
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.42]
+Time: 260.77s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.6  0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 310
+Episode: 1847204
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.69s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.06
+Comm-Action: [0.59 0.6  0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 311
+Episode: 1853444
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 261.04s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.98
+Comm-Action: [0.6  0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 312
+Episode: 1859669
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 258.72s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.02
+Comm-Action: [0.59 0.59 0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 313
+Episode: 1865902
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.43]
+Time: 257.67s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.98
+Comm-Action: [0.59 0.59 0.59 0.62 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 314
+Episode: 1872142
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.60s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.00
+Comm-Action: [0.58 0.6  0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 315
+Episode: 1878380
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 262.32s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.00
+Comm-Action: [0.58 0.61 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 316
+Episode: 1884610
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 262.51s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.99
+Comm-Action: [0.59 0.62 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 317
+Episode: 1890872
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.43]
+Time: 258.71s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.94
+Comm-Action: [0.59 0.63 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 318
+Episode: 1897117
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 258.20s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.98
+Comm-Action: [0.6  0.62 0.59 0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 319
+Episode: 1903331
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.93s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 13.04
+Comm-Action: [0.61 0.59 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 320
+Episode: 1909588
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 258.16s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.96
+Comm-Action: [0.62 0.6  0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 321
+Episode: 1915811
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 260.12s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.03
+Comm-Action: [0.61 0.6  0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 322
+Episode: 1922037
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 255.86s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.02
+Comm-Action: [0.6  0.6  0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 323
+Episode: 1928288
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.94s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.98
+Comm-Action: [0.61 0.6  0.6  0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 324
+Episode: 1934525
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 258.43s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.99
+Comm-Action: [0.61 0.6  0.6  0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 325
+Episode: 1940741
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.15s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.04
+Comm-Action: [0.62 0.61 0.6  0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 326
+Episode: 1947006
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 262.33s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.6  0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 327
+Episode: 1953265
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.42]
+Time: 259.49s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.6  0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 328
+Episode: 1959539
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 257.49s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.90
+Comm-Action: [0.59 0.6  0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 329
+Episode: 1965795
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.43]
+Time: 259.61s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.6 0.6 0.6 0.6 0.6]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 330
+Episode: 1972054
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 257.59s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.95
+Comm-Action: [0.6  0.59 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 331
+Episode: 1978308
+Reward: [-0.43 -0.42 -0.43 -0.42 -0.43]
+Time: 260.27s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.61 0.6  0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 332
+Episode: 1984570
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.42]
+Time: 258.80s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.94
+Comm-Action: [0.6  0.61 0.6  0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 333
+Episode: 1990801
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.42]
+Time: 259.99s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.99
+Comm-Action: [0.61 0.6  0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 334
+Episode: 1997034
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.05s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.00
+Comm-Action: [0.59 0.6  0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 335
+Episode: 2003301
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.42]
+Time: 259.01s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.6  0.61 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 336
+Episode: 2009565
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.42]
+Time: 258.84s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.6  0.61 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 337
+Episode: 2015790
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.58s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.01
+Comm-Action: [0.6  0.61 0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 338
+Episode: 2022045
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.42]
+Time: 259.42s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.94
+Comm-Action: [0.61 0.59 0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 339
+Episode: 2028317
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.43]
+Time: 258.54s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.59 0.58 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 340
+Episode: 2034563
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.12s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.59 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 341
+Episode: 2040796
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 259.37s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.00
+Comm-Action: [0.6  0.59 0.6  0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 342
+Episode: 2047028
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 260.98s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.99
+Comm-Action: [0.6  0.59 0.6  0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 343
+Episode: 2053276
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 261.63s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.59 0.61 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 344
+Episode: 2059495
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.86s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.04
+Comm-Action: [0.59 0.59 0.6  0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 345
+Episode: 2065753
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.42]
+Time: 265.22s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.61 0.62 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 346
+Episode: 2071950
+Reward: [-0.43 -0.44 -0.43 -0.43 -0.43]
+Time: 259.27s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.06
+Comm-Action: [0.59 0.58 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 347
+Episode: 2078170
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 263.24s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.03
+Comm-Action: [0.59 0.6  0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 348
+Episode: 2084439
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.43]
+Time: 264.18s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.61 0.61 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 349
+Episode: 2090700
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.22s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.6  0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 350
+Episode: 2096950
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 261.65s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 12.96
+Comm-Action: [0.61 0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 351
+Episode: 2103224
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.44s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.61 0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 352
+Episode: 2109501
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 262.37s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.6  0.6  0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 353
+Episode: 2115770
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 262.13s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 12.91
+Comm-Action: [0.58 0.6  0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 354
+Episode: 2122028
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.08s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.6  0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 355
+Episode: 2128278
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 262.20s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 356
+Episode: 2134540
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.43]
+Time: 260.34s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.6  0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 357
+Episode: 2140734
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 256.06s
+Enemy-Reward: [-1.74]
+Success: 0.9995
+Steps-Taken: 13.09
+Comm-Action: [0.58 0.6  0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 358
+Episode: 2146974
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.29s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.98
+Comm-Action: [0.58 0.6  0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 359
+Episode: 2153185
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.82s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.04
+Comm-Action: [0.58 0.59 0.58 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 360
+Episode: 2159411
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 259.14s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 13.02
+Comm-Action: [0.58 0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 361
+Episode: 2165643
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.44s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.01
+Comm-Action: [0.59 0.6  0.58 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 362
+Episode: 2171897
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.43]
+Time: 258.27s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.95
+Comm-Action: [0.58 0.59 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 363
+Episode: 2178178
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 255.84s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.90
+Comm-Action: [0.58 0.59 0.6  0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 364
+Episode: 2184433
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 261.96s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 12.96
+Comm-Action: [0.58 0.59 0.61 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 365
+Episode: 2190683
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.82s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 366
+Episode: 2196936
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 258.28s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.6  0.62 0.57 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 367
+Episode: 2203199
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.42]
+Time: 260.00s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.94
+Comm-Action: [0.59 0.59 0.62 0.57 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 368
+Episode: 2209419
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 263.07s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 13.02
+Comm-Action: [0.59 0.58 0.6  0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 369
+Episode: 2215676
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 259.37s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.59 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 370
+Episode: 2221927
+Reward: [-0.43 -0.43 -0.42 -0.42 -0.43]
+Time: 259.08s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.58 0.61 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 371
+Episode: 2228183
+Reward: [-0.43 -0.42 -0.43 -0.42 -0.42]
+Time: 260.55s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.6  0.61 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 372
+Episode: 2234392
+Reward: [-0.44 -0.43 -0.43 -0.43 -0.43]
+Time: 258.78s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.06
+Comm-Action: [0.58 0.58 0.6  0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 373
+Episode: 2240629
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.94s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.99
+Comm-Action: [0.6  0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 374
+Episode: 2246882
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.43]
+Time: 259.07s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.97
+Comm-Action: [0.61 0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 375
+Episode: 2253128
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 254.83s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.97
+Comm-Action: [0.61 0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 376
+Episode: 2259436
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 260.59s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.84
+Comm-Action: [0.6  0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 377
+Episode: 2265697
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 259.67s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.58 0.58 0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 378
+Episode: 2271949
+Reward: [-0.43 -0.42 -0.43 -0.42 -0.42]
+Time: 261.44s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.95
+Comm-Action: [0.6  0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 379
+Episode: 2278226
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.43]
+Time: 258.53s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.91
+Comm-Action: [0.58 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 380
+Episode: 2284479
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.43]
+Time: 257.32s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.59 0.59 0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 381
+Episode: 2290712
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.17s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.99
+Comm-Action: [0.59 0.6  0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 382
+Episode: 2296979
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.42]
+Time: 259.84s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.59 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 383
+Episode: 2303269
+Reward: [-0.43 -0.43 -0.42 -0.42 -0.43]
+Time: 261.52s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.90
+Comm-Action: [0.6  0.59 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 384
+Episode: 2309509
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 264.72s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.99
+Comm-Action: [0.59 0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 385
+Episode: 2315759
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.42]
+Time: 257.89s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.94
+Comm-Action: [0.6  0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 386
+Episode: 2321975
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 260.28s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 13.04
+Comm-Action: [0.59 0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 387
+Episode: 2328216
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.42]
+Time: 257.89s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.98
+Comm-Action: [0.59 0.59 0.59 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 388
+Episode: 2334519
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 259.71s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.84
+Comm-Action: [0.6  0.61 0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 389
+Episode: 2340776
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.49s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.6  0.59 0.59 0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 390
+Episode: 2347070
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 256.11s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.87
+Comm-Action: [0.6  0.6  0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 391
+Episode: 2353383
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 255.26s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.83
+Comm-Action: [0.6  0.61 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 392
+Episode: 2359676
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 260.60s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.86
+Comm-Action: [0.6  0.61 0.6  0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 393
+Episode: 2365959
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 259.31s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.89
+Comm-Action: [0.59 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 394
+Episode: 2372227
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.42]
+Time: 258.34s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.93
+Comm-Action: [0.59 0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 395
+Episode: 2378517
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 255.46s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.88
+Comm-Action: [0.59 0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 396
+Episode: 2384776
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.90s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.58 0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 397
+Episode: 2391052
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.42]
+Time: 259.62s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.91
+Comm-Action: [0.58 0.6  0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 398
+Episode: 2397328
+Reward: [-0.43 -0.43 -0.42 -0.42 -0.43]
+Time: 258.08s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.93
+Comm-Action: [0.59 0.59 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 399
+Episode: 2403607
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.43]
+Time: 257.94s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.90
+Comm-Action: [0.6  0.61 0.61 0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 400
+Episode: 2409860
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 257.96s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.96
+Comm-Action: [0.6  0.59 0.6  0.57 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 401
+Episode: 2416143
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.42]
+Time: 258.06s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.90
+Comm-Action: [0.6  0.59 0.59 0.57 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 402
+Episode: 2422390
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 262.64s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.59 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 403
+Episode: 2428636
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.55s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.97
+Comm-Action: [0.6  0.59 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 404
+Episode: 2434905
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.43]
+Time: 257.21s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.6  0.59 0.59 0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 405
+Episode: 2441159
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 260.71s
+Enemy-Reward: [-1.75]
+Success: 0.9994
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 406
+Episode: 2447419
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.46s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.6  0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 407
+Episode: 2453703
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.42]
+Time: 258.31s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.90
+Comm-Action: [0.6  0.59 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 408
+Episode: 2459964
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.42]
+Time: 262.45s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.94
+Comm-Action: [0.6  0.59 0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 409
+Episode: 2466239
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 265.50s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.59 0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 410
+Episode: 2472532
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.42]
+Time: 258.05s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.87
+Comm-Action: [0.59 0.6  0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 411
+Episode: 2478811
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.42]
+Time: 257.59s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.91
+Comm-Action: [0.59 0.59 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 412
+Episode: 2485069
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 260.92s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.96
+Comm-Action: [0.58 0.59 0.6  0.6  0.61]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 413
+Episode: 2491321
+Reward: [-0.42 -0.43 -0.43 -0.42 -0.42]
+Time: 257.32s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.94
+Comm-Action: [0.59 0.58 0.58 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 414
+Episode: 2497561
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 259.49s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.98
+Comm-Action: [0.57 0.59 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 415
+Episode: 2503803
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 256.36s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.97
+Comm-Action: [0.57 0.59 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 416
+Episode: 2510041
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 257.42s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.01
+Comm-Action: [0.58 0.58 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 417
+Episode: 2516308
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.42]
+Time: 260.32s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.58 0.6  0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 418
+Episode: 2522538
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 256.56s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.00
+Comm-Action: [0.58 0.61 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 419
+Episode: 2528827
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.42]
+Time: 255.54s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.87
+Comm-Action: [0.58 0.61 0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 420
+Episode: 2535079
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.96s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.96
+Comm-Action: [0.58 0.6  0.58 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 421
+Episode: 2541344
+Reward: [-0.43 -0.42 -0.43 -0.42 -0.42]
+Time: 257.15s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.6  0.59 0.61 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 422
+Episode: 2547621
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.42]
+Time: 256.69s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.59 0.6  0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 423
+Episode: 2553873
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 257.32s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.59 0.58 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 424
+Episode: 2560138
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 260.83s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.94
+Comm-Action: [0.6  0.6  0.59 0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 425
+Episode: 2566425
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.42]
+Time: 261.64s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.88
+Comm-Action: [0.6  0.6  0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 426
+Episode: 2572702
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.43]
+Time: 258.31s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.91
+Comm-Action: [0.59 0.61 0.61 0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 427
+Episode: 2579037
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 258.88s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.79
+Comm-Action: [0.59 0.62 0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 428
+Episode: 2585327
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.43]
+Time: 263.23s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.89
+Comm-Action: [0.59 0.61 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 429
+Episode: 2591580
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.43]
+Time: 260.26s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.93
+Comm-Action: [0.59 0.61 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 430
+Episode: 2597847
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.43]
+Time: 257.96s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.93
+Comm-Action: [0.58 0.6  0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 431
+Episode: 2604130
+Reward: [-0.42 -0.43 -0.42 -0.43 -0.43]
+Time: 258.65s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.88
+Comm-Action: [0.57 0.59 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 432
+Episode: 2610406
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.43]
+Time: 258.38s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.91
+Comm-Action: [0.58 0.6  0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 433
+Episode: 2616693
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.42]
+Time: 262.27s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 12.88
+Comm-Action: [0.58 0.6  0.59 0.57 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 434
+Episode: 2622966
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.43]
+Time: 257.37s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.6  0.58 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 435
+Episode: 2629246
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 260.39s
+Enemy-Reward: [-1.76]
+Success: 0.9995
+Steps-Taken: 12.91
+Comm-Action: [0.6  0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 436
+Episode: 2635492
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.42]
+Time: 257.69s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.61 0.6  0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 437
+Episode: 2641791
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.43]
+Time: 258.47s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.86
+Comm-Action: [0.6  0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 438
+Episode: 2648095
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.43]
+Time: 260.68s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.85
+Comm-Action: [0.6  0.58 0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 439
+Episode: 2654357
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 256.97s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.94
+Comm-Action: [0.59 0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 440
+Episode: 2660639
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.43]
+Time: 255.77s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.91
+Comm-Action: [0.59 0.61 0.61 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 441
+Episode: 2666894
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.42]
+Time: 260.04s
+Enemy-Reward: [-1.75]
+Success: 0.9992
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.6  0.6  0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 442
+Episode: 2673199
+Reward: [-0.43 -0.43 -0.42 -0.42 -0.42]
+Time: 260.82s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.85
+Comm-Action: [0.59 0.6  0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 443
+Episode: 2679502
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 256.63s
+Enemy-Reward: [-1.76]
+Success: 0.9997
+Steps-Taken: 12.84
+Comm-Action: [0.6  0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 444
+Episode: 2685761
+Reward: [-0.43 -0.42 -0.43 -0.43 -0.43]
+Time: 260.49s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.58 0.59 0.59 0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 445
+Episode: 2692045
+Reward: [-0.43 -0.42 -0.43 -0.42 -0.43]
+Time: 257.21s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.90
+Comm-Action: [0.59 0.6  0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 446
+Episode: 2698362
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 258.15s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.83
+Comm-Action: [0.6  0.6  0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 447
+Episode: 2704666
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.43]
+Time: 257.95s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.87
+Comm-Action: [0.6  0.6  0.59 0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 448
+Episode: 2710957
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 255.19s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.88
+Comm-Action: [0.6  0.59 0.6  0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 449
+Episode: 2717228
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 257.22s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.92
+Comm-Action: [0.6  0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 450
+Episode: 2723541
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 261.92s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.82
+Comm-Action: [0.58 0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 451
+Episode: 2729808
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 259.31s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.95
+Comm-Action: [0.58 0.59 0.59 0.57 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 452
+Episode: 2736065
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.42]
+Time: 273.12s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.95
+Comm-Action: [0.59 0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 453
+Episode: 2742325
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.43]
+Time: 258.01s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.93
+Comm-Action: [0.59 0.58 0.58 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 454
+Episode: 2748589
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.79s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.6  0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 455
+Episode: 2754887
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 260.18s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.86
+Comm-Action: [0.58 0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 456
+Episode: 2761173
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 261.86s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.88
+Comm-Action: [0.59 0.59 0.58 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 457
+Episode: 2767423
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 258.82s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.96
+Comm-Action: [0.59 0.59 0.58 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 458
+Episode: 2773702
+Reward: [-0.43 -0.42 -0.43 -0.42 -0.43]
+Time: 261.09s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.92
+Comm-Action: [0.59 0.58 0.58 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 459
+Episode: 2779992
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.42]
+Time: 259.48s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.87
+Comm-Action: [0.6  0.59 0.58 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 460
+Episode: 2786331
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 256.66s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.78
+Comm-Action: [0.6  0.59 0.58 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 461
+Episode: 2792635
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 259.89s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.85
+Comm-Action: [0.59 0.58 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 462
+Episode: 2798916
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.43]
+Time: 259.43s
+Enemy-Reward: [-1.74]
+Success: 0.9994
+Steps-Taken: 12.91
+Comm-Action: [0.59 0.59 0.59 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 463
+Episode: 2805216
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 257.39s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.86
+Comm-Action: [0.61 0.59 0.59 0.57 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 464
+Episode: 2811502
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.43]
+Time: 261.00s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.88
+Comm-Action: [0.6  0.59 0.61 0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 465
+Episode: 2817832
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 260.89s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.80
+Comm-Action: [0.61 0.6  0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 466
+Episode: 2824140
+Reward: [-0.43 -0.42 -0.42 -0.43 -0.42]
+Time: 259.25s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.85
+Comm-Action: [0.59 0.59 0.61 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 467
+Episode: 2830402
+Reward: [-0.42 -0.43 -0.43 -0.43 -0.42]
+Time: 258.81s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.94
+Comm-Action: [0.59 0.58 0.6  0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 468
+Episode: 2836706
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 264.20s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.84
+Comm-Action: [0.59 0.6  0.59 0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 469
+Episode: 2843004
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.42]
+Time: 260.94s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.85
+Comm-Action: [0.6  0.6  0.59 0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 470
+Episode: 2849297
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 259.61s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.87
+Comm-Action: [0.59 0.6  0.6  0.61 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 471
+Episode: 2855590
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.43]
+Time: 260.55s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.88
+Comm-Action: [0.59 0.6  0.6  0.61 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 472
+Episode: 2861901
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 260.11s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.85
+Comm-Action: [0.6  0.59 0.59 0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 473
+Episode: 2868215
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 260.01s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.82
+Comm-Action: [0.6  0.59 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 474
+Episode: 2874532
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 254.64s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.81
+Comm-Action: [0.6  0.59 0.61 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 475
+Episode: 2880866
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 260.03s
+Enemy-Reward: [-1.76]
+Success: 1.0000
+Steps-Taken: 12.79
+Comm-Action: [0.59 0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 476
+Episode: 2887147
+Reward: [-0.42 -0.42 -0.42 -0.43 -0.42]
+Time: 261.94s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.89
+Comm-Action: [0.59 0.59 0.59 0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 477
+Episode: 2893416
+Reward: [-0.42 -0.42 -0.43 -0.43 -0.43]
+Time: 261.59s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.91
+Comm-Action: [0.58 0.59 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 478
+Episode: 2899714
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 266.84s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.86
+Comm-Action: [0.59 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 479
+Episode: 2905967
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 267.27s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.95
+Comm-Action: [0.58 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 480
+Episode: 2912231
+Reward: [-0.43 -0.43 -0.42 -0.42 -0.43]
+Time: 261.34s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.93
+Comm-Action: [0.59 0.59 0.59 0.6  0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 481
+Episode: 2918530
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.42]
+Time: 260.09s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.88
+Comm-Action: [0.59 0.59 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 482
+Episode: 2924822
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.43]
+Time: 258.19s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.87
+Comm-Action: [0.59 0.6  0.59 0.62 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 483
+Episode: 2931108
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.43]
+Time: 253.25s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.89
+Comm-Action: [0.58 0.6  0.59 0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 484
+Episode: 2937414
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.42]
+Time: 259.25s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.85
+Comm-Action: [0.59 0.59 0.58 0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 485
+Episode: 2943664
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 258.32s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.97
+Comm-Action: [0.59 0.59 0.59 0.58 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 486
+Episode: 2949945
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.42]
+Time: 259.79s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.90
+Comm-Action: [0.6  0.59 0.61 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 487
+Episode: 2956239
+Reward: [-0.43 -0.42 -0.42 -0.42 -0.43]
+Time: 257.08s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.86
+Comm-Action: [0.6  0.58 0.6  0.58 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 488
+Episode: 2962547
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.43]
+Time: 264.36s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.84
+Comm-Action: [0.61 0.58 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 489
+Episode: 2968901
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 259.33s
+Enemy-Reward: [-1.75]
+Success: 0.9995
+Steps-Taken: 12.77
+Comm-Action: [0.6  0.59 0.59 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 490
+Episode: 2975203
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.42]
+Time: 256.33s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.87
+Comm-Action: [0.59 0.58 0.6  0.6  0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 491
+Episode: 2981427
+Reward: [-0.43 -0.43 -0.42 -0.43 -0.43]
+Time: 257.38s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 13.00
+Comm-Action: [0.59 0.57 0.6  0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 492
+Episode: 2987723
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.43]
+Time: 256.60s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.86
+Comm-Action: [0.59 0.58 0.59 0.6  0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 493
+Episode: 2994015
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.43]
+Time: 262.00s
+Enemy-Reward: [-1.75]
+Success: 1.0000
+Steps-Taken: 12.88
+Comm-Action: [0.59 0.58 0.59 0.59 0.58]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 494
+Episode: 3000319
+Reward: [-0.42 -0.43 -0.42 -0.42 -0.43]
+Time: 259.17s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.86
+Comm-Action: [0.59 0.58 0.59 0.58 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 495
+Episode: 3006612
+Reward: [-0.42 -0.42 -0.43 -0.42 -0.43]
+Time: 259.91s
+Enemy-Reward: [-1.75]
+Success: 0.9997
+Steps-Taken: 12.87
+Comm-Action: [0.59 0.59 0.61 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 496
+Episode: 3012901
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.42]
+Time: 257.12s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.90
+Comm-Action: [0.6  0.59 0.6  0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 497
+Episode: 3019171
+Reward: [-0.43 -0.43 -0.43 -0.42 -0.43]
+Time: 254.66s
+Enemy-Reward: [-1.74]
+Success: 0.9992
+Steps-Taken: 12.93
+Comm-Action: [0.6  0.58 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 498
+Episode: 3025484
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.42]
+Time: 258.96s
+Enemy-Reward: [-1.75]
+Success: 0.9998
+Steps-Taken: 12.83
+Comm-Action: [0.59 0.59 0.57 0.59 0.59]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 499
+Episode: 3031741
+Reward: [-0.43 -0.43 -0.43 -0.43 -0.43]
+Time: 261.73s
+Enemy-Reward: [-1.74]
+Success: 0.9995
+Steps-Taken: 12.94
+Comm-Action: [0.58 0.58 0.59 0.59 0.6 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 500
+Episode: 3038045
+Reward: [-0.42 -0.42 -0.42 -0.42 -0.43]
+Time: 260.35s
+Enemy-Reward: [-1.76]
+Success: 0.9998
+Steps-Taken: 12.84
+Comm-Action: [0.59 0.6  0.59 0.58 0.59]
+==============================================================================
+Running epilogue script on gold53.
+
+Submit time  : 2024-10-03T21:50:07
+Start time   : 2024-10-03T21:50:24
+End time     : 2024-10-05T12:10:13
+Elapsed time : 1-14:19:49 (Timelimit=2-12:00:00)
+
+Job ID: 6615724
+Cluster: i5
+User/Group: jabn1n20/fp
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 16:29:50
+CPU Efficiency: 5.38% of 12-18:38:32 core-walltime
+Job Wall-clock time: 1-14:19:49
+Memory Utilized: 9.43 GB
+Memory Efficiency: 5.11% of 184.57 GB
+

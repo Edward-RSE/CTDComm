@@ -12,7 +12,15 @@
 #SBATCH --time=60:00:00 # Walltime (maximum is 60 hours for batch)
 
 # Specific setup for my cluster and virtual environment
+# making sure there aren't any other conda envs active to interfere
+module load conda
+# source deactivate
+# source deactivate
 source activate commpy
+# conda init
+# conda deactivate
+# conda deactivate
+# conda activate commpy
 
 export OMP_NUM_THREADS=1
 
@@ -24,7 +32,7 @@ fi
 
 printf -v date '%(%Y-%m-%d_%H:%M)T' -1 
 
-# Hyperparameters follow TarMAC where known
+# Hyperparameters follow CAVE
 python -u run_baselines.py \
   --env_name dec_predator_prey \
   --nagents 5 \
@@ -35,15 +43,27 @@ python -u run_baselines.py \
   --num_epochs 500 \
   --epoch_size 10 \
   --hid_size 128 \
+  --value_hid_size 128 \
   --value_coeff 0.01 \
   --detach_gap 10 \
-  --alpha 0.99 \
-  --gamma 0.99 \
-  --entr 0.01 \
-  --lrate 0.0007 \
-  --ic3net \
   --dec_tarmac \
+  --ic3net \
+  --comm_passes 2 \
   --recurrent \
   --save \
   --save_every 25 \
   --seed $seed \
+  --env_seed $seed \
+  --alpha 0.99 \
+  --gamma 0.99 \
+  --entr 0.01 \
+  --lrate 0.0007 \
+  --share_weights \
+  --share_agent_weights \
+  
+
+# Parameters from TarMAC paper.
+  # --alpha 0.99 \
+  # --gamma 0.99 \
+  # --entr 0.01 \
+  # --lrate 0.0007 \

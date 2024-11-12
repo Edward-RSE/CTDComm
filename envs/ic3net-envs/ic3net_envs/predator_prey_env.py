@@ -128,6 +128,7 @@ class PredatorPreyEnv(gym.Env):
         """
         if self.episode_over:
             raise RuntimeError("Episode is done")
+        print('action', action)
         action = np.array(action).squeeze()
         action = np.atleast_1d(action)
 

@@ -1,0 +1,4553 @@
+Running SLURM prolog script on gold54.cluster.local
+===============================================================================
+Job started on Mon Feb 26 19:24:10 GMT 2024
+Job ID          : 5519053
+Job name        : train_tj_hard_commnet.sh
+WorkDir         : /mainfs/home/jabn1n20/CTDComm/MAGIC/baselines
+Command         : /mainfs/home/jabn1n20/CTDComm/MAGIC/baselines/train_tj_hard_commnet.sh
+Partition       : serial
+Num hosts       : 1
+Num cores       : 8
+Num of tasks    : 8
+Hosts allocated : gold54
+Job Output Follows ...
+===============================================================================
+Namespace(action_scale=1.0, add_rate_max=0.05, add_rate_min=0.05, advantages_per_action=False, alpha=0.97, batch_size=500, comm_action_one=False, comm_init='uniform', comm_mask_zero=False, comm_mode='avg', comm_passes=1, commnet=True, continuous=False, curr_end=0.0, curr_start=0.0, detach_gap=10, difficulty='hard', dim=18, dim_actions=1, display=False, entr=0, env_name='traffic_junction', epoch_size=10, eps=1e-06, gacomm=False, gamma=1.0, hard_attn=False, hid_size=128, ic3net=False, load='', lrate=0.001, max_steps=80, mean_ratio=1.0, naction_heads=[2], nactions='1', nagents=20, nfriendly=20, normalize_rewards=False, nprocesses=16, num_actions=[2], num_epochs=250, num_inputs=1325, plot=False, plot_env='main', plot_port='8097', qk_hid_size=16, random=False, recurrent=True, rnn_type='LSTM', save=True, save_adjacency=0, save_every=25, seed=1, share_weights=False, tarcomm=False, tau=1.0, value_coeff=0.01, value_hid_size=32, vision=1, vocab_type='bool')
+====================================================================================================
+Model log:
+
+CommNetMLP(
+  (heads): ModuleList(
+    (0): Linear(in_features=128, out_features=2, bias=True)
+  )
+  (encoder): Linear(in_features=1325, out_features=128, bias=True)
+  (hidd_encoder): Linear(in_features=128, out_features=128, bias=True)
+  (f_module): LSTMCell(128, 128)
+  (C_modules): ModuleList(
+    (0): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (tanh): Tanh()
+  (value_head): Linear(in_features=128, out_features=1, bias=True)
+)
+====================================================================================================
+
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 1
+Episode: 1120
+Reward: [-21.85 -21.09 -22.77 -22.89 -22.2  -22.11 -21.37 -22.18 -21.16 -22.14
+ -21.67 -22.4  -21.43 -22.89 -22.3  -20.47 -22.04 -23.44 -21.92 -22.37]
+Time: 101.61s
+Add-Rate: 0.05
+Success: 0.0241
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 2
+Episode: 2240
+Reward: [-14.02 -15.25 -14.64 -13.66 -14.86 -15.09 -16.43 -13.8  -14.09 -16.2
+ -13.67 -16.07 -14.9  -15.16 -13.61 -13.71 -14.06 -15.09 -13.45 -14.53]
+Time: 110.21s
+Add-Rate: 0.05
+Success: 0.0464
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 3
+Episode: 3360
+Reward: [-13.23 -14.92 -13.57 -12.85 -15.82 -12.73 -12.06 -13.97 -12.64 -15.43
+ -13.05 -14.77 -13.6  -13.34 -13.31 -13.39 -14.05 -13.49 -13.91 -13.16]
+Time: 94.35s
+Add-Rate: 0.05
+Success: 0.0580
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 4
+Episode: 4480
+Reward: [-12.92 -13.17 -12.74 -11.49 -11.44 -14.01 -12.8  -12.7  -12.47 -13.94
+ -13.37 -13.7  -12.42 -12.59 -13.27 -13.01 -13.74 -12.83 -13.54 -14.24]
+Time: 100.40s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 5
+Episode: 5600
+Reward: [-12.59 -13.25 -13.08 -12.82 -12.57 -13.89 -12.87 -12.96 -14.05 -14.3
+ -12.9  -12.41 -11.43 -12.94 -12.63 -13.42 -12.4  -12.66 -13.33 -13.9 ]
+Time: 99.43s
+Add-Rate: 0.05
+Success: 0.0625
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 6
+Episode: 6720
+Reward: [-12.08 -12.77 -14.55 -13.54 -13.19 -11.78 -13.51 -12.52 -11.91 -12.44
+ -14.21 -12.79 -12.3  -14.55 -12.45 -12.36 -12.78 -12.56 -11.3  -12.37]
+Time: 98.47s
+Add-Rate: 0.05
+Success: 0.0857
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 7
+Episode: 7840
+Reward: [-12.67 -12.89 -13.82 -13.4  -12.99 -12.77 -13.22 -12.17 -13.51 -13.93
+ -13.29 -12.05 -12.6  -12.57 -11.46 -12.27 -11.99 -12.57 -13.48 -12.61]
+Time: 97.85s
+Add-Rate: 0.05
+Success: 0.0679
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 8
+Episode: 8960
+Reward: [-14.03 -12.77 -13.62 -11.7  -13.34 -12.42 -12.46 -12.82 -12.74 -13.35
+ -11.61 -15.28 -15.86 -14.33 -12.61 -12.6  -13.66 -12.45 -13.05 -14.43]
+Time: 97.81s
+Add-Rate: 0.05
+Success: 0.0688
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 9
+Episode: 10080
+Reward: [-11.75 -11.47 -11.83 -12.46 -13.44 -11.55 -12.22 -12.84 -12.11 -12.72
+ -11.67 -13.17 -13.31 -12.33 -12.21 -13.2  -13.05 -12.15 -11.92 -14.29]
+Time: 98.02s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 10
+Episode: 11200
+Reward: [-11.18 -12.68 -12.88 -13.27 -14.55 -13.29 -12.79 -11.96 -12.08 -13.4
+ -11.29 -12.55 -12.58 -11.98 -12.76 -12.1  -12.51 -12.03 -13.68 -11.64]
+Time: 98.86s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 11
+Episode: 12320
+Reward: [-11.89 -12.5  -14.79 -11.3  -12.15 -13.32 -11.88 -13.03 -12.78 -12.76
+ -12.02 -11.33 -11.52 -12.4  -12.44 -12.17 -12.13 -12.17 -11.61 -12.21]
+Time: 99.82s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 12
+Episode: 13440
+Reward: [-12.35 -12.7  -11.99 -13.29 -12.74 -12.78 -13.43 -12.18 -13.63 -12.1
+ -11.91 -11.97 -14.18 -11.45 -12.84 -12.45 -12.03 -12.63 -11.41 -11.86]
+Time: 99.65s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 13
+Episode: 14560
+Reward: [-13.46 -13.14 -11.38 -12.22 -11.62 -13.76 -13.34 -11.97 -11.47 -12.5
+ -12.94 -12.56 -11.49 -13.23 -11.23 -14.04 -14.4  -12.74 -11.7  -11.93]
+Time: 99.13s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 14
+Episode: 15680
+Reward: [-11.11 -13.17 -13.14 -11.54 -13.84 -12.64 -12.15 -13.57 -13.16 -14.04
+ -11.9  -10.81 -12.52 -11.62 -12.38 -12.21 -11.46 -12.37 -12.01 -11.89]
+Time: 98.35s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 15
+Episode: 16800
+Reward: [-11.76 -13.69 -14.16 -11.94 -12.56 -11.93 -14.96 -12.47 -12.9  -13.13
+ -12.62 -10.86 -12.82 -12.81 -14.11 -13.14 -13.52 -12.84 -12.22 -12.92]
+Time: 97.45s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 16
+Episode: 17920
+Reward: [-12.05 -11.37 -12.73 -11.5  -12.98 -13.08 -11.65 -12.44 -11.24 -11.92
+ -12.93 -11.63 -12.67 -11.53 -12.52 -12.01 -13.1  -11.72 -10.95 -12.59]
+Time: 95.67s
+Add-Rate: 0.05
+Success: 0.0875
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 17
+Episode: 19040
+Reward: [-13.03 -12.05 -10.94 -12.95 -12.48 -12.32 -11.01 -13.53 -11.26 -13.49
+ -13.03 -12.61 -14.47 -12.86 -11.16 -11.87 -13.84 -13.35 -12.68 -13.9 ]
+Time: 102.39s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 18
+Episode: 20160
+Reward: [-13.3  -12.54 -12.36 -11.83 -11.69 -11.78 -12.68 -11.85 -13.13 -13.4
+ -13.64 -11.78 -12.44 -11.75 -12.08 -12.31 -11.74 -11.58 -10.99 -10.99]
+Time: 110.18s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 19
+Episode: 21280
+Reward: [-11.3  -12.69 -12.72 -13.24 -11.95 -14.02 -13.09 -12.12 -12.72 -12.44
+ -11.88 -12.82 -11.65 -10.86 -13.15 -12.13 -12.16 -12.76 -12.31 -12.65]
+Time: 97.62s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 20
+Episode: 22400
+Reward: [-12.11 -10.94 -13.39 -12.4  -12.95 -13.63 -13.79 -13.22 -12.15 -11.9
+ -13.12 -12.09 -12.41 -11.85 -11.87 -12.16 -12.75 -11.83 -11.61 -13.41]
+Time: 99.06s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 21
+Episode: 23520
+Reward: [-12.76 -11.09 -11.97 -12.13 -11.02 -13.24 -12.84 -14.15 -13.77 -14.28
+ -15.09 -13.2  -12.17 -11.79 -12.15 -12.35 -12.74 -11.36 -12.4  -13.52]
+Time: 98.52s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 22
+Episode: 24640
+Reward: [-12.82 -12.8  -11.06 -11.05 -12.41 -12.49 -11.94 -12.55 -11.13 -11.06
+ -13.62 -12.22 -13.06 -13.87 -11.05 -12.53 -11.94 -13.43 -13.26 -11.73]
+Time: 95.73s
+Add-Rate: 0.05
+Success: 0.0580
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 23
+Episode: 25760
+Reward: [-11.54 -12.19 -13.17 -12.14 -11.73 -12.72 -12.55 -13.44 -13.46 -13.02
+ -11.72 -13.03 -13.39 -12.01 -11.73 -12.04 -14.75 -12.29 -12.23 -11.23]
+Time: 101.48s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 24
+Episode: 26880
+Reward: [-12.19 -12.55 -13.33 -10.92 -12.91 -12.25 -12.12 -12.9  -13.34 -12.77
+ -10.95 -12.13 -10.67 -14.36 -12.04 -11.99 -13.04 -13.62 -13.38 -12.26]
+Time: 98.35s
+Add-Rate: 0.05
+Success: 0.0848
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 25
+Episode: 28000
+Reward: [-12.15 -11.98 -11.85 -12.61 -11.2  -13.31 -12.36 -10.89 -12.09 -12.1
+ -11.81 -10.95 -12.09 -11.26 -10.68 -13.51 -12.46 -12.56 -13.48 -12.66]
+Time: 96.09s
+Add-Rate: 0.05
+Success: 0.0795
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 26
+Episode: 29120
+Reward: [-11.04 -11.58 -13.34 -12.27 -12.71 -12.02 -13.15 -11.94 -12.97 -12.32
+ -11.7  -11.76 -10.31 -13.36 -12.55 -10.86 -11.91 -12.5  -12.9  -13.39]
+Time: 100.05s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 27
+Episode: 30240
+Reward: [-11.58 -12.58 -11.94 -11.05 -13.45 -12.25 -12.44 -13.29 -12.18 -12.3
+ -12.44 -12.54 -12.4  -11.54 -12.63 -13.76 -12.78 -12.13 -11.6  -12.83]
+Time: 96.51s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 28
+Episode: 31360
+Reward: [-12.21 -13.02 -14.01 -12.   -13.7  -12.18 -12.45 -14.25 -11.29 -12.39
+ -12.24 -10.91 -13.43 -12.05 -13.15 -13.66 -13.06 -12.01 -12.16 -14.4 ]
+Time: 97.75s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 29
+Episode: 32480
+Reward: [-12.23 -12.58 -13.17 -12.48 -11.23 -12.91 -11.09 -13.36 -13.1  -12.75
+ -11.5  -13.53 -11.36 -13.06 -10.91 -11.83 -13.09 -14.81 -12.89 -11.72]
+Time: 96.69s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 30
+Episode: 33600
+Reward: [-12.64 -13.35 -11.14 -12.72 -11.79 -12.65 -11.81 -12.07 -12.26 -11.99
+ -12.93 -12.05 -11.81 -12.96 -13.06 -12.33 -11.74 -12.17 -12.05 -12.32]
+Time: 99.78s
+Add-Rate: 0.05
+Success: 0.0661
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 31
+Episode: 34720
+Reward: [-10.99 -10.62 -11.06 -11.15 -11.47 -13.32 -10.18 -11.33 -12.19 -10.4
+ -11.48 -12.96 -10.53 -14.02 -13.94 -13.45  -9.76 -11.88 -12.37 -11.54]
+Time: 99.62s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 32
+Episode: 35840
+Reward: [-13.33 -12.95 -13.27 -11.99 -12.57 -11.66 -12.14 -11.4  -11.86 -12.51
+ -12.67 -12.   -12.04 -12.32 -10.91 -12.52 -11.62 -14.4  -11.89 -12.43]
+Time: 97.58s
+Add-Rate: 0.05
+Success: 0.0884
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 33
+Episode: 36960
+Reward: [-12.16 -11.04 -11.85 -12.42 -11.41 -11.3  -11.83 -12.   -10.12 -13.76
+ -11.67 -11.63 -13.08 -12.07 -12.17 -13.15 -11.41 -11.95 -11.58 -12.69]
+Time: 93.09s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 34
+Episode: 38080
+Reward: [-13.4  -11.99 -12.28 -12.21 -13.89 -12.29 -12.07 -13.38 -14.33 -11.92
+ -12.82 -12.48 -13.51 -12.29 -11.96 -11.73 -11.28 -10.99 -12.61 -11.07]
+Time: 96.02s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 35
+Episode: 39200
+Reward: [-13.25 -12.12 -12.13 -13.03 -11.43 -13.23 -12.54 -12.54 -10.62 -12.84
+ -12.51 -10.78 -13.45 -12.44 -12.54 -12.87 -11.09 -13.2  -12.13 -12.88]
+Time: 101.84s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 36
+Episode: 40320
+Reward: [-13.47 -11.92 -10.61 -12.71 -12.05 -11.62 -11.9  -12.25 -12.   -11.92
+ -12.41 -13.75 -12.97 -12.83 -12.16  -9.78 -12.32 -10.85 -13.43 -11.83]
+Time: 93.04s
+Add-Rate: 0.05
+Success: 0.0920
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 37
+Episode: 41440
+Reward: [-13.65 -12.81 -12.55 -12.47 -12.69 -11.63 -13.16 -13.   -11.72 -13.32
+ -13.13 -13.65 -12.59 -12.58 -11.38 -14.4  -12.91 -12.76 -12.33 -13.48]
+Time: 97.28s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 38
+Episode: 42560
+Reward: [-12.81 -12.64 -14.05 -11.51 -12.96 -11.69 -14.59 -13.33 -12.45 -12.13
+ -12.63 -11.24 -12.42 -13.98 -12.98 -12.98 -13.34 -15.27 -11.7  -13.34]
+Time: 95.50s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 39
+Episode: 43680
+Reward: [-12.43 -13.04 -11.79 -12.23 -13.05 -13.51 -11.67 -12.74 -12.81 -11.53
+ -11.32 -13.22 -13.05 -12.13 -11.74 -13.35 -13.65 -14.15 -12.71 -12.45]
+Time: 95.98s
+Add-Rate: 0.05
+Success: 0.0545
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 40
+Episode: 44800
+Reward: [-11.54 -13.09 -12.95 -12.84 -11.95 -13.19 -13.89 -12.3  -13.14 -12.45
+ -12.57 -12.37 -12.02 -13.25 -11.04 -11.97 -12.48 -12.53 -12.57 -12.88]
+Time: 97.09s
+Add-Rate: 0.05
+Success: 0.0607
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 41
+Episode: 45920
+Reward: [-11.85 -11.38 -10.64 -13.31 -13.06 -13.49 -13.14 -12.66 -13.32 -13.26
+ -12.4  -13.15 -12.   -12.55 -12.78 -12.7  -13.45 -12.75 -12.25 -13.02]
+Time: 96.22s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 42
+Episode: 47040
+Reward: [-11.91 -11.72 -12.28 -13.79 -12.16 -12.21 -13.29 -13.03 -12.8  -12.83
+ -12.37 -12.   -14.6  -13.   -12.11 -11.63 -12.82 -13.08 -12.97 -12.69]
+Time: 94.38s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 43
+Episode: 48160
+Reward: [-11.45 -12.01 -11.38 -11.44 -11.81 -11.54 -12.84 -12.66 -13.96 -12.71
+ -12.53 -12.86 -13.98 -12.14 -12.21 -12.78 -11.88 -12.41 -12.14 -11.93]
+Time: 95.33s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 44
+Episode: 49280
+Reward: [-14.59 -12.28 -13.56 -14.6  -12.82 -13.42 -11.74 -12.82 -11.83 -13.06
+ -14.47 -13.43 -13.26 -10.45 -11.65 -12.81 -12.79 -12.03 -11.42 -13.87]
+Time: 94.37s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 45
+Episode: 50400
+Reward: [-12.18 -12.14 -12.37 -11.71 -12.39 -13.44 -12.47 -12.8  -13.23 -11.34
+ -13.48 -14.05 -12.95 -12.3  -11.8  -13.55 -12.94 -13.2  -12.2  -12.26]
+Time: 94.95s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 46
+Episode: 51520
+Reward: [-12.02 -12.27 -12.29 -11.99 -14.39 -11.45 -12.45 -12.08 -11.77 -10.69
+ -11.78 -13.06 -12.32 -14.01 -13.05 -11.97 -13.88 -12.21 -13.24 -10.49]
+Time: 95.88s
+Add-Rate: 0.05
+Success: 0.0848
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 47
+Episode: 52640
+Reward: [-13.   -10.77 -13.13 -11.94 -11.6  -11.15 -13.51 -12.02 -12.55 -12.58
+ -12.24 -12.04 -12.52 -12.74 -11.49 -11.92 -11.84 -11.84 -11.77 -12.35]
+Time: 92.99s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 48
+Episode: 53760
+Reward: [-12.68 -14.05 -15.   -11.83 -13.85 -13.24 -12.29 -11.98 -11.58 -13.34
+ -13.09 -14.1  -11.   -12.85 -13.88 -13.03 -11.96 -12.95 -13.18 -12.66]
+Time: 94.90s
+Add-Rate: 0.05
+Success: 0.0634
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 49
+Episode: 54880
+Reward: [-14.38 -12.6  -12.72 -13.33 -11.43 -13.42 -11.86 -12.19 -11.71 -14.07
+ -12.26 -11.39 -12.4  -12.89 -12.99 -13.87 -13.01 -13.56 -12.42 -12.58]
+Time: 93.35s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 50
+Episode: 56000
+Reward: [-13.36 -11.6  -10.71 -13.32 -13.71 -11.33 -13.46 -12.19 -13.41 -11.53
+ -11.89 -12.1  -11.57 -11.65 -12.31 -11.95 -12.73 -12.07 -12.84 -11.86]
+Time: 98.21s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 51
+Episode: 57120
+Reward: [-13.51 -12.63 -11.54 -13.07 -13.07 -11.53 -11.49 -11.81 -12.45 -12.59
+ -11.96 -12.93 -11.4  -12.38 -12.17 -12.44 -12.77 -12.78 -12.58 -11.54]
+Time: 95.95s
+Add-Rate: 0.05
+Success: 0.0821
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 52
+Episode: 58240
+Reward: [-11.63 -12.6  -13.64 -12.41 -12.28 -13.96 -12.64 -11.46 -12.1  -12.51
+ -11.81 -13.58 -11.33 -12.6  -11.9  -12.31 -12.41 -10.86 -11.93 -11.99]
+Time: 92.75s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 53
+Episode: 59360
+Reward: [-11.98 -12.48 -13.77 -13.18 -12.57 -14.25 -12.29 -12.48 -13.54 -11.87
+ -12.7  -12.58 -12.55 -12.87 -12.78 -11.99 -11.43 -12.13 -13.65 -12.81]
+Time: 92.21s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 54
+Episode: 60480
+Reward: [-10.94 -11.79 -12.28 -13.71 -12.94 -12.67 -13.68 -11.97 -12.76 -11.74
+ -13.55 -10.82 -11.85 -12.63 -12.71 -11.3  -12.18 -10.92 -11.74 -14.55]
+Time: 94.75s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 55
+Episode: 61600
+Reward: [-13.04 -12.96 -12.15 -11.54 -11.69 -11.05 -12.45 -12.46 -12.97 -11.85
+ -11.63 -11.3  -13.2  -13.45 -12.73 -12.85 -11.56 -11.92 -12.41 -13.83]
+Time: 95.12s
+Add-Rate: 0.05
+Success: 0.0661
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 56
+Episode: 62720
+Reward: [-12.02 -13.43 -12.87 -11.95 -12.4  -11.88 -11.12 -11.83 -11.76 -11.71
+ -12.72 -11.57 -12.45 -12.52 -12.32 -12.77 -12.24 -11.47 -12.15 -12.05]
+Time: 94.79s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 57
+Episode: 63840
+Reward: [-12.29 -13.1  -12.33 -12.57 -14.68 -10.66 -14.13 -14.01 -12.98 -12.93
+ -13.57 -12.4  -12.59 -11.42 -11.95 -11.8  -11.4  -12.09 -13.1  -13.  ]
+Time: 97.75s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 58
+Episode: 64960
+Reward: [-12.19 -13.4  -11.99 -11.35 -11.4  -12.45 -11.66 -12.1  -13.32 -12.18
+ -11.26 -12.13 -13.1  -12.12 -11.94 -12.38 -10.63 -14.47 -12.18 -10.49]
+Time: 92.61s
+Add-Rate: 0.05
+Success: 0.0839
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 59
+Episode: 66080
+Reward: [-12.21 -11.7  -12.64 -12.41 -12.59 -12.53 -13.59 -11.61 -11.51 -11.96
+ -12.21 -12.14 -11.76 -12.21 -11.52 -12.51 -12.37 -13.2  -13.37 -12.2 ]
+Time: 94.92s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 60
+Episode: 67200
+Reward: [-13.45 -12.46 -12.12 -13.44 -13.2  -13.09 -13.04 -12.93 -13.46 -12.27
+ -13.73 -12.77 -11.63 -15.02 -12.09 -12.21 -11.89 -12.22 -12.64 -12.66]
+Time: 102.58s
+Add-Rate: 0.05
+Success: 0.0884
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 61
+Episode: 68320
+Reward: [-11.66 -13.38 -12.57 -11.32 -11.21 -12.23 -12.76 -12.34 -12.98 -10.71
+ -11.47 -12.14 -12.25 -12.58 -11.05 -12.56 -10.87 -11.86 -11.87 -11.68]
+Time: 107.28s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 62
+Episode: 69440
+Reward: [-11.63 -12.53 -13.44 -12.26 -13.23 -11.47 -12.   -14.56 -11.04 -11.88
+ -11.59 -13.04 -12.84 -13.39 -13.13 -11.97 -11.42 -12.52 -13.49 -12.56]
+Time: 94.01s
+Add-Rate: 0.05
+Success: 0.0929
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 63
+Episode: 70560
+Reward: [-13.92 -12.56 -13.62 -12.47 -13.15 -13.87 -12.27 -12.76 -11.44 -12.49
+ -14.06 -12.32 -11.57 -12.71 -14.05 -12.13 -11.06 -11.85 -13.49 -13.66]
+Time: 105.32s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 64
+Episode: 71680
+Reward: [-13.11 -11.79 -12.44 -13.27 -12.55 -10.77 -12.97 -11.6  -12.31 -12.2
+ -11.93 -11.95 -12.47 -11.54 -12.62 -11.6  -13.   -11.93 -12.14 -12.43]
+Time: 100.54s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 65
+Episode: 72800
+Reward: [-12.35 -13.09 -12.16 -12.69 -12.54 -12.89 -12.17 -13.22 -12.66 -11.61
+ -11.63 -11.45 -11.61 -12.95 -11.54 -12.58 -12.72 -12.06 -11.83 -10.61]
+Time: 94.49s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 66
+Episode: 73920
+Reward: [-11.99 -12.4  -14.17 -11.94 -13.71 -11.72 -12.79 -12.06 -11.85 -12.94
+ -12.95 -12.76 -10.81 -12.9  -11.89 -12.15 -10.97 -13.12 -12.44 -12.32]
+Time: 97.19s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 67
+Episode: 75040
+Reward: [-12.06 -11.39 -10.5  -11.12 -10.87 -12.95 -12.97 -12.11 -12.08 -12.86
+ -12.28 -12.12 -12.53 -11.46 -13.67 -13.53 -12.15 -12.78 -11.94 -13.2 ]
+Time: 101.39s
+Add-Rate: 0.05
+Success: 0.0821
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 68
+Episode: 76160
+Reward: [-12.65 -13.23 -12.16 -12.46 -13.02 -12.56 -11.56 -10.26 -13.07 -12.74
+ -14.13 -12.98 -12.76 -13.27 -10.91 -11.26 -11.04 -13.85 -12.47 -10.88]
+Time: 96.45s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 69
+Episode: 77280
+Reward: [-11.85 -11.59 -12.96 -11.55 -13.02 -11.67 -13.39 -13.44 -13.69 -14.82
+ -12.72 -13.   -13.64 -12.84 -12.54 -12.25 -13.24 -12.49 -13.2  -11.84]
+Time: 105.50s
+Add-Rate: 0.05
+Success: 0.0625
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 70
+Episode: 78400
+Reward: [-12.52 -11.89 -12.34 -11.88 -12.43 -12.78 -12.42 -11.42 -11.83 -11.76
+ -10.88 -12.26 -11.69 -12.97 -11.66 -12.15 -12.59 -12.56 -11.25 -11.97]
+Time: 95.51s
+Add-Rate: 0.05
+Success: 0.0795
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 71
+Episode: 79520
+Reward: [-11.48 -12.39 -12.02 -11.61 -12.05 -11.65 -13.12 -11.96 -13.01 -13.24
+ -12.88 -12.99 -13.14 -12.74 -12.28 -13.7  -13.59 -12.56 -11.84 -13.  ]
+Time: 99.31s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 72
+Episode: 80640
+Reward: [-13.01 -12.71 -12.83 -12.5  -13.54 -11.67 -11.5  -13.06 -11.57 -13.32
+ -10.8  -12.83 -14.72 -12.48 -11.04 -12.53 -13.28 -11.28 -13.66 -12.99]
+Time: 94.55s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 73
+Episode: 81760
+Reward: [-11.69 -13.68 -12.49 -13.75 -13.22 -11.84 -12.62 -11.93 -12.34 -11.33
+ -12.47 -11.87 -13.18 -11.61 -13.74 -11.56 -12.43 -12.38 -11.3  -11.25]
+Time: 97.88s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 74
+Episode: 82880
+Reward: [-14.12 -13.13 -11.42 -13.28 -12.14 -12.32 -15.08 -15.84 -12.03 -14.14
+ -12.69 -13.28 -12.91 -12.17 -12.39 -12.37 -12.62 -12.4  -14.55 -12.59]
+Time: 94.77s
+Add-Rate: 0.05
+Success: 0.0661
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 75
+Episode: 84000
+Reward: [-12.73 -13.1  -12.67 -12.46 -12.99 -12.34 -11.28 -11.53 -12.39 -12.82
+ -11.8  -13.16 -10.91 -11.56 -13.54 -12.27 -13.28 -11.54 -12.42 -12.25]
+Time: 94.50s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 76
+Episode: 85120
+Reward: [-12.96 -12.16 -10.87 -11.02 -10.67 -12.06 -13.4  -11.84 -13.44 -11.43
+ -12.86 -11.8  -13.84 -12.21 -11.8  -13.29 -12.69 -11.76 -12.7  -13.11]
+Time: 95.20s
+Add-Rate: 0.05
+Success: 0.0839
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 77
+Episode: 86240
+Reward: [-11.67 -14.37 -13.06 -11.8  -11.72 -11.64 -13.74 -13.59 -11.67 -12.94
+ -11.54 -12.91 -12.41 -12.87 -12.83 -12.55 -12.84 -11.68 -12.   -11.69]
+Time: 97.45s
+Add-Rate: 0.05
+Success: 0.0643
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 78
+Episode: 87360
+Reward: [-12.35 -13.92 -12.39 -12.05 -14.35 -12.35 -12.35 -12.87 -12.77 -11.79
+ -12.29 -13.08 -13.29 -11.92 -12.76 -12.45 -10.97 -12.35 -12.46 -11.98]
+Time: 99.40s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 79
+Episode: 88480
+Reward: [-12.37 -14.16 -11.52 -11.15 -13.3  -13.27 -11.85 -12.94 -11.9  -13.09
+ -13.05 -13.13 -12.62 -11.95 -12.06 -12.24 -12.97 -11.55 -11.25 -13.51]
+Time: 98.70s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 80
+Episode: 89600
+Reward: [-13.12 -12.15 -11.66 -12.71 -11.4  -12.64 -12.54 -11.99 -13.03 -13.81
+ -13.72 -12.   -12.72 -11.52 -12.24 -13.58 -12.05 -12.78 -12.97 -11.76]
+Time: 95.26s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 81
+Episode: 90720
+Reward: [-11.1  -11.91 -12.29 -12.44 -13.02 -11.2  -13.44 -11.75 -12.97 -11.58
+ -12.62 -12.35 -12.53 -11.32 -11.32 -12.58 -11.39 -11.98 -11.02 -11.85]
+Time: 92.61s
+Add-Rate: 0.05
+Success: 0.0848
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 82
+Episode: 91840
+Reward: [-12.82 -13.12 -13.3  -12.69 -13.38 -13.12 -12.78 -11.74 -14.54 -12.29
+ -12.56 -12.84 -11.43 -12.99 -13.24 -12.43 -11.91 -12.28 -11.16 -12.19]
+Time: 94.19s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 83
+Episode: 92960
+Reward: [-12.15 -12.21 -11.51 -12.59 -11.89 -11.96 -13.4  -13.4  -12.89 -12.64
+ -10.62 -11.22 -13.37 -12.31 -11.35 -12.59 -12.35 -12.21 -12.64 -11.49]
+Time: 89.91s
+Add-Rate: 0.05
+Success: 0.0821
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 84
+Episode: 94080
+Reward: [-14.27 -12.36 -11.54 -12.85 -12.94 -12.68 -11.95 -11.03 -11.35 -13.34
+ -14.62 -11.04 -12.19 -12.57 -11.66 -12.08 -11.56 -12.19 -12.94 -12.13]
+Time: 86.78s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 85
+Episode: 95200
+Reward: [-11.94 -13.44 -12.16 -12.06 -12.58 -13.36 -12.51 -13.37 -13.25 -13.58
+ -12.48 -12.95 -13.65 -12.52 -13.83 -11.74 -12.4  -12.35 -13.33 -12.08]
+Time: 90.35s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 86
+Episode: 96320
+Reward: [-13.81 -12.59 -13.35 -13.87 -12.54 -11.92 -13.29 -12.24 -12.37 -13.58
+ -12.89 -13.62 -11.4  -12.64 -11.44 -13.98 -13.19 -11.52 -14.36 -11.24]
+Time: 92.13s
+Add-Rate: 0.05
+Success: 0.0625
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 87
+Episode: 97440
+Reward: [-11.61 -12.58 -12.09 -11.13 -12.32 -12.79 -12.34 -12.51 -12.96 -12.35
+ -11.97 -12.9  -11.77 -12.17 -12.33 -11.53 -13.28 -12.87 -12.34 -11.31]
+Time: 97.68s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 88
+Episode: 98560
+Reward: [-11.84 -11.65 -13.   -12.36 -13.1  -11.86 -10.34 -12.35 -12.9  -12.07
+ -12.61 -12.36 -11.61 -12.41 -12.56 -12.64 -12.45 -12.11 -12.91 -13.33]
+Time: 101.47s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 89
+Episode: 99680
+Reward: [-12.04 -12.56 -11.46 -13.1  -13.19 -12.41 -13.43 -11.58 -10.61 -12.22
+ -12.77 -11.84 -14.64 -12.75 -13.42 -13.31 -12.66 -12.49 -13.86 -12.44]
+Time: 90.14s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 90
+Episode: 100800
+Reward: [-13.14 -12.29 -12.05 -12.72 -11.14 -11.46 -11.61 -11.61 -13.03 -11.84
+ -11.5  -12.43 -10.73 -12.84 -11.9  -12.6  -12.73 -12.77 -13.01 -11.85]
+Time: 96.03s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 91
+Episode: 101920
+Reward: [-11.53 -14.18 -12.98 -11.88 -12.35 -12.13 -12.6  -13.1  -12.   -12.05
+ -12.14 -12.01 -12.14 -12.86 -13.16 -11.57 -12.7  -12.64 -14.1  -13.41]
+Time: 91.63s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 92
+Episode: 103040
+Reward: [-11.79 -12.46 -12.61 -12.31 -10.91 -13.19 -11.98 -12.2  -11.32 -11.88
+ -13.22 -12.08 -12.38 -12.15 -12.04 -11.61 -12.92 -13.28 -11.3  -12.2 ]
+Time: 93.78s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 93
+Episode: 104160
+Reward: [-12.34 -12.44 -12.95 -11.79 -12.24 -11.95 -12.16 -11.98 -12.05 -12.45
+ -13.32 -13.48 -11.9  -11.57 -11.31 -12.39 -12.66 -12.96 -13.78 -13.47]
+Time: 94.81s
+Add-Rate: 0.05
+Success: 0.0848
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 94
+Episode: 105280
+Reward: [-12.54 -13.02 -12.75 -13.37 -10.42 -13.55 -14.7  -13.07 -12.34 -13.73
+ -12.51 -13.3  -12.75 -11.21 -13.27 -12.44 -13.04 -13.3  -12.53 -13.92]
+Time: 89.86s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 95
+Episode: 106400
+Reward: [-11.96 -12.44 -13.06 -12.78 -12.77 -11.8  -12.02 -11.38 -12.04 -11.72
+ -11.96 -14.2  -11.04 -12.9  -12.34 -13.37 -13.18 -13.36 -12.12 -12.39]
+Time: 115.67s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 96
+Episode: 107520
+Reward: [-12.25 -13.11 -11.97 -12.04 -12.96 -13.08 -12.59 -12.99 -13.38 -12.54
+ -11.52 -12.81 -11.85 -12.   -11.31 -12.6  -12.99 -11.09 -12.71 -12.9 ]
+Time: 88.24s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 97
+Episode: 108640
+Reward: [-12.56 -13.31 -12.39 -14.1  -11.15 -12.36 -14.3  -11.39 -12.86 -11.58
+ -11.84 -11.01 -13.52 -11.89 -12.42 -12.01 -11.84 -15.55 -12.56 -12.19]
+Time: 92.57s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 98
+Episode: 109760
+Reward: [-12.88 -12.58 -12.37 -10.65  -9.63 -11.87 -12.12 -13.87 -12.27 -11.87
+ -11.73 -12.29 -12.9  -12.17 -11.81 -14.5  -11.33 -11.94 -13.08 -13.77]
+Time: 91.40s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 99
+Episode: 110880
+Reward: [-10.97 -10.95 -11.69 -12.07 -14.   -13.69 -12.04 -12.09 -11.51 -11.16
+ -12.43 -11.32 -10.18 -12.33 -11.44 -12.22 -11.97 -12.11 -12.56 -11.02]
+Time: 92.79s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 100
+Episode: 112000
+Reward: [-13.83 -11.75 -13.59 -12.12 -12.8  -11.2  -13.31 -11.98 -12.96 -12.08
+ -13.22 -12.58 -11.68 -12.15 -11.7  -11.61 -11.44 -12.85 -12.26 -13.5 ]
+Time: 118.49s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 101
+Episode: 113120
+Reward: [-12.82 -12.89 -11.66 -11.75 -13.01 -11.88 -12.76 -13.54 -11.43 -12.96
+ -13.58 -12.36 -12.3  -11.95 -12.94 -12.37 -10.54 -11.79 -13.33 -13.2 ]
+Time: 94.91s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 102
+Episode: 114240
+Reward: [-12.54 -11.08 -12.55 -11.79 -12.77 -12.42 -11.81 -12.12 -12.36 -11.82
+ -12.88 -12.25 -12.18 -11.67 -11.28 -13.01 -13.67 -13.09 -11.45 -12.15]
+Time: 90.79s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 103
+Episode: 115360
+Reward: [-11.72 -10.96 -12.78 -11.59 -12.14 -12.57 -11.05 -11.71 -11.51 -11.76
+ -13.   -13.58 -13.14 -12.32 -12.08 -12.14 -13.71 -11.7  -11.39 -11.68]
+Time: 92.23s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 104
+Episode: 116480
+Reward: [-12.75 -11.65 -12.11 -11.45 -12.31 -11.34 -10.72 -12.45 -11.12 -11.85
+ -12.85 -13.98 -12.81 -13.1  -12.41 -12.27 -10.65 -10.81 -11.93 -11.44]
+Time: 94.16s
+Add-Rate: 0.05
+Success: 0.0821
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 105
+Episode: 117600
+Reward: [-11.66 -11.65 -13.52 -11.63 -13.73 -12.23 -12.61 -10.9  -14.23 -12.87
+ -12.01 -11.76 -14.02 -12.24 -11.17 -11.7  -13.08 -13.1  -11.03 -13.21]
+Time: 103.66s
+Add-Rate: 0.05
+Success: 0.0839
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 106
+Episode: 118720
+Reward: [-11.8  -13.75 -10.82 -13.33 -12.21 -11.1  -12.06 -11.64 -12.56 -11.92
+ -11.69 -11.83 -12.72 -11.89 -11.51 -12.23 -12.47 -13.17 -12.71 -10.98]
+Time: 100.14s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 107
+Episode: 119840
+Reward: [-14.81 -12.69 -14.71 -12.41 -13.53 -12.65 -11.43 -13.07 -12.46 -10.09
+ -11.93 -12.97 -12.47 -13.71 -12.41 -12.61 -12.1  -12.33 -12.39 -12.08]
+Time: 96.03s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 108
+Episode: 120960
+Reward: [-11.65 -12.23 -11.55 -12.68 -11.5  -13.61 -12.68 -13.69 -12.56 -11.43
+ -14.4  -11.7  -11.37 -11.27 -12.76 -12.85 -13.27 -11.97 -13.21 -14.6 ]
+Time: 96.19s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 109
+Episode: 122080
+Reward: [-12.85 -11.99 -12.08 -12.35 -11.19 -13.12 -12.94 -13.6  -12.51 -11.84
+ -13.22 -13.27 -12.48 -14.45 -12.91 -12.64 -10.84 -10.88 -11.87 -12.23]
+Time: 94.01s
+Add-Rate: 0.05
+Success: 0.0688
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 110
+Episode: 123200
+Reward: [-12.08 -11.41 -12.5  -13.9  -11.36 -12.82 -11.22 -11.33 -12.52 -12.3
+ -12.31 -12.69 -13.22 -13.44 -11.23 -12.42 -11.09 -13.94 -14.12 -12.99]
+Time: 93.97s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 111
+Episode: 124320
+Reward: [-12.62 -12.6  -12.41 -12.89 -12.62 -12.98 -11.63 -12.31 -12.33 -13.62
+ -11.86 -12.35 -13.69 -12.71 -12.73 -11.43 -11.78 -11.17 -13.45 -11.94]
+Time: 96.97s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 112
+Episode: 125440
+Reward: [-12.25 -11.85 -12.92 -12.13 -12.31 -13.69 -13.4  -13.32 -12.4  -11.7
+ -13.32 -13.08 -12.46 -12.4  -12.76 -12.36 -12.97 -11.97 -13.62 -11.96]
+Time: 97.13s
+Add-Rate: 0.05
+Success: 0.0580
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 113
+Episode: 126560
+Reward: [-13.56 -13.03 -13.12 -12.44 -11.07 -13.76 -11.14 -13.66 -11.1  -13.24
+ -10.54 -12.68 -10.86 -10.97 -13.16 -12.03 -11.66 -12.54 -11.92 -11.33]
+Time: 94.79s
+Add-Rate: 0.05
+Success: 0.0661
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 114
+Episode: 127680
+Reward: [-13.4  -10.08 -10.31 -12.43 -11.23 -11.24 -11.06 -10.43 -11.47 -13.43
+ -12.6  -11.52 -13.03 -12.81 -11.99 -13.27 -12.68 -12.47 -12.3  -11.28]
+Time: 98.77s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 115
+Episode: 128800
+Reward: [-13.12 -12.09 -11.94 -11.7  -11.95 -11.72 -14.3  -12.9  -12.71 -12.65
+ -11.48 -11.44 -11.92 -11.59 -12.69 -12.04 -11.49 -12.8  -12.94 -11.48]
+Time: 96.92s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 116
+Episode: 129920
+Reward: [-14.52 -11.64 -12.46 -13.34 -12.7  -12.52 -10.97 -14.19 -11.5  -12.91
+ -12.96 -11.65 -14.17 -13.12 -12.39 -11.79 -12.39 -12.49 -12.31 -12.85]
+Time: 97.94s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 117
+Episode: 131040
+Reward: [-13.07 -11.93 -11.54 -12.63 -13.03 -12.05 -11.04 -12.7  -11.9  -12.56
+ -12.56 -11.38 -11.7  -11.1  -12.61 -12.44 -12.92 -12.84 -11.31 -13.04]
+Time: 99.95s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 118
+Episode: 132160
+Reward: [-13.24 -12.23 -12.33 -12.5  -13.29 -13.16 -10.8  -12.69 -12.07 -11.2
+ -13.14 -11.63 -12.31 -11.95 -13.8  -12.31 -12.97 -12.47 -11.19 -12.47]
+Time: 100.81s
+Add-Rate: 0.05
+Success: 0.0839
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 119
+Episode: 133280
+Reward: [-11.11 -11.73 -11.6  -11.62 -12.06 -11.72 -12.45 -12.99 -12.98 -11.53
+ -14.45 -12.65 -11.25 -12.34 -13.48 -13.41 -11.16 -13.11 -11.84 -12.69]
+Time: 96.15s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 120
+Episode: 134400
+Reward: [-12.16 -11.95 -12.14 -12.22 -11.18 -11.08 -12.6  -11.66 -10.52 -11.62
+ -12.21 -11.79 -13.19 -12.65 -11.76 -11.4  -12.08 -12.67 -13.97 -12.8 ]
+Time: 95.90s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 121
+Episode: 135520
+Reward: [-13.29 -12.28 -13.   -13.33 -11.83 -12.56 -13.04 -12.93 -13.17 -11.92
+ -12.44 -11.65 -14.14 -11.98 -12.77 -12.82 -12.43 -12.09 -12.91 -12.33]
+Time: 98.23s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 122
+Episode: 136640
+Reward: [-12.64 -12.45 -13.37 -13.41 -11.51 -12.18 -12.67 -12.94 -12.34 -13.96
+ -13.55 -13.71 -12.61 -12.   -11.18 -11.79 -12.29 -13.37 -12.69 -10.79]
+Time: 97.29s
+Add-Rate: 0.05
+Success: 0.0607
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 123
+Episode: 137760
+Reward: [-12.84 -12.36 -12.43 -13.3  -13.69 -12.61 -12.7  -11.38 -14.23 -13.89
+ -13.56 -13.49 -12.25 -13.14 -14.46 -12.44 -11.78 -11.87 -12.87 -13.61]
+Time: 96.81s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 124
+Episode: 138880
+Reward: [-13.1  -12.86 -12.8  -11.33 -12.56 -13.04 -13.28 -13.11 -11.43 -12.92
+ -12.46 -13.18 -11.35 -13.59 -11.42 -11.65 -12.07 -12.08 -12.04 -11.87]
+Time: 96.12s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 125
+Episode: 140000
+Reward: [-11.75 -12.11 -12.49 -12.13 -11.7  -12.34 -10.36 -12.51 -13.5  -12.12
+ -13.42 -11.97 -12.49 -10.79 -12.13 -12.87 -11.44 -12.27 -11.64 -13.77]
+Time: 99.46s
+Add-Rate: 0.05
+Success: 0.0920
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 126
+Episode: 141120
+Reward: [-11.19 -10.82 -13.83 -13.58 -11.79 -11.97 -11.92 -12.07 -12.58 -12.03
+ -11.65 -11.74 -13.33 -13.84 -13.23 -14.73 -12.13 -13.1  -12.55 -12.5 ]
+Time: 94.69s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 127
+Episode: 142240
+Reward: [-12.51 -12.54 -11.47 -12.16 -14.2  -10.59 -11.39 -10.97 -14.71 -12.57
+ -13.63 -12.89 -11.64 -12.65 -11.38 -12.2  -13.47 -11.86 -13.67 -12.09]
+Time: 95.79s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 128
+Episode: 143360
+Reward: [-12.89 -13.77 -15.26 -12.43 -13.36 -11.5  -13.01 -13.13 -12.19 -12.81
+ -12.49 -11.65 -12.93 -12.76 -12.93 -13.36 -13.05 -12.47 -12.76 -13.26]
+Time: 95.33s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 129
+Episode: 144480
+Reward: [-13.56 -12.   -11.12 -12.85 -11.78 -11.43 -12.41 -12.34 -11.69 -11.28
+ -11.51 -12.72 -12.47 -13.6  -12.41 -12.41 -12.12 -12.48 -12.03 -13.12]
+Time: 94.88s
+Add-Rate: 0.05
+Success: 0.0938
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 130
+Episode: 145600
+Reward: [-13.02 -11.36 -12.21 -12.88 -11.77 -11.97 -12.23 -11.82 -11.97 -12.43
+ -12.9  -11.75 -12.99 -13.41 -14.25 -11.59 -11.75 -11.79 -12.28 -12.86]
+Time: 96.31s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 131
+Episode: 146720
+Reward: [-12.17 -11.21 -11.6  -12.84 -11.46 -12.62 -13.3  -13.46 -11.3  -13.67
+ -11.24 -13.4  -12.48 -11.63 -12.3  -13.06 -11.67 -11.62 -10.61 -12.65]
+Time: 97.71s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 132
+Episode: 147840
+Reward: [-11.97 -13.07 -11.86 -14.15 -13.85 -13.66 -11.42 -12.03 -13.14 -12.32
+ -12.7  -12.58 -12.33 -13.38 -12.65 -12.73 -11.84 -13.82 -12.79 -12.79]
+Time: 102.93s
+Add-Rate: 0.05
+Success: 0.0679
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 133
+Episode: 148960
+Reward: [-11.92 -12.89 -11.4  -12.18 -12.77 -12.74 -12.53 -13.88 -13.1  -12.05
+ -12.79 -12.48 -12.16 -11.88 -11.27 -11.67 -12.93 -13.14 -12.59 -12.19]
+Time: 100.65s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 134
+Episode: 150080
+Reward: [-11.6  -13.5  -14.33 -12.49 -11.49 -13.07 -12.68 -12.23 -13.19 -12.02
+ -11.06 -11.79 -12.09 -12.41 -12.59 -11.24 -12.18 -13.49 -11.21 -12.62]
+Time: 105.58s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 135
+Episode: 151200
+Reward: [-12.73 -13.32 -11.15 -11.7  -13.34 -12.3  -13.93 -11.59 -11.33 -13.66
+ -13.38 -12.47 -14.02 -12.81 -13.16 -13.36 -13.58 -12.55 -12.29 -12.19]
+Time: 96.81s
+Add-Rate: 0.05
+Success: 0.0688
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 136
+Episode: 152320
+Reward: [-13.11 -12.36 -12.36 -12.46 -11.67 -13.11 -13.07 -12.45 -13.   -13.57
+ -13.04 -12.92 -12.96 -11.87 -13.28 -12.85 -11.18 -10.86 -12.31 -11.29]
+Time: 95.90s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 137
+Episode: 153440
+Reward: [-12.8  -12.08 -12.49 -11.67 -11.57 -13.32 -11.43 -11.43 -11.75 -12.93
+ -12.13 -12.06 -11.44 -12.82 -12.03 -13.36 -11.72 -13.43 -12.6  -12.06]
+Time: 94.83s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 138
+Episode: 154560
+Reward: [-12.57 -12.45 -12.64 -13.07 -11.24 -12.59 -11.78 -12.24 -13.11 -11.73
+ -12.88 -12.9  -11.91 -12.18 -12.78 -12.77 -13.16 -11.57 -13.9  -13.07]
+Time: 96.64s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 139
+Episode: 155680
+Reward: [ -9.91 -13.39 -12.28 -12.25 -12.2  -13.43 -12.98 -14.01 -12.32 -12.19
+ -12.18 -12.14 -13.26 -12.5  -11.35 -13.2  -12.13 -11.19 -11.71 -12.33]
+Time: 101.48s
+Add-Rate: 0.05
+Success: 0.0884
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 140
+Episode: 156800
+Reward: [-11.66 -13.17 -14.18 -13.59 -11.98 -11.9  -13.32 -11.5  -12.83 -12.92
+ -13.33 -13.01 -13.14 -12.05 -13.02 -13.65 -12.27 -11.65 -13.11 -11.68]
+Time: 99.94s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 141
+Episode: 157920
+Reward: [-12.26 -12.83 -12.09 -12.37 -11.72 -12.93 -12.13 -13.17 -12.56 -12.54
+ -12.06 -12.16 -13.72 -11.91 -12.95 -12.61 -12.04 -10.9  -12.13 -12.53]
+Time: 100.05s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 142
+Episode: 159040
+Reward: [-12.   -12.95 -12.9  -11.74 -12.22 -10.89 -13.13 -12.51 -12.8  -13.63
+ -12.82 -11.83 -11.56 -11.9  -12.14 -11.75 -11.76 -12.19 -12.61 -11.69]
+Time: 104.58s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 143
+Episode: 160160
+Reward: [-11.96 -12.01 -12.61 -13.1  -12.25 -12.31 -11.34 -10.5  -11.36 -10.48
+ -12.69 -10.79 -12.03 -11.93 -13.3  -11.55 -11.79 -11.51 -12.   -12.74]
+Time: 97.41s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 144
+Episode: 161280
+Reward: [-11.73 -12.34 -11.1  -12.25 -11.23 -11.15 -12.34 -11.61 -11.61 -11.1
+ -10.87 -11.85 -12.44 -12.26 -12.7  -12.78 -11.73 -13.58 -12.76 -12.72]
+Time: 99.48s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 145
+Episode: 162400
+Reward: [-10.79 -11.43 -12.27 -12.3  -12.04 -12.35 -10.71 -13.31 -11.19 -13.21
+ -11.96 -10.85 -10.8  -12.97 -12.24 -11.71 -12.88 -10.77 -12.5  -12.47]
+Time: 98.28s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 146
+Episode: 163520
+Reward: [-12.56 -11.51 -12.07 -12.71 -10.75 -10.86 -13.79 -13.36 -11.97 -11.5
+ -12.36 -11.74 -10.72 -13.08 -10.66 -12.03 -12.56 -13.24 -11.99 -13.06]
+Time: 101.13s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 147
+Episode: 164640
+Reward: [-13.76 -10.96 -12.13 -12.76 -12.74 -12.05 -13.81 -12.18 -12.4  -13.15
+ -12.05 -12.4  -13.67 -13.03 -13.65 -13.36 -12.58 -12.24 -12.7  -12.37]
+Time: 100.96s
+Add-Rate: 0.05
+Success: 0.0661
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 148
+Episode: 165760
+Reward: [-12.26 -13.09 -13.06 -11.15 -12.44 -11.7  -12.14 -12.85 -12.83 -10.45
+ -11.38 -14.69 -13.98 -11.48 -11.82 -10.64 -11.9  -11.81 -12.41 -13.95]
+Time: 101.00s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 149
+Episode: 166880
+Reward: [-12.85 -12.94 -12.57 -11.65 -13.59 -11.23 -11.34 -11.74 -13.5  -11.88
+ -11.87 -13.9  -12.25 -11.04 -12.99 -11.96 -14.04 -12.35 -12.63 -13.34]
+Time: 102.85s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 150
+Episode: 168000
+Reward: [-11.62 -12.95 -12.9  -13.28 -14.31 -12.39 -11.39 -12.53 -10.94 -13.4
+ -11.76 -12.04 -12.06 -12.92 -14.11 -12.81 -11.85 -12.62 -11.7  -12.83]
+Time: 96.89s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 151
+Episode: 169120
+Reward: [-11.   -11.01 -12.16 -12.47 -11.58 -12.82 -12.65 -12.9  -10.84 -11.99
+ -14.33 -11.73 -12.11 -13.67 -13.27 -13.16 -11.5  -11.54 -12.12 -13.03]
+Time: 96.67s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 152
+Episode: 170240
+Reward: [-11.48 -13.18 -12.08 -13.43 -12.46 -12.37 -13.35 -13.24 -13.03 -11.51
+ -12.82 -11.82 -13.92 -13.26 -12.18 -12.44 -13.4  -11.86 -12.87 -12.6 ]
+Time: 97.41s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 153
+Episode: 171360
+Reward: [-12.97 -12.11 -12.92 -12.48 -11.26 -12.96 -11.39 -12.62 -11.47 -12.87
+ -12.8  -12.98 -13.5  -12.85 -13.05 -12.35 -10.68 -11.78 -10.2  -12.46]
+Time: 97.51s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 154
+Episode: 172480
+Reward: [-12.57 -12.22 -11.75 -12.91 -12.22 -11.15 -11.93 -12.43 -12.09 -12.86
+ -12.51 -12.26 -11.55 -11.55 -12.31 -11.78 -11.75 -12.02 -13.32 -11.89]
+Time: 97.56s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 155
+Episode: 173600
+Reward: [-11.58 -12.   -14.31 -11.82 -10.51 -12.16 -12.14 -12.45 -11.06 -13.32
+ -11.84 -11.84 -13.28 -12.09 -12.69 -12.79 -11.66 -12.29 -12.28 -11.77]
+Time: 97.60s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 156
+Episode: 174720
+Reward: [-11.01 -13.25 -12.02 -13.19 -13.73 -12.64 -12.48 -12.77 -13.66 -12.3
+ -13.86 -13.2  -13.56 -11.51 -13.48 -11.25 -12.59 -13.58 -12.86 -10.91]
+Time: 98.20s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 157
+Episode: 175840
+Reward: [-13.8  -11.89 -12.43 -13.03 -12.25 -13.27 -12.38 -11.28 -13.32 -13.33
+ -12.5  -14.13 -12.68 -11.65 -12.42 -12.36 -12.46 -13.77 -11.86 -12.56]
+Time: 98.21s
+Add-Rate: 0.05
+Success: 0.0688
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 158
+Episode: 176960
+Reward: [-11.41 -13.25 -12.03 -13.47 -13.16 -11.68 -10.59 -11.91 -13.72 -12.75
+ -12.19 -12.81 -11.98 -14.38 -12.47 -11.27 -11.62 -11.82 -11.66 -12.35]
+Time: 99.26s
+Add-Rate: 0.05
+Success: 0.0688
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 159
+Episode: 178080
+Reward: [-12.1  -12.41 -12.96 -11.67 -11.53 -13.14 -14.51 -13.83 -12.38 -11.89
+ -13.51 -11.84 -12.64 -13.49 -12.84 -13.49 -12.46 -14.24 -12.08 -13.34]
+Time: 98.13s
+Add-Rate: 0.05
+Success: 0.0634
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 160
+Episode: 179200
+Reward: [-11.57 -13.02 -12.65 -11.97 -10.89 -13.75 -11.05 -12.72 -12.94 -11.31
+ -12.43 -12.66 -11.95 -12.63 -13.04 -11.94 -12.04 -12.11 -12.54 -12.37]
+Time: 97.73s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 161
+Episode: 180320
+Reward: [-11.72 -12.71 -12.39 -11.94 -12.77 -12.77 -12.43 -11.88 -12.57 -13.02
+ -11.   -12.05 -13.64 -12.66 -12.92 -12.62 -12.35 -12.97 -12.67 -12.72]
+Time: 97.69s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 162
+Episode: 181440
+Reward: [-12.68 -12.22 -13.41 -13.4  -12.34 -11.87 -12.69 -12.44 -12.54 -13.29
+ -13.64 -11.8  -11.68 -11.87 -13.04 -11.37 -13.97 -10.11 -12.19 -12.21]
+Time: 100.02s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 163
+Episode: 182560
+Reward: [-11.06 -12.84 -13.26 -12.91 -11.55 -12.23 -13.69 -14.07 -12.35 -11.15
+ -11.73 -12.23 -13.75 -14.4  -13.15 -12.09 -12.28 -13.17 -12.91 -11.54]
+Time: 98.40s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 164
+Episode: 183680
+Reward: [-12.19 -13.18 -12.18 -14.42 -12.9  -11.86 -11.94 -12.6  -14.94 -12.27
+ -11.73 -11.51 -12.84 -13.12 -13.99 -13.67 -12.89 -12.11 -12.67 -12.07]
+Time: 97.02s
+Add-Rate: 0.05
+Success: 0.0643
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 165
+Episode: 184800
+Reward: [-12.57 -11.49 -12.97 -11.47 -11.66 -12.36 -12.26 -11.14 -11.03 -13.8
+ -12.24 -12.83 -12.67 -11.49 -11.77 -11.72 -13.16 -11.12 -12.86 -11.54]
+Time: 98.35s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 166
+Episode: 185920
+Reward: [-12.2  -11.53 -11.86 -11.42 -12.78 -12.67 -12.81 -14.13 -12.05 -11.87
+ -12.51 -11.9  -11.54 -13.03 -12.4  -12.75 -12.25 -10.97 -12.57 -13.1 ]
+Time: 97.81s
+Add-Rate: 0.05
+Success: 0.0920
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 167
+Episode: 187040
+Reward: [-10.94 -13.89 -13.68 -12.86 -13.77 -13.68 -12.75 -12.32 -12.62 -10.98
+ -13.49 -13.48 -13.39 -12.82 -13.82 -12.18 -12.84 -11.88 -14.4  -13.04]
+Time: 97.39s
+Add-Rate: 0.05
+Success: 0.0643
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 168
+Episode: 188160
+Reward: [-13.58 -12.89 -11.75 -12.97 -13.06 -13.6  -12.96 -13.41 -12.73 -12.78
+ -13.   -11.87 -12.72 -11.57 -12.28 -13.44 -12.17 -13.13 -12.3  -13.1 ]
+Time: 97.41s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 169
+Episode: 189280
+Reward: [-11.96 -11.86 -12.32 -11.98 -12.78 -13.79 -12.82 -12.59 -11.61 -11.61
+ -11.39 -11.75 -11.38 -12.91 -12.66 -12.13 -12.57 -12.64 -12.57 -12.56]
+Time: 97.59s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 170
+Episode: 190400
+Reward: [-13.18 -11.57 -12.17 -11.72 -11.35 -11.04 -13.35 -11.19 -11.62 -11.33
+ -12.5  -12.8  -12.15 -13.13 -12.37 -12.9  -11.23 -13.8  -11.21 -12.16]
+Time: 96.03s
+Add-Rate: 0.05
+Success: 0.0723
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 171
+Episode: 191520
+Reward: [-12.48 -12.82 -12.   -13.61 -11.21 -14.28 -10.99 -12.33 -12.71 -11.29
+ -12.73 -12.66 -13.03 -13.12 -12.85 -11.2  -11.14 -12.49 -11.76 -13.77]
+Time: 96.53s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 172
+Episode: 192640
+Reward: [-11.87 -13.   -12.31 -10.8  -12.09 -14.22 -11.93 -11.87 -13.26 -13.55
+ -12.36 -11.39 -12.12 -13.36 -13.63 -11.69 -12.53 -12.65 -13.18 -13.82]
+Time: 98.32s
+Add-Rate: 0.05
+Success: 0.0679
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 173
+Episode: 193760
+Reward: [-12.17 -13.03 -13.26 -12.09 -11.88 -13.02 -12.89 -12.36 -11.98 -10.49
+ -12.8  -12.88 -11.7  -13.06 -12.65 -13.64 -12.14 -12.24 -12.95 -12.82]
+Time: 96.38s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 174
+Episode: 194880
+Reward: [-11.86 -12.42 -12.67 -14.12 -12.45 -11.48 -12.99 -12.31 -13.51 -12.17
+ -12.24 -12.88 -11.59 -11.84 -14.38 -11.89 -12.26 -12.93 -12.8  -12.02]
+Time: 96.37s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 175
+Episode: 196000
+Reward: [-13.41 -11.87 -13.47 -12.57 -14.92 -13.47 -12.79 -11.83 -12.92 -11.79
+ -13.33 -14.04 -11.85 -12.56 -13.2  -12.62 -13.41 -12.04 -11.39 -13.04]
+Time: 98.76s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 176
+Episode: 197120
+Reward: [-13.17 -11.95 -12.23 -12.23 -11.79 -13.06 -13.39 -12.08 -13.07 -11.86
+ -11.62 -12.85 -12.   -13.23 -14.14 -12.39 -11.31 -13.18 -12.43 -13.15]
+Time: 98.50s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 177
+Episode: 198240
+Reward: [-13.   -13.76 -12.13 -11.76 -11.75 -12.53 -13.59 -13.48 -14.07 -13.21
+ -12.81 -12.56 -12.74 -13.16 -13.62 -13.09 -12.27 -11.67 -13.34 -13.24]
+Time: 97.95s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 178
+Episode: 199360
+Reward: [-12.85 -12.19 -14.37 -12.62 -12.33 -12.79 -12.27 -12.76 -12.59 -12.71
+ -11.16 -13.02 -12.71 -12.26 -13.63 -11.57 -11.6  -13.75 -12.73 -12.14]
+Time: 97.45s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 179
+Episode: 200480
+Reward: [-12.18 -11.23 -12.73 -11.02 -14.28 -12.36 -12.37 -11.34 -11.53 -11.9
+ -12.12 -12.14 -11.41 -11.59 -12.78 -12.3  -11.09 -11.74 -10.86 -11.66]
+Time: 99.15s
+Add-Rate: 0.05
+Success: 0.0848
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 180
+Episode: 201600
+Reward: [-10.73 -10.92 -10.62 -13.23 -13.49 -13.21 -13.46 -12.15 -12.72 -12.08
+ -10.45 -12.19 -11.32 -12.66 -12.86 -12.26 -13.32 -13.48 -12.04 -12.05]
+Time: 96.89s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 181
+Episode: 202720
+Reward: [-12.19 -11.42 -12.45 -12.23 -12.61 -13.37 -13.38 -12.45 -12.04 -10.95
+ -11.21 -12.92 -13.9  -13.41 -11.76 -12.43 -12.65 -13.22 -11.41 -10.24]
+Time: 98.55s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 182
+Episode: 203840
+Reward: [-12.51 -13.73 -12.4  -12.03 -11.77 -12.55 -11.93 -12.28 -13.02 -12.68
+ -12.65 -12.62 -12.41 -11.97 -11.09 -12.54 -12.14 -12.37 -12.47 -10.03]
+Time: 98.80s
+Add-Rate: 0.05
+Success: 0.0821
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 183
+Episode: 204960
+Reward: [-11.58 -12.35 -12.34 -11.91 -11.46 -13.16 -11.4  -12.45 -12.99 -13.03
+ -11.92 -12.72 -12.56 -10.99 -13.25 -12.73 -12.89 -10.89 -14.34 -13.59]
+Time: 100.65s
+Add-Rate: 0.05
+Success: 0.0875
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 184
+Episode: 206080
+Reward: [-11.85 -11.85 -13.18 -12.66 -12.66 -11.68 -13.91 -12.51 -12.6  -11.67
+ -13.26 -11.33 -13.23 -12.84 -12.45 -12.13 -14.15 -11.38 -13.23 -10.96]
+Time: 98.26s
+Add-Rate: 0.05
+Success: 0.0679
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 185
+Episode: 207200
+Reward: [-14.22 -11.13 -11.84 -13.7  -12.24 -12.9  -12.13 -12.36 -12.79 -13.95
+ -12.49 -13.51 -13.46 -11.65 -13.46 -12.77 -13.84 -12.89 -12.59 -12.42]
+Time: 98.09s
+Add-Rate: 0.05
+Success: 0.0589
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 186
+Episode: 208320
+Reward: [-14.35 -11.46 -13.27 -11.98 -12.89 -10.35 -12.95 -11.49 -12.91 -11.72
+ -12.84 -11.21 -12.28 -12.88 -13.23 -12.23 -12.62 -11.81 -11.86 -12.74]
+Time: 97.14s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 187
+Episode: 209440
+Reward: [-12.19 -12.1  -11.67 -12.53 -12.66 -11.77 -12.98 -12.23 -12.75 -11.71
+ -12.06 -12.66 -13.17 -12.56 -10.89 -13.17 -10.86 -14.33 -11.28 -12.45]
+Time: 97.30s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 188
+Episode: 210560
+Reward: [-12.36 -12.02 -10.88 -13.31 -10.77 -13.01 -12.   -11.86 -11.1  -12.51
+ -11.43 -11.16 -12.24 -12.76 -14.21 -14.61 -12.61 -13.55 -11.36 -11.83]
+Time: 98.39s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 189
+Episode: 211680
+Reward: [-12.8  -13.06 -12.45 -12.63 -10.6  -11.96 -12.38 -12.47 -11.48 -12.19
+ -12.7  -11.12 -11.15 -13.06 -10.65 -11.81 -11.2  -11.43 -10.25 -12.21]
+Time: 96.57s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 190
+Episode: 212800
+Reward: [-11.55 -13.84 -13.23 -15.69 -12.39 -11.1  -13.59 -11.44 -12.43 -11.63
+ -13.75 -12.71 -12.58 -13.33 -11.34 -11.49 -13.52 -14.62 -13.45 -11.93]
+Time: 96.82s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 191
+Episode: 213920
+Reward: [-10.79 -12.37 -12.45 -13.42 -12.52 -11.85 -13.02 -12.62 -12.68 -10.51
+ -11.2  -12.32 -12.33 -11.93 -11.43 -11.71 -12.42 -12.25 -13.7  -11.86]
+Time: 99.10s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 192
+Episode: 215040
+Reward: [-12.74 -12.42 -12.38 -12.6  -10.87 -12.5  -12.18 -13.55 -11.2  -12.77
+ -12.25 -12.03 -12.54 -12.66 -14.04 -11.72 -12.05 -11.68 -11.97 -12.6 ]
+Time: 100.89s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 193
+Episode: 216160
+Reward: [-12.62 -10.57 -13.29 -11.38 -13.35 -12.58 -12.9  -12.69 -13.62 -12.95
+ -13.06 -12.63 -11.92 -12.36 -12.34 -11.9  -12.65 -11.06 -12.53 -12.49]
+Time: 98.72s
+Add-Rate: 0.05
+Success: 0.0705
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 194
+Episode: 217280
+Reward: [-11.97 -11.26 -12.62 -13.03 -11.55 -13.32 -13.33 -13.65 -12.84 -11.76
+ -11.81 -12.87 -11.92 -11.96 -12.12 -12.29 -12.72 -13.99 -12.07 -11.23]
+Time: 98.88s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 195
+Episode: 218400
+Reward: [-12.04 -13.01 -14.32 -12.69 -12.48 -12.01 -12.88 -12.48 -13.56 -11.79
+ -11.75 -13.47 -11.59 -12.74 -13.58 -14.21 -11.95 -11.84 -11.52 -12.74]
+Time: 98.62s
+Add-Rate: 0.05
+Success: 0.0875
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 196
+Episode: 219520
+Reward: [-12.81 -12.62 -13.06 -12.03 -12.4  -12.21 -13.26 -11.88 -13.62 -12.56
+ -12.58 -11.9  -12.15 -13.12 -13.06 -12.71 -13.23 -11.19 -13.68 -13.15]
+Time: 95.03s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 197
+Episode: 220640
+Reward: [-13.06 -12.62 -12.96 -13.3  -11.41 -11.15 -12.96 -12.41 -11.77 -12.57
+ -10.81 -12.6  -12.64 -13.2  -13.15 -13.61 -10.99 -11.58 -13.   -12.47]
+Time: 95.07s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 198
+Episode: 221760
+Reward: [-12.67 -12.84 -10.76 -12.29 -11.79 -12.71 -10.57 -11.7  -11.56 -12.78
+ -11.54 -12.44 -11.47 -11.53 -13.64 -13.06 -12.35 -13.31 -13.28 -12.4 ]
+Time: 95.63s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 199
+Episode: 222880
+Reward: [-12.39 -12.62 -13.61 -12.25 -13.75 -13.58 -13.21 -13.44 -13.57 -12.68
+ -13.9  -13.57 -13.13 -13.13 -13.2  -13.04 -11.48 -11.76 -12.59 -12.32]
+Time: 94.97s
+Add-Rate: 0.05
+Success: 0.0679
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 200
+Episode: 224000
+Reward: [-11.21 -12.41 -13.74 -13.75 -12.2  -12.12 -12.32 -12.35 -13.74 -11.93
+ -13.7  -12.79 -12.24 -12.52 -13.38 -13.2  -12.47 -13.04 -12.1  -11.63]
+Time: 97.29s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 201
+Episode: 225120
+Reward: [-12.66 -13.44 -11.1  -13.61 -12.75 -12.46 -12.44 -11.09 -12.48 -13.7
+ -12.69 -12.88 -11.89 -12.54 -11.7  -12.84 -12.06 -11.69 -13.44 -14.51]
+Time: 98.68s
+Add-Rate: 0.05
+Success: 0.0804
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 202
+Episode: 226240
+Reward: [-10.87 -11.78 -11.9  -12.83 -10.67 -12.44 -12.1  -12.21 -13.73 -13.02
+ -12.74 -12.11 -13.26 -11.56 -11.18 -12.5  -12.14 -12.65 -11.41 -11.76]
+Time: 99.84s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 203
+Episode: 227360
+Reward: [-12.5  -13.25 -11.65 -13.32 -14.11 -12.02 -12.36 -12.42 -12.27 -13.13
+ -13.34 -12.7  -12.54 -11.67 -12.4  -13.35 -13.17 -13.43 -13.25 -13.63]
+Time: 100.07s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 204
+Episode: 228480
+Reward: [-11.06 -13.63 -12.48 -13.57 -14.05 -13.31 -14.21 -13.47 -13.88 -13.05
+ -12.71 -11.52 -13.81 -12.37 -12.74 -14.12 -12.39 -14.22 -13.61 -13.56]
+Time: 97.73s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 205
+Episode: 229600
+Reward: [-11.6  -11.65 -11.41 -13.94 -12.75 -13.01 -13.28 -11.36 -11.81 -12.61
+ -11.77 -12.02 -12.75 -11.56 -13.04 -11.83 -12.92 -12.29 -11.51 -12.3 ]
+Time: 95.61s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 206
+Episode: 230720
+Reward: [-11.89 -12.78 -13.49 -11.69 -11.21 -11.5  -13.11 -12.5  -11.4  -11.87
+ -12.21 -12.68 -12.33 -12.86 -12.44 -11.23 -11.85 -12.37 -11.56 -11.18]
+Time: 95.63s
+Add-Rate: 0.05
+Success: 0.0902
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 207
+Episode: 231840
+Reward: [-14.17 -13.85 -13.22 -13.25 -12.14 -12.   -12.87 -12.64 -12.14 -12.38
+ -12.14 -11.18 -11.97 -12.4  -11.64 -12.52 -13.02 -12.55 -11.92 -12.06]
+Time: 95.11s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 208
+Episode: 232960
+Reward: [-13.18 -13.1  -15.04 -11.53 -11.77 -12.82 -12.72 -12.56 -12.21 -13.57
+ -11.31 -13.27 -12.3  -12.24 -12.19 -12.08 -11.89 -12.05 -11.16 -11.51]
+Time: 95.36s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 209
+Episode: 234080
+Reward: [-12.12 -13.26 -11.48 -13.88 -12.39 -11.76 -11.95 -12.53 -12.02 -12.63
+ -13.09 -11.15 -11.07 -11.86 -12.42 -13.05 -12.15 -13.23 -12.78 -12.  ]
+Time: 94.35s
+Add-Rate: 0.05
+Success: 0.0777
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 210
+Episode: 235200
+Reward: [-10.66 -12.5  -12.25 -13.09 -12.74 -12.62 -13.47 -11.78 -12.41 -12.54
+ -11.84 -13.56 -13.28 -12.66 -12.61 -13.31 -10.69 -12.07 -12.2  -13.46]
+Time: 97.03s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 211
+Episode: 236320
+Reward: [-12.84 -13.12 -12.52 -13.01 -12.49 -12.62 -11.52 -11.47 -12.81 -10.65
+ -13.03 -12.03 -12.06 -12.45 -12.32 -10.47 -12.58 -12.93 -12.89 -12.62]
+Time: 94.70s
+Add-Rate: 0.05
+Success: 0.0652
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 212
+Episode: 237440
+Reward: [-12.01 -12.79 -12.16 -13.16 -13.13 -13.64 -13.39 -13.82 -13.2  -13.51
+ -13.66 -13.57 -11.77 -11.63 -12.81 -11.31 -12.47 -12.92 -12.23 -13.89]
+Time: 94.24s
+Add-Rate: 0.05
+Success: 0.0938
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 213
+Episode: 238560
+Reward: [-12.81 -12.5  -13.1  -12.23 -13.25 -12.92 -13.62 -12.67 -12.37 -13.55
+ -13.01 -11.83 -13.42 -12.17 -12.65 -11.61 -12.74 -13.53 -12.95 -13.1 ]
+Time: 95.04s
+Add-Rate: 0.05
+Success: 0.0795
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 214
+Episode: 239680
+Reward: [-13.11 -12.56 -13.6  -10.86 -11.05 -12.61 -11.73 -12.35 -13.44 -13.8
+ -10.27 -11.23 -12.87 -13.17 -11.22 -13.59 -12.26 -11.87 -11.89 -12.64]
+Time: 94.11s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 215
+Episode: 240800
+Reward: [-10.26 -11.12 -11.92 -11.49 -12.69 -11.38 -11.72 -11.68 -12.34 -12.77
+ -11.58 -11.55 -12.05 -12.41 -11.63 -10.85 -11.4  -11.91 -10.74 -12.94]
+Time: 95.67s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 216
+Episode: 241920
+Reward: [-12.4  -12.57 -12.27 -12.15 -12.88 -12.58 -12.23 -12.43 -13.75 -13.12
+ -12.88 -11.94 -12.74 -13.41 -13.26 -10.83 -13.17 -12.22 -13.43 -11.21]
+Time: 94.53s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 217
+Episode: 243040
+Reward: [-11.55 -12.9  -11.43 -11.75 -12.6  -13.03 -11.54 -11.87 -11.72 -12.45
+ -12.4  -12.09 -12.92 -12.76 -12.88 -12.95 -11.91 -11.86 -13.28 -11.25]
+Time: 95.12s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 218
+Episode: 244160
+Reward: [-12.17 -12.89 -15.28 -12.46 -13.47 -12.3  -11.47 -12.92 -13.6  -12.88
+ -12.97 -12.75 -12.9  -12.87 -14.28 -11.69 -12.34 -13.96 -12.69 -12.94]
+Time: 95.33s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 219
+Episode: 245280
+Reward: [-12.9  -12.42 -12.17 -12.13 -13.91 -11.85 -13.04 -12.64 -13.21 -12.72
+ -11.   -13.33 -12.34 -12.02 -12.06 -12.19 -11.42 -12.02 -11.61 -12.17]
+Time: 95.06s
+Add-Rate: 0.05
+Success: 0.0821
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 220
+Episode: 246400
+Reward: [-13.12 -11.94 -10.72 -12.44 -12.35 -13.08 -12.12 -14.03 -12.56 -12.64
+ -12.37 -12.25 -13.01 -11.67 -13.05 -13.   -11.43 -12.72 -12.93 -11.62]
+Time: 94.76s
+Add-Rate: 0.05
+Success: 0.0732
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 221
+Episode: 247520
+Reward: [-11.82 -13.09 -11.31 -14.49 -12.44 -12.6  -11.86 -12.44 -12.96 -12.85
+ -12.54 -13.77 -12.42 -12.72 -11.5  -13.44 -12.46 -13.39 -12.87 -13.57]
+Time: 95.40s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 222
+Episode: 248640
+Reward: [-14.11 -12.01 -12.67 -11.55 -12.1  -13.86 -12.49 -12.87 -12.37 -12.59
+ -12.29 -13.15 -12.31 -12.26 -11.4  -12.02 -13.37 -12.06 -12.52 -11.31]
+Time: 95.14s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 223
+Episode: 249760
+Reward: [-12.5  -13.15 -13.66 -12.34 -13.1  -12.76 -11.33 -12.68 -12.42 -11.9
+ -12.88 -12.18 -11.91 -13.33 -13.23 -13.5  -12.8  -12.81 -12.87 -13.29]
+Time: 94.72s
+Add-Rate: 0.05
+Success: 0.0589
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 224
+Episode: 250880
+Reward: [-11.82 -12.01 -11.61 -14.39 -11.58 -12.68 -12.38 -11.35 -13.44 -11.55
+ -13.08 -11.15 -12.83 -14.12 -12.05 -11.45 -12.12 -11.75 -13.22 -11.15]
+Time: 95.04s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 225
+Episode: 252000
+Reward: [-11.97 -12.37 -12.24 -13.2  -12.53 -12.63 -13.28 -12.01 -11.39 -12.83
+ -10.73 -12.35 -10.6  -12.44 -11.87 -11.66 -11.02 -13.75 -12.82 -12.96]
+Time: 96.92s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 226
+Episode: 253120
+Reward: [-11.51 -11.41 -12.15 -12.54 -11.3  -12.66 -11.41 -11.84 -13.1  -12.89
+ -14.15 -12.34 -12.3  -12.56 -12.92 -12.69 -11.59 -13.22 -13.48 -11.76]
+Time: 94.52s
+Add-Rate: 0.05
+Success: 0.0643
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 227
+Episode: 254240
+Reward: [-12.99 -10.66 -13.58 -11.56 -13.63 -12.83 -12.98 -12.29 -11.93 -12.65
+ -13.33 -13.22 -13.43 -12.82 -13.06 -11.29 -11.73 -12.3  -13.45 -13.24]
+Time: 94.47s
+Add-Rate: 0.05
+Success: 0.0634
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 228
+Episode: 255360
+Reward: [-12.52 -11.68 -11.92 -11.96 -12.65 -12.42 -12.07 -14.28 -12.59 -13.06
+ -12.86 -12.11 -11.58 -13.14 -10.74 -12.28 -13.04 -10.71 -11.85 -12.68]
+Time: 94.83s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 229
+Episode: 256480
+Reward: [-13.07 -15.31 -12.63 -13.75 -13.15 -13.35 -13.17 -13.39 -14.99 -13.42
+ -12.32 -12.67 -13.69 -15.78 -13.21 -13.77 -13.45 -12.52 -13.24 -13.12]
+Time: 99.23s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 230
+Episode: 257600
+Reward: [-12.64 -13.61 -12.76 -12.44 -13.89 -12.75 -13.5  -12.12 -13.64 -12.37
+ -10.73 -12.26 -12.28 -13.65 -13.91 -12.69 -12.33 -11.56 -12.56 -12.29]
+Time: 97.54s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 231
+Episode: 258720
+Reward: [-13.05 -13.93 -12.53 -11.99 -12.93 -10.97 -12.13 -12.6  -13.5  -12.73
+ -12.21 -13.26 -12.8  -12.21 -12.94 -12.68 -12.59 -13.36 -12.27 -12.91]
+Time: 94.71s
+Add-Rate: 0.05
+Success: 0.0670
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 232
+Episode: 259840
+Reward: [-11.46 -13.6  -12.13 -11.72 -12.23 -11.84 -13.39 -11.77 -12.62 -12.82
+ -11.93 -11.62 -12.03 -11.75 -13.04 -11.37 -12.18 -11.83 -11.89 -11.76]
+Time: 94.69s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 233
+Episode: 260960
+Reward: [-11.85 -10.79 -12.71 -12.82 -13.93 -12.86 -12.15 -12.56 -13.12 -12.56
+ -11.59 -12.35 -11.87 -14.59 -11.86 -12.46 -13.22 -13.34 -11.67 -13.54]
+Time: 96.05s
+Add-Rate: 0.05
+Success: 0.0688
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 234
+Episode: 262080
+Reward: [-13.83 -12.79 -11.77 -12.55 -11.47 -11.53 -11.94 -12.67 -11.14 -10.7
+ -12.84 -12.   -11.85 -11.5  -12.28 -11.33 -12.36 -12.98 -11.87 -12.61]
+Time: 94.95s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 235
+Episode: 263200
+Reward: [-11.14 -12.29 -10.79 -11.73 -12.2  -11.58 -12.48 -11.89 -13.29 -11.37
+ -12.17 -11.88 -13.36 -12.56 -11.   -11.13 -12.73 -13.26 -12.35 -11.19]
+Time: 94.70s
+Add-Rate: 0.05
+Success: 0.0768
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 236
+Episode: 264320
+Reward: [-11.94 -11.88 -11.26 -13.39 -14.47 -12.69 -13.04 -11.88 -10.82 -13.74
+ -13.17 -14.49 -11.59 -12.6  -12.23 -13.5  -11.79 -13.05 -13.26 -12.85]
+Time: 94.00s
+Add-Rate: 0.05
+Success: 0.0625
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 237
+Episode: 265440
+Reward: [-11.93 -12.2  -12.91 -13.8  -13.1  -13.93 -12.34 -13.03 -12.08 -11.27
+ -12.86 -11.2  -12.02 -11.55 -11.56 -12.66 -13.05 -11.54 -12.29 -11.89]
+Time: 94.83s
+Add-Rate: 0.05
+Success: 0.0759
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 238
+Episode: 266560
+Reward: [-10.97 -12.76 -13.79 -11.78 -12.   -12.92 -13.32 -13.54 -13.09 -13.49
+ -13.77 -11.8  -12.52 -12.61 -13.2  -12.47 -11.88 -13.09 -12.02 -12.11]
+Time: 94.86s
+Add-Rate: 0.05
+Success: 0.0696
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 239
+Episode: 267680
+Reward: [-11.33 -12.72 -10.65 -13.31 -13.47 -13.17 -12.58 -12.97 -11.02 -12.32
+ -13.69 -12.84 -12.81 -12.48 -12.93 -12.88 -13.56 -12.26 -11.13 -12.5 ]
+Time: 94.66s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 240
+Episode: 268800
+Reward: [-13.03 -13.1  -12.5  -12.08 -12.28 -11.   -13.53 -11.93 -13.07 -12.82
+ -11.17 -13.29 -14.62 -11.67 -12.16 -13.3  -12.22 -12.46 -13.23 -13.01]
+Time: 95.29s
+Add-Rate: 0.05
+Success: 0.0741
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 241
+Episode: 269920
+Reward: [-12.14 -11.37 -11.89 -12.09 -13.85 -11.85 -11.37 -13.46 -10.64 -14.15
+ -11.81 -12.4  -12.21 -13.05 -12.32 -11.23 -11.55 -12.6  -12.87 -13.19]
+Time: 95.42s
+Add-Rate: 0.05
+Success: 0.0714
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 242
+Episode: 271040
+Reward: [-12.49 -12.27 -11.31 -12.28 -11.53 -12.34 -13.74 -11.04 -11.37 -12.1
+ -12.06 -12.42 -11.75 -12.94 -11.31 -11.43 -12.71 -10.71 -12.41 -13.31]
+Time: 94.92s
+Add-Rate: 0.05
+Success: 0.0893
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 243
+Episode: 272160
+Reward: [-13.29 -12.49 -12.67 -12.87 -12.38 -12.26 -11.13 -11.5  -11.96 -12.89
+ -13.57 -13.03 -11.84 -12.89 -11.02 -13.53 -12.14 -12.49 -12.51 -12.59]
+Time: 95.07s
+Add-Rate: 0.05
+Success: 0.0813
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 244
+Episode: 273280
+Reward: [-13.37 -12.26 -11.4  -12.6  -13.85 -11.12 -12.19 -12.15 -10.99 -11.34
+ -12.05 -12.29 -11.51 -12.17 -12.38 -12.21 -12.05 -11.7  -12.1  -12.22]
+Time: 94.80s
+Add-Rate: 0.05
+Success: 0.0830
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 245
+Episode: 274400
+Reward: [-12.69 -13.78 -11.68 -14.22 -12.67 -11.49 -11.59 -11.83 -12.17 -15.02
+ -12.74 -11.49 -12.06 -12.83 -14.24 -13.44 -11.26 -12.48 -12.89 -10.57]
+Time: 95.08s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 246
+Episode: 275520
+Reward: [-11.95 -13.27 -13.51 -12.51 -11.98 -12.02 -12.41 -12.69 -12.74 -11.58
+ -12.34 -13.48 -12.35 -12.28 -12.1  -12.29 -11.48 -13.24 -14.04 -13.05]
+Time: 94.37s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 247
+Episode: 276640
+Reward: [-13.42 -12.6  -12.62 -11.51 -12.6  -13.29 -11.13 -13.52 -12.12 -12.06
+ -12.24 -13.   -12.52 -11.54 -12.6  -11.16 -12.48 -12.81 -12.85 -11.85]
+Time: 95.89s
+Add-Rate: 0.05
+Success: 0.0866
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 248
+Episode: 277760
+Reward: [-12.32 -11.49 -12.46 -12.63 -12.29 -12.05 -11.71 -12.96 -13.24 -12.87
+ -11.51 -12.42 -14.21 -12.38 -12.63 -12.92 -12.48 -13.25 -11.82 -12.21]
+Time: 95.06s
+Add-Rate: 0.05
+Success: 0.0750
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 249
+Episode: 278880
+Reward: [-12.2  -12.35 -11.73 -12.05 -11.54 -12.31 -11.51 -11.73 -12.1  -12.47
+ -12.34 -12.2  -10.87 -12.71 -11.91 -11.43 -12.82 -11.87 -11.24 -12.58]
+Time: 96.06s
+Add-Rate: 0.05
+Success: 0.0786
+Steps-Taken: 80.00
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 250
+Episode: 280000
+Reward: [-12.49 -15.19 -12.53 -13.69 -11.22 -12.66 -12.26 -13.78 -13.11 -13.11
+ -13.04 -12.08 -11.97 -12.53 -12.19 -10.55 -10.77 -12.5  -12.23 -12.95]
+Time: 94.95s
+Add-Rate: 0.05
+Success: 0.0795
+Steps-Taken: 80.00
+==============================================================================
+Running epilogue script on gold54.
+
+Submit time  : 2024-02-26T19:24:08
+Start time   : 2024-02-26T19:24:10
+End time     : 2024-02-27T02:08:59
+Elapsed time : 06:44:49 (Timelimit=2-12:00:00)
+
+Job ID: 5519053
+Cluster: i5
+User/Group: jabn1n20/fp
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 05:54:02
+CPU Efficiency: 10.93% of 2-05:58:32 core-walltime
+Job Wall-clock time: 06:44:49
+Memory Utilized: 10.44 GB
+Memory Efficiency: 5.66% of 184.57 GB
+

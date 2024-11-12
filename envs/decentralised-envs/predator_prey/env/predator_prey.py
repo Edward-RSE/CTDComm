@@ -122,10 +122,9 @@ class PredatorPreyEnv(ParallelEnv):
         """
         Initialise the Predator-Prey environment
         Note: Currently defaults to using the arguments from the args without checking direct inputs
-            TODO: Handle attributes being specified in args AND as direct inputs to make()/__init__()
-            TODO: Allow different parameters for predators and prey (perhaps alse heterogeneous predators), e.g. vision
+            TODO: Allow different parameters for predators and prey (perhaps also heterogeneous predators), e.g. vision
             TODO: Allow reward values as optional arguments
-            TODO: Implement enemy_comm as a separate system rather than giving all agents access to all communication
+            TODO: Allow separate systems for prey and predator communication rather than giving all agents access to all communication
 
         Parameters:
             args (argparse.Namespace object or NoneType) -- List of arguments passed from the command line to the main file
@@ -149,6 +148,7 @@ class PredatorPreyEnv(ParallelEnv):
         self.TIMESTEP_PENALTY = -0.05
         self.PREY_REWARD = 0
         self.POS_PREY_REWARD = 0.05
+        self.DEACTIVATE_PENALTY = -2.
 
         # Collect attributes from args or direct input
         if args:
@@ -216,7 +216,7 @@ class PredatorPreyEnv(ParallelEnv):
             agent: spaces.Box(low=0, high=1, shape=(self.vocab_size, (2 * self.vision) + 1, (2 * self.vision) + 1)
                               , dtype=int) for agent in self.possible_agents
         }
-        self.observation_dim = (self.vocab_size, (2 * self.vision) + 1, (2 * self.vision) + 1)
+        self.observation_dim = self.vocab_size * ((2 * self.vision) + 1) * ((2 * self.vision) + 1)
 
         # Set up rendering
         self.render_mode = render_mode
@@ -341,10 +341,12 @@ class PredatorPreyEnv(ParallelEnv):
         # stats - like success ratio
         self.stat = dict()
 
-        # Observation is N * 2*vision+1 * 2*vision+1
+        # Observation is N * 2*vision+1 * 2*vision+1 * vocab_size
         #   N is the number of learning agents (possibly including prey)
         #   2*vision+1 means that agents have a visual range of self.vision on all sides
-        self.empty_observation = np.ones([2*self.vision+1, 2*self.vision+1], dtype=int)*26
+        #   vocab_size includes a one_hot encoding of all possible obsjects, size=(dims[0]*dims[1])+4
+        self.empty_observation = np.zeros([2*self.vision+1, 2*self.vision+1, self.vocab_size], dtype=int)
+        self.empty_observation[:,:,26] += 1 #All it sees is 'OUTSIDE_CLASS'
         self.all_obs = {}
         self.all_obs = self._get_obs()
 
@@ -360,62 +362,33 @@ class PredatorPreyEnv(ParallelEnv):
             Returns:
                 all_obs (dict(agent: observation object)) -- Joint agent observations
         """
-        for agent in self.possible_agents:
-            # Dead prey receive an empty observation
-            if agent[1] >= self.npredator and not self.active_prey[agent[1]-self.npredator]:
-                self.all_obs[agent] = self.empty_observation.copy()
-            else:
-                # self.all_obs[agent] = 
-                self._observe(agent)
-        return self.all_obs
-    
-    def _observe(self, agent):
-        """
-        Collect the partial observation of a single agent
-        Note: agent positions are stored as [y-self.vision, x-self.vision],
-            where x and y are the actual coordinates in the environment
+        # Representation of the full state
+        self.bool_state = self.empty_bool_base_grid.copy()
 
-            Parameters:
-                agent (agent object) -- Agent for which to collect the observation
-            
-            Returns:
-                obs_grid (observation object) -- Partial observation for the agent
-        """
-        # Get the location of the observing agent
-        agent_loc = self.locs[agent[1]]
-        range_y = np.arange(agent_loc[0], agent_loc[0] + (2 * self.vision) + 2)
-        range_x = np.arange(agent_loc[1], agent_loc[1] + (2 * self.vision) + 2)
-
-        # Get the region within the agent's observation range
-        bool_base_grid = self.empty_bool_base_grid.copy()
-        slice_y = slice(range_y[0], range_y[-1]+1)
-        slice_x = slice(range_x[0], range_x[-1]+1)
-        obs_grid = bool_base_grid[slice_y, slice_x]
-
-        # Add the predators and prey in the agent's observation range
+        # Place all predators and prey in the state
         for i in range(self.npredator):
             p = self.locs[i]
-            if p[0]+self.vision in range_y:
-                if p[1]+self.vision in range_x:
-                    p_position = [0, 0]
-                    p_position[0] = p[0] + self.vision - range_y[0]
-                    p_position[1] = p[1] + self.vision - range_x[0]
-                    obs_grid[p_position[0], p_position[1], self.PREDATOR_CLASS] += 1
-        
+            self.bool_state[p[0] + self.vision, p[1] + self.vision, self.PREDATOR_CLASS] += 1
+
         for i in range(self.nprey):
             # Skip dead prey
             if not self.active_prey[i]: continue
             
             p = self.locs[i+self.npredator]
-            if p[0]+self.vision in range_y:
-                if p[1]+self.vision in range_x:
-                    p_position = [0, 0]
-                    p_position[0] = p[0] + self.vision - range_y[0]
-                    p_position[1] = p[1] + self.vision - range_x[0]
-                    obs_grid[p_position[0], p_position[1], self.PREDATOR_CLASS] += 1
+            self.bool_state[p[0] + self.vision, p[1] + self.vision, self.PREY_CLASS] += 1
 
-        self.all_obs[agent] = obs_grid
-        return obs_grid
+        # Collect partial observations for all agents (possibly including prey)
+        for agent in self.possible_agents:
+            if agent[1] >= self.npredator and not self.active_prey[agent[1]-self.npredator]:
+                # Dead prey receive an empty observation
+                self.all_obs[agent] = self.empty_observation.copy()
+            else:
+                agent_loc = self.locs[agent[1]]
+                slice_y = slice(agent_loc[0], agent_loc[0] + (2 * self.vision) + 1)
+                slice_x = slice(agent_loc[1], agent_loc[1] + (2 * self.vision) + 1)
+                self.all_obs[agent] = self.bool_state[slice_y, slice_x]
+
+        return self.all_obs
 
     def step(self, actions):
         """
@@ -523,12 +496,15 @@ class PredatorPreyEnv(ParallelEnv):
         For prey:
             -1*self.TIMESTEP_PENALTY if they have not been caught
             self.TIMESTEP_PENALTY if there is at least 1 predator on them
+            self.DEACTIVATE_PENALTY if all predators catch them and they are killed, received max once per episode
         For predators:
             self.TIMESTEP_PENALTY if they are not at the same location as a prey (have not caught a prey)
             If they have caught a prey (are at the same location as a prey):
-                self.POS_PREY_REWARD * number of predators on the a prey - cooperative mode
-                self.TIMESTEP_PENALTY or self.POS_PREY_REWARD / number of predators on the same prey - competitive mode
-                self.PREY_REWARD but the largest group of predators that are on a captured prey remain still - mixed mode
+                cooperative mode - self.POS_PREY_REWARD * number of predators on the a prey
+                competitive mode - self.POS_PREY_REWARD / number of predators on the same prey
+                mixed mode - self.PREY_REWARD but the largest group of predators that are on a captured prey remain still
+            When there are multiple prey, there is an additional reward for predators on the 'most caught' prey
+                to promote focusing on one prey at a time.
         
             Returns:
                 rewards (dict(agent: float)) -- Rewards from the environment (see above for logic)
@@ -550,16 +526,16 @@ class PredatorPreyEnv(ParallelEnv):
             on_prey = n_predator_on_prey.squeeze(axis=1)
             on_prey_count = np.sum(on_prey)
 
-            self.reached_prey[on_prey] = 1
+            self.reached_prey[on_prey == 1] = 1
 
             # Rewards for predators
             if self.mode == 'cooperative':
-                reward[on_prey] = self.POS_PREY_REWARD * on_prey_count
+                reward[:self.npredator][on_prey == 1] = self.POS_PREY_REWARD * on_prey_count
             elif self.mode == 'competitive':
                 if on_prey_count:
-                    reward[on_prey] = self.POS_PREY_REWARD / on_prey_count
+                    reward[:self.npredator][on_prey == 1] = self.POS_PREY_REWARD / on_prey_count
             elif self.mode == 'mixed':
-                reward[on_prey] = self.PREY_REWARD
+                reward[:self.npredator][on_prey == 1] = self.PREY_REWARD
 
                 # If all predators have caught a prey, terminate the episode
                 if np.all(self.reached_prey == 1):
@@ -569,30 +545,56 @@ class PredatorPreyEnv(ParallelEnv):
                     self.agents = {}
             else:
                 raise RuntimeError("Incorrect mode, Available modes: [cooperative|competitive|mixed]")
-
+            
             # Rewards for prey
             if self.learning_prey:
                 if on_prey_count == 0:
                     reward[self.npredator] = -1 * self.TIMESTEP_PENALTY
+                elif np.all(self.reached_prey == 1):
+                    # Large one-time penalty when caught and killed
+                    reward[self.npredator] = self.DEACTIVATE_PENALTY
                 else:
-                    reward[self.npredator:] = 0
+                    reward[self.npredator] = self.TIMESTEP_PENALTY
         elif self.nprey > 1:
             # Determine the prey with the most predators on it
             on_prey_count = np.sum(n_predator_on_prey, axis=0)
             most_caught_prey = np.argmax(on_prey_count)
 
             # The current most-caught prey becomes the temporary goal
-            self.reached_prey[n_predator_on_prey[:, most_caught_prey]] = 1
+            self.reached_prey[n_predator_on_prey[:, most_caught_prey] == 1] = 1
 
             # Rewards for predators (as for 1 prey but multiply by the number of prey a predator has caught at once)
             if self.mode == 'cooperative':
-                reward[:self.npredator] = np.sum(n_predator_on_prey * self.POS_PREY_REWARD * on_prey_count, axis=1)
+                # Reward every predator a little bit for every predator on any prey
+                reward[:self.npredator] = np.sum(n_predator_on_prey * on_prey_count * self.POS_PREY_REWARD, axis=1)
+
+                # Double reward for the most caught prey
+                reward[:self.npredator] += on_prey_count[most_caught_prey] * self.POS_PREY_REWARD
+
+                # Timestep penalty if not on any prey
+                reward[:self.npredator][self.reached_prey == 0] = self.TIMESTEP_PENALTY
             elif self.mode == 'competitive':
+                # Reward a predator for being on any prey
+                reward[:self.npredator] = 0
                 for j in range(self.nprey):
                     if on_prey_count[j] != 0:
-                        reward[:self.npredator] = n_predator_on_prey[:, j] * self.POS_PREY_REWARD / on_prey_count[j]
+                        reward[:self.npredator] += n_predator_on_prey[:, j] * self.POS_PREY_REWARD / on_prey_count[j]
+
+                # I don't think that double rewards make sense in the competitive mode
+                # # Double reward for being on the most caught prey
+                # reward[:self.npredator][self.reached_prey == 1] += on_prey_count[most_caught_prey] / self.POS_PREY_REWARD
+
+                # Timestep penalty if not on any prey
+                reward[:self.npredator][self.reached_prey == 0] = self.TIMESTEP_PENALTY
             elif self.mode == 'mixed':
+                # Reward a predator for being on any prey (different value for mixed vs other types)
                 reward[:self.npredator] = np.sum(n_predator_on_prey * self.PREY_REWARD, axis=1)
+
+                # Double reward for being on the most caught prey
+                reward[:self.npredator][self.reached_prey == 1] += on_prey_count[most_caught_prey] * self.PREY_REWARD
+
+                # Timestep penalty if not on any prey
+                reward[:self.npredator][self.reached_prey == 0] = self.TIMESTEP_PENALTY
 
                 # If all predators have caught a prey, terminate it and either end the episode or move on
                 if np.all(self.reached_prey == 1):
@@ -601,25 +603,31 @@ class PredatorPreyEnv(ParallelEnv):
                     for caught_prey in np.flip(caught_list):
                         # Remove caught prey from various attributes (noting that indexing may be messed up by removing previous prey)
                         self.n_living_prey -= 1
-                        if self.n_living_prey == 0:
-                            # All prey have been caught, terminate all agents ready to end the episode
-                            self.terminations = {k: True for k in self.terminations}
-                            self.agents = {}
 
                         # Change the loc to one of the outside spots
                         #   it gets ignored by the observe functions but I don't want it interfering with the 'on_prey' stuff
                         dead_prey_idx = caught_prey
                         self.locs[self.npredator+dead_prey_idx] = [0, 0]
                         self.active_prey[dead_prey_idx] = False
-                        self.all_obs[self.possible_agents[self.npredator+dead_prey_idx]] = self.empty_observation.copy()
-                        
-                        # Account for the possibility of self.agents being smaller than npredator+nprey if a prey has already been caught
-                        ndead = len(np.where(self.active_prey == False)) - 1
-                        if caught_prey >= ndead:
-                            dead_prey_idx = caught_prey - ndead
+                        if self.learning_prey:
+                            self.all_obs[self.possible_agents[self.npredator+dead_prey_idx]] = self.empty_observation.copy()
+                            
+                            # Account for the possibility of self.agents being smaller than npredator+nprey if a prey has already been caught
+                            ndead = len(np.where(self.active_prey == False)) - 1
+                            if caught_prey >= ndead:
+                                dead_prey_idx = caught_prey - ndead
 
-                        self.terminations[self.possible_agents[self.npredator+dead_prey_idx]] = True
-                        self.agents.pop(self.possible_agents[self.npredator+dead_prey_idx])
+                            self.terminations[self.possible_agents[self.npredator+dead_prey_idx]] = True
+                            self.agents.pop(self.possible_agents[self.npredator+dead_prey_idx])
+                        
+                        # If all prey have been caught, terminate the episode
+                        if self.n_living_prey == 0:
+                            # All prey have been caught, terminate all agents ready to end the episode
+                            self.terminations = {k: True for k in self.terminations}
+                            self.agents = {}
+                else:
+                    # If some agents haven't caught the prey, give them the timestep penalty again
+                    reward[:self.npredator][reward[:self.npredator] == 0] = self.TIMESTEP_PENALTY
             else:
                 raise RuntimeError("Incorrect mode, Available modes: [cooperative|competitive|mixed]")
 
@@ -628,12 +636,15 @@ class PredatorPreyEnv(ParallelEnv):
                 for i in range(self.nprey):
                     # Dead prey receive a constant reward equal to having been caught
                     if not self.active_prey[i]:
-                        reward[self.npredator+i] = 0
+                        reward[self.npredator+i] = self.TIMESTEP_PENALTY #0
                     else:
                         if on_prey_count[i] == 0:
                             reward[self.npredator+i] = -1 * self.TIMESTEP_PENALTY
+                        elif on_prey_count[i] == self.npredator:
+                            # Large one-time penalty when caught and killed
+                            reward[self.npredator+i] = self.DEACTIVATE_PENALTY
                         else:
-                            reward[self.npredator+i] = 0
+                            reward[self.npredator+i] = self.TIMESTEP_PENALTY #0
         else:
             raise ValueError("This environment requires at least one prey, nprey (nenemies) must be an integer >= 1")
 
@@ -701,8 +712,11 @@ class PredatorPreyEnv(ParallelEnv):
 
     def reward_terminal(self):
         """Return a zero reward when the environment is terminal
-        TODO: work out if this actually gets used"""
-        self.rewards = {agent: 0 for agent in self.possible_agents}
+        Note: This is adapted from Predator-Prey v0, it may not be necessary for you to use it."""
+        if self.terminations[self.possible_agents[0]] or self.truncations[self.possible_agents[0]]:
+            self.rewards = {agent: 0 for agent in self.possible_agents}
+        else:
+            self.rewards = self._get_rewards()
         return self.rewards
     
     def get_comm_range_mask(self):
@@ -748,3 +762,11 @@ class PredatorPreyEnv(ParallelEnv):
                     comm_range_mask[j, i] = 1
 
         return comm_range_mask
+
+    def get_stat(self):
+        """Collect self.stat from this environment"""
+        if hasattr(self, 'stat'):
+            self.stat.pop('steps_taken', None)
+            return self.stat
+        else:
+            return dict()

@@ -1,0 +1,20 @@
+==============================================================================
+Running epilogue script on gold52.
+
+Submit time  : 2024-11-07T17:12:31
+Start time   : 2024-11-07T17:12:41
+End time     : 2024-11-09T20:45:10
+Elapsed time : 2-03:32:29 (Timelimit=2-12:00:00)
+
+Job ID: 6747690
+Cluster: i5
+User/Group: jabn1n20/fp
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 21:26:11
+CPU Efficiency: 5.20% of 17-04:19:52 core-walltime
+Job Wall-clock time: 2-03:32:29
+Memory Utilized: 10.45 GB
+Memory Efficiency: 5.66% of 184.57 GB
+

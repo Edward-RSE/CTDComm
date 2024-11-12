@@ -1,7 +1,8 @@
 # Ignore experimental data, leaving the summary csv files
 /saved_magic/*
-/baselines/saved/predator_prey*
+/baselines/cave_saved/*predator_prey*
 /baselines/saved/traffic_junction*
+/baselines/ctdcomm_saved/*
 
 
 # Ignore directories used for informal testing

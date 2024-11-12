@@ -44,24 +44,24 @@ class DecTarMAC(TarCommNetMLP):
         self.comm_passes = args.comm_passes
 
         # Set up individual agents
-        if args.share_weights:
-            self.agent = DecAgent(args, num_inputs, a_id)
-            self.agents = []
-            for a_id in range(args.nagents):
-                self.agents.append(self.agent)
-                self.agents[a_id].agent_id = a_id
-            self.agents = nn.ModuleList(self.agents)
-        else:
-            self.agents = nn.ModuleList([DecAgent(args, num_inputs, a_id) for a_id in range(args.nagents)])
+        self.agents = nn.ModuleList([DecAgent(args, num_inputs, a_id) for a_id in range(args.nagents)])
 
         # Centralised value estimation
         self.cave = args.cave
-        if args.cave:
+        self.message_augment = args.message_augment
+        self.v_augment = args.v_augment
+        if args.cave and args.message_augment:
+            # Include both the adjacency data and the message content (attention value) as input to the value head
+            value_input_size = 2 * self.hid_size + (args.comm_passes * args.nagents * args.nagents)
+        elif args.cave:
             # Include the adjacency data as input to the value head
             value_input_size = self.hid_size + (args.comm_passes * args.nagents * args.nagents)
-            self.value_head = nn.Linear(value_input_size, 1)
+        elif args.message_augment or args.v_augment:
+            # Include the message content (aggregated message or attention value) as input to the value head
+            value_input_size = 2 * self.hid_size
         else:
-            self.value_head = nn.Linear(self.hid_size, 1)
+            value_input_size = self.hid_size
+        self.value_head = nn.Linear(value_input_size, 1)
 
         return None
 
@@ -129,33 +129,36 @@ class DecTarMAC(TarCommNetMLP):
 
         # Transpose to shape (n, batch_size, num_inputs)
         hidden_state = torch.transpose(hidden_state, 0, 1)
-        assert len(x.shape) == 3
+        assert len(x.shape) == 3, f"input has {len(x.shape)} dimensions, not 3. Shape is {x.shape}"
         x = torch.transpose(x, 0, 1)
 
         return x, hidden_state, cell_state
 
     def forward(self, x, info={}):
         # TODO: Update dimensions
-        """Centralised forward function for training Dec-TarMAC, expects state, previous hidden
-            state and communication tensor.
+        """Centralised forward function (including critic) for training Dec-TarMAC.
         B: Batch Size: Normally 1 in case of episode
         N: number of agents
+        H: size of the hidden state for recurrent architectures (args.hid_size)
         Note: Need to reshape things as (N x B x ...) rather than (B x N x ...)
             to pass things to decentralised agents
 
         Arguments:
             x {tensor} -- State of the agents (N x num_inputs)
-            prev_hidden_state {tensor} -- Previous hidden state for the networks in
-            case of multiple passes (batch_size x N x hid_size)
-            comm_in {tensor} -- Communication tensor for the network. (batch_size x N x N x hid_size)
+            info {dict} -- Information passed between this module
+                and the trainer/executor function running it
 
         Returns:
-            tuple -- Contains
-                next_hidden {tensor}: Next hidden state for network
-                comm_out {tensor}: Next communication tensor
-                action_data: Data needed for taking next action (Discrete values in
-                case of discrete, mean and std in case of continuous)
-                v: value head
+            action {tensor} --
+                If continuous: actions chosen by each agent (dims are env dependent)
+                If discrete: probability distribution representing action preferences
+                    for each agent (dims are env dependent)
+            value_head {tensor} -- critics' value estimates (N)
+            hidden_state {tuple} (if args.recurrent): Contains
+                hidden_state: Recurrent hidden state (H)
+                cell_state: Recurrent cell state (H)
+            adjacency_data {tensor} (if args.save_adjacency) -- Adjacency matrices
+                for all communication rounds, including all agents (N x N)
         """
 
         # Process and separate observations for each agent (maintaining batch structure)
@@ -204,15 +207,20 @@ class DecTarMAC(TarCommNetMLP):
             # assert False, "Nothing broken up to the attention vector generation, is everything the correct shape?"
 
             # Send attention vectors to each agent and get new communication out
-            attn, hidden_state, cell_state = [], [], []
+            attn, hidden_state, cell_state, comm = [], [], [], []
             for a_id in range(n):
-                agent_attn, agent_hidden_state, agent_cell_state = self.agents[a_id].attn2hid(keys, values, agent_mask[:, :, a_id], agent_mask_alive[:, :, a_id], i)
+                agent_attn, agent_hidden_state, agent_cell_state, agent_comm = self.agents[a_id].attn2hid(keys, values, agent_mask[:, :, a_id], agent_mask_alive[:, :, a_id], i)
                 attn.append(agent_attn)
                 hidden_state.append(agent_hidden_state)
                 cell_state.append(agent_cell_state)
+                comm.append(agent_comm)
             attn = torch.stack(attn).transpose(0,1)
             hidden_state = torch.stack(hidden_state).transpose(0,1)
             cell_state = torch.stack(cell_state).transpose(0,1)
+            if self.message_augment:
+                comm_stack = torch.stack(comm).transpose(0,1)
+            else:
+                comm_stack = None
 
             # Save attentions as a proxy for an adjacency matrix
             if self.args.save_adjacency:
@@ -240,15 +248,32 @@ class DecTarMAC(TarCommNetMLP):
         # assert False, "Nothing broken up to action selection, is everything the correct shape?"
 
         # Centralised critic
-        if self.cave:
+        if self.cave and self.message_augment:
+            # Add the adjacency data and the aggregated messages and add them to the hidden state as inputs to the critic
+            value_input = torch.cat([hidden_state.view(batch_size, n, self.hid_size),
+                                     comm_stack.view(batch_size, n, self.hid_size),
+                                     torch.flatten(adjacency_data).expand((batch_size, n, -1))], dim=2)
+        elif self.cave and self.v_augment:
+            # Add the adjacency data and the attention values and add them to the hidden state as inputs to the critic
+            value_input = torch.cat([hidden_state.view(batch_size, n, self.hid_size),
+                                     values.transpose(0,1).view(batch_size, n, self.hid_size),
+                                     torch.flatten(adjacency_data).expand((batch_size, n, -1))], dim=2)
+        elif self.cave:
             # Flatten the adjacency data and add it to the hidden state to go into the critic
             value_input = torch.cat([hidden_state.view(batch_size, n, self.hid_size),
                                      torch.flatten(adjacency_data).expand((batch_size, n, -1))], dim=2)
             # stacked_adjacency = torch.stack([torch.stack([torch.flatten(adjacency_data) for _ in range(n)]) for _ in range(batch_size)])
             # value_input = torch.cat([hidden_state.view(batch_size, n, self.hid_size), stacked_adjacency], dim=2)
-            value_head = self.value_head(value_input)
+        elif self.message_augment:
+            value_input = torch.cat([hidden_state.view(batch_size, n, self.hid_size),
+                                     comm_stack.view(batch_size, n, self.hid_size)], dim=2)
+        elif self.v_augment:
+            # Add the adjacency data and the attention values and add them to the hidden state as inputs to the critic
+            value_input = torch.cat([hidden_state.view(batch_size, n, self.hid_size),
+                                     values.transpose(0,1).view(batch_size, n, self.hid_size)], dim=2)
         else:
-            value_head = self.value_head(hidden_state)
+            value_input = hidden_state
+        value_head = self.value_head(value_input)
         
         if self.args.save_adjacency and self.args.recurrent:
             return action, value_head, (hidden_state.clone(), cell_state.clone()), adjacency_data.detach().numpy()
