@@ -1757,3 +1757,2551 @@ batch:  1
 batch:  2
 batch:  3
 batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 102
+Episode: 136415
+Reward: [-2.08 -2.07 -2.07 -2.08 -2.08 -2.07 -2.08 -2.08 -2.07 -2.07]
+Time: 156.25s
+Success: 0.6882
+Steps-Taken: 48.42
+Comm-Action: [0.53 0.53 0.53 0.53 0.53 0.53 0.52 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 103
+Episode: 138113
+Reward: [-2.08 -2.1  -2.09 -2.1  -2.08 -2.09 -2.09 -2.1  -2.07 -2.09]
+Time: 152.87s
+Success: 0.6802
+Steps-Taken: 49.98
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 104
+Episode: 139798
+Reward: [-2.21 -2.21 -2.21 -2.2  -2.2  -2.2  -2.21 -2.2  -2.2  -2.21]
+Time: 157.55s
+Success: 0.6380
+Steps-Taken: 50.64
+Comm-Action: [0.52 0.52 0.52 0.52 0.51 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 105
+Episode: 141462
+Reward: [-2.24 -2.24 -2.23 -2.23 -2.22 -2.24 -2.24 -2.24 -2.23 -2.24]
+Time: 152.17s
+Success: 0.6220
+Steps-Taken: 51.28
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 106
+Episode: 143114
+Reward: [-2.18 -2.19 -2.18 -2.2  -2.19 -2.19 -2.19 -2.19 -2.19 -2.18]
+Time: 152.18s
+Success: 0.6634
+Steps-Taken: 51.13
+Comm-Action: [0.52 0.51 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 107
+Episode: 144852
+Reward: [-2.13 -2.13 -2.13 -2.12 -2.13 -2.11 -2.1  -2.12 -2.11 -2.12]
+Time: 163.21s
+Success: 0.6738
+Steps-Taken: 49.10
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 108
+Episode: 146570
+Reward: [-2.12 -2.1  -2.11 -2.1  -2.11 -2.11 -2.11 -2.1  -2.1  -2.1 ]
+Time: 158.60s
+Success: 0.6892
+Steps-Taken: 49.17
+Comm-Action: [0.52 0.51 0.52 0.51 0.51 0.52 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 109
+Episode: 148330
+Reward: [-2.03 -2.04 -2.03 -2.03 -2.03 -2.03 -2.06 -2.03 -2.05 -2.06]
+Time: 167.29s
+Success: 0.7040
+Steps-Taken: 48.09
+Comm-Action: [0.51 0.5  0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 110
+Episode: 150091
+Reward: [-2.04 -2.03 -2.04 -2.03 -2.03 -2.04 -2.03 -2.03 -2.05 -2.04]
+Time: 161.78s
+Success: 0.7371
+Steps-Taken: 48.31
+Comm-Action: [0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 111
+Episode: 151866
+Reward: [-2.01 -2.02 -2.01 -2.02 -2.02 -2.01 -2.02 -2.01 -2.01 -2.02]
+Time: 153.69s
+Success: 0.7279
+Steps-Taken: 47.52
+Comm-Action: [0.54 0.54 0.54 0.54 0.53 0.53 0.54 0.53 0.54 0.54]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 112
+Episode: 153639
+Reward: [-2.06 -2.05 -2.04 -2.04 -2.05 -2.05 -2.04 -2.04 -2.04 -2.04]
+Time: 157.51s
+Success: 0.7078
+Steps-Taken: 47.78
+Comm-Action: [0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 113
+Episode: 155407
+Reward: [-2.03 -2.03 -2.04 -2.02 -2.02 -2.03 -2.03 -2.03 -2.02 -2.03]
+Time: 153.53s
+Success: 0.7257
+Steps-Taken: 47.74
+Comm-Action: [0.51 0.51 0.51 0.5  0.51 0.51 0.51 0.51 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 114
+Episode: 157185
+Reward: [-2.   -1.98 -1.98 -1.98 -1.98 -1.99 -1.98 -2.   -1.99 -2.  ]
+Time: 153.03s
+Success: 0.7508
+Steps-Taken: 47.33
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 115
+Episode: 158985
+Reward: [-2.   -1.99 -1.99 -1.99 -1.99 -1.99 -1.98 -1.99 -1.99 -1.99]
+Time: 157.30s
+Success: 0.7339
+Steps-Taken: 47.05
+Comm-Action: [0.5  0.5  0.5  0.51 0.5  0.51 0.51 0.5  0.51 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 116
+Episode: 160733
+Reward: [-2.08 -2.08 -2.07 -2.07 -2.06 -2.07 -2.08 -2.07 -2.08 -2.08]
+Time: 157.93s
+Success: 0.7317
+Steps-Taken: 48.65
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 117
+Episode: 162524
+Reward: [-2.   -2.   -1.99 -2.   -1.98 -2.   -2.   -2.   -2.   -1.98]
+Time: 160.67s
+Success: 0.7476
+Steps-Taken: 47.28
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 118
+Episode: 164341
+Reward: [-1.98 -1.99 -1.99 -1.99 -1.99 -1.99 -2.   -1.98 -2.   -1.99]
+Time: 161.13s
+Success: 0.7303
+Steps-Taken: 46.75
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 119
+Episode: 166154
+Reward: [-1.98 -1.99 -1.99 -1.98 -1.99 -1.98 -1.98 -1.98 -1.98 -1.99]
+Time: 159.62s
+Success: 0.7457
+Steps-Taken: 46.82
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 120
+Episode: 167933
+Reward: [-2.06 -2.04 -2.03 -2.05 -2.04 -2.04 -2.05 -2.04 -2.03 -2.04]
+Time: 156.92s
+Success: 0.7167
+Steps-Taken: 47.66
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 121
+Episode: 169765
+Reward: [-1.96 -1.96 -1.98 -1.98 -1.97 -1.97 -1.98 -1.97 -1.98 -1.97]
+Time: 154.22s
+Success: 0.7238
+Steps-Taken: 46.26
+Comm-Action: [0.49 0.49 0.49 0.49 0.5  0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 122
+Episode: 171554
+Reward: [-2.03 -2.02 -2.02 -2.03 -2.02 -2.02 -2.01 -2.03 -2.02 -2.01]
+Time: 158.68s
+Success: 0.7267
+Steps-Taken: 47.44
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.48 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 123
+Episode: 173330
+Reward: [-2.01 -2.01 -2.01 -2.03 -2.02 -2.02 -2.03 -2.01 -2.01 -2.02]
+Time: 163.05s
+Success: 0.7348
+Steps-Taken: 47.66
+Comm-Action: [0.5  0.49 0.5  0.5  0.5  0.5  0.5  0.49 0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 124
+Episode: 175169
+Reward: [-1.97 -1.97 -1.96 -1.97 -1.96 -1.96 -1.96 -1.96 -1.98 -1.98]
+Time: 169.33s
+Success: 0.7227
+Steps-Taken: 46.26
+Comm-Action: [0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 125
+Episode: 176986
+Reward: [-2.   -2.01 -2.01 -2.   -2.01 -2.   -2.01 -2.   -1.99 -2.  ]
+Time: 157.98s
+Success: 0.7199
+Steps-Taken: 46.81
+Comm-Action: [0.5  0.5  0.5  0.49 0.5  0.49 0.49 0.5  0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 126
+Episode: 178622
+Reward: [-2.02 -2.03 -2.02 -2.04 -2.03 -2.04 -2.04 -2.04 -2.04 -2.05]
+Time: 151.72s
+Success: 0.6510
+Steps-Taken: 51.94
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 127
+Episode: 180357
+Reward: [-1.96 -1.95 -1.96 -1.95 -1.96 -1.95 -1.95 -1.95 -1.97 -1.95]
+Time: 147.61s
+Success: 0.7337
+Steps-Taken: 48.60
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.5  0.49 0.49 0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 128
+Episode: 182156
+Reward: [-1.98 -1.99 -1.98 -1.97 -1.98 -1.98 -1.97 -1.97 -1.98 -1.98]
+Time: 169.06s
+Success: 0.7315
+Steps-Taken: 47.08
+Comm-Action: [0.49 0.49 0.48 0.49 0.48 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 129
+Episode: 183981
+Reward: [-1.93 -1.94 -1.94 -1.93 -1.93 -1.94 -1.93 -1.94 -1.93 -1.93]
+Time: 163.64s
+Success: 0.7589
+Steps-Taken: 46.32
+Comm-Action: [0.48 0.49 0.48 0.49 0.49 0.48 0.48 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 130
+Episode: 185794
+Reward: [-1.97 -1.97 -1.97 -1.96 -1.97 -1.98 -1.96 -1.96 -1.97 -1.96]
+Time: 161.94s
+Success: 0.7314
+Steps-Taken: 46.49
+Comm-Action: [0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 131
+Episode: 187580
+Reward: [-2.   -1.99 -1.99 -1.99 -1.99 -1.98 -1.98 -1.99 -2.   -1.99]
+Time: 177.32s
+Success: 0.7514
+Steps-Taken: 47.41
+Comm-Action: [0.49 0.48 0.49 0.49 0.48 0.49 0.48 0.48 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 132
+Episode: 189387
+Reward: [-1.97 -1.99 -1.99 -1.98 -1.98 -1.98 -1.99 -1.99 -1.98 -1.99]
+Time: 165.93s
+Success: 0.7471
+Steps-Taken: 46.93
+Comm-Action: [0.5  0.5  0.5  0.49 0.5  0.5  0.5  0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 133
+Episode: 191235
+Reward: [-1.95 -1.93 -1.93 -1.94 -1.95 -1.94 -1.93 -1.95 -1.93 -1.95]
+Time: 170.96s
+Success: 0.7332
+Steps-Taken: 45.65
+Comm-Action: [0.5  0.51 0.51 0.51 0.51 0.5  0.5  0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 134
+Episode: 193066
+Reward: [-2.01 -2.01 -2.01 -2.01 -2.01 -2.   -2.   -2.   -2.01 -2.01]
+Time: 172.80s
+Success: 0.6810
+Steps-Taken: 46.16
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 135
+Episode: 194869
+Reward: [-2.02 -2.03 -2.01 -2.02 -2.02 -2.04 -2.02 -2.04 -2.03 -2.02]
+Time: 168.37s
+Success: 0.6839
+Steps-Taken: 46.98
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 136
+Episode: 196656
+Reward: [-1.99 -1.99 -2.   -2.   -1.99 -1.99 -2.   -1.99 -2.   -2.  ]
+Time: 158.85s
+Success: 0.7252
+Steps-Taken: 47.27
+Comm-Action: [0.5  0.49 0.5  0.5  0.49 0.5  0.5  0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 137
+Episode: 198498
+Reward: [-1.94 -1.94 -1.94 -1.94 -1.93 -1.93 -1.95 -1.94 -1.93 -1.94]
+Time: 172.00s
+Success: 0.7514
+Steps-Taken: 46.04
+Comm-Action: [0.53 0.52 0.53 0.53 0.52 0.52 0.53 0.53 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 138
+Episode: 200316
+Reward: [-1.95 -1.95 -1.95 -1.95 -1.96 -1.95 -1.95 -1.95 -1.95 -1.95]
+Time: 172.47s
+Success: 0.7574
+Steps-Taken: 46.41
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 139
+Episode: 202198
+Reward: [-1.9  -1.89 -1.9  -1.9  -1.91 -1.89 -1.89 -1.9  -1.91 -1.9 ]
+Time: 163.89s
+Success: 0.7386
+Steps-Taken: 44.85
+Comm-Action: [0.47 0.47 0.47 0.48 0.48 0.48 0.48 0.48 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 140
+Episode: 204080
+Reward: [-1.85 -1.84 -1.86 -1.85 -1.86 -1.86 -1.84 -1.85 -1.86 -1.85]
+Time: 161.09s
+Success: 0.7811
+Steps-Taken: 44.89
+Comm-Action: [0.48 0.48 0.47 0.47 0.47 0.47 0.47 0.47 0.47 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 141
+Episode: 205974
+Reward: [-1.86 -1.85 -1.86 -1.86 -1.85 -1.86 -1.86 -1.85 -1.85 -1.86]
+Time: 158.50s
+Success: 0.7788
+Steps-Taken: 44.66
+Comm-Action: [0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 142
+Episode: 207849
+Reward: [-1.86 -1.87 -1.86 -1.87 -1.86 -1.86 -1.86 -1.86 -1.87 -1.86]
+Time: 165.71s
+Success: 0.7888
+Steps-Taken: 45.09
+Comm-Action: [0.49 0.49 0.48 0.48 0.48 0.49 0.48 0.48 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 143
+Episode: 209698
+Reward: [-1.93 -1.93 -1.92 -1.93 -1.93 -1.93 -1.94 -1.93 -1.92 -1.93]
+Time: 159.09s
+Success: 0.7377
+Steps-Taken: 45.76
+Comm-Action: [0.5  0.5  0.5  0.5  0.5  0.5  0.51 0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 144
+Episode: 211609
+Reward: [-1.85 -1.85 -1.85 -1.85 -1.85 -1.85 -1.84 -1.85 -1.86 -1.86]
+Time: 163.05s
+Success: 0.7687
+Steps-Taken: 44.30
+Comm-Action: [0.53 0.53 0.53 0.53 0.53 0.52 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 145
+Episode: 213500
+Reward: [-1.83 -1.83 -1.85 -1.82 -1.84 -1.83 -1.84 -1.83 -1.84 -1.84]
+Time: 170.08s
+Success: 0.7869
+Steps-Taken: 44.65
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 146
+Episode: 215360
+Reward: [-1.88 -1.89 -1.89 -1.88 -1.88 -1.88 -1.89 -1.87 -1.87 -1.89]
+Time: 162.09s
+Success: 0.7871
+Steps-Taken: 45.48
+Comm-Action: [0.51 0.51 0.52 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 147
+Episode: 217246
+Reward: [-1.89 -1.88 -1.87 -1.88 -1.88 -1.87 -1.88 -1.89 -1.88 -1.89]
+Time: 159.35s
+Success: 0.7704
+Steps-Taken: 44.99
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 148
+Episode: 219148
+Reward: [-1.84 -1.83 -1.83 -1.83 -1.83 -1.84 -1.85 -1.82 -1.84 -1.82]
+Time: 165.27s
+Success: 0.7871
+Steps-Taken: 44.35
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.5  0.5  0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 149
+Episode: 221061
+Reward: [-1.79 -1.79 -1.78 -1.8  -1.8  -1.78 -1.81 -1.79 -1.8  -1.8 ]
+Time: 155.14s
+Success: 0.8118
+Steps-Taken: 44.18
+Comm-Action: [0.52 0.52 0.52 0.52 0.51 0.52 0.51 0.51 0.52 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 150
+Episode: 223000
+Reward: [-1.78 -1.77 -1.78 -1.77 -1.77 -1.77 -1.78 -1.76 -1.78 -1.77]
+Time: 174.45s
+Success: 0.8112
+Steps-Taken: 43.72
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 151
+Episode: 224873
+Reward: [-1.83 -1.82 -1.84 -1.83 -1.83 -1.82 -1.85 -1.83 -1.83 -1.84]
+Time: 201.43s
+Success: 0.8153
+Steps-Taken: 44.98
+Comm-Action: [0.49 0.5  0.5  0.5  0.5  0.49 0.49 0.49 0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 152
+Episode: 226804
+Reward: [-1.74 -1.74 -1.76 -1.74 -1.74 -1.74 -1.74 -1.74 -1.76 -1.74]
+Time: 159.92s
+Success: 0.8426
+Steps-Taken: 43.56
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.51 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 153
+Episode: 228718
+Reward: [-1.81 -1.81 -1.81 -1.8  -1.81 -1.82 -1.8  -1.8  -1.81 -1.81]
+Time: 165.64s
+Success: 0.7983
+Steps-Taken: 43.98
+Comm-Action: [0.52 0.51 0.51 0.51 0.52 0.51 0.52 0.51 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 154
+Episode: 230353
+Reward: [-2.01 -2.02 -2.01 -2.01 -2.01 -2.03 -2.02 -1.99 -2.   -2.01]
+Time: 163.93s
+Success: 0.6667
+Steps-Taken: 51.92
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 155
+Episode: 232243
+Reward: [-1.78 -1.77 -1.78 -1.77 -1.78 -1.77 -1.78 -1.78 -1.77 -1.76]
+Time: 164.02s
+Success: 0.8190
+Steps-Taken: 44.55
+Comm-Action: [0.45 0.45 0.45 0.45 0.45 0.46 0.45 0.46 0.45 0.45]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 156
+Episode: 234111
+Reward: [-1.83 -1.84 -1.84 -1.84 -1.84 -1.83 -1.84 -1.83 -1.82 -1.83]
+Time: 155.49s
+Success: 0.8084
+Steps-Taken: 45.17
+Comm-Action: [0.47 0.47 0.47 0.47 0.47 0.47 0.47 0.46 0.46 0.47]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 157
+Episode: 236018
+Reward: [-1.78 -1.79 -1.79 -1.79 -1.79 -1.79 -1.79 -1.78 -1.78 -1.77]
+Time: 163.76s
+Success: 0.8280
+Steps-Taken: 44.10
+Comm-Action: [0.48 0.48 0.48 0.48 0.48 0.48 0.48 0.49 0.48 0.48]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 158
+Episode: 237955
+Reward: [-1.76 -1.76 -1.76 -1.74 -1.76 -1.75 -1.76 -1.76 -1.76 -1.77]
+Time: 160.18s
+Success: 0.8327
+Steps-Taken: 43.46
+Comm-Action: [0.5  0.51 0.5  0.51 0.5  0.5  0.5  0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 159
+Episode: 239923
+Reward: [-1.73 -1.73 -1.72 -1.73 -1.72 -1.72 -1.73 -1.73 -1.73 -1.73]
+Time: 155.89s
+Success: 0.8369
+Steps-Taken: 42.87
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 160
+Episode: 241834
+Reward: [-1.81 -1.77 -1.78 -1.79 -1.78 -1.78 -1.79 -1.79 -1.79 -1.79]
+Time: 176.11s
+Success: 0.8336
+Steps-Taken: 44.15
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 161
+Episode: 243761
+Reward: [-1.78 -1.79 -1.78 -1.77 -1.79 -1.77 -1.78 -1.78 -1.78 -1.78]
+Time: 155.74s
+Success: 0.8121
+Steps-Taken: 43.60
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 162
+Episode: 245676
+Reward: [-1.78 -1.77 -1.76 -1.77 -1.76 -1.76 -1.77 -1.77 -1.77 -1.79]
+Time: 156.40s
+Success: 0.8209
+Steps-Taken: 43.81
+Comm-Action: [0.5  0.5  0.51 0.5  0.5  0.51 0.51 0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 163
+Episode: 247550
+Reward: [-1.87 -1.87 -1.86 -1.86 -1.87 -1.87 -1.86 -1.86 -1.87 -1.87]
+Time: 168.86s
+Success: 0.7876
+Steps-Taken: 45.23
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 164
+Episode: 249480
+Reward: [-1.75 -1.76 -1.76 -1.76 -1.76 -1.76 -1.75 -1.76 -1.75 -1.76]
+Time: 154.61s
+Success: 0.8290
+Steps-Taken: 43.57
+Comm-Action: [0.49 0.49 0.49 0.5  0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 165
+Episode: 251382
+Reward: [-1.81 -1.81 -1.82 -1.81 -1.8  -1.8  -1.8  -1.79 -1.81 -1.81]
+Time: 165.83s
+Success: 0.8107
+Steps-Taken: 44.15
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 166
+Episode: 253357
+Reward: [-1.72 -1.71 -1.71 -1.71 -1.72 -1.72 -1.72 -1.73 -1.72 -1.71]
+Time: 166.06s
+Success: 0.8390
+Steps-Taken: 42.66
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 167
+Episode: 255305
+Reward: [-1.76 -1.76 -1.77 -1.77 -1.77 -1.77 -1.77 -1.77 -1.77 -1.77]
+Time: 160.01s
+Success: 0.8060
+Steps-Taken: 43.45
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.52 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 168
+Episode: 257224
+Reward: [-1.78 -1.78 -1.78 -1.77 -1.77 -1.76 -1.78 -1.78 -1.78 -1.78]
+Time: 153.76s
+Success: 0.8286
+Steps-Taken: 43.98
+Comm-Action: [0.5  0.5  0.5  0.5  0.51 0.5  0.5  0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 169
+Episode: 259185
+Reward: [-1.75 -1.75 -1.76 -1.75 -1.76 -1.74 -1.75 -1.75 -1.74 -1.73]
+Time: 158.91s
+Success: 0.8174
+Steps-Taken: 43.06
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 170
+Episode: 261115
+Reward: [-1.79 -1.81 -1.8  -1.8  -1.8  -1.8  -1.79 -1.81 -1.8  -1.79]
+Time: 157.15s
+Success: 0.7964
+Steps-Taken: 43.75
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 171
+Episode: 263069
+Reward: [-1.73 -1.73 -1.72 -1.74 -1.74 -1.72 -1.73 -1.73 -1.73 -1.74]
+Time: 156.60s
+Success: 0.8291
+Steps-Taken: 43.08
+Comm-Action: [0.5  0.51 0.5  0.51 0.51 0.5  0.51 0.51 0.51 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 172
+Episode: 265011
+Reward: [-1.75 -1.74 -1.75 -1.74 -1.73 -1.73 -1.75 -1.75 -1.74 -1.74]
+Time: 153.63s
+Success: 0.8481
+Steps-Taken: 43.57
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 173
+Episode: 266921
+Reward: [-1.78 -1.78 -1.79 -1.79 -1.79 -1.8  -1.79 -1.8  -1.79 -1.8 ]
+Time: 168.17s
+Success: 0.8262
+Steps-Taken: 44.20
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 174
+Episode: 268872
+Reward: [-1.71 -1.71 -1.71 -1.71 -1.71 -1.71 -1.7  -1.71 -1.71 -1.71]
+Time: 157.49s
+Success: 0.8560
+Steps-Taken: 43.00
+Comm-Action: [0.51 0.51 0.51 0.5  0.51 0.51 0.51 0.51 0.51 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 175
+Episode: 270803
+Reward: [-1.75 -1.76 -1.76 -1.75 -1.75 -1.76 -1.75 -1.75 -1.75 -1.75]
+Time: 151.69s
+Success: 0.8389
+Steps-Taken: 43.77
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 176
+Episode: 272750
+Reward: [-1.73 -1.74 -1.75 -1.74 -1.74 -1.73 -1.73 -1.73 -1.73 -1.74]
+Time: 147.63s
+Success: 0.8449
+Steps-Taken: 43.31
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 177
+Episode: 274634
+Reward: [-1.84 -1.84 -1.84 -1.84 -1.84 -1.85 -1.85 -1.86 -1.84 -1.84]
+Time: 148.66s
+Success: 0.7893
+Steps-Taken: 44.63
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 178
+Episode: 276535
+Reward: [-1.79 -1.78 -1.78 -1.78 -1.78 -1.78 -1.78 -1.79 -1.77 -1.8 ]
+Time: 154.05s
+Success: 0.8233
+Steps-Taken: 44.23
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 179
+Episode: 278481
+Reward: [-1.73 -1.75 -1.76 -1.75 -1.74 -1.74 -1.76 -1.74 -1.74 -1.75]
+Time: 162.32s
+Success: 0.8350
+Steps-Taken: 43.32
+Comm-Action: [0.51 0.51 0.51 0.52 0.51 0.51 0.51 0.52 0.52 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 180
+Episode: 280424
+Reward: [-1.75 -1.74 -1.74 -1.74 -1.74 -1.73 -1.75 -1.74 -1.74 -1.75]
+Time: 161.71s
+Success: 0.8327
+Steps-Taken: 43.23
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 181
+Episode: 282361
+Reward: [-1.76 -1.76 -1.75 -1.77 -1.77 -1.77 -1.76 -1.76 -1.77 -1.75]
+Time: 168.85s
+Success: 0.8245
+Steps-Taken: 43.49
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 182
+Episode: 284281
+Reward: [-1.84 -1.84 -1.84 -1.85 -1.84 -1.84 -1.85 -1.84 -1.85 -1.83]
+Time: 151.72s
+Success: 0.7781
+Steps-Taken: 44.40
+Comm-Action: [0.49 0.49 0.49 0.49 0.5  0.49 0.49 0.49 0.5  0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 183
+Episode: 286252
+Reward: [-1.72 -1.72 -1.73 -1.72 -1.72 -1.72 -1.72 -1.72 -1.73 -1.73]
+Time: 154.21s
+Success: 0.8361
+Steps-Taken: 42.86
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 184
+Episode: 288227
+Reward: [-1.72 -1.72 -1.73 -1.73 -1.72 -1.72 -1.73 -1.72 -1.72 -1.73]
+Time: 148.09s
+Success: 0.8309
+Steps-Taken: 42.86
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 185
+Episode: 290160
+Reward: [-1.79 -1.79 -1.79 -1.8  -1.79 -1.78 -1.78 -1.8  -1.79 -1.79]
+Time: 158.81s
+Success: 0.8065
+Steps-Taken: 43.68
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 186
+Episode: 291723
+Reward: [-2.11 -2.14 -2.1  -2.1  -2.08 -2.12 -2.08 -2.09 -2.09 -2.13]
+Time: 154.60s
+Success: 0.6129
+Steps-Taken: 54.58
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 187
+Episode: 293539
+Reward: [-1.85 -1.88 -1.87 -1.86 -1.87 -1.85 -1.87 -1.87 -1.87 -1.88]
+Time: 154.85s
+Success: 0.7968
+Steps-Taken: 46.30
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 188
+Episode: 295444
+Reward: [-1.79 -1.78 -1.8  -1.79 -1.8  -1.79 -1.79 -1.79 -1.79 -1.8 ]
+Time: 152.56s
+Success: 0.8021
+Steps-Taken: 44.43
+Comm-Action: [0.5  0.5  0.5  0.5  0.5  0.5  0.49 0.5  0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 189
+Episode: 297379
+Reward: [-1.74 -1.72 -1.73 -1.73 -1.73 -1.74 -1.74 -1.73 -1.73 -1.73]
+Time: 150.66s
+Success: 0.8326
+Steps-Taken: 43.51
+Comm-Action: [0.5  0.51 0.5  0.5  0.5  0.5  0.5  0.5  0.51 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 190
+Episode: 299199
+Reward: [-2.01 -2.   -2.02 -2.01 -2.   -2.01 -2.   -2.01 -1.99 -2.  ]
+Time: 152.04s
+Success: 0.7104
+Steps-Taken: 46.66
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 191
+Episode: 300933
+Reward: [-2.18 -2.18 -2.17 -2.17 -2.16 -2.17 -2.18 -2.17 -2.18 -2.19]
+Time: 164.13s
+Success: 0.6107
+Steps-Taken: 49.06
+Comm-Action: [0.54 0.55 0.54 0.54 0.54 0.54 0.54 0.55 0.54 0.55]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 192
+Episode: 302638
+Reward: [-2.22 -2.22 -2.22 -2.21 -2.21 -2.22 -2.21 -2.2  -2.21 -2.23]
+Time: 164.16s
+Success: 0.6100
+Steps-Taken: 49.79
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 193
+Episode: 304447
+Reward: [-1.97 -1.96 -1.97 -1.98 -1.96 -1.97 -1.98 -1.96 -1.97 -1.97]
+Time: 160.14s
+Success: 0.7258
+Steps-Taken: 46.62
+Comm-Action: [0.49 0.48 0.49 0.48 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 194
+Episode: 306311
+Reward: [-1.86 -1.87 -1.88 -1.87 -1.88 -1.87 -1.88 -1.89 -1.88 -1.89]
+Time: 163.11s
+Success: 0.7902
+Steps-Taken: 45.30
+Comm-Action: [0.5  0.49 0.49 0.49 0.49 0.5  0.49 0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 195
+Episode: 308179
+Reward: [-1.89 -1.88 -1.88 -1.88 -1.89 -1.89 -1.9  -1.89 -1.9  -1.9 ]
+Time: 161.32s
+Success: 0.7500
+Steps-Taken: 45.04
+Comm-Action: [0.5  0.5  0.49 0.5  0.5  0.5  0.5  0.49 0.49 0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 196
+Episode: 310039
+Reward: [-1.93 -1.93 -1.93 -1.93 -1.92 -1.92 -1.92 -1.93 -1.92 -1.92]
+Time: 150.88s
+Success: 0.7505
+Steps-Taken: 45.61
+Comm-Action: [0.5  0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 197
+Episode: 311991
+Reward: [-1.77 -1.76 -1.76 -1.76 -1.76 -1.77 -1.75 -1.76 -1.75 -1.76]
+Time: 156.79s
+Success: 0.8069
+Steps-Taken: 43.28
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 198
+Episode: 313891
+Reward: [-1.81 -1.8  -1.81 -1.81 -1.81 -1.83 -1.81 -1.8  -1.81 -1.8 ]
+Time: 165.85s
+Success: 0.8232
+Steps-Taken: 44.20
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 199
+Episode: 315793
+Reward: [-1.82 -1.82 -1.81 -1.82 -1.82 -1.83 -1.82 -1.82 -1.82 -1.83]
+Time: 161.20s
+Success: 0.8128
+Steps-Taken: 44.43
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 200
+Episode: 317732
+Reward: [-1.79 -1.81 -1.8  -1.8  -1.8  -1.79 -1.8  -1.8  -1.8  -1.79]
+Time: 153.67s
+Success: 0.8112
+Steps-Taken: 43.60
+Comm-Action: [0.49 0.5  0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 201
+Episode: 319670
+Reward: [-1.8  -1.8  -1.81 -1.8  -1.8  -1.79 -1.8  -1.81 -1.79 -1.79]
+Time: 161.22s
+Success: 0.8055
+Steps-Taken: 43.41
+Comm-Action: [0.49 0.48 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 202
+Episode: 321522
+Reward: [-1.91 -1.92 -1.91 -1.9  -1.91 -1.92 -1.91 -1.91 -1.91 -1.92]
+Time: 147.24s
+Success: 0.7759
+Steps-Taken: 45.45
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 203
+Episode: 323436
+Reward: [-1.85 -1.84 -1.83 -1.84 -1.84 -1.84 -1.85 -1.85 -1.84 -1.84]
+Time: 161.82s
+Success: 0.7915
+Steps-Taken: 44.09
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 204
+Episode: 325390
+Reward: [-1.81 -1.81 -1.81 -1.82 -1.82 -1.82 -1.81 -1.82 -1.82 -1.81]
+Time: 157.27s
+Success: 0.7876
+Steps-Taken: 43.50
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 205
+Episode: 327340
+Reward: [-1.79 -1.81 -1.8  -1.8  -1.8  -1.79 -1.79 -1.79 -1.78 -1.8 ]
+Time: 155.99s
+Success: 0.7862
+Steps-Taken: 42.99
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 206
+Episode: 329370
+Reward: [-1.67 -1.68 -1.68 -1.67 -1.68 -1.68 -1.66 -1.68 -1.68 -1.67]
+Time: 159.70s
+Success: 0.8650
+Steps-Taken: 41.45
+Comm-Action: [0.49 0.5  0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 207
+Episode: 331317
+Reward: [-1.79 -1.77 -1.78 -1.79 -1.79 -1.79 -1.78 -1.78 -1.78 -1.78]
+Time: 160.35s
+Success: 0.8264
+Steps-Taken: 43.20
+Comm-Action: [0.51 0.5  0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 208
+Episode: 333285
+Reward: [-1.77 -1.76 -1.77 -1.77 -1.78 -1.77 -1.77 -1.76 -1.77 -1.77]
+Time: 151.86s
+Success: 0.8135
+Steps-Taken: 42.97
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 209
+Episode: 335301
+Reward: [-1.67 -1.67 -1.68 -1.66 -1.68 -1.67 -1.68 -1.67 -1.67 -1.68]
+Time: 165.02s
+Success: 0.8403
+Steps-Taken: 41.79
+Comm-Action: [0.52 0.52 0.52 0.51 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 210
+Episode: 337282
+Reward: [-1.74 -1.74 -1.73 -1.73 -1.74 -1.73 -1.72 -1.72 -1.72 -1.72]
+Time: 153.34s
+Success: 0.8041
+Steps-Taken: 42.46
+Comm-Action: [0.51 0.52 0.52 0.51 0.51 0.52 0.52 0.52 0.52 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 211
+Episode: 339261
+Reward: [-1.72 -1.72 -1.71 -1.71 -1.72 -1.71 -1.72 -1.72 -1.71 -1.72]
+Time: 154.43s
+Success: 0.8292
+Steps-Taken: 42.63
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 212
+Episode: 341226
+Reward: [-1.73 -1.73 -1.73 -1.73 -1.74 -1.73 -1.73 -1.72 -1.74 -1.74]
+Time: 149.67s
+Success: 0.8356
+Steps-Taken: 42.99
+Comm-Action: [0.5  0.5  0.5  0.5  0.5  0.49 0.5  0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 213
+Episode: 343192
+Reward: [-1.78 -1.77 -1.78 -1.77 -1.77 -1.78 -1.79 -1.78 -1.77 -1.79]
+Time: 168.93s
+Success: 0.7945
+Steps-Taken: 42.98
+Comm-Action: [0.52 0.52 0.51 0.51 0.52 0.52 0.51 0.51 0.52 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 214
+Episode: 345158
+Reward: [-1.74 -1.71 -1.72 -1.73 -1.73 -1.73 -1.73 -1.73 -1.73 -1.73]
+Time: 157.42s
+Success: 0.8174
+Steps-Taken: 42.66
+Comm-Action: [0.51 0.51 0.5  0.5  0.5  0.5  0.51 0.51 0.5  0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 215
+Episode: 347124
+Reward: [-1.75 -1.74 -1.74 -1.73 -1.74 -1.73 -1.73 -1.74 -1.74 -1.73]
+Time: 151.98s
+Success: 0.8103
+Steps-Taken: 42.74
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 216
+Episode: 349102
+Reward: [-1.74 -1.74 -1.74 -1.74 -1.74 -1.75 -1.74 -1.74 -1.73 -1.74]
+Time: 170.13s
+Success: 0.8180
+Steps-Taken: 42.69
+Comm-Action: [0.5  0.51 0.5  0.5  0.5  0.51 0.51 0.5  0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 217
+Episode: 351066
+Reward: [-1.76 -1.75 -1.76 -1.75 -1.76 -1.75 -1.75 -1.75 -1.75 -1.76]
+Time: 163.92s
+Success: 0.8070
+Steps-Taken: 42.90
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 218
+Episode: 353003
+Reward: [-1.8  -1.81 -1.8  -1.81 -1.81 -1.81 -1.81 -1.8  -1.79 -1.82]
+Time: 156.18s
+Success: 0.7899
+Steps-Taken: 43.53
+Comm-Action: [0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 219
+Episode: 354942
+Reward: [-1.74 -1.76 -1.76 -1.77 -1.76 -1.77 -1.75 -1.75 -1.75 -1.75]
+Time: 160.15s
+Success: 0.8324
+Steps-Taken: 43.48
+Comm-Action: [0.52 0.52 0.53 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 220
+Episode: 356923
+Reward: [-1.74 -1.73 -1.73 -1.74 -1.74 -1.73 -1.74 -1.73 -1.75 -1.73]
+Time: 156.73s
+Success: 0.8157
+Steps-Taken: 42.61
+Comm-Action: [0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 221
+Episode: 358883
+Reward: [-1.78 -1.79 -1.78 -1.78 -1.78 -1.79 -1.78 -1.8  -1.78 -1.78]
+Time: 158.82s
+Success: 0.7954
+Steps-Taken: 43.05
+Comm-Action: [0.53 0.53 0.54 0.53 0.53 0.53 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 222
+Episode: 360830
+Reward: [-1.79 -1.78 -1.78 -1.78 -1.79 -1.78 -1.77 -1.79 -1.77 -1.78]
+Time: 150.15s
+Success: 0.7822
+Steps-Taken: 43.01
+Comm-Action: [0.53 0.53 0.53 0.53 0.52 0.53 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 223
+Episode: 362843
+Reward: [-1.74 -1.72 -1.74 -1.73 -1.74 -1.73 -1.73 -1.74 -1.73 -1.74]
+Time: 162.45s
+Success: 0.8102
+Steps-Taken: 42.16
+Comm-Action: [0.52 0.52 0.52 0.52 0.51 0.51 0.52 0.52 0.51 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 224
+Episode: 364806
+Reward: [-1.72 -1.73 -1.73 -1.72 -1.72 -1.73 -1.72 -1.73 -1.73 -1.72]
+Time: 154.80s
+Success: 0.8309
+Steps-Taken: 42.82
+Comm-Action: [0.51 0.5  0.5  0.51 0.51 0.51 0.51 0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 225
+Episode: 366801
+Reward: [-1.71 -1.7  -1.71 -1.7  -1.7  -1.7  -1.7  -1.7  -1.7  -1.71]
+Time: 160.67s
+Success: 0.8271
+Steps-Taken: 42.30
+Comm-Action: [0.49 0.49 0.49 0.5  0.49 0.49 0.5  0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 226
+Episode: 368772
+Reward: [-1.69 -1.69 -1.68 -1.68 -1.68 -1.71 -1.7  -1.68 -1.7  -1.7 ]
+Time: 161.62s
+Success: 0.8503
+Steps-Taken: 42.46
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 227
+Episode: 370760
+Reward: [-1.68 -1.67 -1.68 -1.67 -1.67 -1.68 -1.67 -1.69 -1.69 -1.69]
+Time: 159.84s
+Success: 0.8581
+Steps-Taken: 42.21
+Comm-Action: [0.48 0.48 0.48 0.49 0.48 0.48 0.48 0.48 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 228
+Episode: 372761
+Reward: [-1.67 -1.68 -1.67 -1.67 -1.67 -1.68 -1.67 -1.67 -1.67 -1.67]
+Time: 145.28s
+Success: 0.8506
+Steps-Taken: 41.98
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 229
+Episode: 374766
+Reward: [-1.67 -1.69 -1.67 -1.68 -1.68 -1.69 -1.68 -1.69 -1.69 -1.69]
+Time: 152.12s
+Success: 0.8439
+Steps-Taken: 42.06
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 230
+Episode: 376742
+Reward: [-1.71 -1.71 -1.69 -1.7  -1.72 -1.72 -1.72 -1.7  -1.71 -1.7 ]
+Time: 150.80s
+Success: 0.8411
+Steps-Taken: 42.79
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 231
+Episode: 378812
+Reward: [-1.61 -1.61 -1.61 -1.61 -1.6  -1.61 -1.6  -1.61 -1.6  -1.61]
+Time: 148.63s
+Success: 0.8700
+Steps-Taken: 40.73
+Comm-Action: [0.5  0.51 0.5  0.51 0.5  0.51 0.51 0.5  0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 232
+Episode: 380836
+Reward: [-1.68 -1.66 -1.67 -1.67 -1.67 -1.67 -1.67 -1.68 -1.67 -1.67]
+Time: 163.81s
+Success: 0.8449
+Steps-Taken: 41.67
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 233
+Episode: 382872
+Reward: [-1.64 -1.64 -1.64 -1.65 -1.63 -1.64 -1.64 -1.63 -1.64 -1.64]
+Time: 157.76s
+Success: 0.8585
+Steps-Taken: 41.34
+Comm-Action: [0.52 0.51 0.51 0.51 0.52 0.52 0.51 0.51 0.51 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 234
+Episode: 384874
+Reward: [-1.68 -1.68 -1.68 -1.67 -1.68 -1.68 -1.67 -1.67 -1.68 -1.67]
+Time: 153.71s
+Success: 0.8427
+Steps-Taken: 41.92
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 235
+Episode: 386915
+Reward: [-1.65 -1.64 -1.64 -1.64 -1.63 -1.63 -1.64 -1.64 -1.64 -1.64]
+Time: 153.56s
+Success: 0.8589
+Steps-Taken: 41.35
+Comm-Action: [0.51 0.51 0.51 0.5  0.51 0.5  0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 236
+Episode: 388943
+Reward: [-1.67 -1.67 -1.67 -1.66 -1.67 -1.68 -1.68 -1.66 -1.68 -1.67]
+Time: 147.52s
+Success: 0.8447
+Steps-Taken: 41.65
+Comm-Action: [0.51 0.51 0.51 0.51 0.5  0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 237
+Episode: 390940
+Reward: [-1.69 -1.69 -1.68 -1.68 -1.68 -1.68 -1.69 -1.69 -1.69 -1.68]
+Time: 154.09s
+Success: 0.8378
+Steps-Taken: 42.10
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 238
+Episode: 392937
+Reward: [-1.7  -1.68 -1.69 -1.69 -1.7  -1.71 -1.69 -1.7  -1.7  -1.7 ]
+Time: 143.51s
+Success: 0.8322
+Steps-Taken: 42.07
+Comm-Action: [0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 239
+Episode: 394951
+Reward: [-1.68 -1.66 -1.67 -1.68 -1.66 -1.65 -1.67 -1.67 -1.66 -1.67]
+Time: 155.88s
+Success: 0.8466
+Steps-Taken: 41.97
+Comm-Action: [0.48 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49 0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 240
+Episode: 396981
+Reward: [-1.63 -1.62 -1.63 -1.63 -1.62 -1.63 -1.63 -1.63 -1.63 -1.64]
+Time: 146.81s
+Success: 0.8601
+Steps-Taken: 41.25
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 241
+Episode: 399008
+Reward: [-1.65 -1.65 -1.64 -1.65 -1.65 -1.64 -1.64 -1.64 -1.64 -1.65]
+Time: 151.83s
+Success: 0.8559
+Steps-Taken: 41.37
+Comm-Action: [0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53 0.53]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 242
+Episode: 401099
+Reward: [-1.57 -1.56 -1.57 -1.57 -1.59 -1.57 -1.57 -1.58 -1.57 -1.57]
+Time: 147.85s
+Success: 0.8828
+Steps-Taken: 40.15
+Comm-Action: [0.51 0.51 0.51 0.52 0.51 0.52 0.52 0.51 0.52 0.52]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 243
+Episode: 403136
+Reward: [-1.63 -1.63 -1.63 -1.64 -1.62 -1.63 -1.63 -1.64 -1.64 -1.63]
+Time: 147.61s
+Success: 0.8748
+Steps-Taken: 41.15
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 244
+Episode: 405165
+Reward: [-1.65 -1.66 -1.66 -1.66 -1.65 -1.66 -1.65 -1.66 -1.65 -1.65]
+Time: 151.95s
+Success: 0.8546
+Steps-Taken: 41.39
+Comm-Action: [0.5  0.5  0.5  0.51 0.51 0.5  0.5  0.5  0.5  0.5 ]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 245
+Episode: 407197
+Reward: [-1.62 -1.63 -1.61 -1.63 -1.63 -1.62 -1.62 -1.63 -1.63 -1.62]
+Time: 155.76s
+Success: 0.8794
+Steps-Taken: 41.41
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 246
+Episode: 409228
+Reward: [-1.65 -1.65 -1.64 -1.65 -1.64 -1.65 -1.65 -1.66 -1.66 -1.68]
+Time: 151.43s
+Success: 0.8557
+Steps-Taken: 41.69
+Comm-Action: [0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 247
+Episode: 411251
+Reward: [-1.64 -1.64 -1.64 -1.65 -1.65 -1.65 -1.65 -1.66 -1.63 -1.64]
+Time: 156.31s
+Success: 0.8611
+Steps-Taken: 41.57
+Comm-Action: [0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 248
+Episode: 413331
+Reward: [-1.57 -1.59 -1.58 -1.58 -1.59 -1.58 -1.59 -1.58 -1.59 -1.58]
+Time: 160.58s
+Success: 0.8808
+Steps-Taken: 40.42
+Comm-Action: [0.51 0.51 0.5  0.51 0.5  0.51 0.5  0.51 0.51 0.51]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 249
+Episode: 415437
+Reward: [-1.57 -1.56 -1.57 -1.56 -1.57 -1.57 -1.57 -1.58 -1.57 -1.57]
+Time: 164.36s
+Success: 0.8879
+Steps-Taken: 40.04
+Comm-Action: [0.5  0.5  0.5  0.5  0.5  0.5  0.5  0.5  0.5  0.49]
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+batch:  7
+batch:  8
+batch:  9
+Epoch 250
+Episode: 417507
+Reward: [-1.62 -1.63 -1.63 -1.63 -1.63 -1.62 -1.63 -1.63 -1.62 -1.62]
+Time: 155.86s
+Success: 0.8676
+Steps-Taken: 40.75
+Comm-Action: [0.48 0.48 0.48 0.48 0.48 0.49 0.48 0.49 0.49 0.48]
+==============================================================================
+Running epilogue script on gold55.
+
+Submit time  : 2024-11-12T12:17:26
+Start time   : 2024-11-12T12:17:30
+End time     : 2024-11-12T22:53:52
+Elapsed time : 10:36:22 (Timelimit=2-12:00:00)
+
+Job ID: 6772954
+Cluster: i5
+User/Group: jabn1n20/fp
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 09:05:04
+CPU Efficiency: 10.71% of 3-12:50:56 core-walltime
+Job Wall-clock time: 10:36:22
+Memory Utilized: 11.01 GB
+Memory Efficiency: 5.97% of 184.57 GB
+
