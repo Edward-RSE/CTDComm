@@ -13,7 +13,7 @@
 
 # Specific setup for my cluster and virtual environment
 module load conda
-source activate commpy
+source activate commpy_37 #commpy for Iridis 5
 # conda init
 # conda activate commpy
 #marl37

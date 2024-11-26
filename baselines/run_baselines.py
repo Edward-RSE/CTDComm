@@ -282,7 +282,12 @@ elif args.recurrent:
     policy_net = RNN(args, num_inputs)
 else:
     policy_net = MLP(args, num_inputs)
-        
+
+# if torch.cuda.is_available():
+#     print('cuda available, converting now')
+#     policy_net = policy_net.to('cuda')
+#     print('Converted to cuda')
+
 if not args.display:
     display_models([policy_net])
 

@@ -1,0 +1,66 @@
+Running SLURM prolog script on ruby059
+===============================================================================
+Job started on Tue Nov 26 12:20:03 GMT 2024
+Job ID          : 34209
+Job name        : train_dpp_5v1_tarmac.sh
+WorkDir         : /iridisfs/home/jabn1n20/CTDComm/baselines
+Command         : /iridisfs/home/jabn1n20/CTDComm/baselines/dec_scripts/train_dpp_5v1_tarmac.sh
+Partition       : amd
+Num hosts       : 1
+Num cores       : 8
+Num of tasks    : 8
+Hosts allocated : ruby059
+Job Output Follows ...
+===============================================================================
+Namespace(action_scale=1.0, advantages_per_action=False, alpha=0.99, batch_size=500, cave=False, comm_action_one=False, comm_init='uniform', comm_mask_zero=False, comm_mode='avg', comm_passes=2, comm_range=0, commnet=1, continuous=False, dec_tarmac=False, detach_gap=10, dim=10, dim_actions=2, directed=False, display=False, entr=0.01, env_name='dec_predator_prey', env_seed=1, epoch_size=10, eps=1e-06, first_gat_normalize=False, first_graph_complete=False, gacomm=False, gamma=0.99, gat_encoder_normalize=False, gat_encoder_out_size=64, gat_hid_size=64, gat_num_heads=1, gat_num_heads_out=1, ge_num_heads=4, hard_attn=1, hid_size=128, ic3net=True, learn_second_graph=False, learning_prey=False, load='', lrate=0.0007, magic=False, max_steps=40, mean_ratio=0, message_augment=False, message_decoder=False, message_encoder=False, mode='mixed', moving_prey=False, naction_heads=[5, 2], nactions='1', nagents=5, nenemies=1, nfriendly=5, normalize_rewards=False, nprocesses=16, num_actions=[5, 2], num_epochs=500, num_inputs=936, plot=False, plot_env='main', plot_port='8097', qk_hid_size=16, random=False, recurrent=True, rnn_type='LSTM', save=True, save_adjacency=False, save_every=25, second_gat_normalize=False, second_graph_complete=False, seed=1, self_loop_type1=2, self_loop_type2=2, share_weights=False, stay=True, tarcomm=True, tau=1.0, use_gat_encoder=False, v_augment=False, value_coeff=0.01, value_hid_size=128, vision=1)
+====================================================================================================
+Model log:
+
+TarCommNetMLP(
+  (heads): ModuleList(
+    (0): Linear(in_features=128, out_features=5, bias=True)
+    (1): Linear(in_features=128, out_features=2, bias=True)
+  )
+  (encoder): Linear(in_features=936, out_features=128, bias=True)
+  (hidd_encoder): Linear(in_features=128, out_features=128, bias=True)
+  (f_module): LSTMCell(128, 128)
+  (C_modules): ModuleList(
+    (0): Linear(in_features=128, out_features=128, bias=True)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (tanh): Tanh()
+  (value_head): Linear(in_features=128, out_features=1, bias=True)
+  (state2query): Linear(in_features=128, out_features=16, bias=True)
+  (state2key): Linear(in_features=128, out_features=16, bias=True)
+  (state2value): Linear(in_features=128, out_features=128, bias=True)
+)
+====================================================================================================
+
+batch:  0
+batch:  1
+batch:  2
+batch:  3
+batch:  4
+batch:  5
+batch:  6
+slurmstepd-ruby059: error: *** JOB 34209 ON ruby059 CANCELLED AT 2024-11-26T12:20:54 ***
+==============================================================================
+Running epilogue script on ruby059.
+
+Submit time  : 2024-11-26T12:20:02
+Start time   : 2024-11-26T12:20:02
+End time     : 2024-11-26T12:20:54
+Elapsed time : 00:00:52 (Timelimit=2-12:00:00)
+
+Job ID: 34209
+Cluster: iridis_x
+User/Group: jabn1n20/
+State: CANCELLED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:06:56 core-walltime
+Job Wall-clock time: 00:00:52
+Memory Utilized: 6.20 GB
+Memory Efficiency: 21.17% of 29.30 GB
+
