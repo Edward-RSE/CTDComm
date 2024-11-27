@@ -11,6 +11,8 @@ import numpy as np
 from models import MLP
 from action_utils import select_action, translate_action
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 class TarCommNetMLP(nn.Module):
     """
     MLP based CommNet. Uses communication vector to communicate info
@@ -120,7 +122,7 @@ class TarCommNetMLP(nn.Module):
         n = self.nagents
 
         if 'alive_mask' in info:
-            agent_mask = torch.from_numpy(info['alive_mask'])
+            agent_mask = torch.from_numpy(info['alive_mask']).to(device)
             num_agents_alive = agent_mask.sum()
         else:
             agent_mask = torch.ones(n)
@@ -338,4 +340,3 @@ class TarCommNetMLP(nn.Module):
         # dim 0 = num of layers * num of direction
         return tuple(( torch.zeros(batch_size * self.nagents, self.hid_size, requires_grad=True),
                        torch.zeros(batch_size * self.nagents, self.hid_size, requires_grad=True)))
-
