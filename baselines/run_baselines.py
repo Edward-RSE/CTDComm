@@ -29,7 +29,9 @@ from multi_processing import MultiProcessTrainer
 torch.utils.backcompat.broadcast_warning.enabled = True
 torch.utils.backcompat.keepdim_warning.enabled = True
 
-torch.set_default_tensor_type('torch.DoubleTensor')
+default_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+torch.set_default_device(default_device)
+torch.set_default_dtype(torch.double)
 
 parser = argparse.ArgumentParser(description='PyTorch RL trainer')
 # training
@@ -283,10 +285,10 @@ elif args.recurrent:
 else:
     policy_net = MLP(args, num_inputs)
 
-# if torch.cuda.is_available():
-#     print('cuda available, converting now')
-#     policy_net = policy_net.to('cuda')
-#     print('Converted to cuda')
+if torch.cuda.is_available():
+    print('cuda available, converting now')
+    policy_net = policy_net.to('cuda')
+    print('Converted to cuda')
 
 if not args.display:
     display_models([policy_net])

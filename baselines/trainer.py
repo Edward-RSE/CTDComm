@@ -7,6 +7,7 @@ import torch.nn as nn
 from utils import *
 from action_utils import *
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 Transition = namedtuple('Transition', ('state', 'action', 'action_out', 'value', 'episode_mask', 'episode_mini_mask', 'next_state',
                                        'reward', 'misc'))
 
@@ -32,7 +33,7 @@ class Trainer(object):
             # Convert observation dict into a 'state' array for backwards compatibility (batch size=1)
             state = np.stack([obs.flatten() for _, obs in observations.items()])
             state = np.expand_dims(state, 0)
-            state = torch.from_numpy(state).double()
+            state = torch.from_numpy(state).double().to(device)
         else:
             if 'epoch' in reset_args:
                 state = self.env.reset(epoch)
@@ -117,7 +118,7 @@ class Trainer(object):
                 # Convert next_state dict into a 'state' array for backwards compatibility (batch size=1)
                 next_state = np.stack([obs.flatten() for _, obs in next_state.items()])
                 next_state = np.expand_dims(next_state, 0)
-                next_state = torch.from_numpy(next_state).double()
+                next_state = torch.from_numpy(next_state).double().to(device)
             else:
                 next_state, reward, done, info = self.env.step(actual)
 
@@ -197,10 +198,10 @@ class Trainer(object):
         n = self.args.nagents
         batch_size = len(batch.state)
 
-        rewards = torch.Tensor(batch.reward)
-        episode_masks = torch.Tensor(batch.episode_mask)
-        episode_mini_masks = torch.Tensor(batch.episode_mini_mask)
-        actions = torch.Tensor(batch.action)
+        rewards = torch.tensor(batch.reward, device=device)
+        episode_masks = torch.tensor(batch.episode_mask, device=device)
+        episode_mini_masks = torch.tensor(batch.episode_mini_mask, device=device)
+        actions = torch.tensor(batch.action, device=device)
         actions = actions.transpose(1, 2).view(-1, n, dim_actions)
 
         # old_actions = torch.Tensor(np.concatenate(batch.action, 0))
@@ -212,13 +213,13 @@ class Trainer(object):
         action_out = list(zip(*batch.action_out))
         action_out = [torch.cat(a, dim=0) for a in action_out]
 
-        alive_masks = torch.Tensor(np.concatenate([item['alive_mask'] for item in batch.misc])).view(-1)
+        alive_masks = torch.tensor(np.concatenate([item['alive_mask'] for item in batch.misc]), device=device).view(-1)
 
-        coop_returns = torch.Tensor(batch_size, n)
-        ncoop_returns = torch.Tensor(batch_size, n)
-        returns = torch.Tensor(batch_size, n)
-        deltas = torch.Tensor(batch_size, n)
-        advantages = torch.Tensor(batch_size, n)
+        coop_returns = torch.zeros(batch_size, n, device=device)
+        ncoop_returns = torch.zeros(batch_size, n)
+        returns = torch.zeros(batch_size, n, device=device)
+        deltas = torch.zeros(batch_size, n)
+        advantages = torch.zeros(batch_size, n, device=device)
         values = values.view(batch_size, n)
 
         prev_coop_return = 0
