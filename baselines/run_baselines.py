@@ -318,14 +318,184 @@ def parse_args() :
     return args, env, render
 
 
-def prepare_torch():
-    """Set default PyTorch settings."""
+def init_torch():
     torch.utils.backcompat.broadcast_warning.enabled = True
     torch.utils.backcompat.keepdim_warning.enabled = True
     default_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.set_default_device(default_device)
     torch.set_default_dtype(torch.double)
     torch.multiprocessing.set_start_method("spawn", force=True)
+
+
+def load_model(path, policy_net, trainer, log):
+    d = torch.load(path)
+    # log.clear()
+    policy_net.load_state_dict(d["policy_net"])
+    log.update(d["log"])
+    trainer.load_state_dict(d["trainer"])
+
+
+def save_model(policy_net, trainer, log, run_dir, final, episode=0):
+    d = dict()
+    d["policy_net"] = policy_net.state_dict()
+    d["log"] = log
+    d["trainer"] = trainer.state_dict()
+    if final:
+        model_filename = run_dir / "model.pt"
+
+        i = 0
+        while os.path.exists(model_filename):
+            i += 1
+            model_filename = run_dir / ("model%i.pt" % (i))
+        torch.save(d, model_filename)
+    else:
+        model_filename = run_dir / ("model_ep%i.pt" % (episode))
+
+        i = 0
+        while os.path.exists(model_filename):
+            i += 1
+            model_filename = run_dir / ("model_ep%i_%i.pt" % (i, episode))
+        torch.save(d, model_filename)
+
+
+def signal_handler(env, env_name, display):
+    def handler(signal, frame):
+        print("You pressed Ctrl+C! Exiting gracefully.")
+        if "dec" in env_name:
+            env.close()
+        else:
+            if display:
+                env.exit_render()
+        sys.exit(0)
+    return handler
+
+
+def get_env_name(args):
+    if args.env_name == "traffic_junction":
+        env_name_str = args.env_name + "_" + args.difficulty
+        if args.difficulty == "hard" and args.add_rate_min == args.add_rate_max:
+            if args.add_rate_max == 0.1:
+                env_name_str = env_name_str + "_add_01"
+            elif args.add_rate_max == 0.2:
+                env_name_str = env_name_str + "_add_02"
+    elif "predator_prey" in args.env_name:
+        if "dec" in args.env_name:
+            env_name_str = args.env_name + f"_{args.nagents}v{args.nenemies}"
+
+            if args.comm_range != 0:
+                env_name_str = args.env_name + "_cr=" + str(args.comm_range)
+
+            if args.learning_prey:
+                env_name_str = env_name_str + "_learning_prey"
+            elif args.moving_prey:
+                env_name_str = env_name_str + "_random_prey"
+        else:
+            env_name_str = args.env_name
+            if args.nagents == 5:
+                env_name_str = env_name_str + "_5v1"  #'_medium'
+            elif args.nagents == 10:
+                if args.nenemies == 1:
+                    env_name_str = env_name_str + "_10v1"  #'_hard'
+                if args.nenemies == 2:
+                    env_name_str = env_name_str + "_10v2"
+            elif args.nagents == 20:
+                env_name_str = env_name_str + "_20v1"
+    else:
+        env_name_str = args.env_name
+
+    return env_name_str
+
+
+def get_run_dir(args, env_name_str):
+    model_dir = Path("./ctdcomm_saved") / env_name_str
+    if args.magic:
+        model_dir = model_dir / "magic"
+    elif args.gacomm:
+        model_dir = model_dir / "gacomm"
+    elif args.dec_tarmac:
+        if args.ic3net:
+            if args.cave:
+                if args.message_augment:
+                    model_dir = model_dir / "ctdcomm"
+                elif args.v_augment:
+                    model_dir = model_dir / "ctdcomm_v_aug"
+            else:
+                if args.message_augment:
+                    model_dir = model_dir / "dec_tarmac_message_aug"
+                elif args.v_augment:
+                    model_dir = model_dir / "dec_tarmac_v_aug"
+                else:
+                    model_dir = model_dir / "dec_tarmac"
+        elif args.commnet:
+            model_dir = model_dir / "dec_tarcomm"
+    elif args.tarcomm:
+        if args.ic3net:
+            model_dir = model_dir / "tar_ic3net"
+        elif args.commnet:
+            model_dir = model_dir / "tar_commnet"
+        else:
+            model_dir = model_dir / "other"
+
+        if args.comm_passes != 1:
+            model_dir = Path(str(model_dir) + "_" + str(args.comm_passes) + "comm_rounds")
+    elif args.ic3net:
+        model_dir = model_dir / "ic3net"
+    elif args.commnet:
+        model_dir = model_dir / "commnet"
+    else:
+        model_dir = model_dir / "other"
+
+    if args.cave and not (args.message_augment or args.v_augment):
+        # Alter the dir name to differentiate from a standard value head
+        dir_head, dir_tail = os.path.split(model_dir)
+        model_dir = Path(dir_head + "/" + dir_tail + "_cave")
+
+    if args.env_name == "grf":
+        model_dir = model_dir / args.scenario
+
+    if args.load:
+        run_dir = args.load[: args.load.rfind("/")]
+        curr_run = run_dir[run_dir.rfind("/") + 1 :]
+        run_dir = Path(run_dir)
+    else:
+        curr_run = "run%i" % args.seed
+        if (model_dir / curr_run).exists():
+            exst_run_nums = [
+                int(str(folder.name).split("run")[1])
+                for folder in model_dir.iterdir()
+                if str(folder.name).startswith("run")
+            ]
+            if len(exst_run_nums) == 0:
+                curr_run = "run1"
+            else:
+                curr_run = "run%i" % (max(exst_run_nums) + 1)
+        run_dir = model_dir / curr_run
+
+    return run_dir
+
+
+def get_policy_net(args):
+    """Return the requested Policy Net from the command line arguments."""
+    num_inputs = args.num_inputs
+    if args.magic:
+        policy_net = MAGIC(args, num_inputs)
+    elif args.gacomm:
+        policy_net = GACommNetMLP(args, num_inputs)
+    elif args.commnet:
+        if args.tarcomm:
+            policy_net = TarCommNetMLP(args, num_inputs)
+        elif args.dec_tarmac:
+            policy_net = DecTarMAC(args, num_inputs)
+        else:
+            policy_net = CommNetMLP(args, num_inputs)
+    elif args.random:
+        policy_net = Random(args, num_inputs)
+    elif args.recurrent:
+        policy_net = RNN(args, num_inputs)
+    else:
+        policy_net = MLP(args, num_inputs)
+
+    return policy_net
 
 
 def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
@@ -398,7 +568,7 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
                     )
 
         if args.save_every and ep and args.save and ep % args.save_every == 0:
-            save(policy_net, trainer, log, run_dir, final=False, episode=ep)
+            save_model(policy_net, trainer, log, run_dir, final=False, episode=ep)
             if args.save_adjacency:
                 adj_filename = run_dir / ("adjacency_epoch_%i.npy" % (ep))
                 i = 0
@@ -410,7 +580,7 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
                 np.save(adj_filename, adjacency_data)
 
     if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
-        save(policy_net, trainer, log, run_dir, final=True)
+        save_model(policy_net, trainer, log, run_dir, final=True)
         if args.save_adjacency:
             adj_filename = run_dir / "adjacency_final_epoch.npy"
             i = 0
@@ -422,76 +592,12 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
             np.save(adj_filename, adjacency_data)
 
 
-def save(policy_net, trainer, log, run_dir, final, episode=0):
-    d = dict()
-    d["policy_net"] = policy_net.state_dict()
-    d["log"] = log
-    d["trainer"] = trainer.state_dict()
-    if final:
-        model_filename = run_dir / "model.pt"
 
-        i = 0
-        while os.path.exists(model_filename):
-            i += 1
-            model_filename = run_dir / ("model%i.pt" % (i))
-        torch.save(d, model_filename)
-    else:
-        model_filename = run_dir / ("model_ep%i.pt" % (episode))
-
-        i = 0
-        while os.path.exists(model_filename):
-            i += 1
-            model_filename = run_dir / ("model_ep%i_%i.pt" % (i, episode))
-        torch.save(d, model_filename)
-
-
-def load(path, policy_net, trainer, log):
-    d = torch.load(path)
-    # log.clear()
-    policy_net.load_state_dict(d["policy_net"])
-    log.update(d["log"])
-    trainer.load_state_dict(d["trainer"])
-
-
-def signal_handler(env, env_name, display):
-    def handler(signal, frame):
-        print("You pressed Ctrl+C! Exiting gracefully.")
-        if "dec" in env_name:
-            env.close()
-        else:
-            if display:
-                env.exit_render()
-        sys.exit(0)
-    return handler
-
-
-def get_policy_net(args):
-    """Return the requested Policy Net from the command line arguments."""
-    num_inputs = args.num_inputs
-    if args.magic:
-        policy_net = MAGIC(args, num_inputs)
-    elif args.gacomm:
-        policy_net = GACommNetMLP(args, num_inputs)
-    elif args.commnet:
-        if args.tarcomm:
-            policy_net = TarCommNetMLP(args, num_inputs)
-        elif args.dec_tarmac:
-            policy_net = DecTarMAC(args, num_inputs)
-        else:
-            policy_net = CommNetMLP(args, num_inputs)
-    elif args.random:
-        policy_net = Random(args, num_inputs)
-    elif args.recurrent:
-        policy_net = RNN(args, num_inputs)
-    else:
-        policy_net = MLP(args, num_inputs)
-
-    return policy_net
 
 
 def run_baselines():
     """Main entry point for `run_baselines.py`."""
-    prepare_torch()
+    init_torch()
     args, env, render = parse_args()
     signal.signal(signal.SIGINT, signal_handler(env, args.env_name, args.display))
     policy_net = get_policy_net(args)
@@ -526,7 +632,7 @@ def run_baselines():
     log["density2"] = LogField(list(), True, "epoch", "num_steps")
 
     if args.load != "":
-        load(args.load, policy_net, trainer, log)
+        load_model(args.load, policy_net, trainer, log)
 
     if torch.cuda.is_available():
         policy_net = policy_net.to("cuda")
@@ -543,101 +649,8 @@ def run_baselines():
     else:
         vis = None
 
-    if args.env_name == "traffic_junction":
-        env_name_str = args.env_name + "_" + args.difficulty
-        if args.difficulty == "hard" and args.add_rate_min == args.add_rate_max:
-            if args.add_rate_max == 0.1:
-                env_name_str = env_name_str + "_add_01"
-            elif args.add_rate_max == 0.2:
-                env_name_str = env_name_str + "_add_02"
-    elif "predator_prey" in args.env_name:
-        if "dec" in args.env_name:
-            env_name_str = args.env_name + f"_{args.nagents}v{args.nenemies}"
-
-            if args.comm_range != 0:
-                env_name_str = args.env_name + "_cr=" + str(args.comm_range)
-
-            if args.learning_prey:
-                env_name_str = env_name_str + "_learning_prey"
-            elif args.moving_prey:
-                env_name_str = env_name_str + "_random_prey"
-        else:
-            env_name_str = args.env_name
-            if args.nagents == 5:
-                env_name_str = env_name_str + "_5v1"  #'_medium'
-            elif args.nagents == 10:
-                if args.nenemies == 1:
-                    env_name_str = env_name_str + "_10v1"  #'_hard'
-                if args.nenemies == 2:
-                    env_name_str = env_name_str + "_10v2"
-            elif args.nagents == 20:
-                env_name_str = env_name_str + "_20v1"
-    else:
-        env_name_str = args.env_name
-
-    model_dir = Path("./ctdcomm_saved") / env_name_str
-    if args.magic:
-        model_dir = model_dir / "magic"
-    elif args.gacomm:
-        model_dir = model_dir / "gacomm"
-    elif args.dec_tarmac:
-        if args.ic3net:
-            if args.cave:
-                if args.message_augment:
-                    model_dir = model_dir / "ctdcomm"
-                elif args.v_augment:
-                    model_dir = model_dir / "ctdcomm_v_aug"
-            else:
-                if args.message_augment:
-                    model_dir = model_dir / "dec_tarmac_message_aug"
-                elif args.v_augment:
-                    model_dir = model_dir / "dec_tarmac_v_aug"
-                else:
-                    model_dir = model_dir / "dec_tarmac"
-        elif args.commnet:
-            model_dir = model_dir / "dec_tarcomm"
-    elif args.tarcomm:
-        if args.ic3net:
-            model_dir = model_dir / "tar_ic3net"
-        elif args.commnet:
-            model_dir = model_dir / "tar_commnet"
-        else:
-            model_dir = model_dir / "other"
-
-        if args.comm_passes != 1:
-            model_dir = Path(str(model_dir) + "_" + str(args.comm_passes) + "comm_rounds")
-    elif args.ic3net:
-        model_dir = model_dir / "ic3net"
-    elif args.commnet:
-        model_dir = model_dir / "commnet"
-    else:
-        model_dir = model_dir / "other"
-
-    if args.cave and not (args.message_augment or args.v_augment):
-        # Alter the dir name to differentiate from a standard value head
-        dir_head, dir_tail = os.path.split(model_dir)
-        model_dir = Path(dir_head + "/" + dir_tail + "_cave")
-
-    if args.env_name == "grf":
-        model_dir = model_dir / args.scenario
-
-    if args.load:
-        run_dir = args.load[: args.load.rfind("/")]
-        curr_run = run_dir[run_dir.rfind("/") + 1 :]
-        run_dir = Path(run_dir)
-    else:
-        curr_run = "run%i" % args.seed
-        if (model_dir / curr_run).exists():
-            exst_run_nums = [
-                int(str(folder.name).split("run")[1])
-                for folder in model_dir.iterdir()
-                if str(folder.name).startswith("run")
-            ]
-            if len(exst_run_nums) == 0:
-                curr_run = "run1"
-            else:
-                curr_run = "run%i" % (max(exst_run_nums) + 1)
-        run_dir = model_dir / curr_run
+    env_name_str = get_env_name(args)
+    run_dir = get_run_dir(args, env_name_str)
 
     run(args, policy_net, trainer, log, run_dir, vis, args.num_epochs)
 
@@ -650,7 +663,7 @@ def run_baselines():
                 env.exit_render()
 
     if args.save:
-        save(policy_net, trainer, log, run_dir, final=True)
+        save_model(policy_net, trainer, log, run_dir, final=True)
 
     if sys.flags.interactive == 0 and args.nprocesses > 1:
         trainer.quit()
