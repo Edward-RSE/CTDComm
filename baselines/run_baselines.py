@@ -18,6 +18,7 @@ from magic import MAGIC
 from trainer import Trainer
 
 sys.path.append("..")
+
 import data
 from action_utils import parse_action_args
 from multi_processing import MultiProcessTrainer
@@ -324,9 +325,10 @@ def prepare_torch():
     default_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.set_default_device(default_device)
     torch.set_default_dtype(torch.double)
+    torch.multiprocessing.set_start_method("spawn", force=True)
 
 
-def run(args, trainer, log, run_dir, vis, num_epochs):
+def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
     num_episodes = 0
     if args.save and not args.load:
         os.makedirs(run_dir)
@@ -396,7 +398,7 @@ def run(args, trainer, log, run_dir, vis, num_epochs):
                     )
 
         if args.save_every and ep and args.save and ep % args.save_every == 0:
-            save(final=False, episode=ep)
+            save(policy_net, trainer, log, run_dir, final=False, episode=ep)
             if args.save_adjacency:
                 adj_filename = run_dir / ("adjacency_epoch_%i.npy" % (ep))
                 i = 0
@@ -408,7 +410,7 @@ def run(args, trainer, log, run_dir, vis, num_epochs):
                 np.save(adj_filename, adjacency_data)
 
     if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
-        save(final=True)
+        save(policy_net, trainer, log, run_dir, final=True)
         if args.save_adjacency:
             adj_filename = run_dir / "adjacency_final_epoch.npy"
             i = 0
@@ -637,7 +639,8 @@ def run_baselines():
                 curr_run = "run%i" % (max(exst_run_nums) + 1)
         run_dir = model_dir / curr_run
 
-    run(args, trainer, log, run_dir, vis,args.num_epochs)
+    run(args, policy_net, trainer, log, run_dir, vis, args.num_epochs)
+
     if args.display:
         # The MAGIC code called a fucntion called 'env.end_display()' which didn't exist in any of the environments...
         if "dec" in args.env_name:
