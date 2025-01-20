@@ -1,7 +1,6 @@
 import torch
 import torch.nn.functional as F
 from torch import nn
-import numpy as np
 from action_utils import select_action, translate_action
 from gnn_layers import GraphAttention
 
@@ -21,7 +20,7 @@ class MAGIC(nn.Module):
         self.args = args
         self.nagents = args.nagents
         self.hid_size = args.hid_size
-        
+
         dropout = 0
         negative_slope = 0.2
 
@@ -53,7 +52,7 @@ class MAGIC(nn.Module):
                     nn.Linear(self.hid_size//2, self.hid_size//8),
                     nn.ReLU(),
                     nn.Linear(self.hid_size//8, 2))
-                
+
         if args.learn_second_graph and not args.second_graph_complete:
             if args.use_gat_encoder:
                 self.sub_scheduler_mlp2 = nn.Sequential(
@@ -85,7 +84,7 @@ class MAGIC(nn.Module):
                 self.sub_scheduler_mlp1.apply(self.init_linear)
             if args.learn_second_graph and not args.second_graph_complete:
                 self.sub_scheduler_mlp2.apply(self.init_linear)
-                   
+
         # initialize the action head (in practice, one action head is used)
         self.action_heads = nn.ModuleList([nn.Linear(2*args.hid_size, o)
                                         for o in args.naction_heads])
@@ -154,7 +153,7 @@ class MAGIC(nn.Module):
         comm = hidden_state
         if self.args.message_encoder:
             comm = self.message_encoder(comm)
-            
+
         # mask communcation from dead agents (only effective in Traffic Junction)
         comm = comm * agent_mask
         comm_ori = comm.clone()
@@ -173,7 +172,7 @@ class MAGIC(nn.Module):
 
         # sub-processor 1
         comm = F.elu(self.sub_processor1(comm, adj1))
-        
+
         # sub-scheduler 2
         if self.args.learn_second_graph and not self.args.second_graph_complete:
             if self.args.use_gat_encoder:
@@ -189,13 +188,13 @@ class MAGIC(nn.Module):
             adj2 = adj1
         else:
             adj2 = self.get_complete_graph(agent_mask)
-            
+
         # sub-processor 2
         comm = self.sub_processor2(comm, adj2)
-        
+
         # mask communication to dead agents (only effective in Traffic Junction)
         comm = comm * agent_mask
-        
+
         if self.args.message_decoder:
             comm = self.message_decoder(comm)
 
@@ -223,7 +222,7 @@ class MAGIC(nn.Module):
         else:
             value_head = self.value_head(torch.cat((hidden_state, comm), dim=-1))
         # value_head = self.value_head(torch.cat((hidden_state, comm), dim=-1))
-        
+
         h = hidden_state.view(batch_size, n, self.hid_size)
         c = comm.view(batch_size, n, self.hid_size)
 
@@ -255,32 +254,32 @@ class MAGIC(nn.Module):
 
     def init_linear(self, m):
         """
-        Function to initialize the parameters in nn.Linear as o 
+        Function to initialize the parameters in nn.Linear as o
         """
         if type(m) == nn.Linear:
             m.weight.data.fill_(0.)
             m.bias.data.fill_(0.)
-        
+
     def init_hidden(self, batch_size):
         """
         Function to initialize the hidden states and cell states
         """
         return tuple(( torch.zeros(batch_size * self.nagents, self.hid_size, requires_grad=True),
                        torch.zeros(batch_size * self.nagents, self.hid_size, requires_grad=True)))
-    
-    
+
+
     def sub_scheduler(self, sub_scheduler_mlp, hidden_state, agent_mask, directed=True):
         """
         Function to perform a sub-scheduler
 
-        Arguments: 
+        Arguments:
             sub_scheduler_mlp (nn.Sequential): the MLP layers in a sub-scheduler
             hidden_state (tensor): the encoded messages input to the sub-scheduler [n * hid_size]
             agent_mask (tensor): [n * 1]
             directed (bool): decide if generate directed graphs
 
         Return:
-            adj (tensor): a adjacency matrix which is the communication graph [n * n]  
+            adj (tensor): a adjacency matrix which is the communication graph [n * n]
         """
 
         # hidden_state: [n * hid_size]
@@ -300,9 +299,9 @@ class MAGIC(nn.Module):
         agent_mask_transpose = agent_mask.transpose(0, 1)
         # adj: [n * n]
         adj = hard_attn_output.squeeze() * agent_mask * agent_mask_transpose
-        
+
         return adj
-    
+
     def get_complete_graph(self, agent_mask):
         """
         Function to generate a complete graph, and mask it with agent_mask
@@ -312,5 +311,5 @@ class MAGIC(nn.Module):
         agent_mask = agent_mask.expand(n, n)
         agent_mask_transpose = agent_mask.transpose(0, 1)
         adj = adj * agent_mask * agent_mask_transpose
-        
+
         return adj

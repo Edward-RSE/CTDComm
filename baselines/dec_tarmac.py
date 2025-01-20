@@ -1,13 +1,9 @@
 # Cleaned up and rearranged from the version by Yaru Niu for MAGIC
 # Itself slightly adapted from a version from Dr. Abhishek Das
 
-import math
-
 import torch
 import torch.nn.functional as F
 from torch import nn
-
-import numpy as np
 
 from models import MLP
 from tar_comm import TarCommNetMLP
@@ -29,13 +25,13 @@ class DecTarMAC(TarCommNetMLP):
             MLP {object} -- Self
             args {Namespace} -- Parse args namespace
             num_inputs {number} -- Environment observation dimension for agents
-        
+
         Returns: None
         """
 
         # Inherit init_weights and get_agent_mask from parent
         super(TarCommNetMLP, self).__init__()
-        
+
         # Set up all the stuff from TarComm
         self.num_inputs = num_inputs
         self.args = args
@@ -69,10 +65,10 @@ class DecTarMAC(TarCommNetMLP):
         """
         Initialise the LSTM hidden state and cell state for each agent
             then stack them
-        
+
         Arguments:
             batch_size {number}
-        
+
         Returns:
             hidden_states {tensor} -- LSTM hidden states for all agents over all batches (N x batch_size x hid_size)
             cell_states {tensor} -- LSTM cell states for all agents over all batches (N x batch_size x hid_size)
@@ -91,7 +87,7 @@ class DecTarMAC(TarCommNetMLP):
         cell_states = torch.transpose(cell_states, 0, 1)
 
         return hidden_states, cell_states
-    
+
     def separate_input(self, x):
         # TODO: confirm the expected shapes of the hidden and cell states then transpose them if necessary
         """
@@ -99,11 +95,11 @@ class DecTarMAC(TarCommNetMLP):
         Also parses the hidden and cell states where applicable.
         Similar to the 'forward_state_encoder' function in TarComm except that the encoder is
             removed to be executed by the decentralised agents.
-        
+
         Arguments:
             x -- Concatenated observations (states) from the environment, may also
                 contain the hidden and cell states
-        
+
         Returns:
             x {tensor} -- Concatenated observations (states) from the environment,
                 transposed for decentralisation (N x batch_size x num_inputs)
@@ -116,7 +112,7 @@ class DecTarMAC(TarCommNetMLP):
 
         if self.args.recurrent:
             x, extras = x
-            
+
             if self.args.rnn_type == 'LSTM':
                 hidden_state, cell_state = extras
 
@@ -175,7 +171,7 @@ class DecTarMAC(TarCommNetMLP):
 
         if self.args.save_adjacency:
             adjacency_data = torch.zeros([self.comm_passes, n, n])
-        
+
         # For decentralised environments, this mask should be dealt with by individual agents
         #   rather than through 'info' passed through this central process but that
         #   isn't compatible with the environments used here
@@ -189,7 +185,7 @@ class DecTarMAC(TarCommNetMLP):
             comm_action_mask = comm_action.expand(batch_size, n, n).unsqueeze(-1)
             # action 1 is talk, 0 is silent i.e. act as dead for comm purposes.
             agent_mask *= comm_action_mask.double()
-        
+
         # #### Check the shapes of x, hidden state and cell_state to make sure that I'm actually sending the correct info to each agent!
         # assert False, "Nothing broken up to the first comm, is everything the correct shape?"
 
@@ -228,7 +224,7 @@ class DecTarMAC(TarCommNetMLP):
 
             # #### Check the shapes of x, hidden state and cell_state to make sure that I'm actually sending the correct info to each agent!
             # assert False, "Nothing broken up to the communication, is everything the correct shape?"
-        
+
         # Agents pick actions decentrally
         if self.args.continuous:
             action_mean, action_log_std, action_std = [], [], []
@@ -243,7 +239,7 @@ class DecTarMAC(TarCommNetMLP):
             #   From (N x heads x action_space) to (heads x N x action_space)
             agentwise_action = [agent.get_action() for agent in self.agents]
             action = [torch.stack([agentwise_action[a_id][head] for a_id in range(n)]).transpose(0,1) for head in range(len(agentwise_action[0]))]
-        
+
         # #### Check the shapes of x, hidden state and cell_state to make sure that I'm actually sending the correct info to each agent!
         # assert False, "Nothing broken up to action selection, is everything the correct shape?"
 
@@ -274,7 +270,7 @@ class DecTarMAC(TarCommNetMLP):
         else:
             value_input = hidden_state
         value_head = self.value_head(value_input)
-        
+
         if self.args.save_adjacency and self.args.recurrent:
             return action, value_head, (hidden_state.clone(), cell_state.clone()), adjacency_data.detach().numpy()
         elif self.args.save_adjacency:

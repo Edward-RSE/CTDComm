@@ -1,11 +1,10 @@
-import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn
 
 from models import MLP
-import sys 
-sys.path.append("..") 
+import sys
+sys.path.append("..")
 from action_utils import select_action, translate_action
 
 class CommNetMLP(nn.Module):
@@ -181,11 +180,11 @@ class CommNetMLP(nn.Module):
 
         if self.args.save_adjacency:
             if self.args.hard_attn:
-                adjacency_data = np.tile(agent_mask, (self.comm_passes, 1, 1))
+                adjacency_data = torch.tile(agent_mask, (self.comm_passes, 1, 1))
             else:
                 # For CommNet, each agent receives messages from every agent except itself
                 # Note: This adjacency matrix is constant. The code is only here for compatibility
-                adjacency_data = np.ones([self.comm_passes, n, n]) - np.tile(np.eye(n, n), (self.comm_passes, 1, 1))
+                adjacency_data = torch.ones([self.comm_passes, n, n]) - torch.tile(torch.eye(n, n), (self.comm_passes, 1, 1))
 
         for i in range(self.comm_passes):
             # Choose current or prev depending on recurrent

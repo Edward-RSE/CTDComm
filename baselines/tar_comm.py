@@ -6,8 +6,6 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-import numpy as np
-
 from models import MLP
 from action_utils import select_action, translate_action
 
@@ -200,7 +198,7 @@ class TarCommNetMLP(nn.Module):
             agent_mask *= comm_action_mask.double()
 
         agent_mask_transpose = agent_mask.transpose(1, 2)
-        
+
         for i in range(self.comm_passes):
             # Choose current or prev depending on recurrent
             comm = hidden_state.view(batch_size, n, self.hid_size) if self.args.recurrent else hidden_state
