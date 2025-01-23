@@ -319,6 +319,7 @@ def parse_args() :
 
 
 def init_torch():
+    print("cuda available:", torch.cuda.is_available())
     torch.utils.backcompat.broadcast_warning.enabled = True
     torch.utils.backcompat.keepdim_warning.enabled = True
     default_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -590,9 +591,6 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
             print("Doing the final adjacency data save to", adj_filename)
             print("\t", np.array(adjacency_data).shape)
             np.save(adj_filename, adjacency_data)
-
-
-
 
 
 def run_baselines():

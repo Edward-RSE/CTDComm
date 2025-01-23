@@ -1,5 +1,5 @@
 from collections import namedtuple
-from inspect import getargspec
+from inspect import getfullargspec
 import numpy as np
 import torch
 from torch import optim
@@ -25,7 +25,7 @@ class Trainer(object):
 
     def get_episode(self, epoch):
         episode = []
-        reset_args = getargspec(self.env.reset).args
+        reset_args = getfullargspec(self.env.reset).args
         if 'epoch' in reset_args:
             state = self.env.reset(epoch)
         else:
@@ -126,7 +126,7 @@ class Trainer(object):
         action_out = [torch.cat(a, dim=0) for a in action_out]
 
         # alive_masks: [batch_size * n]
-        alive_masks = torch.Tensor(np.concatenate([item['alive_mask'] for item in batch.misc])).view(-1)
+        alive_masks = torch.from_numpy(np.array([item['alive_mask'] for item in batch.misc])).view(-1)
 
         coop_returns = torch.Tensor(batch_size, n)
         ncoop_returns = torch.Tensor(batch_size, n)
@@ -156,7 +156,7 @@ class Trainer(object):
 
         if self.args.normalize_rewards:
             advantages = (advantages - advantages.mean()) / advantages.std()
-            
+
         # element of log_p_a: [(batch_size*n) * num_actions[i]]
         log_p_a = [action_out[i].view(-1, num_actions[i]) for i in range(dim_actions)]
         # actions: [(batch_size*n) * dim_actions]

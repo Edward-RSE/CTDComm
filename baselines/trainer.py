@@ -1,5 +1,5 @@
 from collections import namedtuple
-from inspect import getargspec
+from inspect import getfullargspec
 import numpy as np
 import torch
 from torch import optim
@@ -26,14 +26,14 @@ class Trainer(object):
 
     def get_episode(self, epoch):
         episode = []
-        reset_args = getargspec(self.env.reset).args
+        reset_args = getfullargspec(self.env.reset).args
         if self.args.env_name == 'dec_predator_prey':
             observations, info = self.env.reset(self.args.env_seed)
 
             # Convert observation dict into a 'state' array for backwards compatibility (batch size=1)
-            state = np.stack([obs.flatten() for _, obs in observations.items()])
+            state = np.stack([obs.flatten() for _, obs in observations.items()], dtype=np.double)
             state = np.expand_dims(state, 0)
-            state = torch.from_numpy(state).double().to(device)
+            state = torch.from_numpy(state).to(device)
         else:
             if 'epoch' in reset_args:
                 state = self.env.reset(epoch)
@@ -62,7 +62,7 @@ class Trainer(object):
                     prev_hid = self.policy_net.init_hidden(batch_size=state.shape[0])
 
                 x = [state, prev_hid]
-                
+
                 if self.args.gacomm and self.args.save_adjacency:
                     action_out, value, prev_hid, comm_density, timestep_adjacency = self.policy_net(x, info)
                 elif self.args.gacomm:
@@ -86,7 +86,7 @@ class Trainer(object):
                 elif self.args.save_adjacency:
                     action_out, value, timestep_adjacency = self.policy_net(x, info)
                 else:
-                    action_out, value, = self.policy_net(x, info)             
+                    action_out, value, = self.policy_net(x, info)
 
             # Save adjacency data for network analysis
             if self.args.save_adjacency:
@@ -95,8 +95,8 @@ class Trainer(object):
 
             if self.args.gacomm:
                 stat['density1'] = stat.get('density1', 0) + comm_density[0]
-                stat['density2'] = stat.get('density2', 0) + comm_density[1]               
-            
+                stat['density2'] = stat.get('density2', 0) + comm_density[1]
+
             action = select_action(self.args, action_out)
             action, actual = translate_action(self.args, self.env, action)
             if 'dec' in self.args.env_name:
@@ -114,7 +114,7 @@ class Trainer(object):
                     # The environment uses a string to explain that the agent is dead/inactive
                     if isinstance(info_val, str):
                         info['alive_mask'][agent[1]] = 0
-                
+
                 # Convert next_state dict into a 'state' array for backwards compatibility (batch size=1)
                 next_state = np.stack([obs.flatten() for _, obs in next_state.items()])
                 next_state = np.expand_dims(next_state, 0)
@@ -198,10 +198,10 @@ class Trainer(object):
         n = self.args.nagents
         batch_size = len(batch.state)
 
-        rewards = torch.tensor(batch.reward, device=device)
-        episode_masks = torch.tensor(batch.episode_mask, device=device)
-        episode_mini_masks = torch.tensor(batch.episode_mini_mask, device=device)
-        actions = torch.tensor(batch.action, device=device)
+        rewards = torch.tensor(np.array(batch.reward), device=device)
+        episode_masks = torch.tensor(np.array(batch.episode_mask), device=device)
+        episode_mini_masks = torch.tensor(np.array(batch.episode_mini_mask), device=device)
+        actions = torch.tensor(np.array(batch.action), device=device)
         actions = actions.transpose(1, 2).view(-1, n, dim_actions)
 
         # old_actions = torch.Tensor(np.concatenate(batch.action, 0))
@@ -212,11 +212,10 @@ class Trainer(object):
         values = torch.cat(batch.value, dim=0)
         action_out = list(zip(*batch.action_out))
         action_out = [torch.cat(a, dim=0) for a in action_out]
-
-        alive_masks = torch.tensor(np.concatenate([item['alive_mask'] for item in batch.misc]), device=device).view(-1)
+        alive_masks = torch.tensor(np.concatenate([item['alive_mask'] for item in batch.misc]), device=device)
 
         coop_returns = torch.zeros(batch_size, n, device=device)
-        ncoop_returns = torch.zeros(batch_size, n)
+        ncoop_returns = torch.zeros(batch_size, n, device=device)
         returns = torch.zeros(batch_size, n, device=device)
         deltas = torch.zeros(batch_size, n)
         advantages = torch.zeros(batch_size, n, device=device)
