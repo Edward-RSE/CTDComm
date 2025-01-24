@@ -632,9 +632,6 @@ def run_baselines():
     if args.load != "":
         load_model(args.load, policy_net, trainer, log)
 
-    if torch.cuda.is_available():
-        policy_net = policy_net.to("cuda")
-
     if not args.display:
         display_models([policy_net])
 

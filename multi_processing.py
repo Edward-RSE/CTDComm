@@ -1,16 +1,17 @@
-import time
-from utils import *
 import torch
+import numpy as np
 import torch.multiprocessing as mp
+
+from utils import merge_stat
 
 class MultiProcessWorker(mp.Process):
     # TODO: Make environment init threadsafe
-    def __init__(self, rank, trainer_maker, comm, seed, save_adjacency=False, *args, **kwargs):
+    def __init__(self, rank, trainer, comm, seed, save_adjacency=False, *args, **kwargs):
         self.rank = rank
         self.seed = seed
         self.save_adjacency = save_adjacency
         super(MultiProcessWorker, self).__init__()
-        self.trainer = trainer_maker()
+        self.trainer = trainer
         self.comm = comm
 
         if torch.cuda.is_available():
@@ -18,7 +19,7 @@ class MultiProcessWorker(mp.Process):
             self.device = f"cuda:{self.rank % num_devices}"
         else:
             self.device = "cpu"
-
+        self.trainer.set_device(self.device)
 
     def run(self):
         torch.manual_seed(self.seed + self.rank + 1)
@@ -61,7 +62,7 @@ class MultiProcessTrainer(object):
         for i in range(self.nworkers):
             comm, comm_remote = mp.Pipe()
             self.comms.append(comm)
-            worker = MultiProcessWorker(i, trainer_maker, comm_remote, args.seed, args.save_adjacency)
+            worker = MultiProcessWorker(i, self.trainer, comm_remote, args.seed, args.save_adjacency)
             worker.start()
         self.grads = None
         self.worker_grads = None
