@@ -5,17 +5,24 @@ import torch.multiprocessing as mp
 
 class MultiProcessWorker(mp.Process):
     # TODO: Make environment init threadsafe
-    def __init__(self, id, trainer_maker, comm, seed, save_adjacency=False, *args, **kwargs):
-        self.id = id
+    def __init__(self, rank, trainer_maker, comm, seed, save_adjacency=False, *args, **kwargs):
+        self.rank = rank
         self.seed = seed
         self.save_adjacency = save_adjacency
         super(MultiProcessWorker, self).__init__()
         self.trainer = trainer_maker()
         self.comm = comm
 
+        if torch.cuda.is_available():
+            num_devices = torch.cuda.device_count()
+            self.device = f"cuda:{self.rank % num_devices}"
+        else:
+            self.device = "cpu"
+
+
     def run(self):
-        torch.manual_seed(self.seed + self.id + 1)
-        np.random.seed(self.seed + self.id + 1)
+        torch.manual_seed(self.seed + self.rank + 1)
+        np.random.seed(self.seed + self.rank + 1)
 
         while True:
             task = self.comm.recv()
