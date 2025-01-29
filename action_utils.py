@@ -27,13 +27,13 @@ def parse_action_args(args):
 def select_action(args, action_out):
     if args.continuous:
         action_mean, _, action_std = action_out
-        action = torch.normal(action_mean, action_std)
-        return action.detach()
+        ret = torch.normal(action_mean, action_std).detach()
     else:
         log_p_a = action_out
-        p_a = [[z.exp() for z in x] for x in log_p_a]
+        # p_a = [[z.exp() for z in x] for x in log_p_a]
+        p_a = [torch.exp(x) for x in log_p_a]
         ret = torch.stack([torch.stack([torch.multinomial(x, 1).detach() for x in p]) for p in p_a])
-        return ret
+    return ret
 
 def translate_action(args, env, action):
     if args.num_actions[0] > 0:

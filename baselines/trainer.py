@@ -19,9 +19,8 @@ class Trainer(object):
         self.display = False
         self.last_step = False
         self.optimizer = optim.RMSprop(policy_net.parameters(),
-            lr = args.lrate, alpha=args.alpha, eps=args.eps) #don't know why these weren't input args #alpha=0.97, eps=1e-6)
+            lr = args.lrate, alpha=args.alpha, eps=args.eps)  # don't know why these weren't input args #alpha=0.97, eps=1e-6)
         self.params = [p for p in self.policy_net.parameters()]
-
         if torch.cuda.is_available():
             self.set_device("cuda")
         else:
@@ -31,6 +30,7 @@ class Trainer(object):
         self.device = device
         self.policy_net.set_device(device)
         self.policy_net = self.policy_net.to(device)
+        torch.set_default_device(self.device)
 
     def get_episode(self, epoch):
         episode = []

@@ -12,7 +12,7 @@ import data
 from magic import MAGIC #CTDComm.MAGIC.baselines.
 from utils import *
 from action_utils import parse_action_args
-from trainer import Trainer
+from _trainer import Trainer
 from multi_processing import MultiProcessTrainer
 import gym
 
@@ -90,8 +90,7 @@ parser.add_argument('--comm_mask_zero', action='store_true', default=False,
 # optimization
 parser.add_argument('--gamma', type=float, default=1.0,
                     help='discount factor')
-parser.add_argument('--seed', type=int, default=-1,
-                    help='random seed') 
+parser.add_argument("--seed", type=int, default=-1, help="random seed")
 parser.add_argument('--normalize_rewards', action='store_true', default=False,
                     help='normalize rewards in each batch')
 parser.add_argument('--lrate', type=float, default=0.001,
@@ -238,9 +237,9 @@ else:
         curr_run = 'run1'
     else:
         curr_run = 'run%i' % (max(exst_run_nums) + 1)
-run_dir = model_dir / curr_run 
+run_dir = model_dir / curr_run
 
-def run(num_epochs): 
+def run(num_epochs):
     num_episodes = 0
     if args.save:
         os.makedirs(run_dir)
@@ -269,12 +268,12 @@ def run(num_epochs):
                 v.data.append(stat.get(k, 0))
 
         np.set_printoptions(precision=2)
-        
-        print('Epoch {}'.format(epoch))
-        print('Episode: {}'.format(num_episodes))
-        print('Reward: {}'.format(stat['reward']))
-        print('Time: {:.2f}s'.format(epoch_time))
-        
+
+        print("Epoch {}".format(epoch))
+        print("Episode: {}".format(num_episodes))
+        print("Reward: {}".format(stat["reward"]))
+        print("Time: {:.2f}s".format(epoch_time))
+
         if 'enemy_reward' in stat.keys():
             print('Enemy-Reward: {}'.format(stat['enemy_reward']))
         if 'add_rate' in stat.keys():
@@ -293,7 +292,7 @@ def run(num_epochs):
                 if v.plot and len(v.data) > 0:
                     vis.line(np.asarray(v.data), np.asarray(log[v.x_axis].data[-len(v.data):]),
                     win=k, opts=dict(xlabel=v.x_axis, ylabel=k))
-    
+
         if args.save_every and ep and args.save and (ep+1) % args.save_every == 0:
             save(final=False, epoch=ep+1)
             if args.save_adjacency:
@@ -318,7 +317,7 @@ def run(num_epochs):
             print("\t", np.array(adjacency_data).shape)
             np.save(adj_filename, adjacency_data)
 
-def save(final, epoch=0): 
+def save(final, epoch=0):
     d = dict()
     d['policy_net'] = policy_net.state_dict()
     d['log'] = log

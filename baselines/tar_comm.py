@@ -113,16 +113,18 @@ class TarCommNetMLP(nn.Module):
 
     def set_device(self, device):
         self.device = device
+        torch.set_default_device(self.device)
 
     def get_agent_mask(self, batch_size, info):
         n = self.nagents
 
         if 'alive_mask' in info:
-            agent_mask = torch.from_numpy(info['alive_mask']).to(self.device)
+            agent_mask = torch.from_numpy(info["alive_mask"])  # .to(self.device)
             num_agents_alive = agent_mask.sum()
         else:
             agent_mask = torch.ones(n)
             num_agents_alive = n
+
         agent_mask = agent_mask.view(1, 1, n)
         agent_mask = agent_mask.expand(batch_size, n, n).unsqueeze(-1).clone()
 

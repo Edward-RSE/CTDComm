@@ -4,6 +4,7 @@ import torch.multiprocessing as mp
 
 from utils import merge_stat
 
+
 class MultiProcessWorker(mp.Process):
     # TODO: Make environment init threadsafe
     def __init__(self, rank, trainer, comm, seed, save_adjacency=False, *args, **kwargs):
@@ -20,6 +21,7 @@ class MultiProcessWorker(mp.Process):
         else:
             self.device = "cpu"
         self.trainer.set_device(self.device)
+        print(f"Worker {self.rank} is using device {self.device}")
 
     def run(self):
         torch.manual_seed(self.seed + self.rank + 1)

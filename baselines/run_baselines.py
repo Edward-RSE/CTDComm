@@ -11,7 +11,7 @@ import visdom
 from comm import CommNetMLP
 from dec_tarmac import DecTarMAC
 from ga_comm import GACommNetMLP
-from models import *
+from models import MLP, Random, RNN
 from tar_comm import TarCommNetMLP
 
 from magic import MAGIC
@@ -22,7 +22,7 @@ sys.path.append("..")
 import data
 from action_utils import parse_action_args
 from multi_processing import MultiProcessTrainer
-from utils import *
+from utils import merge_stat, init_args_for_env, LogField, display_models
 
 
 def parse_args() :
@@ -313,19 +313,21 @@ def parse_args() :
         else:
             args.env_seed = np.random.randint(0, 10000)
 
-    print(args)
+    # print(args)
 
     return args, env, render
 
 
 def init_torch():
-    print("cuda available:", torch.cuda.is_available())
     torch.utils.backcompat.broadcast_warning.enabled = True
     torch.utils.backcompat.keepdim_warning.enabled = True
-    default_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    torch.set_default_device(default_device)
     torch.set_default_dtype(torch.double)
-    torch.multiprocessing.set_start_method("spawn", force=True)
+
+    if torch.cuda.is_available():
+        torch.multiprocessing.set_start_method("spawn", force=True)
+        print("Model is using cuda device(s):", torch.cuda.current_device())
+    else:
+        print("Model is using cpu")
 
 
 def load_model(path, policy_net, trainer, log):
@@ -509,6 +511,14 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
             for arg in vars(args):
                 f.write(str(arg) + ": " + str(getattr(args, arg)) + "\n")
 
+    # prof = torch.profiler.profile(
+    #     activities=[torch.profiler.ProfilerActivity.CPU],
+    #     with_stack=False,
+    #     profile_memory=False,
+    # )
+
+    # prof.start()
+
     for ep in range(num_epochs):
         epoch_begin_time = time.time()
         stat = dict()
@@ -579,6 +589,9 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
                 print("Saving adjacency data to", adj_filename)
                 print("\t", np.array(adjacency_data).shape)
                 np.save(adj_filename, adjacency_data)
+
+    # prof.stop()
+    # print(prof.key_averages().table(row_limit=10))
 
     if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
         save_model(policy_net, trainer, log, run_dir, final=True)
