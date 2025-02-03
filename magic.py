@@ -242,7 +242,7 @@ class MAGIC(nn.Module):
         n = self.nagents
 
         if 'alive_mask' in info:
-            agent_mask = torch.from_numpy(info['alive_mask'])
+            agent_mask = info["alive_mask"]
             num_agents_alive = agent_mask.sum()
         else:
             agent_mask = torch.ones(n)

@@ -101,8 +101,8 @@ class GACommNetMLP(nn.Module):
     def get_agent_mask(self, batch_size, info):
         n = self.nagents
 
-        if 'alive_mask' in info:
-            agent_mask = torch.from_numpy(info['alive_mask'])
+        if "alive_mask" in info:
+            agent_mask = info["alive_mask"]
             num_agents_alive = agent_mask.sum()
         else:
             agent_mask = torch.ones(n)
