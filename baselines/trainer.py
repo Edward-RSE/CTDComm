@@ -3,9 +3,13 @@ from inspect import getfullargspec
 import numpy as np
 import torch
 from torch import optim
-import torch.nn as nn
-from utils import *
-from action_utils import *
+from utils import (
+    merge_stat,
+    normal_log_density,
+    multinomials_log_density,
+    multinomials_log_densities,
+)
+from action_utils import select_action, translate_action
 
 Transition = namedtuple('Transition', ('state', 'action', 'action_out', 'value', 'episode_mask', 'episode_mini_mask', 'next_state',
                                        'reward', 'misc'))
@@ -58,7 +62,6 @@ class Trainer(object):
             # None of the envs have a 'display', so I presume they mean render - JenniBN
             self.env.render()
         stat = dict()
-        switch_t = -1
 
         prev_hid = torch.zeros(1, self.args.nagents, self.args.hid_size)
         if self.args.save_adjacency:
@@ -237,14 +240,11 @@ class Trainer(object):
         coop_returns = torch.zeros(batch_size, n, device=self.device)
         ncoop_returns = torch.zeros(batch_size, n, device=self.device)
         returns = torch.zeros(batch_size, n, device=self.device)
-        deltas = torch.zeros(batch_size, n, device=self.device)
         advantages = torch.zeros(batch_size, n, device=self.device)
         values = values.view(batch_size, n)
 
         prev_coop_return = 0
         prev_ncoop_return = 0
-        prev_value = 0
-        prev_advantage = 0
 
         for i in reversed(range(rewards.size(0))):
             coop_returns[i] = rewards[i] + self.args.gamma * prev_coop_return * episode_masks[i]
