@@ -37,11 +37,15 @@ class Trainer(object):
         reset_args = getfullargspec(self.env.reset).args
         if self.args.env_name == 'dec_predator_prey':
             observations, info = self.env.reset(self.args.env_seed)
-
             # Convert observation dict into a 'state' array for backwards compatibility (batch size=1)
             state = np.stack([obs.flatten() for _, obs in observations.items()], dtype=np.double)
             state = np.expand_dims(state, 0)
-            state = torch.from_numpy(state).to(self.device)
+            state = torch.tensor(state).to(self.device)
+            # flattened_obs = [
+            #     torch.from_numpy(obs.flatten()) for obs in observations.values()
+            # ]
+            # stacked_obs = torch.stack(flattened_obs, dim=0).double()
+            # state = stacked_obs.unsqueeze(0)
         else:
             if 'epoch' in reset_args:
                 state = self.env.reset(epoch)
@@ -63,7 +67,7 @@ class Trainer(object):
         for t in range(self.args.max_steps):
             misc = dict()
             if t == 0 and self.args.hard_attn and self.args.commnet:
-                info['comm_action'] = np.zeros(self.args.nagents, dtype=int)
+                info["comm_action"] = torch.zeros(self.args.nagents, dtype=int)
             # recurrence over time
             if self.args.recurrent:
                 if self.args.rnn_type == 'LSTM' and t == 0:
@@ -112,12 +116,15 @@ class Trainer(object):
                 #TODO: does the dict setup still work when learning agents die?
                 actual = {self.env.possible_agents[i]: actual[0][i] for i in range(len(self.env.possible_agents))}
                 next_state, rewards, terminations, truncations, infos = self.env.step(actual)
-                reward = np.array([r for _, r in rewards.items()])
-                terminated = np.all([termination for _, termination in terminations.items()])
-                truncated = np.all([truncation for _, truncation in truncations.items()])
+                reward = torch.tensor(list(rewards.values()))
+                terminated = np.all(list(terminations.values()))
+                truncated = np.all(list(truncations.values()))
                 done = terminated or truncated
 
-                info = {'agent_locs': self.env.locs, 'alive_mask': np.ones_like(reward)}
+                info = {
+                    "agent_locs": self.env.locs,
+                    "alive_mask": torch.ones_like(reward),
+                }
                 for agent, info_val in infos.items():
                     # The environment uses a string to explain that the agent is dead/inactive
                     if isinstance(info_val, str):
@@ -132,7 +139,11 @@ class Trainer(object):
 
             # store comm_action in info for next step
             if self.args.hard_attn and self.args.commnet:
-                info['comm_action'] = action[-1] if not self.args.comm_action_one else np.ones(self.args.nagents, dtype=int)
+                info["comm_action"] = (
+                    action[-1]
+                    if not self.args.comm_action_one
+                    else torch.ones(self.args.nagents, dtype=int)
+                )
 
                 stat['comm_action'] = stat.get('comm_action', 0) + info['comm_action'][:self.args.nfriendly]
                 if hasattr(self.args, 'enemy_comm') and self.args.enemy_comm:
@@ -142,7 +153,7 @@ class Trainer(object):
             if 'alive_mask' in info:
                 misc['alive_mask'] = info['alive_mask'].reshape(reward.shape)
             else:
-                misc['alive_mask'] = np.ones_like(reward)
+                misc["alive_mask"] = torch.ones_like(reward)
 
             # env should handle this make sure that reward for dead agents is not counted
             # reward = reward * misc['alive_mask']
@@ -154,11 +165,11 @@ class Trainer(object):
 
             done = done or t == self.args.max_steps - 1
 
-            episode_mask = np.ones(reward.shape)
-            episode_mini_mask = np.ones(reward.shape)
+            episode_mask = torch.ones(reward.shape)
+            episode_mini_mask = torch.ones(reward.shape)
 
             if done:
-                episode_mask = np.zeros(reward.shape)
+                episode_mask = torch.zeros(reward.shape)
             else:
                 if 'is_completed' in info:
                     episode_mini_mask = 1 - info['is_completed'].reshape(-1)
@@ -177,7 +188,7 @@ class Trainer(object):
         if hasattr(self.env, 'reward_terminal'):
             rewards = self.env.reward_terminal()
             if 'dec' in self.args.env_name:
-                reward = np.array([r for _, r in rewards.items()])
+                reward = torch.tensor(list(rewards.values()))
 
             # We are not multiplying in case of reward terminal with alive agent
             # If terminal reward is masked environment should do
@@ -206,10 +217,11 @@ class Trainer(object):
         n = self.args.nagents
         batch_size = len(batch.state)
 
-        rewards = torch.tensor(np.array(batch.reward), device=self.device)
-        episode_masks = torch.tensor(np.array(batch.episode_mask), device=self.device)
-        episode_mini_masks = torch.tensor(np.array(batch.episode_mini_mask), device=self.device)
-        actions = torch.tensor(np.array(batch.action), device=self.device)
+        rewards = torch.stack(batch.reward)
+        episode_masks = torch.stack(batch.episode_mask)
+        episode_mini_masks = torch.stack(batch.episode_mini_mask)
+        # actions = torch.tensor(batch.action)
+        actions = torch.stack([torch.stack(a) for a in batch.action])
         actions = actions.transpose(1, 2).view(-1, n, dim_actions)
 
         # old_actions = torch.Tensor(np.concatenate(batch.action, 0))
@@ -217,10 +229,10 @@ class Trainer(object):
         # print(old_actions == actions)
 
         # can't do batch forward.
-        values = torch.cat(batch.value, dim=0)
+        values = torch.concatenate(batch.value, dim=0)
         action_out = list(zip(*batch.action_out))
         action_out = [torch.cat(a, dim=0) for a in action_out]
-        alive_masks = torch.tensor(np.concatenate([item['alive_mask'] for item in batch.misc]), device=self.device)
+        alive_masks = torch.concatenate([item["alive_mask"] for item in batch.misc])
 
         coop_returns = torch.zeros(batch_size, n, device=self.device)
         ncoop_returns = torch.zeros(batch_size, n, device=self.device)

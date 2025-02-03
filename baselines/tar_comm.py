@@ -119,7 +119,7 @@ class TarCommNetMLP(nn.Module):
         n = self.nagents
 
         if 'alive_mask' in info:
-            agent_mask = torch.from_numpy(info["alive_mask"])  # .to(self.device)
+            agent_mask = info["alive_mask"]
             num_agents_alive = agent_mask.sum()
         else:
             agent_mask = torch.ones(n)
@@ -190,13 +190,13 @@ class TarCommNetMLP(nn.Module):
         num_agents_alive, agent_mask = self.get_agent_mask(batch_size, info)
         agent_mask_alive = agent_mask.clone()
 
-        agent_mask = agent_mask.to(self.device)
+        # agent_mask = agent_mask.to(self.device)
 
         # Hard Attention - action whether an agent communicates or not
         if self.args.hard_attn:
-            comm_action = torch.tensor(info['comm_action'])
+            comm_action = info["comm_action"]
             comm_action_mask = comm_action.expand(batch_size, n, n).unsqueeze(-1)
-            comm_action_mask = comm_action_mask.to(self.device)
+            # comm_action_mask = comm_action_mask.to(self.device)
             # action 1 is talk, 0 is silent i.e. act as dead for comm purposes.
             agent_mask *= comm_action_mask.double()
 
@@ -210,8 +210,7 @@ class TarCommNetMLP(nn.Module):
                 comm_mask = torch.zeros_like(comm)
                 comm = comm * comm_mask
 
-
-            comm = comm.double().to(self.device)
+            # comm = comm.double().to(self.device)
             # print(comm.dtype)
 
             #########################################################
@@ -256,7 +255,7 @@ class TarCommNetMLP(nn.Module):
                 -2, -1)) / math.sqrt(self.hid_size)
             # scores = scores.masked_fill(comm_action_mask.squeeze(-1) == 0, -1e9)
             # Use agent_mask instead of comm_action_mask to make this work in tj env
-            agent_mask = agent_mask.to(self.device)
+            # agent_mask = agent_mask.to(self.device)
             scores = scores.masked_fill(agent_mask.squeeze(-1) == 0, -1e9)
 
             # softmax + weighted sum
@@ -287,7 +286,7 @@ class TarCommNetMLP(nn.Module):
             ###########################################################
             # for tj: dead agents do not receive messages
             # for tj: alive agents with no comm actions can receive messages (align with tarmac+ic3net in pp)
-            agent_mask_alive = agent_mask_alive.to(self.device)
+            # agent_mask_alive = agent_mask_alive.to(self.device)
             comm *= agent_mask_alive.squeeze(-1)[:, 0].unsqueeze(-1).expand(batch_size, n, self.hid_size)
             c = self.C_modules[i](comm)
 
@@ -296,9 +295,9 @@ class TarCommNetMLP(nn.Module):
                 inp = x + c
 
                 inp = inp.view(batch_size * n, self.hid_size)
-                inp = inp.to(self.device)
-                hidden_state = hidden_state.double().to(self.device)
-                cell_state = cell_state.double().to(self.device)
+                # inp = inp.to(self.device)
+                # hidden_state = hidden_state.double().to(self.device)
+                # cell_state = cell_state.double().to(self.device)
 
                 output = self.f_module(inp, (hidden_state, cell_state))
 

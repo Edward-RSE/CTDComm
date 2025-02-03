@@ -1,29 +1,30 @@
 import time
 import numpy as np
 import torch
-from gym import spaces
 from inspect import getfullargspec
 
+
 class GymWrapper(object):
-    '''
+    """
     for multi-agent
-    '''
+    """
+
     def __init__(self, env):
         self.env = env
 
     @property
     def observation_dim(self):
-        '''
+        """
         for multi-agent, this is the obs per agent
-        '''
+        """
 
         # tuple space
-        if hasattr(self.env.observation_space, 'spaces'):
+        if hasattr(self.env.observation_space, "spaces"):
             total_obs_dim = 0
             for space in self.env.observation_space.spaces:
-                if hasattr(self.env.action_space, 'shape'):
+                if hasattr(self.env.action_space, "shape"):
                     total_obs_dim += int(np.prod(space.shape))
-                else: # Discrete
+                else:  # Discrete
                     total_obs_dim += 1
             return total_obs_dim
         else:
@@ -31,21 +32,21 @@ class GymWrapper(object):
 
     @property
     def num_actions(self):
-        if hasattr(self.env.action_space, 'nvec'):
+        if hasattr(self.env.action_space, "nvec"):
             # MultiDiscrete
             return int(self.env.action_space.nvec[0])
-        elif hasattr(self.env.action_space, 'n'):
+        elif hasattr(self.env.action_space, "n"):
             # Discrete
             return self.env.action_space.n
 
     @property
     def dim_actions(self):
         # for multi-agent, this is the number of action per agent
-        if hasattr(self.env.action_space, 'nvec'):
+        if hasattr(self.env.action_space, "nvec"):
             # MultiDiscrete
             return self.env.action_space.shape[0]
             # return len(self.env.action_space.shape)
-        elif hasattr(self.env.action_space, 'n'):
+        elif hasattr(self.env.action_space, "n"):
             # Discrete => only 1 action takes place at a time.
             return 1
 
@@ -55,7 +56,7 @@ class GymWrapper(object):
 
     def reset(self, epoch):
         reset_args = getfullargspec(self.env.reset).args
-        if 'epoch' in reset_args:
+        if "epoch" in reset_args:
             obs = self.env.reset(epoch)
         else:
             obs = self.env.reset()
@@ -80,15 +81,15 @@ class GymWrapper(object):
         return (obs, r, done, info)
 
     def reward_terminal(self):
-        if hasattr(self.env, 'reward_terminal'):
+        if hasattr(self.env, "reward_terminal"):
             return self.env.reward_terminal()
         else:
             return np.zeros(1)
 
     def _flatten_obs(self, obs):
         if isinstance(obs, tuple):
-            _obs=[]
-            for agent in obs: #list/tuple of observations.
+            _obs = []
+            for agent in obs:  # list/tuple of observations.
                 ag_obs = []
                 for obs_kind in agent:
                     ag_obs.append(np.array(obs_kind).flatten())
@@ -100,8 +101,8 @@ class GymWrapper(object):
         return obs
 
     def get_stat(self):
-        if hasattr(self.env, 'stat'):
-            self.env.stat.pop('steps_taken', None)
+        if hasattr(self.env, "stat"):
+            self.env.stat.pop("steps_taken", None)
             return self.env.stat
         else:
             return dict()

@@ -24,6 +24,10 @@ from action_utils import parse_action_args
 from multi_processing import MultiProcessTrainer
 from utils import merge_stat, init_args_for_env, LogField, display_models
 
+import warnings
+
+warnings.simplefilter("error")
+
 
 def parse_args() :
     """Parse arguments for the script.
