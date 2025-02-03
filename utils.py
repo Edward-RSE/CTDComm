@@ -18,8 +18,8 @@ def merge_stat(src, dest):
             dest[k] = v
         elif isinstance(v, numbers.Number):
             dest[k] = dest.get(k, 0) + v
-        elif isinstance(v, np.ndarray): # for rewards in case of multi-agent
-            dest[k] = dest.get(k, 0) + v
+        elif isinstance(v, np.ndarray) or isinstance(v, torch.Tensor):
+            dest[k] = dest.get(k, 0) + v  # for rewards in case of multi-agent
         else:
             if isinstance(dest[k], list) and isinstance(v, list):
                 dest[k].extend(v)
