@@ -28,7 +28,6 @@ import warnings
 
 warnings.simplefilter("error")
 
-
 def parse_args() :
     """Parse arguments for the script.
 
@@ -684,9 +683,9 @@ def run_baselines():
 
     if sys.flags.interactive == 0 and args.nprocesses > 1:
         trainer.quit()
-        import os
-
         os._exit(0)
+    else:
+        trainer.env.close()
 
 
 if __name__ == "__main__":

@@ -33,6 +33,7 @@ class MultiProcessWorker(mp.Process):
                 task, epoch = task
 
             if task == 'quit':
+                self.trainer.env.close()
                 return
             elif task == 'run_batch':
                 if self.save_adjacency:

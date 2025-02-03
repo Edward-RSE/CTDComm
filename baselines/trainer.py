@@ -42,14 +42,11 @@ class Trainer(object):
         if self.args.env_name == 'dec_predator_prey':
             observations, info = self.env.reset(self.args.env_seed)
             # Convert observation dict into a 'state' array for backwards compatibility (batch size=1)
-            state = np.stack([obs.flatten() for _, obs in observations.items()], dtype=np.double)
-            state = np.expand_dims(state, 0)
-            state = torch.tensor(state).to(self.device)
-            # flattened_obs = [
-            #     torch.from_numpy(obs.flatten()) for obs in observations.values()
-            # ]
-            # stacked_obs = torch.stack(flattened_obs, dim=0).double()
-            # state = stacked_obs.unsqueeze(0)
+            state = np.stack(
+                [obs.flatten() for obs in observations.values()], dtype=np.float64
+            )
+            state_cpu = np.expand_dims(state, 0)
+            state = torch.tensor(state_cpu)
         else:
             if 'epoch' in reset_args:
                 state = self.env.reset(epoch)
@@ -76,7 +73,7 @@ class Trainer(object):
                 if self.args.rnn_type == 'LSTM' and t == 0:
                     prev_hid = self.policy_net.init_hidden(batch_size=state.shape[0])
 
-                x = [state, prev_hid]
+                x = [state.double(), prev_hid]
 
                 if self.args.gacomm and self.args.save_adjacency:
                     action_out, value, prev_hid, comm_density, timestep_adjacency = self.policy_net(x, info)
@@ -136,7 +133,7 @@ class Trainer(object):
                 # Convert next_state dict into a 'state' array for backwards compatibility (batch size=1)
                 next_state = np.stack([obs.flatten() for _, obs in next_state.items()])
                 next_state = np.expand_dims(next_state, 0)
-                next_state = torch.from_numpy(next_state).double().to(self.device)
+                next_state = torch.tensor(next_state)
             else:
                 next_state, reward, done, info = self.env.step(actual)
 

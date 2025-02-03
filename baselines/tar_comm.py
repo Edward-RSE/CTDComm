@@ -61,17 +61,18 @@ class TarCommNetMLP(nn.Module):
         if args.recurrent:
             self.init_hidden(args.batch_size)
             self.f_module = nn.LSTMCell(args.hid_size, args.hid_size)
-
         else:
             if args.share_weights:
                 self.f_module = nn.Linear(args.hid_size, args.hid_size)
                 self.f_modules = nn.ModuleList([self.f_module
                                                 for _ in range(self.comm_passes)])
             else:
-                self.f_modules = nn.ModuleList([nn.Linear(args.hid_size, args.hid_size)
-                                                for _ in range(self.comm_passes)])
-        # else:
-            # raise RuntimeError("Unsupported RNN type.")
+                self.f_modules = nn.ModuleList(
+                    [
+                        nn.Linear(args.hid_size, args.hid_size)
+                        for _ in range(self.comm_passes)
+                    ]
+                )
 
         # Our main function for converting current hidden state to next state
         # self.f = nn.Linear(args.hid_size, args.hid_size)
@@ -80,9 +81,12 @@ class TarCommNetMLP(nn.Module):
             self.C_modules = nn.ModuleList([self.C_module
                                             for _ in range(self.comm_passes)])
         else:
-            self.C_modules = nn.ModuleList([nn.Linear(args.hid_size, args.hid_size)
-                                            for _ in range(self.comm_passes)])
-        # self.C = nn.Linear(args.hid_size, args.hid_size)
+            self.C_modules = nn.ModuleList(
+                [
+                    nn.Linear(args.hid_size, args.hid_size)
+                    for _ in range(self.comm_passes)
+                ]
+            )
 
         # initialise weights as 0
         if args.comm_init == 'zeros':
@@ -90,15 +94,12 @@ class TarCommNetMLP(nn.Module):
                 self.C_modules[i].weight.data.zero_()
         self.tanh = nn.Tanh()
 
-        # print(self.C)
-        # self.C.weight.data.zero_()
-        # Init weights for linear layers
-        # self.apply(self.init_weights)
-
         self.cave = args.cave
         if args.cave:
             # Include the adjacency data as input to the value head
-            value_input_size = self.hid_size + (args.comm_passes * args.nagents * args.nagents)
+            value_input_size = self.hid_size + (
+                args.comm_passes * args.nagents * args.nagents
+            )
             self.value_head = nn.Linear(value_input_size, 1)
         else:
             self.value_head = nn.Linear(self.hid_size, 1)
@@ -118,7 +119,7 @@ class TarCommNetMLP(nn.Module):
     def get_agent_mask(self, batch_size, info):
         n = self.nagents
 
-        if 'alive_mask' in info:
+        if "alive_mask" in info:
             agent_mask = info["alive_mask"]
             num_agents_alive = agent_mask.sum()
         else:
@@ -137,18 +138,16 @@ class TarCommNetMLP(nn.Module):
             x, extras = x
             x = self.encoder(x)
 
-            if self.args.rnn_type == 'LSTM':
+            if self.args.rnn_type == "LSTM":
                 hidden_state, cell_state = extras
             else:
                 hidden_state = extras
-            # hidden_state = self.tanh( self.hidd_encoder(prev_hidden_state) + x)
         else:
             x = self.encoder(x)
             x = self.tanh(x)
             hidden_state = x
 
         return x, hidden_state, cell_state
-
 
     def forward(self, x, info={}):
         # TODO: Update dimensions
@@ -171,14 +170,6 @@ class TarCommNetMLP(nn.Module):
                 case of discrete, mean and std in case of continuous)
                 v: value head
         """
-
-        # if self.args.env_name == 'starcraft':
-        #     maxi = x.max(dim=-2)[0]
-        #     x = self.state_encoder(x)
-        #     x = x.sum(dim=-2)
-        #     x = torch.cat([x, maxi], dim=-1)
-        #     x = self.tanh(x)
-
         x, hidden_state, cell_state = self.forward_state_encoder(x)
 
         batch_size = x.size()[0]
@@ -187,10 +178,8 @@ class TarCommNetMLP(nn.Module):
         if self.args.save_adjacency:
             adjacency_data = torch.zeros([self.comm_passes, n, n])
 
-        num_agents_alive, agent_mask = self.get_agent_mask(batch_size, info)
+        _, agent_mask = self.get_agent_mask(batch_size, info)
         agent_mask_alive = agent_mask.clone()
-
-        # agent_mask = agent_mask.to(self.device)
 
         # Hard Attention - action whether an agent communicates or not
         if self.args.hard_attn:
@@ -200,8 +189,6 @@ class TarCommNetMLP(nn.Module):
             # action 1 is talk, 0 is silent i.e. act as dead for comm purposes.
             agent_mask *= comm_action_mask.double()
 
-        agent_mask_transpose = agent_mask.transpose(1, 2)
-
         for i in range(self.comm_passes):
             # Choose current or prev depending on recurrent
             comm = hidden_state.view(batch_size, n, self.hid_size) if self.args.recurrent else hidden_state
@@ -209,9 +196,6 @@ class TarCommNetMLP(nn.Module):
             if self.args.comm_mask_zero:
                 comm_mask = torch.zeros_like(comm)
                 comm = comm * comm_mask
-
-            # comm = comm.double().to(self.device)
-            # print(comm.dtype)
 
             #########################################################
             # [TarMAC changeset] Don't expand same comm vector to all
@@ -239,9 +223,6 @@ class TarCommNetMLP(nn.Module):
             #     comm = comm / (num_agents_alive - 1)
             ############################################################
 
-            # if info['comm_action'].sum() != 0:
-            #     import pdb; pdb.set_trace()
-
             #########################################################
             # [TarMAC changeset] Attentional communication b/w agents
             #########################################################
@@ -251,8 +232,7 @@ class TarCommNetMLP(nn.Module):
             value = self.state2value(comm)
 
             # scores
-            scores = torch.matmul(query, key.transpose(
-                -2, -1)) / math.sqrt(self.hid_size)
+            scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(self.hid_size)
             # scores = scores.masked_fill(comm_action_mask.squeeze(-1) == 0, -1e9)
             # Use agent_mask instead of comm_action_mask to make this work in tj env
             # agent_mask = agent_mask.to(self.device)
@@ -343,7 +323,7 @@ class TarCommNetMLP(nn.Module):
             return action, value_head
 
     def init_weights(self, m):
-        if type(m) == nn.Linear:
+        if isinstance(m, nn.Linear):
             m.weight.data.normal_(0, self.init_std)
 
     def init_hidden(self, batch_size):
