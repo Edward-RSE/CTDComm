@@ -515,13 +515,16 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
             for arg in vars(args):
                 f.write(str(arg) + ": " + str(getattr(args, arg)) + "\n")
 
-    # prof = torch.profiler.profile(
-    #     activities=[torch.profiler.ProfilerActivity.CPU],
-    #     with_stack=False,
-    #     profile_memory=False,
-    # )
+    if os.getenv("ENABLE_PROFILER"):
+        prof = torch.profiler.profile(
+            activities=[torch.profiler.ProfilerActivity.CPU],
+            with_stack=False,
+            profile_memory=False,
+        )
 
-    # prof.start()
+        prof.start()
+
+    np.set_printoptions(precision=2)
 
     for ep in range(num_epochs):
         epoch_begin_time = time.time()
@@ -547,8 +550,6 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
                 if k in stat and v.divide_by is not None and stat[v.divide_by] > 0:
                     stat[k] = stat[k] / stat[v.divide_by]
                 v.data.append(stat.get(k, 0))
-
-        np.set_printoptions(precision=2)
 
         print("Epoch {}".format(epoch))
         print("Episode: {}".format(num_episodes))
@@ -594,8 +595,12 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
                 print("\t", np.array(adjacency_data).shape)
                 np.save(adj_filename, adjacency_data)
 
-    # prof.stop()
-    # print(prof.key_averages().table(row_limit=10))
+    if os.getenv("ENABLE_PROFILER"):
+        prof.stop()
+        print("CPU profile")
+        print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=10))
+        print("GPU Profile")
+        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
 
     if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
         save_model(policy_net, trainer, log, run_dir, final=True)
