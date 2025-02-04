@@ -351,11 +351,12 @@ class PredatorPreyEnv(ParallelEnv):
         #   vocab_size includes a one_hot encoding of all possible obsjects, size=(dims[0]*dims[1])+4
         self.empty_observation = np.zeros([2*self.vision+1, 2*self.vision+1, self.vocab_size], dtype=int)
         self.empty_observation[:,:,26] += 1 #All it sees is 'OUTSIDE_CLASS'
-        self.all_obs = {}
         self.all_obs = self._get_obs()
 
-        # Set up agent infos with their locations
-        self.infos = {agent: self.locs[self.agent_name_mapping[agent]] for agent in self.agents}
+        # Set up agent infos with their status and locations
+        self.infos = {
+            agent: {"alive": 1, "loc": self.locs[self.agent_name_mapping[agent]]} for agent in self.agents
+        }
 
         return self.all_obs, self.infos
 
@@ -386,24 +387,26 @@ class PredatorPreyEnv(ParallelEnv):
 
         for i in range(self.nprey):
             # Skip dead prey
-            if not self.active_prey[i]: continue
+            if not self.active_prey[i]:
+                continue
 
             p = self.locs[i+self.npredator]
             self.bool_state[p[0] + self.vision, p[1] + self.vision, self.PREY_CLASS] += 1
 
         # Collect partial observations for all agents (possibly including prey)
+        observations = {}
         for agent in self.possible_agents:
             agent_id = self.agent_name_mapping[agent]
             if agent_id >= self.npredator and not self.active_prey[agent_id - self.npredator]:
                 # Dead prey receive an empty observation
-                self.all_obs[agent] = self.empty_observation.copy()
+                observations[agent] = self.empty_observation.copy()
             else:
                 agent_loc = self.locs[agent_id]
                 slice_y = slice(agent_loc[0], agent_loc[0] + (2 * self.vision) + 1)
                 slice_x = slice(agent_loc[1], agent_loc[1] + (2 * self.vision) + 1)
-                self.all_obs[agent] = self.bool_state[slice_y, slice_x]
+                observations[agent] = self.bool_state[slice_y, slice_x]
 
-        return self.all_obs
+        return observations
 
     def step(self, actions):
         """
@@ -431,13 +434,13 @@ class PredatorPreyEnv(ParallelEnv):
             # Skip dead prey
             agent_id = self.agent_name_mapping[agent]
             if agent_id >= self.npredator and not self.active_prey[agent_id - self.npredator]:
-                self.infos[agent] = "Dead prey"
+                self.infos[agent]["alive"] = 0
                 continue
 
             assert act <= self.naction, "Actions should be in the range [0,naction)."
             self._take_action(agent, act)
 
-            self.infos[agent] = self.locs[agent_id]
+            self.infos[agent]["loc"] = self.locs[agent_id]
 
         if self.moving_prey and not self.learning_prey:
             for i in range(self.nprey):

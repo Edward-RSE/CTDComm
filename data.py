@@ -1,6 +1,7 @@
 import sys
 # import gym #I'm importing gym in the body to avoid importing unnecessarily
 from env_wrappers import *
+from torchrl.envs import PettingZooWrapper
 
 def init(env_name, args, final_init=True):
     if env_name == 'dec_predator_prey':
@@ -8,6 +9,7 @@ def init(env_name, args, final_init=True):
         env = predator_prey.env.PredatorPreyEnv(args)
         if args.display:
             env.init_curses()
+        env = PettingZooWrapper(env)
     elif env_name == 'predator_prey':
         import gym
         import ic3net_envs

@@ -40,7 +40,7 @@ class Trainer(object):
         episode = []
         reset_args = getfullargspec(self.env.reset).args
         if self.args.env_name == 'dec_predator_prey':
-            observations, info = self.env.reset(self.args.env_seed)
+            observations, info = self.env.reset(seed=self.args.env_seed)
             # Convert observation dict into a 'state' array for backwards compatibility (batch size=1)
             state = np.stack(
                 [obs.flatten() for obs in observations.values()], dtype=np.float64
@@ -49,7 +49,7 @@ class Trainer(object):
             state = torch.tensor(state_cpu)
         else:
             if 'epoch' in reset_args:
-                state = self.env.reset(epoch)
+                state = self.env.reset(epoch)  # TODO(EP): ???/ wtf is this for
             else:
                 state = self.env.reset()
             info = dict()
@@ -125,10 +125,12 @@ class Trainer(object):
                     "agent_locs": self.env.locs,
                     "alive_mask": torch.ones_like(reward),
                 }
-                for agent, info_val in infos.items():
+                for agent, agent_info in infos.items():
                     # The environment uses a string to explain that the agent is dead/inactive
-                    if isinstance(info_val, str):
-                        info['alive_mask'][agent[1]] = 0
+                    # TODO(EP): handling of dead agents/agent status needs improving
+                    if agent in self.env.agents and agent_info["alive"] == 0:
+                        agent_id = self.env.agent_name_mapping[agent]
+                        info['alive_mask'][agent_id] = 0
 
                 # Convert next_state dict into a 'state' array for backwards compatibility (batch size=1)
                 next_state = np.stack([obs.flatten() for _, obs in next_state.items()])
