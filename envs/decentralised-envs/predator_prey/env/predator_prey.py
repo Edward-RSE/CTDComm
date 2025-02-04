@@ -113,7 +113,7 @@ class PredatorPreyEnv(ParallelEnv):
         # This was included in the previous version but never did anything, removed until implemented
         # env.add_argument('--enemy_comm', action="store_true", default=False,
         #                  help="Whether prey can communicate")
-        
+
         return None
 
     def __init__(self, args=None, render_mode=None, nprey=1, npredator=1,
@@ -157,7 +157,7 @@ class PredatorPreyEnv(ParallelEnv):
             params = ['dim', 'vision', 'mode', 'stay', 'moving_prey', 'learning_prey', 'comm_range'] #, 'enemy_comm'
             for key in params:
                 setattr(self, key, getattr(args, key))
-            
+
             self.nprey = args.nenemies
             self.npredator = args.nfriendly
         else:
@@ -172,7 +172,7 @@ class PredatorPreyEnv(ParallelEnv):
 
             self.nprey = nprey
             self.npredator = npredator
-        
+
         self.dims = (self.dim, self.dim)
 
         if self.learning_prey and not self.moving_prey:
@@ -224,7 +224,7 @@ class PredatorPreyEnv(ParallelEnv):
             self.init_curses()
 
         return None
-    
+
     @functools.lru_cache(maxsize=None)
     def action_space(self, agent=None):
         """Collect the action space for an agent
@@ -232,7 +232,7 @@ class PredatorPreyEnv(ParallelEnv):
         if agent == None:
             agent = self.possible_agents[0]
         return self._action_spaces[agent]
-    
+
     @functools.lru_cache(maxsize=None)
     def observation_space(self, agent=None):
         """Collect the observation space for an agent
@@ -260,7 +260,7 @@ class PredatorPreyEnv(ParallelEnv):
                 "You are calling render method without specifying any render mode."
             )
             return None
-        
+
         grid = np.zeros(self.BASE, dtype=object).reshape(self.dims)
         self.stdscr.clear()
 
@@ -295,9 +295,9 @@ class PredatorPreyEnv(ParallelEnv):
 
         self.stdscr.addstr(len(grid), 0, '\n')
         self.stdscr.refresh()
-        
+
         return None
-    
+
     def close(self):
         """Release the graphical display once the environment is no longer needed"""
         if self.render_mode == 'human':
@@ -319,7 +319,7 @@ class PredatorPreyEnv(ParallelEnv):
         # Reset the random seed
         #   Including generating a new seed using PRNG if not provided
         self.np_random, seed = seeding.np_random(seed)
-        
+
         # (Re)Initialise key attributes
         self.agents = self.possible_agents[:]
         self.rewards = {agent: 0 for agent in self.agents}
@@ -354,11 +354,11 @@ class PredatorPreyEnv(ParallelEnv):
         self.infos = {agent: self.locs[agent[1]] for agent in self.agents}
 
         return self.all_obs, self.infos
-    
+
     def _get_obs(self):
         """
         Collect observations for all agents
-        
+
             Returns:
                 all_obs (dict(agent: observation object)) -- Joint agent observations
         """
@@ -373,7 +373,7 @@ class PredatorPreyEnv(ParallelEnv):
         for i in range(self.nprey):
             # Skip dead prey
             if not self.active_prey[i]: continue
-            
+
             p = self.locs[i+self.npredator]
             self.bool_state[p[0] + self.vision, p[1] + self.vision, self.PREY_CLASS] += 1
 
@@ -410,19 +410,19 @@ class PredatorPreyEnv(ParallelEnv):
                 "You are calling the step method without specifying any actions."
             )
             return {}, {}, {}, {}, {}
-        
+
         # Loop through agents and actions
         for agent, act in actions.items():
             # Skip dead prey
             if agent[1] >= self.npredator and not self.active_prey[agent[1]-self.npredator]:
                 self.infos[agent] = "Dead prey"
                 continue
-            
+
             assert act <= self.naction, "Actions should be in the range [0,naction)."
             self._take_action(agent, act)
 
             self.infos[agent] = self.locs[agent[1]]
-        
+
         if self.moving_prey and not self.learning_prey:
             for i in range(self.nprey):
                 act = self.np_random.randint(self.naction)
@@ -484,10 +484,10 @@ class PredatorPreyEnv(ParallelEnv):
         # STAY
         elif act==4:
             return None
-        
+
         else:
             raise ValueError(f"No action has been taken for agent {agent} with chosen action {act}")
-        
+
         return None
 
     def _get_rewards(self):
@@ -505,7 +505,7 @@ class PredatorPreyEnv(ParallelEnv):
                 mixed mode - self.PREY_REWARD but the largest group of predators that are on a captured prey remain still
             When there are multiple prey, there is an additional reward for predators on the 'most caught' prey
                 to promote focusing on one prey at a time.
-        
+
             Returns:
                 rewards (dict(agent: float)) -- Rewards from the environment (see above for logic)
         """
@@ -521,7 +521,7 @@ class PredatorPreyEnv(ParallelEnv):
                 if np.all(predator_loc == prey_loc):
                     n_predator_on_prey[i, j] += 1
         self.trapped_prey = np.any(n_predator_on_prey, axis=0)
-        
+
         if self.nprey == 1:
             on_prey = n_predator_on_prey.squeeze(axis=1)
             on_prey_count = np.sum(on_prey)
@@ -545,7 +545,7 @@ class PredatorPreyEnv(ParallelEnv):
                     self.agents = {}
             else:
                 raise RuntimeError("Incorrect mode, Available modes: [cooperative|competitive|mixed]")
-            
+
             # Rewards for prey
             if self.learning_prey:
                 if on_prey_count == 0:
@@ -611,7 +611,7 @@ class PredatorPreyEnv(ParallelEnv):
                         self.active_prey[dead_prey_idx] = False
                         if self.learning_prey:
                             self.all_obs[self.possible_agents[self.npredator+dead_prey_idx]] = self.empty_observation.copy()
-                            
+
                             # Account for the possibility of self.agents being smaller than npredator+nprey if a prey has already been caught
                             ndead = len(np.where(self.active_prey == False)) - 1
                             if caught_prey >= ndead:
@@ -619,7 +619,7 @@ class PredatorPreyEnv(ParallelEnv):
 
                             self.terminations[self.possible_agents[self.npredator+dead_prey_idx]] = True
                             self.agents.pop(self.possible_agents[self.npredator+dead_prey_idx])
-                        
+
                         # If all prey have been caught, terminate the episode
                         if self.n_living_prey == 0:
                             # All prey have been caught, terminate all agents ready to end the episode
@@ -658,7 +658,7 @@ class PredatorPreyEnv(ParallelEnv):
     def _init_coordinates(self):
         """
         Set up random initial coordinates for all predators and prey
-        
+
             Returns:
                 locs (np array, shape: npredator+nprey x 2) -- coordinates for the predators and prey in the environment
         """
@@ -702,7 +702,7 @@ class PredatorPreyEnv(ParallelEnv):
             Parameters:
                 idx (numpy array) -- Array to be encoded
                 axis (int) -- Axis along which to insert the encoded values
-            
+
             Returns:
                 out (tuple) -- Tuple of indices where the value of the onehot encoding will be 1
         """
@@ -718,29 +718,29 @@ class PredatorPreyEnv(ParallelEnv):
         else:
             self.rewards = self._get_rewards()
         return self.rewards
-    
+
     def get_comm_range_mask(self):
         """
         Determine which agents are in range to communicate and mask off communication otherwise.
             Note: Communication ranges are always square (like vision).
             Note: We do not differentiate predators and prey if both are able to communicate.
             Note: Agents can always communicate with themselves.
-        
+
             Returns:
                 comm_range_mask (2D numpy array) -- A mask to apply to a square adjacency matrix
                     for multi-agent reinforcement learning methods with communication
         """
         nagents = len(self.possible_agents)
-        
+
         # If comm range is unlimited, return a trivial mask
         if self.comm_range == 0:
             return np.ones([nagents, nagents])
-        
+
         comm_range_mask = np.zeros([nagents, nagents])
 
         # Agents will never be out of range of themselves
         comm_range_mask += np.eye(nagents)
-        
+
         # Main loop for determining whether agents are in range
         for i in range(nagents):
             # If i is a dead prey, mask all communication
@@ -748,13 +748,13 @@ class PredatorPreyEnv(ParallelEnv):
                 if not self.active_prey[i-self.npredator]:
                     comm_range_mask[i, i] = 0
                     continue
-            
+
             for j in range(i+1, nagents):
                 # If j is a dead prey, mask communication
                 if j > self.npredator:
                     if not self.active_prey[j-self.npredator]:
                         continue
-                
+
                 y_dist = np.abs(self.locs[i][0] - self.locs[j][0])
                 x_dist = np.abs(self.locs[i][1] - self.locs[j][1])
                 if np.max(y_dist, x_dist) <= self.comm_range:
