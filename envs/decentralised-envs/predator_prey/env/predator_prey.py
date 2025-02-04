@@ -193,13 +193,17 @@ class PredatorPreyEnv(ParallelEnv):
 
         # Predators and prey are stored as tuple with names and int indices
         #   for differentiation and so that they can be called individually at runtime
-        self.possible_predators = [('predator_' + str(i), i) for i in range(self.npredator)]
-        self.possible_prey = [('prey_' + str(i), i+self.npredator) for i in range(self.nprey)]
+        self.possible_predators = ['predator_' + str(i) for i in range(self.npredator)]
+        self.possible_prey = ['prey_' + str(i) for i in range(self.nprey)]
         if self.learning_prey:
             self.possible_agents = self.possible_predators + self.possible_prey
         else:
             # Prey aren't agents if they aren't learning
             self.possible_agents = self.possible_predators
+
+        # Create a mapping between agent name and id
+        self.agent_name_mapping = self._create_agent_name_mapping()
+
         # This is a hack because the pettingzoo parallel_api_test is asking for an agent_selection
         self.agent_selection = None
 
@@ -351,9 +355,19 @@ class PredatorPreyEnv(ParallelEnv):
         self.all_obs = self._get_obs()
 
         # Set up agent infos with their locations
-        self.infos = {agent: self.locs[agent[1]] for agent in self.agents}
+        self.infos = {agent: self.locs[self.agent_name_mapping[agent]] for agent in self.agents}
 
         return self.all_obs, self.infos
+
+    def _create_agent_name_mapping(self):
+        """
+        Create a mapping between agent name and id for self.possible_agents
+
+            Returns:
+                agent_name_mapping (dict(agent_name: agent_id)) -- Mapping between agent name and id
+        """
+        return dict(zip(self.possible_agents, range(len(self.possible_agents))))
+
 
     def _get_obs(self):
         """
@@ -379,11 +393,12 @@ class PredatorPreyEnv(ParallelEnv):
 
         # Collect partial observations for all agents (possibly including prey)
         for agent in self.possible_agents:
-            if agent[1] >= self.npredator and not self.active_prey[agent[1]-self.npredator]:
+            agent_id = self.agent_name_mapping[agent]
+            if agent_id >= self.npredator and not self.active_prey[agent_id - self.npredator]:
                 # Dead prey receive an empty observation
                 self.all_obs[agent] = self.empty_observation.copy()
             else:
-                agent_loc = self.locs[agent[1]]
+                agent_loc = self.locs[agent_id]
                 slice_y = slice(agent_loc[0], agent_loc[0] + (2 * self.vision) + 1)
                 slice_x = slice(agent_loc[1], agent_loc[1] + (2 * self.vision) + 1)
                 self.all_obs[agent] = self.bool_state[slice_y, slice_x]
@@ -414,19 +429,21 @@ class PredatorPreyEnv(ParallelEnv):
         # Loop through agents and actions
         for agent, act in actions.items():
             # Skip dead prey
-            if agent[1] >= self.npredator and not self.active_prey[agent[1]-self.npredator]:
+            agent_id = self.agent_name_mapping[agent]
+            if agent_id >= self.npredator and not self.active_prey[agent_id - self.npredator]:
                 self.infos[agent] = "Dead prey"
                 continue
 
             assert act <= self.naction, "Actions should be in the range [0,naction)."
             self._take_action(agent, act)
 
-            self.infos[agent] = self.locs[agent[1]]
+            self.infos[agent] = self.locs[agent_id]
 
         if self.moving_prey and not self.learning_prey:
             for i in range(self.nprey):
                 act = self.np_random.randint(self.naction)
-                agent = ('random_prey_'+str(i), i+self.npredator)
+                agent = 'random_prey_' + str(i)
+                self.agent_name_mapping[agent] = i + self.npredator
                 self._take_action(agent, act)
 
         return self._get_obs(), self._get_rewards(), self.terminations, self.truncations, self.infos
@@ -439,7 +456,7 @@ class PredatorPreyEnv(ParallelEnv):
                 agent (agent object) -- Agent to act
                 act (int) -- Action to be taken, encoded into the range [0,naction)
         """
-        idx = agent[1]
+        idx = self.agent_name_mapping[agent]
         if idx < self.npredator:
             # Predators stop moving once they've reached the prey
             if self.reached_prey[idx] == 1:
@@ -652,7 +669,7 @@ class PredatorPreyEnv(ParallelEnv):
         if self.mode != 'competitive':
             self.stat['success'] = self.nprey - self.n_living_prey
 
-        self.rewards = {agent: reward[agent[1]] for agent in self.possible_agents}
+        self.rewards = {agent: reward[self.agent_name_mapping[agent]] for agent in self.possible_agents}
         return self.rewards
 
     def _init_coordinates(self):
