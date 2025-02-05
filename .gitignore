@@ -168,3 +168,9 @@ cython_debug/
 
 # Ignore directories used for informal testing
 /envs/base-verysimplemodule/*
+
+# VS Code stuff
+.vscode
+
+# Other developer tools
+ruff.toml
