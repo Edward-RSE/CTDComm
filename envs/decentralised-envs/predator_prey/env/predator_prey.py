@@ -31,6 +31,7 @@ from gymnasium import spaces
 
 from pettingzoo import ParallelEnv
 from pettingzoo.utils import parallel_to_aec, wrappers
+from pettingzoo.test import parallel_api_test
 
 def env(render_mode=None, nprey=1, npredator=1, dim=5, vision=2, mode='mixed', stay=True,
             moving_prey=False, learning_prey=False, comm_range=0): #, enemy_comm=False
@@ -126,6 +127,8 @@ class PredatorPreyEnv(ParallelEnv):
             TODO: Allow reward values as optional arguments
             TODO: Allow separate systems for prey and predator communication rather than giving all agents access to all communication
 
+        Version 1.1.0 changed the value for agents in self.infos into a dict {"loc": np.ndarray, "alive": int}.
+
         Parameters:
             args (argparse.Namespace object or NoneType) -- List of arguments passed from the command line to the main file
             render_mode (str or NoneType) -- Way in which the environment is rendered (None (default) or 'human')
@@ -139,7 +142,7 @@ class PredatorPreyEnv(ParallelEnv):
             learning_prey (bool) -- Whether prey can learn their own policies (default False)
             comm_range (int) -- Range over which agents can maintain communication. If 0, there is no limit. (default 0)
         """
-        self.__version__ = "1.0.1"
+        self.__version__ = "1.1.0"
 
         # These parameters are consistent with previous versions
         self.OUTSIDE_CLASS = 1
@@ -790,3 +793,8 @@ class PredatorPreyEnv(ParallelEnv):
             return self.stat
         else:
             return dict()
+
+
+if __name__ == "__main__":
+    env = PredatorPreyEnv()
+    parallel_api_test(env, num_cycles=1_000_000)
