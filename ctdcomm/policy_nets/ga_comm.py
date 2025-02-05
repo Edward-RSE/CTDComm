@@ -6,10 +6,8 @@ import torch.nn.functional as F
 from torch import nn
 import numpy as np
 
-from models import MLP
-import sys
-sys.path.append("..")
-from ctdcomm.action_utils import select_action, translate_action
+from ctdcomm.policy_nets.models import MLP
+
 
 class GACommNetMLP(nn.Module):
     def __init__(self, args, num_inputs):

@@ -169,8 +169,12 @@ cython_debug/
 # Ignore directories used for informal testing
 /envs/base-verysimplemodule/*
 
+# Ignore saved data
+ctdcomm_saved/
+
 # VS Code stuff
 .vscode
 
 # Other developer tools
 ruff.toml
+.ruff_cache

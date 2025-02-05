@@ -3,28 +3,24 @@ import os
 import signal
 import sys
 import time
+import warnings
 from pathlib import Path
 
 import numpy as np
 import torch
 import visdom
-from ctdcomm.policy_nets.comm import CommNetMLP
-from dec_tarmac import DecTarMAC
-from ga_comm import GACommNetMLP
-from ctdcomm.policy_nets.models import MLP, Random, RNN
-from ctdcomm.policy_nets.tar_comm import TarCommNetMLP
 
-from magic import MAGIC
-from trainer import Trainer
-
-sys.path.append("..")
-
-import ctdcomm.data as data
+from ctdcomm import data
 from ctdcomm.action_utils import parse_action_args
 from ctdcomm.multi_processing import MultiProcessTrainer
-from ctdcomm.utils import merge_stat, init_args_for_env, LogField, display_models
-
-import warnings
+from ctdcomm.policy_nets.comm import CommNetMLP
+from ctdcomm.policy_nets.dec_tarmac import DecTarMAC
+from ctdcomm.policy_nets.ga_comm import GACommNetMLP
+from ctdcomm.policy_nets.magic import MAGIC
+from ctdcomm.policy_nets.models import MLP, RNN, Random
+from ctdcomm.policy_nets.tar_comm import TarCommNetMLP
+from ctdcomm.trainer import Trainer
+from ctdcomm.utils import LogField, display_models, init_args_for_env, merge_stat
 
 warnings.simplefilter("error")
 

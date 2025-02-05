@@ -7,11 +7,9 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-import numpy as np
-
-from models import MLP
+from ctdcomm.policy_nets.models import MLP
 from ctdcomm.policy_nets.tar_comm import TarCommNetMLP
-from ctdcomm.action_utils import select_action, translate_action
+
 
 class DecAgent(TarCommNetMLP):
     """
