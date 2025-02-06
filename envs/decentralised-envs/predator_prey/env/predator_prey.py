@@ -101,8 +101,8 @@ class PredatorPreyEnv(ParallelEnv):
                          help="Dimension of box")
         env.add_argument('--vision', type=int, default=2,
                          help="Vision of agents")
-        parser.add_argument('--mode', default='mixed', type=str,
-                        help='cooperative|competitive|mixed (default: mixed)')
+        env.add_argument('--mode', default='mixed', type=str,
+                         help='cooperative|competitive|mixed (default: mixed)')
         env.add_argument('--stay', action="store_false", default=True,
                          help="Whether predators have an action to stay in place. Note: this replaces 'no_stay' in previous version which had the opposite behaviour")
         env.add_argument('--moving_prey', action="store_true", default=False,
