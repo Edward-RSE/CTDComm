@@ -4,8 +4,8 @@ This is the repository for CTDComm...
 
 ## Requirements
 
-You can install the requirements by using the `.yml` files in the `conda_envs/` directory, or you can use the (currently
-most tested method) installation script `conda_envs/install-venv.sh` which will create a Python 3.12 virtual environment
+You can install the requirements by using the `.yml` files in the `python_envs/` directory, or you can use the (currently
+most tested method) installation script `python_envs/install-venv.sh` which will create a Python 3.12 virtual environment
 in a directory named `.venv`.
 
 If you choose to use the conda environment files, you will need to install the learning environments in `envs/`

@@ -10,8 +10,8 @@ install_venv() {
 }
 
 install_packages() {
-    pip install -r conda_envs/requirements.txt
-    cd envs/decentralized-envs && pip install .
+    pip install -r python_envs/requirements.txt
+    cd src/envs/decentralized-envs && pip install .
     cd ../ic3net-envs && pip install .
 }
 
