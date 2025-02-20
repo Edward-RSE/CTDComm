@@ -311,10 +311,14 @@ def run_baselines():
     if args.env_name == "grf":
         args.render = render
 
-    if args.nprocesses > 1:
-        trainer = MultiProcessTrainer(args, lambda: Trainer(args, policy_net, data.init(args.env_name, args)))
-    else:
-        trainer = Trainer(args, policy_net, data.init(args.env_name, args))
+    # if args.nprocesses > 1:
+    #     trainer = MultiProcessTrainer(args, lambda: Trainer(args, policy_net, data.init(args.env_name, args)))
+    # else:
+    #     trainer = Trainer(args, policy_net, data.init(args.env_name, args))
+
+    trainer = MultiProcessTrainer(
+        args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
+    )
 
     # # This doesn't get used but I'll leave it since it succinctly displays an episode
     # disp_trainer = Trainer(args, policy_net, data.init(args.env_name, args, False))

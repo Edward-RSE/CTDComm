@@ -15,9 +15,8 @@ class MultiProcessWorker(mp.Process):
         self.trainer = trainer
         self.comm = comm
 
-        if torch.cuda.is_available():
-            num_devices = torch.cuda.device_count()
-            self.device = f"cuda:{self.rank % num_devices}"
+        if args.nprocesses == 1 and torch.cuda.is_available():
+            self.device = "cuda"
         else:
             self.device = "cpu"
         self.trainer.set_device(self.device)
@@ -29,6 +28,8 @@ class MultiProcessWorker(mp.Process):
 
         while True:
             task = self.comm.recv()
+            print(task)
+
             if type(task) == list:
                 task, epoch = task
 
