@@ -12,7 +12,7 @@ install_venv() {
 install_packages() {
     pip install -r python_envs/requirements.txt
     pip install .
-    cd src/envs/decentralized-envs && pip install .
+    cd src/envs/decentralised-envs && pip install .
     cd ../ic3net-envs && pip install .
 }
 
