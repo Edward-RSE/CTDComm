@@ -7,18 +7,14 @@ from ctdcomm.utils import merge_stat
 
 class MultiProcessWorker(mp.Process):
     # TODO: Make environment init threadsafe
-    def __init__(self, rank, trainer, comm, seed, save_adjacency=False, *args, **kwargs):
+    def __init__(self, rank, trainer, comm, seed, device, save_adjacency=False, *args, **kwargs):
         self.rank = rank
         self.seed = seed
         self.save_adjacency = save_adjacency
         super(MultiProcessWorker, self).__init__()
         self.trainer = trainer
         self.comm = comm
-
-        if args.nprocesses == 1 and torch.cuda.is_available():
-            self.device = "cuda"
-        else:
-            self.device = "cpu"
+        self.device = device
         self.trainer.set_device(self.device)
         print(f"Worker {self.rank} is using device {self.device}")
 
@@ -66,7 +62,9 @@ class MultiProcessTrainer(object):
         for i in range(self.nworkers):
             comm, comm_remote = mp.Pipe()
             self.comms.append(comm)
-            worker = MultiProcessWorker(i, self.trainer, comm_remote, args.seed, args.save_adjacency)
+            worker = MultiProcessWorker(
+                i, self.trainer, comm_remote, args.seed, self.trainer.device, args.save_adjacency
+            )
             worker.start()
         self.grads = None
         self.worker_grads = None

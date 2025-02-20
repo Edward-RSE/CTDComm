@@ -35,7 +35,10 @@ def parse_args():
         help="number of steps before each update (per thread)",
     )
     parser.add_argument(
-        "--nprocesses", type=int, default=16, help="How many processes to run"
+        "--nprocesses", type=int, default=1, help="How many processes to run"
+    )
+    parser.add_argument(
+        "--use_cuda", action="store_true", default=False, help="Use CUDA for training"
     )
     # model
     parser.add_argument("--hid_size", default=64, type=int, help="hidden layer size")
@@ -351,6 +354,9 @@ def parse_args():
 
     init_args_for_env(parser)
     args = parser.parse_args()
+
+    if args.nprocesses != 1 and args.use_cuda:
+        raise ValueError("Cannot use CUDA with multiple processes")
 
     if args.cave:
         args.save_adjacency = True

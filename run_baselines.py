@@ -28,12 +28,7 @@ def init_torch():
     torch.utils.backcompat.broadcast_warning.enabled = True
     torch.utils.backcompat.keepdim_warning.enabled = True
     torch.set_default_dtype(torch.double)
-
-    if torch.cuda.is_available():
-        torch.multiprocessing.set_start_method("spawn", force=True)
-        print("Model is using cuda device(s):", torch.cuda.current_device())
-    else:
-        print("Model is using cpu")
+    torch.multiprocessing.set_start_method("spawn", force=True)
 
 
 def load_model(path, policy_net, trainer, log):
@@ -316,8 +311,13 @@ def run_baselines():
     # else:
     #     trainer = Trainer(args, policy_net, data.init(args.env_name, args))
 
+    if args.use_cuda:
+        device = torch.device("cuda:0")
+    else:
+        device = torch.device("cpu")
+
     trainer = MultiProcessTrainer(
-        args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
+        args, lambda: Trainer(args, policy_net, data.init(args.env_name, args), device=device)
     )
 
     # # This doesn't get used but I'll leave it since it succinctly displays an episode
@@ -372,11 +372,11 @@ def run_baselines():
     if args.save:
         save_model(policy_net, trainer, log, run_dir, final=True)
 
-    if sys.flags.interactive == 0 and args.nprocesses > 1:
-        trainer.quit()
-        os._exit(0)
-    else:
-        trainer.env.close()
+    # if sys.flags.interactive == 0 and args.nprocesses > 1:
+    #     trainer.quit()
+    #     os._exit(0)
+    # else:
+    #     trainer.env.close()
 
 
 if __name__ == "__main__":
