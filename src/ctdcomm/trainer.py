@@ -25,16 +25,24 @@ class Trainer(object):
         self.optimizer = optim.RMSprop(policy_net.parameters(),
             lr = args.lrate, alpha=args.alpha, eps=args.eps)  # don't know why these weren't input args #alpha=0.97, eps=1e-6)
         self.params = [p for p in self.policy_net.parameters()]
-        if torch.cuda.is_available():
-            self.set_device("cuda")
-        else:
-            self.set_device("cpu")
+
+        # if torch.cuda.is_available():
+        #     self.set_device("cuda")
+        # else:
+        #     self.set_device("cpu")
+
+    def with_distributed_policy_net(self, device):
+        self.policy_net = torch.nn.parallel.DistributedDataParallel(
+            self.policy_net,
+            device_ids=[device] if self.args.use_cuda else None,
+            output_device=device if self.args.use_cuda else None,
+        )
+        self.trainer.params = [p for p in self.policy_net.parameters()]
+        self.set_device(device)
 
     def set_device(self, device):
         self.device = device
-        self.policy_net.set_device(device)
-        self.policy_net = self.policy_net.to(device)
-        torch.set_default_device(self.device)
+        torch.set_default_device(device)
 
     def get_episode(self, epoch):
         episode = []
