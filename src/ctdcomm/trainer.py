@@ -45,8 +45,8 @@ class Trainer(object):
             state = np.stack(
                 [obs.flatten() for obs in observations.values()], dtype=np.float64
             )
-            state_cpu = np.expand_dims(state, 0)
-            state = torch.tensor(state_cpu)
+            state_numpy = np.expand_dims(state, 0)
+            state = torch.tensor(state_numpy)
         else:
             if 'epoch' in reset_args:
                 state = self.env.reset(epoch)
