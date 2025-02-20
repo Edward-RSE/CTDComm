@@ -31,7 +31,7 @@ class Trainer(object):
         # else:
         #     self.set_device("cpu")
 
-    def with_distributed_policy_net(self, device):
+    def wrap_with_distributed_policy_net(self, device):
         self.policy_net = torch.nn.parallel.DistributedDataParallel(
             self.policy_net,
             device_ids=[device] if self.args.use_cuda else None,
@@ -340,7 +340,8 @@ class Trainer(object):
         else:
             return batch, self.stats
 
-    # only used when nprocesses=1
+    # only used when nprocesses=1. In other cases, the method is overwritten by
+    # the same method in either MultiProcessTrainer or DistributedTrainer
     def train_batch(self, epoch):
         if self.args.save_adjacency:
             batch, stat, batch_adjacency = self.run_batch(epoch)
