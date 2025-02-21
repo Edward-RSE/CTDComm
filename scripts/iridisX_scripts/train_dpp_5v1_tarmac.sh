@@ -19,17 +19,15 @@ fi
 
 printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
-python_exe=pyinstrument
-# python_exe=python
-
-$python_exe run_baselines.py \
+python -u run_baselines.py \
+  --cuda \
   --env_name dec_predator_prey \
   --nagents 5 \
   --dim 10 \
   --max_steps 40 \
   --vision 1 \
   --nprocesses 1 \
-  --num_epochs 2 \
+  --num_epochs 5 \
   --epoch_size 10 \
   --hid_size 128 \
   --value_hid_size 128 \

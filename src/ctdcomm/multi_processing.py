@@ -56,6 +56,8 @@ class MultiProcessTrainer(object):
         self.comms = []
         self.trainer = trainer_maker()
         self.device = self.trainer.set_device(device)
+        # Share memory between root process and workers
+        self.trainer.policy_net.share_memory()
         # itself will do the same job as workers
         self.nworkers = args.nprocesses - 1
         for i in range(self.nworkers):
@@ -71,6 +73,7 @@ class MultiProcessTrainer(object):
     def quit(self):
         for comm in self.comms:
             comm.send('quit')
+        self.trainer.env.close()
 
     def obtain_grad_pointers(self):
         # only need perform this once

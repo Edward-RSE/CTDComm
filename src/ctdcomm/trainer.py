@@ -28,7 +28,7 @@ class Trainer(object):
         self.device = self.set_device(device)
 
     def set_device(self, device):
-        torch.set_default_device(self.device)
+        torch.set_default_device(device)
         self.policy_net = self.policy_net.to(device)
         return device
 

@@ -215,15 +215,6 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
             for arg in vars(args):
                 f.write(str(arg) + ": " + str(getattr(args, arg)) + "\n")
 
-    if os.getenv("ENABLE_PROFILER"):
-        prof = torch.profiler.profile(
-            activities=[torch.profiler.ProfilerActivity.CPU],
-            with_stack=False,
-            profile_memory=False,
-        )
-
-        prof.start()
-
     np.set_printoptions(precision=2)
 
     for ep in range(num_epochs):
@@ -295,13 +286,6 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
                 print("\t", np.array(adjacency_data).shape)
                 np.save(adj_filename, adjacency_data)
 
-    if os.getenv("ENABLE_PROFILER"):
-        prof.stop()
-        print("CPU profile")
-        print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=10))
-        print("GPU Profile")
-        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
-
     if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
         save_model(policy_net, trainer, log, run_dir, final=True)
         if args.save_adjacency:
@@ -319,18 +303,27 @@ def run_baselines():
     """Main entry point for `run_baselines.py`."""
     init_torch()
     args, env, render = parse_config_args()
+    print(args)
     signal.signal(signal.SIGINT, signal_handler(env, args.env_name, args.display))
     policy_net = get_policy_net(args)
 
     if args.env_name == "grf":
         args.render = render
 
+    if args.cuda:
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        else:
+            raise RuntimeError("CUDA has been requested, but is not available")
+    else:
+        device = torch.device("cpu")
+
     if args.nprocesses > 1:
         trainer = MultiProcessTrainer(
             args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
         )
     else:
-        trainer = Trainer(args, policy_net, data.init(args.env_name, args))
+        trainer = Trainer(args, policy_net, data.init(args.env_name, args), device=device)
 
     log = dict()
     log["epoch"] = LogField(list(), False, None, None)
@@ -352,10 +345,6 @@ def run_baselines():
 
     if not args.display:
         display_models([policy_net])
-
-    # share parameters among threads, but not gradients
-    for p in policy_net.parameters():
-        p.data.share_memory_()
 
     if args.plot:
         vis = visdom.Visdom(env=args.plot_env, port=args.plot_port)
