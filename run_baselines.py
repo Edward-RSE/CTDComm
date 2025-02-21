@@ -28,7 +28,6 @@ def init_torch():
     torch.utils.backcompat.broadcast_warning.enabled = True
     torch.utils.backcompat.keepdim_warning.enabled = True
     torch.set_default_dtype(torch.double)
-    torch.multiprocessing.set_start_method("spawn", force=True)
 
 
 def load_model(path, policy_net, trainer, log):
@@ -319,10 +318,15 @@ def run_baselines():
         device = torch.device("cpu")
 
     if args.nprocesses > 1:
+        # limit the number of threads to avoid contention and over-subscription
+        torch.set_num_threads(1)
+        # no need to set the device, as the default is CPU and we cannot use
+        # GPUs with the shared-memory multi-processing approach
         trainer = MultiProcessTrainer(
             args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
         )
     else:
+        # GPU training is available for single processes
         trainer = Trainer(args, policy_net, data.init(args.env_name, args), device=device)
 
     log = dict()
@@ -357,12 +361,12 @@ def run_baselines():
     run(args, policy_net, trainer, log, run_dir, vis, args.num_epochs)
 
     if args.display:
-        # The MAGIC code called a fucntion called 'env.end_display()' which didn't exist in any of the environments...
+        # The MAGIC code called a function called 'env.end_display()'
+        # which didn't exist in any of the environments...
         if "dec" in args.env_name:
             env.close()
         else:
-            if args.display:
-                env.exit_render()
+            env.exit_render()
 
     if args.save:
         save_model(policy_net, trainer, log, run_dir, final=True)

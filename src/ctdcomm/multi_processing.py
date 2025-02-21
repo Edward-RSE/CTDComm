@@ -54,6 +54,7 @@ class MultiProcessWorker(mp.Process):
 class MultiProcessTrainer(object):
     def __init__(self, args, trainer_maker, device=torch.device("cpu")):
         self.comms = []
+        self.workers = []
         self.trainer = trainer_maker()
         self.device = self.trainer.set_device(device)
         # Share memory between root process and workers
@@ -64,6 +65,7 @@ class MultiProcessTrainer(object):
             comm, comm_remote = mp.Pipe()
             self.comms.append(comm)
             worker = MultiProcessWorker(i, self.trainer, comm_remote, args.seed, args.save_adjacency)
+            self.workers.append(worker)
             worker.start()
         self.grads = None
         self.worker_grads = None
@@ -74,6 +76,8 @@ class MultiProcessTrainer(object):
         for comm in self.comms:
             comm.send('quit')
         self.trainer.env.close()
+        for worker in self.workers:
+            worker.join()
 
     def obtain_grad_pointers(self):
         # only need perform this once

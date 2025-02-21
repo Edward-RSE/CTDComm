@@ -10,6 +10,7 @@
 source $HOME/modules/ctdcomm.lmod
 source $HOME/codes/CTDComm/.venv/bin/activate
 export CUDA_VISIBLE_DEVICES=0
+export PYTHONUNBUFFERED=1
 
 if [ $# -eq 1 ]; then
   seed=$1
@@ -20,14 +21,14 @@ fi
 printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
 python -u run_baselines.py \
-  --cuda \
   --env_name dec_predator_prey \
   --nagents 5 \
   --dim 10 \
   --max_steps 40 \
   --vision 1 \
+  --cuda \
   --nprocesses 1 \
-  --num_epochs 5 \
+  --num_epochs 2 \
   --epoch_size 10 \
   --hid_size 128 \
   --value_hid_size 128 \
