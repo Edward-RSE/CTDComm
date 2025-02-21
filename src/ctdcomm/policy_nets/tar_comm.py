@@ -23,7 +23,6 @@ class TarCommNetMLP(nn.Module):
 
         super(TarCommNetMLP, self).__init__()
         self.args = args
-        self.device = "cpu"
         self.nagents = args.nagents
         self.hid_size = args.hid_size
         self.comm_passes = args.comm_passes
@@ -112,10 +111,6 @@ class TarCommNetMLP(nn.Module):
         self.state2key = nn.Linear(args.hid_size, args.qk_hid_size)
         self.state2value = nn.Linear(args.hid_size, args.value_hid_size)
 
-    def set_device(self, device):
-        self.device = device
-        torch.set_default_device(self.device)
-
     def get_agent_mask(self, batch_size, info):
         n = self.nagents
 
@@ -185,7 +180,6 @@ class TarCommNetMLP(nn.Module):
         if self.args.hard_attn:
             comm_action = info["comm_action"]
             comm_action_mask = comm_action.expand(batch_size, n, n).unsqueeze(-1)
-            # comm_action_mask = comm_action_mask.to(self.device)
             # action 1 is talk, 0 is silent i.e. act as dead for comm purposes.
             agent_mask *= comm_action_mask.double()
 
@@ -235,7 +229,6 @@ class TarCommNetMLP(nn.Module):
             scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(self.hid_size)
             # scores = scores.masked_fill(comm_action_mask.squeeze(-1) == 0, -1e9)
             # Use agent_mask instead of comm_action_mask to make this work in tj env
-            # agent_mask = agent_mask.to(self.device)
             scores = scores.masked_fill(agent_mask.squeeze(-1) == 0, -1e9)
 
             # softmax + weighted sum
@@ -266,24 +259,16 @@ class TarCommNetMLP(nn.Module):
             ###########################################################
             # for tj: dead agents do not receive messages
             # for tj: alive agents with no comm actions can receive messages (align with tarmac+ic3net in pp)
-            # agent_mask_alive = agent_mask_alive.to(self.device)
             comm *= agent_mask_alive.squeeze(-1)[:, 0].unsqueeze(-1).expand(batch_size, n, self.hid_size)
             c = self.C_modules[i](comm)
 
             if self.args.recurrent:
                 # skip connection - combine comm. matrix and encoded input for all agents
                 inp = x + c
-
                 inp = inp.view(batch_size * n, self.hid_size)
-                # inp = inp.to(self.device)
-                # hidden_state = hidden_state.double().to(self.device)
-                # cell_state = cell_state.double().to(self.device)
-
                 output = self.f_module(inp, (hidden_state, cell_state))
-
                 hidden_state = output[0]
                 cell_state = output[1]
-
             else: # MLP|RNN
                 # Get next hidden state from f node
                 # and Add skip connection from start and sum them

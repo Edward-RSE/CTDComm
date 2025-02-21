@@ -6,30 +6,25 @@ from ctdcomm.utils import merge_stat
 
 
 class MultiProcessWorker(mp.Process):
-    # TODO: Make environment init threadsafe
-    def __init__(self, rank, trainer, comm, seed, save_adjacency=False, *args, **kwargs):
-        self.rank = rank
+    def __init__(
+        self, rank, trainer, comm, seed, save_adjacency=False, *args, **kwargs
+    ):
+        self.rank = (
+            rank + 1
+        )  # +1 to avoid rank = 0, as the controlling process is rank 0
         self.seed = seed
         self.save_adjacency = save_adjacency
         super(MultiProcessWorker, self).__init__()
         self.trainer = trainer
         self.comm = comm
 
-        if torch.cuda.is_available():
-            num_devices = torch.cuda.device_count()
-            self.device = f"cuda:{self.rank % num_devices}"
-        else:
-            self.device = "cpu"
-        self.trainer.set_device(self.device)
-        print(f"Worker {self.rank} is using device {self.device}")
-
     def run(self):
-        torch.manual_seed(self.seed + self.rank + 1)
-        np.random.seed(self.seed + self.rank + 1)
+        torch.manual_seed(self.seed + self.rank)
+        np.random.seed(self.seed + self.rank)
 
         while True:
             task = self.comm.recv()
-            if type(task) == list:
+            if isinstance(task, list):
                 task, epoch = task
 
             if task == 'quit':
@@ -57,9 +52,10 @@ class MultiProcessWorker(mp.Process):
 
 
 class MultiProcessTrainer(object):
-    def __init__(self, args, trainer_maker):
+    def __init__(self, args, trainer_maker, device=torch.device("cpu")):
         self.comms = []
         self.trainer = trainer_maker()
+        self.device = self.trainer.set_device(device)
         # itself will do the same job as workers
         self.nworkers = args.nprocesses - 1
         for i in range(self.nworkers):

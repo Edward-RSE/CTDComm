@@ -16,7 +16,7 @@ Transition = namedtuple('Transition', ('state', 'action', 'action_out', 'value',
 
 
 class Trainer(object):
-    def __init__(self, args, policy_net, env):
+    def __init__(self, args, policy_net, env, device=torch.device("cpu")):
         self.args = args
         self.policy_net = policy_net
         self.env = env
@@ -25,16 +25,12 @@ class Trainer(object):
         self.optimizer = optim.RMSprop(policy_net.parameters(),
             lr = args.lrate, alpha=args.alpha, eps=args.eps)  # don't know why these weren't input args #alpha=0.97, eps=1e-6)
         self.params = [p for p in self.policy_net.parameters()]
-        if torch.cuda.is_available():
-            self.set_device("cuda")
-        else:
-            self.set_device("cpu")
+        self.device = self.set_device(device)
 
     def set_device(self, device):
-        self.device = device
-        self.policy_net.set_device(device)
-        self.policy_net = self.policy_net.to(device)
         torch.set_default_device(self.device)
+        self.policy_net = self.policy_net.to(device)
+        return device
 
     def get_episode(self, epoch):
         episode = []
@@ -234,10 +230,10 @@ class Trainer(object):
         action_out = [torch.cat(a, dim=0) for a in action_out]
         alive_masks = torch.concatenate([item["alive_mask"] for item in batch.misc])
 
-        coop_returns = torch.zeros(batch_size, n, device=self.device)
-        ncoop_returns = torch.zeros(batch_size, n, device=self.device)
-        returns = torch.zeros(batch_size, n, device=self.device)
-        advantages = torch.zeros(batch_size, n, device=self.device)
+        coop_returns = torch.zeros(batch_size, n)
+        ncoop_returns = torch.zeros(batch_size, n)
+        returns = torch.zeros(batch_size, n)
+        advantages = torch.zeros(batch_size, n)
         values = values.view(batch_size, n)
 
         prev_coop_return = 0
