@@ -10,7 +10,7 @@ import torch
 
 from ctdcomm import data
 from ctdcomm.args import parse_args
-from ctdcomm.multi_processing import MultiProcessTrainer
+from ctdcomm.distributed import DistributedTrainer
 from ctdcomm.policy_nets.comm import CommNetMLP
 from ctdcomm.policy_nets.dec_tarmac import DecTarMAC
 from ctdcomm.policy_nets.ga_comm import GACommNetMLP
@@ -18,7 +18,7 @@ from ctdcomm.policy_nets.magic import MAGIC
 from ctdcomm.policy_nets.models import MLP, RNN, Random
 from ctdcomm.policy_nets.tar_comm import TarCommNetMLP
 from ctdcomm.trainer import Trainer
-from ctdcomm.utils import LogField, display_models, merge_stat
+from ctdcomm.utils import LogField, merge_stat
 
 warnings.simplefilter("error")
 
@@ -191,7 +191,7 @@ def get_policy_net(args):
     return policy_net
 
 
-def run(args, policy_net, trainer, log, run_dir, num_epochs):
+def run(args, trainer, log, run_dir):
     num_episodes = 0
     if args.save and not args.load:
         os.makedirs(run_dir)
@@ -203,7 +203,8 @@ def run(args, policy_net, trainer, log, run_dir, num_epochs):
 
     np.set_printoptions(precision=2)
 
-    for ep in range(num_epochs):
+    for ep in range(args.num_epochs):
+        print("Epoch: ", ep)
         epoch_begin_time = time.time()
         stat = dict()
         for n in range(args.epoch_size):
@@ -213,10 +214,10 @@ def run(args, policy_net, trainer, log, run_dir, num_epochs):
                 s, adjacency_data = trainer.train_batch(ep)
             else:
                 s = trainer.train_batch(ep)
-            print("batch: ", n)
+            print("  batch: ", n)
             merge_stat(s, stat)
-            trainer.display = False
 
+        # continue
         epoch_time = time.time() - epoch_begin_time
         epoch = len(log["epoch"].data) + 1
         num_episodes += stat["num_episodes"]
@@ -229,7 +230,6 @@ def run(args, policy_net, trainer, log, run_dir, num_epochs):
                     stat[k] = stat[k] / stat[v.divide_by]
                 v.data.append(stat.get(k, 0))
 
-        print("Epoch {}".format(epoch))
         print("Episode: {}".format(num_episodes))
         print("Reward: {}".format(stat["reward"]))
         print("Time: {:.2f}s".format(epoch_time))
@@ -251,29 +251,31 @@ def run(args, policy_net, trainer, log, run_dir, num_epochs):
         if "density2" in stat.keys():
             print("density2: {:.4f}".format(stat["density2"]))
 
-        if args.save_every and ep and args.save and ep % args.save_every == 0:
-            save_model(policy_net, trainer, log, run_dir, final=False, episode=ep)
-            if args.save_adjacency:
-                adj_filename = run_dir / ("adjacency_epoch_%i.npy" % (ep))
-                i = 0
-                while os.path.exists(adj_filename):
-                    i += 1
-                    adj_filename = run_dir / ("adjacency_epoch_%i_%d.npy" % (ep, i))
-                print("Saving adjacency data to", adj_filename)
-                print("\t", np.array(adjacency_data).shape)
-                np.save(adj_filename, adjacency_data)
+        # if args.save_every and ep and args.save and ep % args.save_every == 0:
+        #     save_model(
+        #         trainer.policy_net, trainer, log, run_dir, final=False, episode=ep
+        #     )
+        #     if args.save_adjacency:
+        #         adj_filename = run_dir / ("adjacency_epoch_%i.npy" % (ep))
+        #         i = 0
+        #         while os.path.exists(adj_filename):
+        #             i += 1
+        #             adj_filename = run_dir / ("adjacency_epoch_%i_%d.npy" % (ep, i))
+        #         print("Saving adjacency data to", adj_filename)
+        #         print("\t", np.array(adjacency_data).shape)
+        #         np.save(adj_filename, adjacency_data)
 
-    if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
-        save_model(policy_net, trainer, log, run_dir, final=True)
-        if args.save_adjacency:
-            adj_filename = run_dir / "adjacency_final_epoch.npy"
-            i = 0
-            while os.path.exists(adj_filename):
-                i += 1
-                adj_filename = run_dir / ("adjacency_final_epoch%i.npy" % (i))
-            print("Doing the final adjacency data save to", adj_filename)
-            print("\t", np.array(adjacency_data).shape)
-            np.save(adj_filename, adjacency_data)
+    # if args.save:  # JenniBN - moved this an indent lower so it isn't saving every epoch
+    #     save_model(trainer.policy_net, trainer, log, run_dir, final=True)
+    #     if args.save_adjacency:
+    #         adj_filename = run_dir / "adjacency_final_epoch.npy"
+    #         i = 0
+    #         while os.path.exists(adj_filename):
+    #             i += 1
+    #             adj_filename = run_dir / ("adjacency_final_epoch%i.npy" % (i))
+    #         print("Doing the final adjacency data save to", adj_filename)
+    #         print("\t", np.array(adjacency_data).shape)
+    #         np.save(adj_filename, adjacency_data)
 
 
 def main():
@@ -283,8 +285,14 @@ def main():
 
     policy_net = get_policy_net(args)
 
-    trainer = MultiProcessTrainer(
-        args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
+    trainer = DistributedTrainer(
+        args,
+        lambda: Trainer(
+            args,
+            policy_net,
+            data.init(args.env_name, args),
+        ),
+        save_adjacency=args.save_adjacency,
     )
 
     # trainer = Trainer(args, policy_net, data.init(args.env_name, args))
@@ -307,17 +315,10 @@ def main():
     if args.load != "":
         load_model(args.load, policy_net, trainer, log)
 
-    display_models([policy_net])
-
     env_name_str = get_env_name(args)
     run_dir = get_run_dir(args, env_name_str)
-
-    run(args, policy_net, trainer, log, run_dir, args.num_epochs)
-
-    if args.save:
-        save_model(policy_net, trainer, log, run_dir, final=True)
-
-    os._exit(0)
+    run(args, trainer, log, run_dir)
+    trainer.quit()
 
 
 if __name__ == "__main__":

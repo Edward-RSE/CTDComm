@@ -33,8 +33,8 @@ class Trainer(object):
             device_ids=[device] if self.args.use_cuda else None,
             output_device=device if self.args.use_cuda else None,
         )
-        self.trainer.params = [p for p in self.policy_net.parameters()]
         self.set_device(device)
+        self.params = [p for p in self.policy_net.parameters()]
 
     def set_device(self, device):
         self.device = device
