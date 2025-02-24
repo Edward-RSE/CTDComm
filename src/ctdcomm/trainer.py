@@ -30,6 +30,7 @@ class Trainer(object):
     def set_device(self, device):
         torch.set_default_device(device)
         self.policy_net = self.policy_net.to(device)
+        self.params = [p for p in self.policy_net.parameters()]
         return device
 
     def get_episode(self, epoch):
