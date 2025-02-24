@@ -2,7 +2,6 @@ import os
 import signal
 import sys
 import time
-import warnings
 from pathlib import Path
 
 import numpy as np
@@ -20,8 +19,6 @@ from ctdcomm.policy_nets.tar_comm import TarCommNetMLP
 from ctdcomm.trainer import Trainer
 from ctdcomm.utils import LogField, display_models, merge_stat
 from ctdcomm.config import parse_config_args
-
-warnings.simplefilter("error")
 
 
 def init_torch():
@@ -204,7 +201,7 @@ def get_policy_net(args):
     return policy_net
 
 
-def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
+def run(args, policy_net, trainer, log, run_dir, vis):
     num_episodes = 0
     if args.save and not args.load:
         os.makedirs(run_dir)
@@ -216,7 +213,7 @@ def run(args, policy_net, trainer, log, run_dir, vis, num_epochs):
 
     np.set_printoptions(precision=2)
 
-    for ep in range(num_epochs):
+    for ep in range(args.num_epochs):
         epoch_begin_time = time.time()
         stat = dict()
         for n in range(args.epoch_size):
@@ -358,7 +355,7 @@ def run_baselines():
     env_name_str = get_env_name(args)
     run_dir = get_run_dir(args, env_name_str)
 
-    run(args, policy_net, trainer, log, run_dir, vis, args.num_epochs)
+    run(args, policy_net, trainer, log, run_dir, vis)
 
     if args.display:
         # The MAGIC code called a function called 'env.end_display()'
