@@ -108,7 +108,7 @@ def get_env_name(args):
 
 
 def get_run_dir(args, env_name_str):
-    model_dir = Path("./ctdcomm_saved") / env_name_str
+    model_dir = Path("./output/ctdcomm_saved") / env_name_str
     if args.magic:
         model_dir = model_dir / "magic"
     elif args.gacomm:
