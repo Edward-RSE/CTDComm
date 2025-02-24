@@ -1,15 +1,11 @@
 #!/bin/bash
 
-#SBATCH --partition=a100
-#SBATCH --gres=gpu:1
+#SBATCH --partition=amd
 #SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --mem=64G
-#SBATCH --time=00:10:00
+#SBATCH --ntasks=16
+#SBATCH --time=01:00:00
 
-source $HOME/modules/ctdcomm.lmod
-source $HOME/codes/CTDComm/.venv/bin/activate
-export CUDA_VISIBLE_DEVICES=0
+source .venv/bin/activate
 export PYTHONUNBUFFERED=1
 
 if [ $# -eq 1 ]; then
@@ -26,9 +22,8 @@ python -u run_baselines.py \
   --dim 10 \
   --max_steps 40 \
   --vision 1 \
-  --cuda \
-  --nprocesses 1 \
-  --num_epochs 2 \
+  --nprocesses $SLURM_NTASKS \
+  --num_epochs 100 \
   --epoch_size 10 \
   --hid_size 128 \
   --value_hid_size 128 \
@@ -47,8 +42,3 @@ python -u run_baselines.py \
   --entr 0.01 \
   --lrate 0.0007
 
-# Parameters from TarMAC paper.
-  # --alpha 0.99 \
-  # --gamma 0.99 \
-  # --entr 0.01 \
-  # --lrate 0.0007 \

@@ -1,14 +1,13 @@
 #!/bin/bash
 
-#SBATCH --partition=a100
+#SBATCH --partition=swarm_l4
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --mem=64G
-#SBATCH --time=00:10:00
+#SBATCH --time=01:00:00
 
-source $HOME/modules/ctdcomm.lmod
-source $HOME/codes/CTDComm/.venv/bin/activate
+source .venv/bin/activate
 export CUDA_VISIBLE_DEVICES=0
 export PYTHONUNBUFFERED=1
 
@@ -21,14 +20,14 @@ fi
 printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
 python -u run_baselines.py \
+  --cuda \
   --env_name dec_predator_prey \
   --nagents 5 \
   --dim 10 \
   --max_steps 40 \
   --vision 1 \
-  --cuda \
   --nprocesses 1 \
-  --num_epochs 2 \
+  --num_epochs 100 \
   --epoch_size 10 \
   --hid_size 128 \
   --value_hid_size 128 \
