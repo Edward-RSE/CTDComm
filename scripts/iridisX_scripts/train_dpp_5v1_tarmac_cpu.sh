@@ -23,6 +23,7 @@ python -u run_baselines.py \
   --max_steps 40 \
   --vision 1 \
   --nprocesses $SLURM_NTASKS \
+  --nthreads_per_process $SLURM_CPUS_PER_TASK \
   --num_epochs 100 \
   --epoch_size 10 \
   --hid_size 128 \

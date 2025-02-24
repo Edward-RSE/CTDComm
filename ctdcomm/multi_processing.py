@@ -2,12 +2,12 @@ import torch
 import numpy as np
 import torch.multiprocessing as mp
 
-from ctdcomm.utils import merge_stat
+from ctdcomm.utils import merge_stat, init_torch
 
 
 class MultiProcessWorker(mp.Process):
     def __init__(
-        self, rank, trainer, comm, seed, save_adjacency=False, *args, **kwargs
+        self, rank, trainer, comm, seed, num_threads, save_adjacency=False, *args, **kwargs
     ):
         self.rank = (
             rank + 1
@@ -16,9 +16,13 @@ class MultiProcessWorker(mp.Process):
         self.save_adjacency = save_adjacency
         super(MultiProcessWorker, self).__init__()
         self.trainer = trainer
+        self.num_threads = num_threads
         self.comm = comm
 
+
     def run(self):
+        init_torch()
+        torch.set_num_threads(self.num_threads)
         torch.manual_seed(self.seed + self.rank)
         np.random.seed(self.seed + self.rank)
 
@@ -64,7 +68,7 @@ class MultiProcessTrainer(object):
         for i in range(self.nworkers):
             comm, comm_remote = mp.Pipe()
             self.comms.append(comm)
-            worker = MultiProcessWorker(i, self.trainer, comm_remote, args.seed, args.save_adjacency)
+            worker = MultiProcessWorker(i, self.trainer, comm_remote, args.seed, args.nthreads_per_process, args.save_adjacency)
             self.workers.append(worker)
             worker.start()
         self.grads = None
