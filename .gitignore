@@ -130,7 +130,6 @@ celerybeat.pid
 # Environments
 .env
 .venv
-env/
 venv/
 ENV/
 env.bak/
@@ -178,3 +177,6 @@ ctdcomm_saved/
 # Other developer tools
 ruff.toml
 .ruff_cache
+
+# macOS
+.DS_Store
