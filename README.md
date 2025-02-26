@@ -26,4 +26,5 @@ manually.
 ## References
 
 The training framework is adapted from [MAGIC](https://github.com/CORE-Robotics-Lab/MAGIC). MAGIC's repository was,
-in turn, adapted from [IC3Net](https://github.com/IC3Net/IC3Net)
+in turn, adapted from [IC3Net](https://github.com/IC3Net/IC3Net). We have used and adapated the StarCraft II environment
+from [CommFormer](https://github.com/charleshsc/CommFormer).
