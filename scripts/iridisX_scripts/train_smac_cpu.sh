@@ -16,13 +16,12 @@ fi
 
 printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
-SLURM_NTASKS=1
 
 python -u run_baselines.py \
   --env_name starcraft2 \
-  --nagents 5 \
+  --map_name 3m \
   --max_steps 40 \
-  --nprocesses $SLURM_NTASKS \
+  --nprocesses 1 \
   --num_epochs 100 \
   --epoch_size 10 \
   --hid_size 128 \

@@ -2,6 +2,8 @@ import numbers
 import math
 from collections import namedtuple
 
+import starcraft2_envs
+import predator_prey
 import numpy as np
 
 import torch
@@ -111,7 +113,9 @@ def init_args_for_env(parser):
         'predator_prey': 'PredatorPrey-v0',
         'dec_predator_prey': 'PredatorPrey-v1',
         'traffic_junction': 'TrafficJunction-v0',
-        'grf': 'GRFWrapper-v0'
+        'grf': 'GRFWrapper-v0',
+        "starcraft2": "StarCraft2Env-V0",
+        "starcraft2_random": "RandomStarCraft2Env-V0"
     }
 
     args = sys.argv
@@ -124,17 +128,16 @@ def init_args_for_env(parser):
         return
 
     if env_dict[env_name] == 'PredatorPrey-v1':
-        import gymnasium
-        import pettingzoo
-        import predator_prey
         env = predator_prey.env.PredatorPreyEnv()
+    elif env_dict[env_name] in ["StarCraft2Env-V0", "RandomStarCraft2Env-V0"]: # Have the same arguments
+        env = starcraft2_envs.StarCraft2Env()
     else:
         import gym
         import ic3net_envs
         # import grf_envs #Altered by JenniBN because I haven't installed GRF yet
         env = gym.make(env_dict[env_name], disable_env_checker=True) #JenniBN, edited to work with latest gym
+
     env.init_args(parser)
-    return
 
 def display_models(list_models):
     print('='*100)

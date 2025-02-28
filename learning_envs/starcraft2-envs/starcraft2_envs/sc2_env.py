@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from .multiagentenv import MultiAgentEnv
+from .env_wrapper import MultiAgentEnv
 from .smac_maps import get_map_params
 
 import atexit
@@ -59,14 +59,14 @@ class Direction(enum.IntEnum):
     WEST = 3
 
 
-class RandomStarCraft2Env(MultiAgentEnv):
+class StarCraft2Env(MultiAgentEnv):
     """The StarCraft II environment for decentralised multi-agent
     micromanagement scenarios.
     """
 
     def __init__(
         self,
-        args,
+        args=None,
         step_mul=8,
         move_amount=2,
         difficulty="7",
@@ -198,20 +198,42 @@ class RandomStarCraft2Env(MultiAgentEnv):
             Log messages about observations, state, actions and rewards for
             debugging purposes (default is False).
         """
-        # Map arguments
-        self.map_name = args.map_name
-        self.add_local_obs = args.add_local_obs
-        self.add_move_state = args.add_move_state
-        self.add_visible_state = args.add_visible_state
-        self.add_distance_state = args.add_distance_state
-        self.add_xy_state = args.add_xy_state
-        self.add_enemy_action_state = args.add_enemy_action_state
-        self.add_agent_id = args.add_agent_id
-        self.use_state_agent = args.use_state_agent
-        self.use_mustalive = args.use_mustalive
-        self.add_center_xy = args.add_center_xy
-        self.use_stacked_frames = args.use_stacked_frames
-        self.stacked_frames = args.stacked_frames
+        # Setting up default parameters, same was as done by the other
+        # environments used for CTDComm
+        if args:
+            self.map_name = args.map_name
+            self.add_local_obs = args.add_local_obs
+            self.add_move_state = args.add_move_state
+            self.add_visible_state = args.add_visible_state
+            self.add_distance_state = args.add_distance_state
+            self.add_xy_state = args.add_xy_state
+            self.add_enemy_action_state = args.add_enemy_action_state
+            self.add_agent_id = args.add_agent_id
+            self.use_state_agent = args.use_state_agent
+            self.use_mustalive = args.use_mustalive
+            self.add_center_xy = args.add_center_xy
+            self.use_stacked_frames = args.use_stacked_frames
+            self.stacked_frames = args.stacked_frames
+            self.shoot_range = args.shoot_range
+            self.sight_range = args.sight_range
+            self.obs_instead_of_state = args.use_obs_instead_of_state
+        else:
+            self.map_name = "3m"
+            self.add_local_obs = False
+            self.add_move_state = False
+            self.add_visible_state = False
+            self.add_distance_state = False
+            self.add_xy_state = False
+            self.add_enemy_action_state = False
+            self.add_agent_id = False
+            self.use_state_agent = True
+            self.use_mustalive = True
+            self.add_center_xy = True
+            self.use_stacked_frames = False
+            self.stacked_frames = 1
+            self.shoot_range = 6
+            self.sight_range = 9
+            self.obs_instead_of_state = False
 
         map_params = get_map_params(self.map_name)
         self.n_agents = map_params["n_agents"]
@@ -224,7 +246,6 @@ class RandomStarCraft2Env(MultiAgentEnv):
         # Observations and state
         self.obs_own_health = obs_own_health
         self.obs_all_health = obs_all_health
-        self.obs_instead_of_state = args.use_obs_instead_of_state
         self.obs_last_action = obs_last_action
 
         self.obs_pathing_grid = obs_pathing_grid
@@ -310,8 +331,8 @@ class RandomStarCraft2Env(MultiAgentEnv):
         self._controller = None
 
         # add for randomizing
-        self.agent_permutation = None
-        self.agent_recovery = None
+        # self.agent_permutation = None
+        # self.agent_recovery = None
 
         # Try to avoid leaking SC2 processes on shutdown
         atexit.register(lambda: self.close())
@@ -423,12 +444,10 @@ class RandomStarCraft2Env(MultiAgentEnv):
         )
 
     # add for randomizing
-    def permutate_idx(self):
-        self.agent_permutation = np.random.permutation(self.n_agents)
-        self.agent_recovery = [
-            np.where(self.agent_permutation == i)[0][0] for i in range(self.n_agents)
-        ]
-        self.agent_recovery = np.array(self.agent_recovery)
+    # def permutate_idx(self):
+    #     self.agent_permutation = np.random.permutation(self.n_agents)
+    #     self.agent_recovery = [np.where(self.agent_permutation == i)[0][0] for i in range(self.n_agents)]
+    #     self.agent_recovery = np.array(self.agent_recovery)
 
     def reset(self):
         """Reset the environment. Required after each full episode.
@@ -442,7 +461,7 @@ class RandomStarCraft2Env(MultiAgentEnv):
             self._restart()
 
         # add for randomizing
-        self.permutate_idx()
+        # self.permutate_idx()
 
         # Information kept for counting the reward
         self.death_tracker_ally = np.zeros(self.n_agents, dtype=np.float32)
@@ -494,9 +513,9 @@ class RandomStarCraft2Env(MultiAgentEnv):
             global_state = self.stacked_global_state.reshape(self.n_agents, -1)
 
         # add for randomizing
-        local_obs = np.array(local_obs)[self.agent_permutation]
-        global_state = np.array(global_state)[self.agent_permutation]
-        available_actions = np.array(available_actions)[self.agent_permutation]
+        # local_obs = np.array(local_obs)[self.agent_permutation]
+        # global_state = np.array(global_state)[self.agent_permutation]
+        # available_actions = np.array(available_actions)[self.agent_permutation]
 
         return local_obs, global_state, available_actions
 
@@ -527,7 +546,7 @@ class RandomStarCraft2Env(MultiAgentEnv):
         actions_int = [int(a) for a in actions]
 
         # add for randomizing
-        actions_int = np.array(actions_int)[self.agent_recovery].tolist()
+        # actions_int = np.array(actions_int)[self.agent_recovery].tolist()
 
         self.last_action = np.eye(self.n_actions)[np.array(actions_int)]
 
@@ -599,11 +618,11 @@ class RandomStarCraft2Env(MultiAgentEnv):
                 global_state = self.stacked_global_state.reshape(self.n_agents, -1)
 
             # add for randomizing
-            local_obs = np.array(local_obs)[self.agent_permutation]
-            global_state = np.array(global_state)[self.agent_permutation]
-            dones = np.array(dones)[self.agent_permutation]
-            infos = np.array(infos)[self.agent_permutation]
-            available_actions = np.array(available_actions)[self.agent_permutation]
+            # local_obs = np.array(local_obs)[self.agent_permutation]
+            # global_state = np.array(global_state)[self.agent_permutation]
+            # dones = np.array(dones)[self.agent_permutation]
+            # infos = np.array(infos)[self.agent_permutation]
+            # available_actions = np.array(available_actions)[self.agent_permutation]
 
             return (
                 local_obs,
@@ -648,8 +667,8 @@ class RandomStarCraft2Env(MultiAgentEnv):
             # Episode limit reached
             terminated = True
             self.bad_transition = True
-            if self.continuing_episode:
-                info["episode_limit"] = True
+            # if self.continuing_episode:
+            #     info["episode_limit"] = True
             self.battles_game += 1
             self.timeouts += 1
 
@@ -704,12 +723,12 @@ class RandomStarCraft2Env(MultiAgentEnv):
             global_state = self.stacked_global_state.reshape(self.n_agents, -1)
 
         # add for randomizing
-        local_obs = np.array(local_obs)[self.agent_permutation]
-        global_state = np.array(global_state)[self.agent_permutation]
-        rewards = np.array(rewards)[self.agent_permutation]
-        dones = np.array(dones)[self.agent_permutation]
-        infos = np.array(infos)[self.agent_permutation]
-        available_actions = np.array(available_actions)[self.agent_permutation]
+        # local_obs = np.array(local_obs)[self.agent_permutation]
+        # global_state = np.array(global_state)[self.agent_permutation]
+        # rewards = np.array(rewards)[self.agent_permutation]
+        # dones = np.array(dones)[self.agent_permutation]
+        # infos = np.array(infos)[self.agent_permutation]
+        # available_actions = np.array(available_actions)[self.agent_permutation]
 
         return local_obs, global_state, rewards, dones, infos, available_actions
 
@@ -985,11 +1004,11 @@ class RandomStarCraft2Env(MultiAgentEnv):
 
     def unit_shoot_range(self, agent_id):
         """Returns the shooting range for an agent."""
-        return 6
+        return self.shoot_range
 
     def unit_sight_range(self, agent_id):
         """Returns the sight range for an agent."""
-        return 9
+        return self.sight_range
 
     def unit_max_cooldown(self, unit):
         """Returns the maximal cooldown for a unit."""
@@ -1971,7 +1990,29 @@ class RandomStarCraft2Env(MultiAgentEnv):
     def get_unit_type_id(self, unit, ally):
         """Returns the ID of unit type in the given scenario."""
         if ally:  # use new SC2 unit types
-            type_id = unit.unit_type - self._min_unit_type
+            if self.map_type == "overload_zergling":
+                if unit.unit_type == 1971:
+                    # zerglings
+                    type_id = 0
+                else:
+                    # overload
+                    type_id = 1
+            elif self.map_type == "overload_roach":
+                if unit.unit_type == 1972:
+                    # roach
+                    type_id = 0
+                elif unit.unit_type == 1971:
+                    # overload
+                    type_id = 1
+            elif self.map_type == "overload_bane":
+                if unit.unit_type == 1971:
+                    # overload
+                    type_id = 0
+                else:
+                    # baneling
+                    type_id = 1
+            else:
+                type_id = unit.unit_type - self._min_unit_type
         else:  # use default SC2 unit types
             if self.map_type == "stalkers_and_zealots":
                 # id(Stalker) = 74, id(Zealot) = 73
@@ -1996,6 +2037,15 @@ class RandomStarCraft2Env(MultiAgentEnv):
                     type_id = 1
                 else:
                     type_id = 2
+            elif self.map_type == "overload_zergling":
+                # zergling
+                type_id = 0
+            elif self.map_type == "overload_roach":
+                # roach
+                type_id = 0
+            elif self.map_type == "overload_bane":
+                # baneling
+                type_id = 0
 
         return type_id
 
@@ -2204,6 +2254,8 @@ class RandomStarCraft2Env(MultiAgentEnv):
         elif self.map_type == "bane":
             self.baneling_id = min_unit_type
             self.zergling_id = min_unit_type + 1
+        elif self.map_type == "bZ_hM":
+            self.baneling_id = min_unit_type
 
     def only_medivac_left(self, ally):
         """Check if only Medivac units are left."""
