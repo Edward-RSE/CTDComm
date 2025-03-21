@@ -2,7 +2,6 @@ import numbers
 import math
 from collections import namedtuple
 
-import starcraft2_envs
 import predator_prey
 import numpy as np
 
@@ -114,8 +113,6 @@ def init_args_for_env(parser):
         'dec_predator_prey': 'PredatorPrey-v1',
         'traffic_junction': 'TrafficJunction-v0',
         'grf': 'GRFWrapper-v0',
-        "starcraft2": "StarCraft2Env-V0",
-        "starcraft2_random": "RandomStarCraft2Env-V0"
     }
 
     args = sys.argv
@@ -129,8 +126,6 @@ def init_args_for_env(parser):
 
     if env_dict[env_name] == 'PredatorPrey-v1':
         env = predator_prey.env.PredatorPreyEnv()
-    elif env_dict[env_name] in ["StarCraft2Env-V0", "RandomStarCraft2Env-V0"]: # Have the same arguments
-        env = starcraft2_envs.StarCraft2Env()
     else:
         import gym
         import ic3net_envs

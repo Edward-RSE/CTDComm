@@ -14,7 +14,6 @@ install_packages() {
     pip install -e .
     cd learning_envs/decentralised-envs && pip install .
     cd ../ic3net-envs && pip install .
-    cd ../starcraft2-envs && pip install .
 }
 
 if command -v python3.12 &> /dev/null; then
