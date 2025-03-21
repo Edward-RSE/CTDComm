@@ -11,6 +11,8 @@ from ctdcomm.utils import (
 )
 from ctdcomm.action_utils import select_action, translate_action
 
+import pyinstrument
+
 Transition = namedtuple('Transition', ('state', 'action', 'action_out', 'value', 'episode_mask', 'episode_mini_mask', 'next_state',
                                        'reward', 'misc'))
 
@@ -334,17 +336,29 @@ class Trainer(object):
         # For now, just save the adjacency for the last episode of the batch (arbitrary but easiest)
         # if self.args.save_adjacency:
         #     batch_adjacency = []
-        while len(batch) < self.args.batch_size:
-            if self.args.batch_size - len(batch) <= self.args.max_steps:
-                self.last_step = True
-            if self.args.save_adjacency:
-                episode, episode_stat, episode_adjacency = self.get_episode(epoch)
-                # batch_adjacency.append(episode_adjacency)
-            else:
-                episode, episode_stat = self.get_episode(epoch)
-            merge_stat(episode_stat, self.stats)
-            self.stats['num_episodes'] += 1
-            batch += episode
+        # inst_prof = pyinstrument.Profiler()
+        # inst_prof.start()
+        print("Starting batch with size {}".format(self.args.batch_size))
+        with torch.profiler.profile(
+            activities=[torch.profiler.ProfilerActivity.CPU, torch.profiler.ProfilerActivity.CUDA],
+            record_shapes=True,
+            with_stack=True
+        ) as torch_prof:
+            while len(batch) < self.args.batch_size:
+                if self.args.batch_size - len(batch) <= self.args.max_steps:
+                    self.last_step = True
+                if self.args.save_adjacency:
+                    episode, episode_stat, episode_adjacency = self.get_episode(epoch)
+                    # batch_adjacency.append(episode_adjacency)
+                else:
+                    episode, episode_stat = self.get_episode(epoch)
+                merge_stat(episode_stat, self.stats)
+                self.stats['num_episodes'] += 1
+                batch += episode
+
+        print(torch_prof.key_averages().table(sort_by="self_cpu_time_total", row_limit=10))
+        # inst_prof.stop()
+        # inst_prof.print()
 
         self.last_step = False
         self.stats['num_steps'] = len(batch)

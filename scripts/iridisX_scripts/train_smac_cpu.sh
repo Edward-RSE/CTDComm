@@ -19,11 +19,12 @@ printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
 python -u run_baselines.py \
   --env_name smac \
-  --smac_challenge 3m \
-  --nagents 3 \
+  --smac_challenge 10gen_terran \
+  --nagents 5 \
+  --batch_size 128 \
   --max_steps 40 \
   --num_epochs 1 \
-  --epoch_size 10 \
+  --epoch_size 1 \
   --hid_size 128 \
   --value_hid_size 128 \
   --value_coeff 0.01 \
