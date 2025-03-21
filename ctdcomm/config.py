@@ -91,6 +91,9 @@ def parse_config_args():
         "--env_name", default="Cartpole", help="name of the environment to run"
     )
     parser.add_argument(
+        '--smac_challenge', default="8m", help='Specific scenario for SMAC, unused otherwise'
+    )
+    parser.add_argument(
         "--max_steps",
         default=20,
         type=int,

@@ -29,7 +29,6 @@ def init_torch():
 
 def load_model(path, policy_net, trainer, log):
     d = torch.load(path)
-    # log.clear()
     policy_net.load_state_dict(d["policy_net"])
     log.update(d["log"])
     trainer.load_state_dict(d["trainer"])
@@ -72,7 +71,9 @@ def signal_handler(env, env_name, display):
 
 
 def get_env_name(args):
-    if args.env_name == "traffic_junction":
+    if args.env_name == "smac":
+        env_name_str = args.env_name + "_" + args.smac_challenge
+    elif args.env_name == "traffic_junction":
         env_name_str = args.env_name + "_" + args.difficulty
         if args.difficulty == "hard" and args.add_rate_min == args.add_rate_max:
             if args.add_rate_max == 0.1:

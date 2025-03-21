@@ -18,11 +18,11 @@ printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
 
 python -u run_baselines.py \
-  --env_name starcraft2 \
-  --map_name 3m \
+  --env_name smac \
+  --smac_challenge 3m \
+  --nagents 3 \
   --max_steps 40 \
-  --nprocesses 1 \
-  --num_epochs 100 \
+  --num_epochs 1 \
   --epoch_size 10 \
   --hid_size 128 \
   --value_hid_size 128 \

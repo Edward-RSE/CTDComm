@@ -1,5 +1,5 @@
 import gym
-import starcraft2_envs
+from smacv2.env import StarCraft2Env
 
 from ctdcomm.env_wrappers import GymWrapper
 
@@ -25,8 +25,16 @@ def init(env_name, args, final_init=True):
         env = gym.make('GRFWrapper-v0')
         env.multi_agent_init(args)
         env = GymWrapper(env)
-    elif env_name == "starcraft2":
-        env = starcraft2_envs.StarCraft2Env(args)
+    elif env_name == "smac":
+        env = StarCraft2Env(map_name=args.smac_challenge, seed=args.seed)
+        env_info = env.get_env_info()
+        env.observation_dim = env_info["obs_shape"]
+        env.num_actions = env_info["n_actions"]
+        env.dim_actions = 1
+        if env_info["n_agents"] != args.nagents:
+            raise ValueError(
+                f"Invalid number of agents, {args.nagents} requested but {env_info['n_agents']} in StarCraft2Env"
+            )
     else:
         raise RuntimeError("wrong env name")
 
