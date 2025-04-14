@@ -18,6 +18,7 @@ printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
 
 python -u run_baselines.py \
+  --cuda \
   --env_name smac \
   --smac_map_name 10gen_terran \
   --smac_capability_config scripts/iridisX_scripts/smac_example.yaml \
