@@ -8,7 +8,7 @@ import numpy as np
 import torch
 import visdom
 
-from ctdcomm import data
+from ctdcomm import envs
 from ctdcomm.multi_processing import MultiProcessTrainer
 from ctdcomm.policy_nets.comm import CommNetMLP
 from ctdcomm.policy_nets.dec_tarmac import DecTarMAC

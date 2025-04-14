@@ -3,7 +3,7 @@ import argparse
 import numpy as np
 import torch
 
-from ctdcomm import data
+from ctdcomm import envs
 from ctdcomm.action_utils import parse_action_args
 from ctdcomm.utils import init_args_for_env
 

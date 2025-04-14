@@ -1,4 +1,3 @@
-import logging
 import gym
 from smacv2.env.starcraft2.wrapper import StarCraftCapabilityEnvWrapper
 
