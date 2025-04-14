@@ -2,9 +2,11 @@ import os
 import signal
 import sys
 import time
+import warnings
 from pathlib import Path
 
 import numpy as np
+import psutil
 import torch
 import visdom
 
@@ -17,14 +19,8 @@ from ctdcomm.policy_nets.magic import MAGIC
 from ctdcomm.policy_nets.models import MLP, RNN, Random
 from ctdcomm.policy_nets.tar_comm import TarCommNetMLP
 from ctdcomm.trainer import Trainer
-from ctdcomm.utils import LogField, display_models, merge_stat
+from ctdcomm.utils import LogField, display_models, merge_stat, init_torch
 from ctdcomm.config import parse_config_args
-
-
-def init_torch():
-    torch.utils.backcompat.broadcast_warning.enabled = True
-    torch.utils.backcompat.keepdim_warning.enabled = True
-    torch.set_default_dtype(torch.double)
 
 
 def load_model(path, policy_net, trainer, log):
@@ -307,19 +303,35 @@ def run_baselines():
     if args.env_name == "grf":
         args.render = render
 
+    # Set the device properties
     if args.cuda:
         if torch.cuda.is_available():
             device = torch.device("cuda")
         else:
-            raise RuntimeError("CUDA has been requested, but is not available")
+            raise RuntimeError("CUDA has been requested, but no CUDA devices are available")
     else:
         device = torch.device("cpu")
 
+    # Set the number of OpenMP threads if set by the user. But if
+    # nthreads_per_process is not given, set it to 1 and warn the user that they
+    # can set the number of threads in the future
+    if args.nthreads_per_process == 0 and args.nprocesses > 1:
+        warnings.warn(
+            "Number of threads per process is not specified when using multiple processes. Setting it to 1. If you "
+            "want to use more threads per process, please specify --nthreads_per_process."
+        )
+        args.nthreads_per_process = 1
+    if args.nthreads_per_process > 0:
+        if args.nprocesses * args.nthreads_per_process > psutil.cpu_count(logical=False):
+            raise ValueError("Requested more threads per process than available number of CPUs")
+        torch.set_num_threads(args.nthreads_per_process)
+
+    # Prepare the trainer, depending on the number of processes requested.
+    # If there are multiple processes, we do not need to set the device, as the
+    # default is CPU and we cannot use GPUs with the shared-memory
+    # multi-processing approach. GPU training is available for single processes.
     if args.nprocesses > 1:
-        # limit the number of threads to avoid contention and over-subscription
-        torch.set_num_threads(1)
-        # no need to set the device, as the default is CPU and we cannot use
-        # GPUs with the shared-memory multi-processing approach
+        torch.multiprocessing.set_start_method("spawn", force=True)
         trainer = MultiProcessTrainer(
             args, lambda: Trainer(args, policy_net, env)
         )

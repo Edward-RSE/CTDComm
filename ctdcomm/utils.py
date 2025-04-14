@@ -15,6 +15,12 @@ import sys
 LogField = namedtuple('LogField', ('data', 'plot', 'x_axis', 'divide_by'))
 
 
+def init_torch():
+    torch.utils.backcompat.broadcast_warning.enabled = True
+    torch.utils.backcompat.keepdim_warning.enabled = True
+    torch.set_default_dtype(torch.double)
+
+    
 def merge_stat(src, dest):
     for k, v in src.items():
         if not k in dest:

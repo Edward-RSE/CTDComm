@@ -38,6 +38,9 @@ def parse_config_args():
         "--nprocesses", type=int, default=1, help="How many processes to run"
     )
     parser.add_argument(
+        "--nthreads_per_process", type=int, default=0, help="How many OpenMP threads to use per process, default lets PyTorch device"
+    )
+    parser.add_argument(
         "--cuda", action="store_true", default=False, help="Use CUDA acceleration"
     )
     # model
