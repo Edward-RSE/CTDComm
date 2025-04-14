@@ -121,7 +121,7 @@ def init_args_for_smac(parser):
 
     """
     env_args = parser.add_argument_group('SMAC')
-    env_args.add_argument("--smac_capability_config", type=str,
+    env_args.add_argument("--smac_capability_config", type=str, required=True,
                           help="Path to a YAML file containing a SMAC capability configuration.")
 
     env_args.add_argument("--smac_map_name", default="8m",

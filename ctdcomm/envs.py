@@ -34,11 +34,10 @@ def init(env_name, args, final_init=True):
         env = GymWrapper(env)
     elif env_name == "smac":
         with open(args.smac_capability_config) as file_in:
-            capability_config = yaml.load(file_in, Loader=yaml.Loader)
+             args.smac_capability_config = yaml.safe_load(file_in)
         smac_args = {k[5:]: v for k, v in vars(args).items() if k.startswith("smac_")}
         env = StarCraftCapabilityEnvWrapper(
             seed=args.seed,
-            capability_config=capability_config,
             **smac_args,
         )
         env_info = env.get_env_info()

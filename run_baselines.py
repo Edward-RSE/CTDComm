@@ -72,7 +72,7 @@ def signal_handler(env, env_name, display):
 
 def get_env_name(args):
     if args.env_name == "smac":
-        env_name_str = args.env_name + "_" + args.smac_challenge
+        env_name_str = args.env_name + "_" + args.smac_map_name
     elif args.env_name == "traffic_junction":
         env_name_str = args.env_name + "_" + args.difficulty
         if args.difficulty == "hard" and args.add_rate_min == args.add_rate_max:
@@ -321,11 +321,11 @@ def run_baselines():
         # no need to set the device, as the default is CPU and we cannot use
         # GPUs with the shared-memory multi-processing approach
         trainer = MultiProcessTrainer(
-            args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
+            args, lambda: Trainer(args, policy_net, env)
         )
     else:
         # GPU training is available for single processes
-        trainer = Trainer(args, policy_net, data.init(args.env_name, args), device=device)
+        trainer = Trainer(args, policy_net, env, device=device)
 
     log = dict()
     log["epoch"] = LogField(list(), False, None, None)

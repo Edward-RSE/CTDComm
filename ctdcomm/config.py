@@ -403,7 +403,7 @@ def parse_config_args():
     else:
         render = None
 
-    env = data.init(args.env_name, args, False)
+    env = envs.init(args.env_name, args, False)
 
     # TODO: Check that observation dim works with the new api
     num_inputs = env.observation_dim

@@ -19,7 +19,8 @@ printf -v date '%(%Y-%m-%d_%H:%M:%S)T' -1
 
 python -u run_baselines.py \
   --env_name smac \
-  --smac_challenge 10gen_terran \
+  --smac_map_name 10gen_terran \
+  --smac_capability_config scripts/iridisX_scripts/smac_example.yaml \
   --nagents 5 \
   --batch_size 128 \
   --max_steps 40 \
@@ -41,4 +42,3 @@ python -u run_baselines.py \
   --gamma 0.99 \
   --entr 0.01 \
   --lrate 0.0007
-
