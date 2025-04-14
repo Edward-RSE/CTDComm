@@ -1,4 +1,5 @@
 import gym
+import yaml
 from smacv2.env.starcraft2.wrapper import StarCraftCapabilityEnvWrapper
 
 from ctdcomm.env_wrappers import GymWrapper
@@ -32,33 +33,13 @@ def init(env_name, args, final_init=True):
         env.multi_agent_init(args)
         env = GymWrapper(env)
     elif env_name == "smac":
-        distribution_config = {
-            "n_units": 5,
-            "n_enemies": 5,
-            "team_gen": {
-                "dist_type": "weighted_teams",
-                "unit_types": ["marine", "marauder", "medivac"],
-                "exception_unit_types": ["medivac"],
-                "weights": [0.45, 0.45, 0.1],
-                "observe": True,
-            },
-            "start_positions": {
-                "dist_type": "surrounded_and_reflect",
-                "p": 0.5,
-                "n_enemies": 5,
-                "map_x": 32,
-                "map_y": 32,
-            },
-        }
+        with open(args.smac_capability_config) as file_in:
+            capability_config = yaml.load(file_in, Loader=yaml.Loader)
+        smac_args = {k[5:]: v for k, v in vars(args).items() if k.startswith("smac_")}
         env = StarCraftCapabilityEnvWrapper(
-            capability_config=distribution_config,
-            map_name=args.smac_challenge,
-            debug=True,
             seed=args.seed,
-            conic_fov=False,
-            obs_own_pos=True,
-            use_unit_ranges=True,
-            min_attack_range=2,
+            capability_config=capability_config,
+            **smac_args,
         )
         env_info = env.get_env_info()
         env.observation_dim = env_info["obs_shape"]

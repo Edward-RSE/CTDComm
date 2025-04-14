@@ -88,10 +88,8 @@ def parse_config_args():
     )  # Added by JenniBN
     # environment
     parser.add_argument(
-        "--env_name", default="Cartpole", help="name of the environment to run"
-    )
-    parser.add_argument(
-        '--smac_challenge', default="8m", help='Specific scenario for SMAC, unused otherwise'
+        "--env_name", default="dec_predator_prey", help="name of the environment to run",
+        choices=("dec_predator_prey", "predator_prey", "traffic_junction", "grf", "smac")
     )
     parser.add_argument(
         "--max_steps",
