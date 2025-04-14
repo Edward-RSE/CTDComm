@@ -10,7 +10,7 @@ import psutil
 import torch
 import visdom
 
-from ctdcomm import data
+from ctdcomm import envs
 from ctdcomm.multi_processing import MultiProcessTrainer
 from ctdcomm.policy_nets.comm import CommNetMLP
 from ctdcomm.policy_nets.dec_tarmac import DecTarMAC
@@ -25,7 +25,6 @@ from ctdcomm.config import parse_config_args
 
 def load_model(path, policy_net, trainer, log):
     d = torch.load(path)
-    # log.clear()
     policy_net.load_state_dict(d["policy_net"])
     log.update(d["log"])
     trainer.load_state_dict(d["trainer"])
@@ -68,7 +67,9 @@ def signal_handler(env, env_name, display):
 
 
 def get_env_name(args):
-    if args.env_name == "traffic_junction":
+    if args.env_name == "smac":
+        env_name_str = args.env_name + "_" + args.smac_map_name
+    elif args.env_name == "traffic_junction":
         env_name_str = args.env_name + "_" + args.difficulty
         if args.difficulty == "hard" and args.add_rate_min == args.add_rate_max:
             if args.add_rate_max == 0.1:
@@ -332,11 +333,11 @@ def run_baselines():
     if args.nprocesses > 1:
         torch.multiprocessing.set_start_method("spawn", force=True)
         trainer = MultiProcessTrainer(
-            args, lambda: Trainer(args, policy_net, data.init(args.env_name, args))
+            args, lambda: Trainer(args, policy_net, env)
         )
     else:
-        trainer = Trainer(args, policy_net, data.init(args.env_name, args), device=device)
-
+        # GPU training is available for single processes
+        trainer = Trainer(args, policy_net, env, device=device)
 
     log = dict()
     log["epoch"] = LogField(list(), False, None, None)

@@ -9,6 +9,7 @@ install_venv() {
 }
 
 install_packages() {
+    pip install --upgrade pip
     pip install -r python_envs/requirements.txt
     pip install -e .
     cd learning_envs/decentralised-envs && pip install .

@@ -3,7 +3,7 @@ import argparse
 import numpy as np
 import torch
 
-from ctdcomm import data
+from ctdcomm import envs
 from ctdcomm.action_utils import parse_action_args
 from ctdcomm.utils import init_args_for_env
 
@@ -91,7 +91,8 @@ def parse_config_args():
     )  # Added by JenniBN
     # environment
     parser.add_argument(
-        "--env_name", default="Cartpole", help="name of the environment to run"
+        "--env_name", default="dec_predator_prey", help="name of the environment to run",
+        choices=("dec_predator_prey", "predator_prey", "traffic_junction", "grf", "smac")
     )
     parser.add_argument(
         "--max_steps",
@@ -405,7 +406,7 @@ def parse_config_args():
     else:
         render = None
 
-    env = data.init(args.env_name, args, False)
+    env = envs.init(args.env_name, args, False)
 
     # TODO: Check that observation dim works with the new api
     num_inputs = env.observation_dim

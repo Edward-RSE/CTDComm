@@ -50,8 +50,11 @@ class Trainer(object):
             else:
                 state = self.env.reset()
             info = dict()
-        should_display = self.display and self.last_step
 
+        if self.args.env_name == 'smac':
+            state = torch.tensor([self.env.get_obs()])
+
+        should_display = self.display and self.last_step
         if should_display:
             # None of the envs have a 'display', so I presume they mean render - JenniBN
             self.env.render()
@@ -131,6 +134,19 @@ class Trainer(object):
                 next_state = np.stack([obs.flatten() for _, obs in next_state.items()])
                 next_state = np.expand_dims(next_state, 0)
                 next_state = torch.tensor(next_state)
+            elif "smac" in self.args.env_name:
+                available_actions = np.array(self.env.get_avail_actions())
+                masked_actions = actual[0].clone()
+                for a_id, a_act in enumerate(masked_actions):
+                    if available_actions[a_id, a_act] == 0:
+                        # Doing this to avoid errors
+                        # Pymarl default to 0, which consistently results in errors.
+                        # I'm pretty sure the idx0 is meant to be non-op (i.e. the correct choice)
+                        masked_actions[a_id] = np.where(available_actions[a_id] == 1)[0][0]
+                reward, done, info = self.env.step(masked_actions)
+                # Reward from SMAC is singular, and shared, so we're going to divide it out equally
+                reward = torch.ones(self.args.nagents) * reward / self.args.nagents
+                next_state = torch.tensor([self.env.get_obs()])
             else:
                 next_state, reward, done, info = self.env.step(actual)
 
@@ -166,7 +182,10 @@ class Trainer(object):
             episode_mini_mask = torch.ones(reward.shape)
 
             if done:
-                episode_mask = torch.zeros(reward.shape)
+                if "smac" in self.args.env_name:
+                    episode_mask = torch.ones(reward.shape)
+                else:
+                    episode_mask = torch.zeros(reward.shape)
             else:
                 if 'is_completed' in info:
                     episode_mini_mask = 1 - info['is_completed'].reshape(-1)
@@ -178,9 +197,15 @@ class Trainer(object):
             episode.append(trans)
             state = next_state
             if done:
+                if "smac" in self.args.env_name:
+                    self.env.close()
                 break
         stat['num_steps'] = t + 1
         stat['steps_taken'] = stat['num_steps']
+        if "smac" in self.args.env_name:
+            # Failed if all agents can only select "non-op" by the end of the episode,
+            # i.e. they're all dead
+            stat["success"] = not np.all(np.array(self.env.get_avail_actions())[:, 1:] == 0)
 
         if hasattr(self.env, 'reward_terminal'):
             rewards = self.env.reward_terminal()
@@ -309,6 +334,7 @@ class Trainer(object):
         # For now, just save the adjacency for the last episode of the batch (arbitrary but easiest)
         # if self.args.save_adjacency:
         #     batch_adjacency = []
+        print("Starting batch with size {}".format(self.args.batch_size))
         while len(batch) < self.args.batch_size:
             if self.args.batch_size - len(batch) <= self.args.max_steps:
                 self.last_step = True
